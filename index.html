@@ -1,0 +1,1489 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
+  <title>Infinity Sky Lounge - King & Queen OF THE NIGHT 2026</title>
+  
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" href="favicon.png">
+
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Supabase JS Client & HTML2Canvas -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+  <style>
+    :root {
+      --bg-page: #080c14;
+      --gold-primary: #d4af37;
+      --gold-grad: linear-gradient(135deg, #fce08a 0%, #d4af37 50%, #856108 100%);
+      --red-booked: #ef4444;
+      --red-glow: rgba(239, 68, 68, 0.95);
+      --card-bg: rgba(18, 24, 38, 0.98);
+      --purple-fdc: #a855f7;
+      --emerald-accent: #10b981;
+      --cyan-terrace: #38bdf8;
+      --amber-lounge: #f59e0b;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--bg-page);
+      color: #f8fafc;
+      min-height: 100vh;
+      min-height: -webkit-fill-available;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    /* HEADER */
+    header {
+      background: linear-gradient(180deg, rgba(15, 23, 42, 0.98) 0%, rgba(9, 13, 22, 0.96) 100%);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1.5px solid rgba(212, 175, 55, 0.4);
+      padding: clamp(10px, 1.2vw, 14px) clamp(12px, 1.6vw, 24px);
+      position: sticky;
+      top: 0;
+      z-index: 60;
+      box-shadow: 0 6px 25px rgba(0,0,0,0.7);
+    }
+
+    .hdr-wrap {
+      max-width: 1850px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .brand-section {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    .brand-logo-frame {
+      min-width: clamp(84px, 7vw, 110px);
+      height: clamp(44px, 3.8vw, 54px);
+      background: #ffffff;
+      border: 2px solid var(--gold-primary);
+      border-radius: 10px;
+      padding: 3px 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 14px rgba(212, 175, 55, 0.35);
+    }
+
+    .brand-logo-frame img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+
+    .brand-title h1 {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(0.95rem, 1.15vw, 1.3rem);
+      font-weight: 800;
+      letter-spacing: 1.2px;
+      background: var(--gold-grad);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1.2;
+    }
+
+    .brand-title p {
+      font-size: clamp(0.66rem, 0.75vw, 0.8rem);
+      color: #94a3b8;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 3px;
+    }
+
+    .event-badge {
+      background: rgba(236, 72, 153, 0.2);
+      border: 1px solid #ec4899;
+      color: #f472b6;
+      padding: 2px 7px;
+      border-radius: 12px;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    .hdr-controls {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .metrics-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .metric-card-lg {
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.85) 0%, rgba(15, 23, 42, 0.95) 100%);
+      border: 1.5px solid rgba(255, 255, 255, 0.12);
+      border-radius: 10px;
+      padding: 7px clamp(10px, 1vw, 14px);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      min-width: clamp(105px, 9vw, 135px);
+      box-shadow: 0 3px 12px rgba(0,0,0,0.35);
+    }
+
+    .metric-card-lg:hover {
+      background: rgba(51, 65, 85, 0.95);
+      border-color: rgba(212, 175, 55, 0.5);
+      transform: translateY(-1px);
+    }
+
+    .metric-card-lg i { font-size: clamp(1.1rem, 1.25vw, 1.35rem); }
+
+    .metric-card-lg .txt-wrap {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.15;
+    }
+
+    .metric-card-lg .txt-wrap span {
+      font-size: clamp(0.56rem, 0.62vw, 0.66rem);
+      color: #94a3b8;
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    .metric-card-lg .txt-wrap strong {
+      font-size: clamp(0.95rem, 1.05vw, 1.18rem);
+      font-weight: 800;
+      font-family: 'Cinzel', serif;
+      letter-spacing: 0.3px;
+    }
+
+    .btn-action-group {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .btn-action {
+      border: none;
+      padding: clamp(7px, 0.8vw, 9px) clamp(10px, 1vw, 15px);
+      border-radius: 9px;
+      font-weight: 700;
+      font-size: clamp(0.72rem, 0.78vw, 0.82rem);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: all 0.2s ease;
+      touch-action: manipulation;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.35);
+    }
+
+    .btn-action:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.12);
+    }
+
+    .btn-dashboard { background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%); color: #fff; }
+    .btn-fdc { background: linear-gradient(135deg, #a855f7 0%, #7e22ce 100%); color: #fff; }
+    .btn-jpg { background: linear-gradient(135deg, #10b981 0%, #047857 100%); color: #fff; }
+    .btn-csv { background: var(--gold-grad); color: #111; }
+
+    /* TOOLBAR */
+    .toolbar-bar {
+      max-width: 1850px;
+      margin: 8px auto 0;
+      padding: 0 clamp(12px, 1.6vw, 24px);
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .legend-tag {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(15, 23, 42, 0.88);
+      padding: 6px 14px;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: clamp(0.68rem, 0.75vw, 0.76rem);
+      flex-wrap: wrap;
+    }
+
+    .dot-node { width: 9px; height: 9px; border-radius: 50%; }
+    .dot-node.avail { background: #38bdf8; box-shadow: 0 0 6px #38bdf8; }
+    .dot-node.booked { background: #ef4444; box-shadow: 0 0 8px #ef4444; }
+
+    .zoom-group {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-tool-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 9px;
+      background: rgba(30, 41, 59, 0.9);
+      border: 1.5px solid rgba(212, 175, 55, 0.35);
+      color: #fff;
+      font-size: 0.88rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      touch-action: manipulation;
+      transition: background 0.2s;
+    }
+
+    .btn-tool-icon:hover { background: rgba(51, 65, 85, 1); }
+
+    /* VIEWPORT */
+    .viewport-area {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+      touch-action: pan-x pan-y pinch-zoom;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px;
+    }
+
+    .map-frame {
+      width: 100%;
+      max-width: 1300px;
+      position: relative;
+      transform-origin: center center;
+      transition: transform 0.12s ease-out;
+      box-shadow: 0 20px 45px rgba(0,0,0,0.85);
+      border-radius: 10px;
+      overflow: hidden;
+      background: #0f172a;
+    }
+
+    .render-3d-img {
+      width: 100%;
+      height: auto;
+      display: block;
+      pointer-events: none;
+    }
+
+    .hotspots-layer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .spot {
+      position: absolute;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 5px;
+      transition: transform 0.15s ease, background 0.15s ease;
+      background: rgba(56, 189, 248, 0.08);
+      border: 1.5px solid rgba(56, 189, 248, 0.45);
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .spot:active { transform: scale(0.96); }
+    .spot.round { border-radius: 50%; }
+
+    .spot.is-booked {
+      background: rgba(220, 38, 38, 0.82) !important;
+      border: 2px solid #ff4d4d !important;
+      box-shadow: 0 0 16px var(--red-glow), inset 0 0 8px rgba(255,255,255,0.5) !important;
+      z-index: 5;
+    }
+
+    /* MODAL */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(9, 13, 20, 0.9);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 14px;
+    }
+
+    .modal-backdrop.open { display: flex; }
+
+    .modal-container {
+      background: var(--card-bg);
+      border: 1px solid rgba(212, 175, 55, 0.35);
+      border-radius: 14px;
+      width: 100%;
+      max-width: 520px;
+      max-height: 92vh;
+      overflow-y: auto;
+      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.85);
+    }
+
+    .modal-header {
+      background: linear-gradient(135deg, #1f2a3c 0%, #121926 100%);
+      padding: 13px 18px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .modal-header h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.05rem;
+      color: #fef08a;
+    }
+
+    .btn-x {
+      background: transparent;
+      border: none;
+      color: #94a3b8;
+      font-size: 1.3rem;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .modal-body {
+      padding: 16px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .form-row {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .form-row label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #cbd5e1;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .inp-field {
+      background: #0f172a;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      padding: 10px 12px;
+      color: #fff;
+      font-size: 0.88rem;
+      outline: none;
+      -webkit-appearance: none;
+    }
+
+    .inp-field:focus { border-color: var(--gold-primary); }
+
+    .money-input-box { position: relative; }
+    .money-input-box span {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--gold-primary);
+      font-weight: 700;
+      font-size: 0.88rem;
+    }
+    .money-input-box input {
+      padding-left: 42px;
+      width: 100%;
+    }
+
+    .modal-footer {
+      padding: 13px 18px;
+      background: #0f172a;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .btn-modal-del {
+      background: #7f1d1d;
+      color: #fca5a5;
+      border: none;
+      padding: 9px 14px;
+      border-radius: 8px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .btn-modal-save {
+      background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%);
+      color: #fff;
+      border: none;
+      padding: 9px 18px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      box-shadow: 0 2px 10px rgba(239, 68, 68, 0.4);
+    }
+
+    .dash-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .dash-card {
+      background: #0f172a;
+      border: 1px solid #334155;
+      border-radius: 11px;
+      padding: 12px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .dash-card.hero-card {
+      grid-column: span 2;
+      background: linear-gradient(135deg, rgba(212,175,55,0.18) 0%, rgba(15,23,42,0.96) 100%);
+      border-color: rgba(212,175,55,0.45);
+    }
+
+    .dash-card .card-lbl {
+      font-size: 0.7rem;
+      color: #94a3b8;
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .dash-card .card-val {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: #f8fafc;
+      font-family: 'Cinzel', serif;
+    }
+
+    .dash-card .card-sub { font-size: 0.68rem; color: #64748b; }
+
+    .occupancy-bar-wrap {
+      width: 100%;
+      height: 8px;
+      background: #1e293b;
+      border-radius: 4px;
+      overflow: hidden;
+      margin-top: 4px;
+    }
+
+    .occupancy-bar {
+      height: 100%;
+      width: 0%;
+      transition: width 0.4s ease;
+    }
+
+    .loader-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.85);
+      z-index: 200;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    .spinner {
+      width: 44px;
+      height: 44px;
+      border: 4px solid rgba(212, 175, 55, 0.2);
+      border-top-color: var(--gold-primary);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    @media (max-width: 992px) {
+      .hdr-wrap { flex-direction: column; align-items: flex-start; }
+      .hdr-controls { width: 100%; justify-content: space-between; }
+      .metrics-group { width: 100%; display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
+      .btn-action-group { width: 100%; display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+      .btn-action { justify-content: center; padding: 9px 4px; font-size: 0.72rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="hdr-wrap">
+      <div class="brand-section">
+        <div class="brand-logo-frame">
+          <img src="logo.png" alt="Logo Platinum Hotel"
+               onerror="this.onerror=null; this.src='logo platinum hotel Balikpapan.png'; this.addEventListener('error', () => { this.src='favicon.png'; });">
+        </div>
+        <div class="brand-title">
+          <h1>Platinum Hotel & Convention Hall</h1>
+          <p>
+            <span>INFINITY SKY LOUNGE</span>
+            <span class="event-badge"><i class="fa-solid fa-crown"></i> KING & QUEEN OF THE NIGHT</span>
+          </p>
+        </div>
+      </div>
+
+      <div class="hdr-controls">
+        <div class="metrics-group">
+          <!-- 1. INDOOR LOUNGE MEJA -->
+          <div class="metric-card-lg" onclick="openReportModal()" title="Lihat Inventaris Indoor Lounge">
+            <i class="fa-solid fa-couch" style="color: var(--amber-lounge);"></i>
+            <div class="txt-wrap">
+              <span>Lounge (L)</span>
+              <strong><span id="statLoungeBooked" style="color: var(--amber-lounge);">0</span><span style="font-size:0.85rem; color:#64748b;"> / 32</span></strong>
+            </div>
+          </div>
+
+          <!-- 2. ROOFTOP TERRACE MEJA -->
+          <div class="metric-card-lg" onclick="openReportModal()" title="Lihat Inventaris Rooftop Terrace">
+            <i class="fa-solid fa-cloud-moon" style="color: var(--cyan-terrace);"></i>
+            <div class="txt-wrap">
+              <span>Terrace (C)</span>
+              <strong><span id="statTerraceBooked" style="color: var(--cyan-terrace);">0</span><span style="font-size:0.85rem; color:#64748b;"> / 13</span></strong>
+            </div>
+          </div>
+
+          <!-- 3. FDC GUESTS -->
+          <div class="metric-card-lg" onclick="openFDCListModal()" title="Lihat Tamu Tiket FDC Standing">
+            <i class="fa-solid fa-ticket" style="color: var(--purple-fdc);"></i>
+            <div class="txt-wrap">
+              <span>FDC Guests</span>
+              <strong><span id="statFDCPaxTotal" style="color: var(--purple-fdc);">0</span><span style="font-size:0.85rem; color:#64748b;"> Pax</span></strong>
+            </div>
+          </div>
+
+          <!-- 4. TOTAL REVENUE -->
+          <div class="metric-card-lg" onclick="openReportModal()" title="Lihat Rincian Pendapatan">
+            <i class="fa-solid fa-money-bill-wave" style="color: var(--emerald-accent);"></i>
+            <div class="txt-wrap">
+              <span>Total Rev / DP</span>
+              <strong id="statDPTotal" style="color: var(--emerald-accent);">Rp 0</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="btn-action-group">
+          <button class="btn-action btn-dashboard" onclick="openReportModal()">
+            <i class="fa-solid fa-chart-pie"></i> Report
+          </button>
+          <button class="btn-action btn-fdc" onclick="openFDCBookingModal()">
+            <i class="fa-solid fa-user-plus"></i> + FDC
+          </button>
+          <button class="btn-action btn-jpg" onclick="downloadLayoutJPG()">
+            <i class="fa-solid fa-file-image"></i> Share JPG
+          </button>
+          <button class="btn-action btn-csv" onclick="exportReservationsCSV()">
+            <i class="fa-solid fa-file-csv"></i> CSV
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- TOOLBAR -->
+  <div class="toolbar-bar">
+    <div class="legend-tag">
+      <div style="display:flex; align-items:center; gap:6px;"><div class="dot-node avail"></div> <span id="legendAvailText">Lounge: 32 | Terrace: 13</span></div>
+      <div style="display:flex; align-items:center; gap:6px;"><div class="dot-node booked"></div> <span id="legendBookedText">0 Terbooking (Merah)</span></div>
+    </div>
+    
+    <div class="zoom-group">
+      <label class="btn-tool-icon" title="Pilih Gambar Denah dari Perangkat">
+        <i class="fa-solid fa-image"></i>
+        <input type="file" id="localImgPicker" accept="image/*" style="display: none;" onchange="loadLocalImage(event)">
+      </label>
+      <button class="btn-tool-icon" onclick="zoomMap(0.1)"><i class="fa-solid fa-plus"></i></button>
+      <button class="btn-tool-icon" onclick="zoomMap(-0.1)"><i class="fa-solid fa-minus"></i></button>
+      <button class="btn-tool-icon" onclick="resetZoom()"><i class="fa-solid fa-arrows-rotate"></i></button>
+    </div>
+  </div>
+
+  <!-- VIEWPORT -->
+  <main class="viewport-area" id="mapTouchArea">
+    <div class="map-frame" id="mapFrame">
+      <img id="mainDenahImg" 
+           src="Gemini_Generated_Image_xa8u3bxa8u3bxa8u.jpg" 
+           alt="Infinity Sky Lounge - King & Queen 2026" 
+           class="render-3d-img"
+           onerror="handleImgFallback(this)">
+
+      <div class="hotspots-layer">
+        
+        <!-- A. ROOFTOP TERRACE (KIRI) -->
+        <div id="spot-C1" class="spot" style="top: 51.5%; left: 16.5%; width: 4.8%; height: 6.8%;" onclick="openBooking('C1', 'Terrace Sofa (4-6 Pax)', 4, 'terrace')"></div>
+        <div id="spot-C2" class="spot" style="top: 51.5%; left: 22.2%; width: 4.8%; height: 6.8%;" onclick="openBooking('C2', 'Terrace Sofa (4-6 Pax)', 4, 'terrace')"></div>
+        <div id="spot-C3" class="spot" style="top: 51.5%; left: 27.8%; width: 4.8%; height: 6.8%;" onclick="openBooking('C3', 'Terrace Sofa (4-6 Pax)', 4, 'terrace')"></div>
+
+        <div id="spot-C4" class="spot round" style="top: 66.0%; left: 13.5%; width: 4.5%; height: 7.2%;" onclick="openBooking('C4', 'Terrace Table (4-Pax)', 4, 'terrace')"></div>
+        <div id="spot-C5" class="spot round" style="top: 66.0%; left: 18.8%; width: 4.5%; height: 7.2%;" onclick="openBooking('C5', 'Terrace Table (4-Pax)', 4, 'terrace')"></div>
+        <div id="spot-C6" class="spot round" style="top: 66.0%; left: 24.2%; width: 4.5%; height: 7.2%;" onclick="openBooking('C6', 'Terrace Table (4-Pax)', 4, 'terrace')"></div>
+        <div id="spot-C7" class="spot round" style="top: 66.0%; left: 29.6%; width: 4.5%; height: 7.2%;" onclick="openBooking('C7', 'Terrace Table (4-Pax)', 4, 'terrace')"></div>
+        <div id="spot-C8" class="spot round" style="top: 66.0%; left: 35.0%; width: 4.5%; height: 7.2%;" onclick="openBooking('C8', 'Terrace Table (4-Pax)', 4, 'terrace')"></div>
+
+        <div id="spot-C9" class="spot round" style="top: 79.5%; left: 13.5%; width: 4.5%; height: 7.2%;" onclick="openBooking('C9', 'Terrace Table (4-Pax)', 4, 'terrace')"></div>
+        <div id="spot-C10" class="spot round" style="top: 79.5%; left: 18.8%; width: 4.5%; height: 7.2%;" onclick="openBooking('C10', 'Terrace Table (4-Pax)', 4, 'terrace')"></div>
+        <div id="spot-C11" class="spot round" style="top: 79.5%; left: 24.2%; width: 4.5%; height: 7.2%;" onclick="openBooking('C11', 'Terrace Table (4-Pax)', 4, 'terrace')"></div>
+        <div id="spot-C12" class="spot round" style="top: 79.5%; left: 29.6%; width: 4.5%; height: 7.2%;" onclick="openBooking('C12', 'Terrace Table (4-Pax)', 4, 'terrace')"></div>
+        <div id="spot-C13" class="spot round" style="top: 79.5%; left: 35.0%; width: 4.5%; height: 7.2%;" onclick="openBooking('C13', 'Terrace Table (4-Pax)', 4, 'terrace')"></div>
+
+        <!-- B. INDOOR LOUNGE (KANAN) -->
+        <div id="spot-L1-top" class="spot" style="top: 11.5%; left: 50.2%; width: 4.8%; height: 7.0%;" onclick="openBooking('L1-T', 'VIP Dining L1 Atas', 6, 'lounge')"></div>
+        <div id="spot-L2-top" class="spot" style="top: 11.5%; left: 57.0%; width: 4.8%; height: 7.0%;" onclick="openBooking('L2-T', 'VIP Dining L2 Atas', 6, 'lounge')"></div>
+        <div id="spot-L3-top" class="spot" style="top: 11.5%; left: 63.8%; width: 4.8%; height: 7.0%;" onclick="openBooking('L3-T', 'VIP Dining L3 Atas', 6, 'lounge')"></div>
+
+        <div id="spot-L1" class="spot" style="top: 24.0%; left: 48.8%; width: 5.5%; height: 8.0%;" onclick="openBooking('L1', 'VIP Dining Lounge L1', 6, 'lounge')"></div>
+        <div id="spot-L2" class="spot" style="top: 24.0%; left: 57.0%; width: 5.5%; height: 8.0%;" onclick="openBooking('L2', 'VIP Dining Lounge L2', 6, 'lounge')"></div>
+        <div id="spot-L3" class="spot" style="top: 24.0%; left: 66.5%; width: 5.5%; height: 8.0%;" onclick="openBooking('L3', 'VIP Dining Lounge L3', 6, 'lounge')"></div>
+
+        <div id="spot-L11" class="spot round" style="top: 38.0%; left: 47.5%; width: 4.5%; height: 7.2%;" onclick="openBooking('L11', 'Lounge Center Table', 4, 'lounge')"></div>
+        <div id="spot-L12" class="spot round" style="top: 38.0%; left: 53.2%; width: 4.5%; height: 7.2%;" onclick="openBooking('L12', 'Lounge Center Table', 4, 'lounge')"></div>
+        <div id="spot-L13" class="spot round" style="top: 38.0%; left: 58.8%; width: 4.5%; height: 7.2%;" onclick="openBooking('L13', 'Lounge Center Table', 4, 'lounge')"></div>
+        <div id="spot-L14" class="spot round" style="top: 38.0%; left: 64.5%; width: 4.5%; height: 7.2%;" onclick="openBooking('L14', 'Lounge Center Table', 4, 'lounge')"></div>
+        <div id="spot-L15" class="spot round" style="top: 38.0%; left: 70.5%; width: 4.5%; height: 7.2%;" onclick="openBooking('L15', 'Lounge Center Table', 4, 'lounge')"></div>
+
+        <div id="spot-L9" class="spot round" style="top: 29.5%; left: 77.2%; width: 3.8%; height: 6.2%;" onclick="openBooking('L9', 'Bar High Chair', 2, 'lounge')"></div>
+        <div id="spot-L10" class="spot round" style="top: 37.5%; left: 78.8%; width: 3.8%; height: 6.2%;" onclick="openBooking('L10', 'Bar High Chair', 2, 'lounge')"></div>
+
+        <div id="spot-L16" class="spot round" style="top: 50.5%; left: 74.2%; width: 4.2%; height: 6.8%;" onclick="openBooking('L16', 'Lounge Cocktail', 4, 'lounge')"></div>
+        <div id="spot-L17" class="spot round" style="top: 50.5%; left: 80.5%; width: 4.2%; height: 6.8%;" onclick="openBooking('L17', 'Lounge Cocktail', 4, 'lounge')"></div>
+        <div id="spot-L22" class="spot round" style="top: 61.5%; left: 78.2%; width: 4.5%; height: 7.2%;" onclick="openBooking('L22', 'Lounge Table', 4, 'lounge')"></div>
+
+        <div id="spot-L18" class="spot round" style="top: 61.5%; left: 50.8%; width: 4.5%; height: 7.2%;" onclick="openBooking('L18', 'Lounge Center Table', 4, 'lounge')"></div>
+        <div id="spot-L19" class="spot round" style="top: 61.5%; left: 56.5%; width: 4.5%; height: 7.2%;" onclick="openBooking('L19', 'Lounge Center Table', 4, 'lounge')"></div>
+        <div id="spot-L20" class="spot round" style="top: 61.5%; left: 62.2%; width: 4.5%; height: 7.2%;" onclick="openBooking('L20', 'Lounge Center Table', 4, 'lounge')"></div>
+        <div id="spot-L21" class="spot round" style="top: 61.5%; left: 68.0%; width: 4.5%; height: 7.2%;" onclick="openBooking('L21', 'Lounge Center Table', 4, 'lounge')"></div>
+
+        <div id="spot-L23" class="spot round" style="top: 79.5%; left: 51.5%; width: 4.5%; height: 7.2%;" onclick="openBooking('L23', 'Frontline Lounge Table', 4, 'lounge')"></div>
+        <div id="spot-L24" class="spot round" style="top: 79.5%; left: 57.2%; width: 4.5%; height: 7.2%;" onclick="openBooking('L24', 'Frontline Lounge Table', 4, 'lounge')"></div>
+        <div id="spot-L25" class="spot round" style="top: 79.5%; left: 63.0%; width: 4.5%; height: 7.2%;" onclick="openBooking('L25', 'Frontline Lounge Table', 4, 'lounge')"></div>
+        <div id="spot-L26" class="spot round" style="top: 79.5%; left: 68.8%; width: 4.5%; height: 7.2%;" onclick="openBooking('L26', 'Frontline Lounge Table', 4, 'lounge')"></div>
+        <div id="spot-L27" class="spot round" style="top: 79.5%; left: 74.8%; width: 4.5%; height: 7.2%;" onclick="openBooking('L27', 'Frontline Lounge Table', 4, 'lounge')"></div>
+        <div id="spot-L28" class="spot round" style="top: 79.5%; left: 81.0%; width: 4.5%; height: 7.2%;" onclick="openBooking('L28', 'Frontline Lounge Table', 4, 'lounge')"></div>
+
+        <div id="spot-L29" class="spot" style="top: 40.0%; left: 91.5%; width: 3.8%; height: 6.2%;" onclick="openBooking('L29', 'Wall Bar Table', 2, 'lounge')"></div>
+        <div id="spot-L30" class="spot" style="top: 49.0%; left: 91.5%; width: 3.8%; height: 6.2%;" onclick="openBooking('L30', 'Wall Bar Table', 2, 'lounge')"></div>
+        <div id="spot-L31" class="spot" style="top: 58.0%; left: 92.5%; width: 3.8%; height: 6.2%;" onclick="openBooking('L31', 'Wall Bar Table', 2, 'lounge')"></div>
+        <div id="spot-L32" class="spot" style="top: 67.0%; left: 93.0%; width: 3.8%; height: 6.2%;" onclick="openBooking('L32', 'Wall Bar Table', 2, 'lounge')"></div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- MODAL RESERVASI MEJA -->
+  <div id="bookingModal" class="modal-backdrop">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3><i class="fa-solid fa-chair" style="color: #fef08a;"></i> Reservasi <span id="modalTitle">#L1</span></h3>
+        <button class="btn-x" onclick="closeBookingModal()"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <div class="modal-body">
+        <div class="form-row">
+          <label><i class="fa-solid fa-user"></i> Nama Tamu (Guest Name) *</label>
+          <input type="text" id="guestName" class="inp-field" placeholder="Contoh: Jessica Alexandra">
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+          <div class="form-row">
+            <label><i class="fa-brands fa-whatsapp"></i> WhatsApp / HP *</label>
+            <input type="tel" id="guestPhone" class="inp-field" placeholder="0812-xxxx-xxxx">
+          </div>
+          <div class="form-row">
+            <label><i class="fa-solid fa-users"></i> Jumlah Pax</label>
+            <input type="number" id="guestPax" class="inp-field" value="4" min="1">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <label><i class="fa-solid fa-money-bill-wave" style="color: #34d399;"></i> Nominal DP / Uang Muka (Manual) *</label>
+          <div class="money-input-box">
+            <span>Rp</span>
+            <input type="text" id="guestDP" class="inp-field" placeholder="Contoh: 500.000" onkeyup="formatCurrencyInput(this)">
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+          <div class="form-row">
+            <label><i class="fa-solid fa-clock"></i> Jam Kedatangan</label>
+            <select id="guestTime" class="inp-field">
+              <option value="20:00 WITA">20:00 WITA</option>
+              <option value="21:00 WITA" selected>21:00 WITA</option>
+              <option value="22:00 WITA">22:00 WITA</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label><i class="fa-solid fa-user-tag" style="color: var(--gold-primary);"></i> Created By (Staff) *</label>
+            <input type="text" id="guestCreatedBy" class="inp-field" placeholder="Nama Staff" value="Abdul Ghofur">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <label><i class="fa-solid fa-note-sticky"></i> Catatan Khusus / Special Request</label>
+          <input type="text" id="guestNotes" class="inp-field" placeholder="Cth: Request bucket ice, fruit platter...">
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button id="btnRemoveBooking" class="btn-modal-del" onclick="deleteBooking()" style="display: none;">
+          <i class="fa-solid fa-trash"></i> Hapus
+        </button>
+        <button class="btn-modal-del" style="background:#334155; color:#cbd5e1;" onclick="closeBookingModal()">Tutup</button>
+        <button class="btn-modal-save" onclick="saveBooking()">
+          <i class="fa-solid fa-check"></i> Simpan ke Cloud (Merah)
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL INPUT FDC (@ RP 125.000) -->
+  <div id="fdcModal" class="modal-backdrop">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3 style="color: #d8b4fe;"><i class="fa-solid fa-ticket"></i> Input Tiket FDC (Standing Party)</h3>
+        <button class="btn-x" onclick="closeFDCModal()"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <div class="modal-body">
+        <div style="background: rgba(168, 85, 247, 0.12); border: 1px solid rgba(168, 85, 247, 0.35); padding: 8px 12px; border-radius: 8px; font-size: 0.72rem; color: #e9d5ff;">
+          <i class="fa-solid fa-circle-info"></i> Tiket First Drink Charge (FDC) Standing: <strong>Rp 125.000 / Pax</strong> (Free 1st Drink Voucher).
+        </div>
+
+        <div class="form-row">
+          <label><i class="fa-solid fa-user"></i> Nama Tamu *</label>
+          <input type="text" id="fdcName" class="inp-field" placeholder="Nama pemesan FDC">
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+          <div class="form-row">
+            <label><i class="fa-brands fa-whatsapp"></i> WhatsApp / HP *</label>
+            <input type="tel" id="fdcPhone" class="inp-field" placeholder="0812-xxxx-xxxx">
+          </div>
+          <div class="form-row">
+            <label><i class="fa-solid fa-users"></i> Jumlah Tiket (Pax) *</label>
+            <input type="number" id="fdcPax" class="inp-field" value="1" min="1" oninput="calculateFDCAmount()">
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+          <div class="form-row">
+            <label><i class="fa-solid fa-money-bill-wave" style="color: #34d399;"></i> Total FDC (@ Rp 125rb) *</label>
+            <div class="money-input-box">
+              <span>Rp</span>
+              <input type="text" id="fdcAmount" class="inp-field" placeholder="125.000" onkeyup="formatCurrencyInput(this)">
+            </div>
+          </div>
+          <div class="form-row">
+            <label><i class="fa-solid fa-user-tag" style="color: #d8b4fe;"></i> Created By (Staff) *</label>
+            <input type="text" id="fdcCreatedBy" class="inp-field" placeholder="Nama Staff" value="Abdul Ghofur">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <label><i class="fa-solid fa-note-sticky"></i> Keterangan / PIC Penjualan</label>
+          <input type="text" id="fdcNotes" class="inp-field" placeholder="Cth: Sales FO / Bar Cashier">
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn-modal-del" style="background:#334155; color:#cbd5e1;" onclick="closeFDCModal()">Batal</button>
+        <button class="btn-modal-save" style="background: linear-gradient(135deg, #a855f7 0%, #7e22ce 100%);" onclick="saveFDCBooking()">
+          <i class="fa-solid fa-check"></i> Simpan Tiket FDC
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL EXECUTIVE DASHBOARD -->
+  <div id="reportModal" class="modal-backdrop">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3 style="color: #fef08a;"><i class="fa-solid fa-chart-line"></i> Event Executive Dashboard</h3>
+        <button class="btn-x" onclick="closeReportModal()"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <div class="modal-body">
+        <div class="dash-grid">
+          <div class="dash-card hero-card">
+            <div class="card-lbl"><i class="fa-solid fa-coins" style="color: var(--gold-primary);"></i> Total Gross Revenue (Meja + FDC)</div>
+            <div class="card-val" id="repTotalGross" style="color: #fef08a;">Rp 0</div>
+            <div class="card-sub">Akumulasi seluruh transaksi reservasi meja Lounge, Terrace & tiket standing</div>
+          </div>
+
+          <div class="dash-card">
+            <div class="card-lbl"><i class="fa-solid fa-couch" style="color: var(--amber-lounge);"></i> Indoor Lounge (L)</div>
+            <div class="card-val"><span id="repLoungeBooked" style="color: var(--amber-lounge);">0</span> <span style="font-size:0.75rem; color:#94a3b8;">/ 32 Unit</span></div>
+            <div class="occupancy-bar-wrap">
+              <div id="repLoungeBar" class="occupancy-bar" style="background: var(--amber-lounge);"></div>
+            </div>
+            <div class="card-sub" style="margin-top: 3px;">
+              Tersisa: <strong id="repLoungeLeft" style="color:#38bdf8;">32</strong> | Rev: <span id="repLoungeRev" style="color:#34d399;">Rp 0</span>
+            </div>
+          </div>
+
+          <div class="dash-card">
+            <div class="card-lbl"><i class="fa-solid fa-cloud-moon" style="color: var(--cyan-terrace);"></i> Rooftop Terrace (C)</div>
+            <div class="card-val"><span id="repTerraceBooked" style="color: var(--cyan-terrace);">0</span> <span style="font-size:0.75rem; color:#94a3b8;">/ 13 Unit</span></div>
+            <div class="occupancy-bar-wrap">
+              <div id="repTerraceBar" class="occupancy-bar" style="background: var(--cyan-terrace);"></div>
+            </div>
+            <div class="card-sub" style="margin-top: 3px;">
+              Tersisa: <strong id="repTerraceLeft" style="color:#38bdf8;">13</strong> | Rev: <span id="repTerraceRev" style="color:#34d399;">Rp 0</span>
+            </div>
+          </div>
+
+          <div class="dash-card">
+            <div class="card-lbl"><i class="fa-solid fa-receipt" style="color: var(--emerald-accent);"></i> Total Revenue Meja</div>
+            <div class="card-val" id="repTableGrossRev" style="font-size: 1rem; color: var(--emerald-accent);">Rp 0</div>
+            <div class="card-sub" id="repTablePaxDetail">0 Pax dari 0 meja terisi</div>
+          </div>
+
+          <div class="dash-card">
+            <div class="card-lbl"><i class="fa-solid fa-ticket" style="color: var(--purple-fdc);"></i> FDC Standing Ticket</div>
+            <div class="card-val" id="repFDCPax" style="font-size: 1rem; color: #d8b4fe;">0 Pax</div>
+            <div class="card-sub" id="repFDCTotalRev">Rp 0 Total FDC Revenue</div>
+          </div>
+
+          <div class="dash-card" style="grid-column: span 2; background: rgba(30, 41, 59, 0.65);">
+            <div class="card-lbl"><i class="fa-solid fa-users" style="color: #f1f5f9;"></i> Total Estimated Attendees (Crowd)</div>
+            <div class="card-val" id="repTotalPax" style="font-size: 1.1rem; color: #f1f5f9;">0 Total Tamu</div>
+            <div class="card-sub" id="repCrowdBreakdown">0 Seating (Lounge + Terrace) + 0 Standing FDC</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn-modal-del" style="background:#334155; color:#cbd5e1;" onclick="closeReportModal()">Tutup</button>
+        <button class="btn-action btn-csv" onclick="exportReservationsCSV()">
+          <i class="fa-solid fa-download"></i> Unduh CSV
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL DAFTAR TAMU FDC -->
+  <div id="fdcListModal" class="modal-backdrop">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3 style="color: #d8b4fe;"><i class="fa-solid fa-list-check"></i> Daftar Pesanan FDC (Standing)</h3>
+        <button class="btn-x" onclick="closeFDCListModal()"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <div class="modal-body" style="max-height: 60vh; overflow-y: auto;">
+        <div id="fdcListContent"></div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn-modal-del" style="background:#334155; color:#cbd5e1;" onclick="closeFDCListModal()">Tutup</button>
+        <button class="btn-action btn-fdc" onclick="closeFDCListModal(); openFDCBookingModal();">
+          + Tambah FDC Baru
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- LOADER SPINNER -->
+  <div id="loaderOverlay" class="loader-overlay">
+    <div class="spinner"></div>
+    <div style="color: var(--gold-primary); font-weight: 700; font-size: 0.95rem;">Menyiapkan Gambar Denah JPG...</div>
+    <div style="color: #cbd5e1; font-size: 0.78rem;">Resolusi tajam siap dibagikan ke WhatsApp</div>
+  </div>
+
+  <script>
+    // ================= KREDENSIAL SUPABASE REALTIME CLOUD =================
+    const SUPABASE_URL = 'https://hupvhnvztvzqbdhuukpt.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imh1cHZobnZ6dHZ6cWJkaHV1a3B0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAyNDY4NTIsImV4cCI6MjEwNTgyMjg1Mn0.E-XiAzngGIe_KAe2Znk201Jy55zwLUMOwL4cHhxQCPQ';
+
+    const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    const FDC_DEFAULT_PRICE = 125000;
+
+    // INVENTORY KING & QUEEN 2026 (TERPISAH TOTAL)
+    // Area Terrace: C1 s/d C13 (13 Unit)
+    const TERRACE_IDS = ['C1', 'C2', 'C3', 'C4', 'C5', 'C6', 'C7', 'C8', 'C9', 'C10', 'C11', 'C12', 'C13'];
+
+    // Area Lounge: L1 s/d L32 (32 Unit)
+    const LOUNGE_IDS = [
+      'L1-T', 'L2-T', 'L3-T', 'L1', 'L2', 'L3',
+      'L9', 'L10', 'L11', 'L12', 'L13', 'L14', 'L15',
+      'L16', 'L17', 'L18', 'L19', 'L20', 'L21', 'L22',
+      'L23', 'L24', 'L25', 'L26', 'L27', 'L28',
+      'L29', 'L30', 'L31', 'L32'
+    ];
+
+    let bookings = {};
+    let fdcBookings = [];
+    let currentTable = null;
+    let currentCategory = 'lounge';
+    let zoomLevel = 1.0;
+
+    const possibleImages = [
+      'Gemini_Generated_Image_xa8u3bxa8u3bxa8u.jpg',
+      'LAYOUT HALLOWEN 2026.jpg',
+      'denah.jpg'
+    ];
+    let imgAttempt = 0;
+
+    function handleImgFallback(img) {
+      if (imgAttempt < possibleImages.length) {
+        img.src = possibleImages[imgAttempt];
+        imgAttempt++;
+      }
+    }
+
+    function loadLocalImage(e) {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(evt) {
+          document.getElementById('mainDenahImg').src = evt.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', async () => {
+      await fetchAllCloudData();
+      initGestures();
+      subscribeRealtime();
+    });
+
+    // ================= SUPABASE DATA SYNC (TABEL KHUSUS KQ_) =================
+    async function fetchAllCloudData() {
+      try {
+        const { data: tableData, error: tErr } = await _supabase.from('kq_table_bookings').select('*');
+        if (!tErr && tableData) {
+          bookings = {};
+          tableData.forEach(row => {
+            bookings[String(row.table_id)] = {
+              name: row.guest_name,
+              phone: row.guest_phone,
+              category: row.category,
+              pax: row.pax,
+              dp: Number(row.dp),
+              time: row.arrival_time,
+              notes: row.notes,
+              created_by: row.created_by || 'Staff'
+            };
+          });
+        }
+
+        const { data: fdcData, error: fErr } = await _supabase.from('kq_fdc_bookings').select('*');
+        if (!fErr && fdcData) {
+          fdcBookings = fdcData.map(row => ({
+            id: row.id,
+            name: row.guest_name,
+            phone: row.guest_phone,
+            pax: row.pax,
+            amount: Number(row.amount),
+            notes: row.notes,
+            created_by: row.created_by || 'Staff'
+          }));
+        }
+
+        refreshMapNodes();
+        updateMetrics();
+      } catch (err) {
+        console.error('Koneksi Supabase gagal:', err);
+      }
+    }
+
+    function subscribeRealtime() {
+      _supabase
+        .channel('schema-kq-changes')
+        .on('postgres_changes', { event: '*', schema: 'public', table: 'kq_table_bookings' }, () => {
+          fetchAllCloudData();
+        })
+        .on('postgres_changes', { event: '*', schema: 'public', table: 'kq_fdc_bookings' }, () => {
+          fetchAllCloudData();
+        })
+        .subscribe();
+    }
+
+    // ================= MODAL MEJA =================
+    function openBooking(tableId, tableType, defaultPax, category) {
+      currentTable = String(tableId);
+      currentCategory = category || (TERRACE_IDS.includes(tableId) ? 'terrace' : 'lounge');
+      document.getElementById('modalTitle').innerText = '#' + tableId + ' (' + tableType + ')';
+
+      const data = bookings[tableId];
+      const btnDel = document.getElementById('btnRemoveBooking');
+
+      if (data) {
+        document.getElementById('guestName').value = data.name || '';
+        document.getElementById('guestPhone').value = data.phone || '';
+        document.getElementById('guestPax').value = data.pax || defaultPax;
+        document.getElementById('guestDP').value = data.dp ? parseInt(data.dp, 10).toLocaleString('id-ID') : '';
+        document.getElementById('guestTime').value = data.time || '21:00 WITA';
+        document.getElementById('guestCreatedBy').value = data.created_by || 'Abdul Ghofur';
+        document.getElementById('guestNotes').value = data.notes || '';
+        btnDel.style.display = 'inline-flex';
+      } else {
+        document.getElementById('guestName').value = '';
+        document.getElementById('guestPhone').value = '';
+        document.getElementById('guestPax').value = defaultPax;
+        document.getElementById('guestDP').value = '';
+        document.getElementById('guestTime').value = '21:00 WITA';
+        document.getElementById('guestCreatedBy').value = localStorage.getItem('last_staff_name') || 'Abdul Ghofur';
+        document.getElementById('guestNotes').value = '';
+        btnDel.style.display = 'none';
+      }
+
+      document.getElementById('bookingModal').classList.add('open');
+    }
+
+    function closeBookingModal() {
+      document.getElementById('bookingModal').classList.remove('open');
+      currentTable = null;
+    }
+
+    async function saveBooking() {
+      const name = document.getElementById('guestName').value.trim();
+      const phone = document.getElementById('guestPhone').value.trim();
+      const rawDP = document.getElementById('guestDP').value.replace(/[^0-9]/g, '');
+      const staff = document.getElementById('guestCreatedBy').value.trim() || 'Staff';
+
+      if (!name) {
+        alert('Silakan masukkan nama tamu pemesan.');
+        return;
+      }
+
+      localStorage.setItem('last_staff_name', staff);
+
+      const payload = {
+        table_id: String(currentTable),
+        guest_name: name,
+        guest_phone: phone,
+        category: currentCategory,
+        pax: parseInt(document.getElementById('guestPax').value, 10) || 4,
+        dp: rawDP ? parseInt(rawDP, 10) : 0,
+        arrival_time: document.getElementById('guestTime').value,
+        created_by: staff,
+        notes: document.getElementById('guestNotes').value
+      };
+
+      const { data, error } = await _supabase
+        .from('kq_table_bookings')
+        .upsert(payload, { onConflict: 'table_id' });
+
+      if (error) {
+        alert('Gagal menyimpan ke database Supabase: ' + error.message);
+        console.error('Supabase Error:', error);
+        return;
+      }
+
+      bookings[currentTable] = payload;
+      refreshMapNodes();
+      updateMetrics();
+      closeBookingModal();
+      
+      await fetchAllCloudData();
+      alert(`Meja #${currentTable} berhasil dibooking oleh ${staff} dan tersimpan ke Cloud!`);
+    }
+
+    async function deleteBooking() {
+      if (confirm('Batalkan reservasi #' + currentTable + '? Unit akan kembali tersedia.')) {
+        const { error } = await _supabase.from('kq_table_bookings').delete().eq('table_id', String(currentTable));
+        if (!error) {
+          delete bookings[currentTable];
+          refreshMapNodes();
+          updateMetrics();
+          closeBookingModal();
+          await fetchAllCloudData();
+        } else {
+          alert('Gagal menghapus data: ' + error.message);
+        }
+      }
+    }
+
+    // ================= MODAL FDC (@ RP 125.000) =================
+    function openFDCBookingModal() {
+      document.getElementById('fdcName').value = '';
+      document.getElementById('fdcPhone').value = '';
+      document.getElementById('fdcPax').value = '1';
+      document.getElementById('fdcAmount').value = (1 * FDC_DEFAULT_PRICE).toLocaleString('id-ID');
+      document.getElementById('fdcCreatedBy').value = localStorage.getItem('last_staff_name') || 'Abdul Ghofur';
+      document.getElementById('fdcNotes').value = '';
+      document.getElementById('fdcModal').classList.add('open');
+    }
+
+    function closeFDCModal() {
+      document.getElementById('fdcModal').classList.remove('open');
+    }
+
+    function calculateFDCAmount() {
+      const pax = parseInt(document.getElementById('fdcPax').value, 10) || 1;
+      document.getElementById('fdcAmount').value = (pax * FDC_DEFAULT_PRICE).toLocaleString('id-ID');
+    }
+
+    async function saveFDCBooking() {
+      const name = document.getElementById('fdcName').value.trim();
+      const phone = document.getElementById('fdcPhone').value.trim();
+      const pax = parseInt(document.getElementById('fdcPax').value, 10) || 1;
+      const rawAmt = document.getElementById('fdcAmount').value.replace(/[^0-9]/g, '');
+      const staff = document.getElementById('fdcCreatedBy').value.trim() || 'Staff';
+
+      if (!name) {
+        alert('Silakan masukkan nama pemesan tiket FDC.');
+        return;
+      }
+
+      localStorage.setItem('last_staff_name', staff);
+
+      const payload = {
+        id: 'KQ-FDC-' + Date.now().toString().slice(-6),
+        guest_name: name,
+        guest_phone: phone,
+        pax: pax,
+        amount: rawAmt ? parseInt(rawAmt, 10) : (pax * FDC_DEFAULT_PRICE),
+        created_by: staff,
+        notes: document.getElementById('fdcNotes').value
+      };
+
+      const { error } = await _supabase.from('kq_fdc_bookings').insert([payload]);
+      if (error) {
+        alert('Gagal menyimpan tiket FDC ke Supabase: ' + error.message);
+        return;
+      }
+
+      closeFDCModal();
+      await fetchAllCloudData();
+      alert(`Berhasil menyimpan Tiket FDC: ${name} (${pax} Pax) oleh ${staff}!`);
+    }
+
+    function openFDCListModal() {
+      const container = document.getElementById('fdcListContent');
+      if (fdcBookings.length === 0) {
+        container.innerHTML = '<div style="text-align:center; padding: 25px; color:#94a3b8; font-size:0.85rem;">Belum ada pesanan tiket FDC Standing.</div>';
+      } else {
+        let html = '';
+        fdcBookings.forEach((item) => {
+          html += `
+            <div style="background:#0f172a; border:1px solid #334155; border-radius:8px; padding:10px 12px; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
+              <div>
+                <strong style="color:#d8b4fe; font-size:0.86rem;">${item.name}</strong> 
+                <span style="background:rgba(168,85,247,0.2); color:#c084fc; font-size:0.65rem; padding:2px 6px; border-radius:4px; margin-left:6px; font-weight:700;">${item.pax} Pax</span>
+                <div style="font-size:0.75rem; color:#94a3b8; margin-top:2px;">
+                  WA: ${item.phone || '-'} | Total: <strong style="color:#34d399;">Rp ${(item.amount || 0).toLocaleString('id-ID')}</strong>
+                </div>
+                <div style="font-size:0.7rem; color:#fce08a; margin-top:2px;">
+                  <i class="fa-solid fa-user-pen"></i> By: <strong>${item.created_by || 'Staff'}</strong>
+                </div>
+                ${item.notes ? `<div style="font-size:0.7rem; color:#cbd5e1; margin-top:2px; font-style:italic;">"${item.notes}"</div>` : ''}
+              </div>
+              <button onclick="deleteFDC('${item.id}')" style="background:#7f1d1d; border:none; color:#fca5a5; width:30px; height:30px; border-radius:6px; cursor:pointer;" title="Hapus Tiket FDC">
+                <i class="fa-solid fa-trash" style="font-size:0.75rem;"></i>
+              </button>
+            </div>
+          `;
+        });
+        container.innerHTML = html;
+      }
+      document.getElementById('fdcListModal').classList.add('open');
+    }
+
+    function closeFDCListModal() {
+      document.getElementById('fdcListModal').classList.remove('open');
+    }
+
+    async function deleteFDC(id) {
+      if (confirm('Hapus pesanan tiket FDC ini dari database?')) {
+        const { error } = await _supabase.from('kq_fdc_bookings').delete().eq('id', id);
+        if (!error) {
+          await fetchAllCloudData();
+          openFDCListModal();
+        } else {
+          alert('Gagal menghapus: ' + error.message);
+        }
+      }
+    }
+
+    // ================= MODAL EXECUTIVE REPORT =================
+    function openReportModal() {
+      const bookedKeys = Object.keys(bookings);
+
+      let loungeBooked = 0;
+      let loungeRev = 0;
+      let loungePax = 0;
+
+      let terraceBooked = 0;
+      let terraceRev = 0;
+      let terracePax = 0;
+
+      bookedKeys.forEach(k => {
+        const item = bookings[k];
+        const isTerrace = TERRACE_IDS.includes(k);
+        const dp = item.dp || 0;
+        const pax = parseInt(item.pax || 0, 10);
+
+        if (isTerrace) {
+          terraceBooked++;
+          terraceRev += dp;
+          terracePax += pax;
+        } else {
+          loungeBooked++;
+          loungeRev += dp;
+          loungePax += pax;
+        }
+      });
+
+      const totalLounge = 32;
+      const totalTerrace = 13;
+
+      const loungeLeft = totalLounge - loungeBooked;
+      const terraceLeft = totalTerrace - terraceBooked;
+
+      const loungeOccupancy = Math.round((loungeBooked / totalLounge) * 100);
+      const terraceOccupancy = Math.round((terraceBooked / totalTerrace) * 100);
+
+      let fdcPax = 0;
+      let fdcTotalRev = 0;
+      fdcBookings.forEach(item => {
+        fdcPax += (item.pax || 0);
+        fdcTotalRev += (item.amount || 0);
+      });
+
+      const tableGrossRev = loungeRev + terraceRev;
+      const grandGross = tableGrossRev + fdcTotalRev;
+      const seatingPax = loungePax + terracePax;
+      const totalCrowd = seatingPax + fdcPax;
+
+      document.getElementById('repTotalGross').innerText = 'Rp ' + grandGross.toLocaleString('id-ID');
+      
+      document.getElementById('repLoungeBooked').innerText = loungeBooked;
+      document.getElementById('repLoungeLeft').innerText = loungeLeft;
+      document.getElementById('repLoungeRev').innerText = 'Rp ' + loungeRev.toLocaleString('id-ID');
+      document.getElementById('repLoungeBar').style.width = loungeOccupancy + '%';
+
+      document.getElementById('repTerraceBooked').innerText = terraceBooked;
+      document.getElementById('repTerraceLeft').innerText = terraceLeft;
+      document.getElementById('repTerraceRev').innerText = 'Rp ' + terraceRev.toLocaleString('id-ID');
+      document.getElementById('repTerraceBar').style.width = terraceOccupancy + '%';
+
+      document.getElementById('repTableGrossRev').innerText = 'Rp ' + tableGrossRev.toLocaleString('id-ID');
+      document.getElementById('repTablePaxDetail').innerText = `${seatingPax} Pax dari ${loungeBooked + terraceBooked} meja terisi (${loungeBooked} Lounge + ${terraceBooked} Terrace)`;
+
+      document.getElementById('repFDCPax').innerText = `${fdcPax} Pax`;
+      document.getElementById('repFDCTotalRev').innerText = `Rp ${fdcTotalRev.toLocaleString('id-ID')} Total FDC Revenue`;
+
+      document.getElementById('repTotalPax').innerText = `${totalCrowd} Total Tamu Hadir`;
+      document.getElementById('repCrowdBreakdown').innerText = `${seatingPax} Seating (${loungePax} Lounge + ${terracePax} Terrace) + ${fdcPax} Standing FDC`;
+
+      document.getElementById('reportModal').classList.add('open');
+    }
+
+    function closeReportModal() {
+      document.getElementById('reportModal').classList.remove('open');
+    }
+
+    // ================= REFRESH UI & HITUNGAN =================
+    function refreshMapNodes() {
+      document.querySelectorAll('.spot').forEach(spot => {
+        const id = spot.id.replace('spot-', '');
+        if (bookings[id]) {
+          spot.classList.add('is-booked');
+        } else {
+          spot.classList.remove('is-booked');
+        }
+      });
+    }
+
+    function updateMetrics() {
+      const bookedKeys = Object.keys(bookings);
+      let loungeCount = 0;
+      let terraceCount = 0;
+      let tableDP = 0;
+
+      bookedKeys.forEach(k => {
+        if (TERRACE_IDS.includes(k)) {
+          terraceCount++;
+        } else {
+          loungeCount++;
+        }
+        tableDP += (bookings[k].dp || 0);
+      });
+
+      document.getElementById('statLoungeBooked').innerText = loungeCount;
+      document.getElementById('statTerraceBooked').innerText = terraceCount;
+
+      let fdcPaxTotal = 0;
+      let fdcAmountTotal = 0;
+      fdcBookings.forEach(item => {
+        fdcPaxTotal += (item.pax || 0);
+        fdcAmountTotal += (item.amount || 0);
+      });
+
+      document.getElementById('statFDCPaxTotal').innerText = fdcPaxTotal;
+      const grandTotal = tableDP + fdcAmountTotal;
+      document.getElementById('statDPTotal').innerText = 'Rp ' + grandTotal.toLocaleString('id-ID');
+
+      document.getElementById('legendAvailText').innerText = `Sisa Lounge: ${32 - loungeCount} | Sisa Terrace: ${13 - terraceCount}`;
+      document.getElementById('legendBookedText').innerText = `${bookedKeys.length} Terbooking (Merah)`;
+    }
+
+    function formatCurrencyInput(el) {
+      let val = el.value.replace(/[^0-9]/g, '');
+      el.value = val ? parseInt(val, 10).toLocaleString('id-ID') : '';
+    }
+
+    // ================= DOWNLOAD JPG UNTUK SHARE KE TAMU =================
+    async function downloadLayoutJPG() {
+      const loader = document.getElementById('loaderOverlay');
+      loader.style.display = 'flex';
+
+      const mapEl = document.getElementById('mapFrame');
+      const savedTransform = mapEl.style.transform;
+      mapEl.style.transform = 'scale(1)';
+
+      try {
+        const canvas = await html2canvas(mapEl, {
+          scale: 2,
+          useCORS: true,
+          allowTaint: true,
+          backgroundColor: '#080c14'
+        });
+
+        const link = document.createElement('a');
+        const dateStr = new Date().toISOString().slice(0, 10);
+        link.download = `Layout_KingAndQueen_Update_${dateStr}.jpg`;
+        link.href = canvas.toDataURL('image/jpeg', 0.92);
+        link.click();
+      } catch (err) {
+        console.error('Gagal membuat JPG:', err);
+        alert('Gagal mengekspor gambar secara otomatis. Anda dapat mengambil Screenshot layar perangkat Anda.');
+      } finally {
+        mapEl.style.transform = savedTransform;
+        loader.style.display = 'none';
+      }
+    }
+
+    // ================= EKSPOR CSV INVENTORY LENGKAP =================
+    function exportReservationsCSV() {
+      const tableKeys = Object.keys(bookings);
+      if (tableKeys.length === 0 && fdcBookings.length === 0) {
+        alert('Belum ada data reservasi Meja maupun FDC.');
+        return;
+      }
+
+      let csv = 'Area Kategori,Nomor Meja/ID,Nama Tamu,WhatsApp,Pax,Nominal Bayar/DP (IDR),Jam Tiba,Created By (Staff),Catatan Khusus\n';
+      
+      tableKeys.forEach(k => {
+        const b = bookings[k];
+        const categoryLabel = TERRACE_IDS.includes(k) ? 'ROOFTOP TERRACE (C)' : 'INDOOR LOUNGE (L)';
+        csv += `"${categoryLabel}","${k}","${b.name}","${b.phone}","${b.pax}","${b.dp}","${b.time}","${b.created_by || 'Staff'}","${b.notes || ''}"\n`;
+      });
+
+      fdcBookings.forEach(f => {
+        csv += `"FDC STANDING TICKET","${f.id}","${f.name}","${f.phone}","${f.pax}","${f.amount}","-","${f.created_by || 'Staff'}","${f.notes || ''}"\n`;
+      });
+
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = `Executive_Report_King_And_Queen_${new Date().toISOString().slice(0, 10)}.csv`;
+      a.click();
+    }
+
+    // ================= ZOOM & GESTURE TOUCH =================
+    function zoomMap(delta) {
+      zoomLevel = Math.max(0.6, Math.min(2.2, zoomLevel + delta));
+      applyTransform();
+    }
+
+    function resetZoom() {
+      zoomLevel = 1.0;
+      applyTransform();
+    }
+
+    function applyTransform() {
+      document.getElementById('mapFrame').style.transform = `scale(${zoomLevel})`;
+    }
+
+    function initGestures() {
+      const area = document.getElementById('mapTouchArea');
+      let startDist = 0;
+
+      area.addEventListener('touchstart', (e) => {
+        if (e.touches.length === 2) {
+          startDist = Math.hypot(
+            e.touches[0].pageX - e.touches[1].pageX,
+            e.touches[0].pageY - e.touches[1].pageY
+          );
+        }
+      }, { passive: true });
+
+      area.addEventListener('touchmove', (e) => {
+        if (e.touches.length === 2) {
+          const dist = Math.hypot(
+            e.touches[0].pageX - e.touches[1].pageX,
+            e.touches[0].pageY - e.touches[1].pageY
+          );
+          if (startDist > 0) {
+            const diff = dist - startDist;
+            if (Math.abs(diff) > 10) {
+              zoomMap(diff > 0 ? 0.03 : -0.03);
+              startDist = dist;
+            }
+          }
+        }
+      }, { passive: true });
+    }
+  </script>
+</body>
+</html>
