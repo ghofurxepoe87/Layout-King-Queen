@@ -313,27 +313,27 @@
       height: 100%;
     }
 
-    /* HOTSPOT TANPA KOTAK / GARIS (INVISIBLE KLIK LANGSUNG PADA GAMBAR MEJA) */
+    /* HOTSPOT TANPA KOTAK ATAU GARIS (MURNI KLIK DI ATAS GAMBAR MEJA) */
     .spot {
       position: absolute;
       cursor: pointer;
       border-radius: 50%;
       background: transparent;
       border: none;
-      transition: background 0.2s ease, transform 0.15s ease;
+      transition: background 0.15s ease, transform 0.15s ease;
       -webkit-tap-highlight-color: transparent;
     }
 
     .spot:hover {
-      background: rgba(56, 189, 248, 0.2);
+      background: rgba(56, 189, 248, 0.25);
     }
 
     .spot:active { transform: scale(0.95); }
 
     .spot.is-booked {
-      background: rgba(220, 38, 38, 0.65) !important;
+      background: rgba(220, 38, 38, 0.7) !important;
       border-radius: 50% !important;
-      box-shadow: 0 0 14px var(--red-glow), inset 0 0 8px rgba(255,255,255,0.4) !important;
+      box-shadow: 0 0 16px var(--red-glow), inset 0 0 8px rgba(255,255,255,0.5) !important;
       z-index: 5;
     }
 
@@ -662,7 +662,7 @@
     </div>
   </div>
 
-  <!-- VIEWPORT DENGAN AREA KLIK PRESISI DI ATAS MEJA (TANPA GARIS KOTAK) -->
+  <!-- VIEWPORT DENGAN AREA KLIK PRESISI TINGGI DI ATAS GAMBAR MEJA (TANPA GARIS KOTAK) -->
   <main class="viewport-area" id="mapTouchArea">
     <div class="map-frame" id="mapFrame">
       <img id="mainDenahImg" 
@@ -735,7 +735,7 @@
     </div>
   </main>
 
-  <!-- MODAL RESERVASI MEJA DENGAN KASIR MENU & CETAK PDF -->
+  <!-- MODAL RESERVASI MEJA DENGAN KASIR MENU & CETAK PDF TAMU -->
   <div id="bookingModal" class="modal-backdrop">
     <div class="modal-container">
       <div class="modal-header">
@@ -775,7 +775,7 @@
             </button>
           </div>
 
-          <!-- Daftar item yang dipilih di keranjang -->
+          <!-- Daftar item keranjang -->
           <div id="bookingCartItemsContainer" style="display: flex; flex-direction: column; gap: 6px; max-height: 160px; overflow-y: auto;">
             <div style="font-size: 0.72rem; color: #64748b; text-align: center; padding: 6px;">Belum ada menu dipilih.</div>
           </div>
@@ -821,7 +821,7 @@
           <i class="fa-solid fa-trash"></i> Hapus
         </button>
         <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-          <button type="button" class="btn-action btn-jpg" onclick="generateGuestBookingPDF()" style="background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%); color:#fff;">
+          <button type="button" class="btn-action" onclick="generateGuestBookingPDF()" style="background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%); color:#fff;">
             <i class="fa-solid fa-file-pdf"></i> Cetak PDF Tamu
           </button>
           <button class="btn-modal-save" onclick="saveBooking()">
