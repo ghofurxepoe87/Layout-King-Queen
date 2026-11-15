@@ -314,33 +314,24 @@
       height: 100%;
     }
 
-    /* KOTAK HOTSPOT PRESISI & TERKUNCI */
+    /* SPOT TANPA OVERLAY TEKS (BERSIH, TRANSPARAN, MENJADI MERAH SAAT BOOKED) */
     .spot {
       position: absolute;
       cursor: pointer;
       border-radius: 8px;
-      background: rgba(56, 189, 248, 0.2);
-      border: 2px solid rgba(56, 189, 248, 0.85);
-      transition: all 0.15s ease;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.65rem;
-      font-weight: 800;
-      color: #fff;
-      text-shadow: 0 1px 2px rgba(0,0,0,0.8);
+      background: transparent;
+      border: none;
+      transition: background 0.15s ease;
       -webkit-tap-highlight-color: transparent;
     }
 
     .spot:hover {
-      background: rgba(56, 189, 248, 0.45);
-      border-color: #38bdf8;
-      box-shadow: 0 0 12px rgba(56, 189, 248, 0.6);
-      z-index: 10;
+      background: rgba(56, 189, 248, 0.25);
     }
 
     .spot:active { transform: scale(0.96); }
 
+    /* KETIKA SUDAH DIPESAN, BERUBAH JADI MERAH MENYALA */
     .spot.is-booked {
       background: rgba(220, 38, 38, 0.82) !important;
       border: 2px solid #ff4d4d !important;
@@ -672,7 +663,7 @@
     </div>
   </div>
 
-  <!-- VIEWPORT DENGAN KOTAK HOTSPOT PRESISI & TERKUNCI -->
+  <!-- VIEWPORT DENGAN KOTAK HOTSPOT BERSIH (TANPA OVERLAY TEKS) -->
   <main class="viewport-area" id="mapTouchArea">
     <div class="map-frame" id="mapFrame">
       <img id="mainDenahImg" 
@@ -684,63 +675,63 @@
 
       <div class="hotspots-layer" id="hotspotsLayer">
         
-        <!-- 1. COCKPIT DECK (C1 s/d C13) -->
-        <div id="spot-C1" class="spot" style="top: 35.8%; left: 11.2%; width: 6.2%; height: 7.2%;" onclick="openBooking('C1', 'Cockpit Deck Sofa (3 Pax)', 3, 'terrace')">C1</div>
-        <div id="spot-C2" class="spot" style="top: 35.8%; left: 21.0%; width: 6.2%; height: 7.2%;" onclick="openBooking('C2', 'Cockpit Deck Sofa (3 Pax)', 3, 'terrace')">C2</div>
-        <div id="spot-C3" class="spot" style="top: 35.8%; left: 30.8%; width: 6.2%; height: 7.2%;" onclick="openBooking('C3', 'Cockpit Deck Sofa (3 Pax)', 3, 'terrace')">C3</div>
+        <!-- 1. COCKPIT DECK (C1 s/d C13) - BERSIH TANPA TEKS OVERLAY -->
+        <div id="spot-C1" class="spot" style="top: 35.8%; left: 11.2%; width: 6.2%; height: 7.2%;" onclick="openBooking('C1', 'Cockpit Deck Sofa (3 Pax)', 3, 'terrace')"></div>
+        <div id="spot-C2" class="spot" style="top: 35.8%; left: 21.0%; width: 6.2%; height: 7.2%;" onclick="openBooking('C2', 'Cockpit Deck Sofa (3 Pax)', 3, 'terrace')"></div>
+        <div id="spot-C3" class="spot" style="top: 35.8%; left: 30.8%; width: 6.2%; height: 7.2%;" onclick="openBooking('C3', 'Cockpit Deck Sofa (3 Pax)', 3, 'terrace')"></div>
 
-        <div id="spot-C4" class="spot" style="top: 60.5%; left: 5.2%; width: 5.8%; height: 8.0%;" onclick="openBooking('C4', 'Cockpit Table (4 Pax)', 4, 'terrace')">C4</div>
-        <div id="spot-C5" class="spot" style="top: 60.5%; left: 13.0%; width: 5.8%; height: 8.0%;" onclick="openBooking('C5', 'Cockpit Table (4 Pax)', 4, 'terrace')">C5</div>
-        <div id="spot-C6" class="spot" style="top: 60.5%; left: 20.8%; width: 5.8%; height: 8.0%;" onclick="openBooking('C6', 'Cockpit Table (4 Pax)', 4, 'terrace')">C6</div>
-        <div id="spot-C7" class="spot" style="top: 60.5%; left: 28.6%; width: 5.8%; height: 8.0%;" onclick="openBooking('C7', 'Cockpit Table (4 Pax)', 4, 'terrace')">C7</div>
-        <div id="spot-C8" class="spot" style="top: 60.5%; left: 36.4%; width: 5.8%; height: 8.0%;" onclick="openBooking('C8', 'Cockpit Table (4 Pax)', 4, 'terrace')">C8</div>
+        <div id="spot-C4" class="spot" style="top: 60.5%; left: 5.2%; width: 5.8%; height: 8.0%;" onclick="openBooking('C4', 'Cockpit Table (4 Pax)', 4, 'terrace')"></div>
+        <div id="spot-C5" class="spot" style="top: 60.5%; left: 13.0%; width: 5.8%; height: 8.0%;" onclick="openBooking('C5', 'Cockpit Table (4 Pax)', 4, 'terrace')"></div>
+        <div id="spot-C6" class="spot" style="top: 60.5%; left: 20.8%; width: 5.8%; height: 8.0%;" onclick="openBooking('C6', 'Cockpit Table (4 Pax)', 4, 'terrace')"></div>
+        <div id="spot-C7" class="spot" style="top: 60.5%; left: 28.6%; width: 5.8%; height: 8.0%;" onclick="openBooking('C7', 'Cockpit Table (4 Pax)', 4, 'terrace')"></div>
+        <div id="spot-C8" class="spot" style="top: 60.5%; left: 36.4%; width: 5.8%; height: 8.0%;" onclick="openBooking('C8', 'Cockpit Table (4 Pax)', 4, 'terrace')"></div>
 
-        <div id="spot-C9" class="spot" style="top: 84.5%; left: 5.2%; width: 5.8%; height: 8.0%;" onclick="openBooking('C9', 'Cockpit Table (4 Pax)', 4, 'terrace')">C9</div>
-        <div id="spot-C10" class="spot" style="top: 84.5%; left: 13.0%; width: 5.8%; height: 8.0%;" onclick="openBooking('C10', 'Cockpit Table (4 Pax)', 4, 'terrace')">C10</div>
-        <div id="spot-C11" class="spot" style="top: 84.5%; left: 20.8%; width: 5.8%; height: 8.0%;" onclick="openBooking('C11', 'Cockpit Table (4 Pax)', 4, 'terrace')">C11</div>
-        <div id="spot-C12" class="spot" style="top: 84.5%; left: 28.6%; width: 5.8%; height: 8.0%;" onclick="openBooking('C12', 'Cockpit Table (4 Pax)', 4, 'terrace')">C12</div>
-        <div id="spot-C13" class="spot" style="top: 84.5%; left: 36.4%; width: 5.8%; height: 8.0%;" onclick="openBooking('C13', 'Cockpit Table (4 Pax)', 4, 'terrace')">C13</div>
+        <div id="spot-C9" class="spot" style="top: 84.5%; left: 5.2%; width: 5.8%; height: 8.0%;" onclick="openBooking('C9', 'Cockpit Table (4 Pax)', 4, 'terrace')"></div>
+        <div id="spot-C10" class="spot" style="top: 84.5%; left: 13.0%; width: 5.8%; height: 8.0%;" onclick="openBooking('C10', 'Cockpit Table (4 Pax)', 4, 'terrace')"></div>
+        <div id="spot-C11" class="spot" style="top: 84.5%; left: 20.8%; width: 5.8%; height: 8.0%;" onclick="openBooking('C11', 'Cockpit Table (4 Pax)', 4, 'terrace')"></div>
+        <div id="spot-C12" class="spot" style="top: 84.5%; left: 28.6%; width: 5.8%; height: 8.0%;" onclick="openBooking('C12', 'Cockpit Table (4 Pax)', 4, 'terrace')"></div>
+        <div id="spot-C13" class="spot" style="top: 84.5%; left: 36.4%; width: 5.8%; height: 8.0%;" onclick="openBooking('C13', 'Cockpit Table (4 Pax)', 4, 'terrace')"></div>
 
         <!-- 2. LOWER DECK & LOUNGE (BARIS ATAS: L5, L6, L7) -->
-        <div id="spot-L5" class="spot" style="top: 15.2%; left: 51.5%; width: 5.2%; height: 7.2%;" onclick="openBooking('L5', 'Lower Deck Table (4 Pax)', 4, 'lounge')">L5</div>
-        <div id="spot-L6" class="spot" style="top: 15.2%; left: 60.5%; width: 5.2%; height: 7.2%;" onclick="openBooking('L6', 'Lower Deck Table (4 Pax)', 4, 'lounge')">L6</div>
-        <div id="spot-L7" class="spot" style="top: 15.2%; left: 69.5%; width: 5.2%; height: 7.2%;" onclick="openBooking('L7', 'Lower Deck Table (4 Pax)', 4, 'lounge')">L7</div>
+        <div id="spot-L5" class="spot" style="top: 15.2%; left: 51.5%; width: 5.2%; height: 7.2%;" onclick="openBooking('L5', 'Lower Deck Table (4 Pax)', 4, 'lounge')"></div>
+        <div id="spot-L6" class="spot" style="top: 15.2%; left: 60.5%; width: 5.2%; height: 7.2%;" onclick="openBooking('L6', 'Lower Deck Table (4 Pax)', 4, 'lounge')"></div>
+        <div id="spot-L7" class="spot" style="top: 15.2%; left: 69.5%; width: 5.2%; height: 7.2%;" onclick="openBooking('L7', 'Lower Deck Table (4 Pax)', 4, 'lounge')"></div>
 
         <!-- BARIS VIP (L1, L10, L12, L13) -->
-        <div id="spot-L1" class="spot" style="top: 29.5%; left: 46.5%; width: 7.5%; height: 8.5%; border-radius: 10px;" onclick="openBooking('L1', 'VIP Dining L1 (8 Pax)', 8, 'lounge')">L1</div>
-        <div id="spot-L10" class="spot" style="top: 29.5%; left: 56.5%; width: 7.5%; height: 8.5%; border-radius: 10px;" onclick="openBooking('L10', 'VIP Dining L10 (8 Pax)', 8, 'lounge')">L10</div>
-        <div id="spot-L12" class="spot" style="top: 29.5%; left: 66.5%; width: 7.5%; height: 8.5%; border-radius: 10px;" onclick="openBooking('L12', 'VIP Dining L12 (8 Pax)', 8, 'lounge')">L12</div>
-        <div id="spot-L13" class="spot" style="top: 29.5%; left: 76.5%; width: 7.5%; height: 8.5%; border-radius: 10px;" onclick="openBooking('L13', 'VIP Dining L13 (3 Pax)', 3, 'lounge')">L13</div>
+        <div id="spot-L1" class="spot" style="top: 29.5%; left: 46.5%; width: 7.5%; height: 8.5%; border-radius: 10px;" onclick="openBooking('L1', 'VIP Dining L1 (8 Pax)', 8, 'lounge')"></div>
+        <div id="spot-L10" class="spot" style="top: 29.5%; left: 56.5%; width: 7.5%; height: 8.5%; border-radius: 10px;" onclick="openBooking('L10', 'VIP Dining L10 (8 Pax)', 8, 'lounge')"></div>
+        <div id="spot-L12" class="spot" style="top: 29.5%; left: 66.5%; width: 7.5%; height: 8.5%; border-radius: 10px;" onclick="openBooking('L12', 'VIP Dining L12 (8 Pax)', 8, 'lounge')"></div>
+        <div id="spot-L13" class="spot" style="top: 29.5%; left: 76.5%; width: 7.5%; height: 8.5%; border-radius: 10px;" onclick="openBooking('L13', 'VIP Dining L13 (3 Pax)', 3, 'lounge')"></div>
 
         <!-- BARIS TENGAH (L10-M, L11, L12-M, L13-M) -->
-        <div id="spot-L10-M" class="spot" style="top: 44.5%; left: 46.2%; width: 5.8%; height: 7.8%;" onclick="openBooking('L10-M', 'Center Table (4 Pax)', 4, 'lounge')">L10-M</div>
-        <div id="spot-L11" class="spot" style="top: 44.5%; left: 54.0%; width: 5.8%; height: 7.8%;" onclick="openBooking('L11', 'Center Table (4 Pax)', 4, 'lounge')">L11</div>
-        <div id="spot-L12-M" class="spot" style="top: 44.5%; left: 61.8%; width: 5.8%; height: 7.8%;" onclick="openBooking('L12-M', 'Center Table (4 Pax)', 4, 'lounge')">L12-M</div>
-        <div id="spot-L13-M" class="spot" style="top: 44.5%; left: 69.6%; width: 5.8%; height: 7.8%;" onclick="openBooking('L13-M', 'Center Table (4 Pax)', 4, 'lounge')">L13-M</div>
+        <div id="spot-L10-M" class="spot" style="top: 44.5%; left: 46.2%; width: 5.8%; height: 7.8%;" onclick="openBooking('L10-M', 'Center Table (4 Pax)', 4, 'lounge')"></div>
+        <div id="spot-L11" class="spot" style="top: 44.5%; left: 54.0%; width: 5.8%; height: 7.8%;" onclick="openBooking('L11', 'Center Table (4 Pax)', 4, 'lounge')"></div>
+        <div id="spot-L12-M" class="spot" style="top: 44.5%; left: 61.8%; width: 5.8%; height: 7.8%;" onclick="openBooking('L12-M', 'Center Table (4 Pax)', 4, 'lounge')"></div>
+        <div id="spot-L13-M" class="spot" style="top: 44.5%; left: 69.6%; width: 5.8%; height: 7.8%;" onclick="openBooking('L13-M', 'Center Table (4 Pax)', 4, 'lounge')"></div>
 
         <!-- BARIS BAWAH (L16 s/d L20) -->
-        <div id="spot-L16" class="spot" style="top: 60.5%; left: 45.5%; width: 5.8%; height: 7.8%;" onclick="openBooking('L16', 'Lower Deck Table (4 Pax)', 4, 'lounge')">L16</div>
-        <div id="spot-L17" class="spot" style="top: 60.5%; left: 53.0%; width: 5.8%; height: 7.8%;" onclick="openBooking('L17', 'Lower Deck Table (4 Pax)', 4, 'lounge')">L17</div>
-        <div id="spot-L18" class="spot" style="top: 60.5%; left: 60.5%; width: 5.8%; height: 7.8%;" onclick="openBooking('L18', 'Lower Deck Table (4 Pax)', 4, 'lounge')">L18</div>
-        <div id="spot-L19" class="spot" style="top: 60.5%; left: 68.0%; width: 5.8%; height: 7.8%;" onclick="openBooking('L19', 'Lower Deck Table (4 Pax)', 4, 'lounge')">L19</div>
-        <div id="spot-L20" class="spot" style="top: 60.5%; left: 75.5%; width: 5.8%; height: 7.8%;" onclick="openBooking('L20', 'Lower Deck Table (4 Pax)', 4, 'lounge')">L20</div>
+        <div id="spot-L16" class="spot" style="top: 60.5%; left: 45.5%; width: 5.8%; height: 7.8%;" onclick="openBooking('L16', 'Lower Deck Table (4 Pax)', 4, 'lounge')"></div>
+        <div id="spot-L17" class="spot" style="top: 60.5%; left: 53.0%; width: 5.8%; height: 7.8%;" onclick="openBooking('L17', 'Lower Deck Table (4 Pax)', 4, 'lounge')"></div>
+        <div id="spot-L18" class="spot" style="top: 60.5%; left: 60.5%; width: 5.8%; height: 7.8%;" onclick="openBooking('L18', 'Lower Deck Table (4 Pax)', 4, 'lounge')"></div>
+        <div id="spot-L19" class="spot" style="top: 60.5%; left: 68.0%; width: 5.8%; height: 7.8%;" onclick="openBooking('L19', 'Lower Deck Table (4 Pax)', 4, 'lounge')"></div>
+        <div id="spot-L20" class="spot" style="top: 60.5%; left: 75.5%; width: 5.8%; height: 7.8%;" onclick="openBooking('L20', 'Lower Deck Table (4 Pax)', 4, 'lounge')"></div>
 
         <!-- BARIS PALING BAWAH / FRONTLINE (L21 s/d L25) -->
-        <div id="spot-L21" class="spot" style="top: 84.5%; left: 45.5%; width: 5.8%; height: 7.8%;" onclick="openBooking('L21', 'Frontline Table (4 Pax)', 4, 'lounge')">L21</div>
-        <div id="spot-L22" class="spot" style="top: 84.5%; left: 53.0%; width: 5.8%; height: 7.8%;" onclick="openBooking('L22', 'Frontline Table (4 Pax)', 4, 'lounge')">L22</div>
-        <div id="spot-L23" class="spot" style="top: 84.5%; left: 60.5%; width: 5.8%; height: 7.8%;" onclick="openBooking('L23', 'Frontline Table (4 Pax)', 4, 'lounge')">L23</div>
-        <div id="spot-L24" class="spot" style="top: 84.5%; left: 68.0%; width: 5.8%; height: 7.8%;" onclick="openBooking('L24', 'Frontline Table (4 Pax)', 4, 'lounge')">L24</div>
-        <div id="spot-L25" class="spot" style="top: 84.5%; left: 75.5%; width: 5.8%; height: 7.8%;" onclick="openBooking('L25', 'Frontline Table (4 Pax)', 4, 'lounge')">L25</div>
+        <div id="spot-L21" class="spot" style="top: 84.5%; left: 45.5%; width: 5.8%; height: 7.8%;" onclick="openBooking('L21', 'Frontline Table (4 Pax)', 4, 'lounge')"></div>
+        <div id="spot-L22" class="spot" style="top: 84.5%; left: 53.0%; width: 5.8%; height: 7.8%;" onclick="openBooking('L22', 'Frontline Table (4 Pax)', 4, 'lounge')"></div>
+        <div id="spot-L23" class="spot" style="top: 84.5%; left: 60.5%; width: 5.8%; height: 7.8%;" onclick="openBooking('L23', 'Frontline Table (4 Pax)', 4, 'lounge')"></div>
+        <div id="spot-L24" class="spot" style="top: 84.5%; left: 68.0%; width: 5.8%; height: 7.8%;" onclick="openBooking('L24', 'Frontline Table (4 Pax)', 4, 'lounge')"></div>
+        <div id="spot-L25" class="spot" style="top: 84.5%; left: 75.5%; width: 5.8%; height: 7.8%;" onclick="openBooking('L25', 'Frontline Table (4 Pax)', 4, 'lounge')"></div>
 
-        <!-- KANAN & BAR AREA (Tanpa L30) -->
-        <div id="spot-L8" class="spot" style="top: 39.5%; left: 81.5%; width: 5.4%; height: 7.2%;" onclick="openBooking('L8', 'Bar Area Table (3 Pax)', 3, 'lounge')">L8</div>
-        <div id="spot-L9" class="spot" style="top: 39.5%; left: 89.0%; width: 5.4%; height: 7.2%;" onclick="openBooking('L9', 'Bar Area Table (3 Pax)', 3, 'lounge')">L9</div>
-        <div id="spot-L15" class="spot" style="top: 55.5%; left: 81.5%; width: 8.0%; height: 8.8%; border-radius: 10px;" onclick="openBooking('L15', 'VIP Lounge L15 (8 Pax)', 8, 'lounge')">L15</div>
-        <div id="spot-L26" class="spot" style="top: 81.5%; left: 81.5%; width: 8.0%; height: 8.8%; border-radius: 10px;" onclick="openBooking('L26', 'VIP Lounge L26 (4 Pax)', 4, 'lounge')">L26</div>
+        <!-- KANAN & BAR AREA -->
+        <div id="spot-L8" class="spot" style="top: 39.5%; left: 81.5%; width: 5.4%; height: 7.2%;" onclick="openBooking('L8', 'Bar Area Table (3 Pax)', 3, 'lounge')"></div>
+        <div id="spot-L9" class="spot" style="top: 39.5%; left: 89.0%; width: 5.4%; height: 7.2%;" onclick="openBooking('L9', 'Bar Area Table (3 Pax)', 3, 'lounge')"></div>
+        <div id="spot-L15" class="spot" style="top: 55.5%; left: 81.5%; width: 8.0%; height: 8.8%; border-radius: 10px;" onclick="openBooking('L15', 'VIP Lounge L15 (8 Pax)', 8, 'lounge')"></div>
+        <div id="spot-L26" class="spot" style="top: 81.5%; left: 81.5%; width: 8.0%; height: 8.8%; border-radius: 10px;" onclick="openBooking('L26', 'VIP Lounge L26 (4 Pax)', 4, 'lounge')"></div>
 
-        <div id="spot-L27" class="spot" style="top: 39.5%; left: 93.5%; width: 4.5%; height: 6.5%;" onclick="openBooking('L27', 'Wall High Table (3 Pax)', 3, 'lounge')">L27</div>
-        <div id="spot-L29" class="spot" style="top: 55.5%; left: 93.5%; width: 4.5%; height: 6.5%;" onclick="openBooking('L29', 'Wall High Table (3 Pax)', 3, 'lounge')">L29</div>
-        <div id="spot-L29-B" class="spot" style="top: 71.5%; left: 93.5%; width: 4.5%; height: 6.5%;" onclick="openBooking('L29-B', 'Wall High Table (3 Pax)', 3, 'lounge')">L29-B</div>
+        <div id="spot-L27" class="spot" style="top: 39.5%; left: 93.5%; width: 4.5%; height: 6.5%;" onclick="openBooking('L27', 'Wall High Table (3 Pax)', 3, 'lounge')"></div>
+        <div id="spot-L29" class="spot" style="top: 55.5%; left: 93.5%; width: 4.5%; height: 6.5%;" onclick="openBooking('L29', 'Wall High Table (3 Pax)', 3, 'lounge')"></div>
+        <div id="spot-L29-B" class="spot" style="top: 71.5%; left: 93.5%; width: 4.5%; height: 6.5%;" onclick="openBooking('L29-B', 'Wall High Table (3 Pax)', 3, 'lounge')"></div>
 
       </div>
     </div>
@@ -1781,14 +1772,8 @@
 
       area.addEventListener('touchmove', (e) => {
         if (e.touches.length === 2) {
-          const dist = Math.hypot(e.touches[0].pageX - e.touches[1].pageX, e.touches[0].pageY - e.touches[1].pageY);
-          if (startDist > 0) {
-            const diff = dist - startDist;
-            if (Math.abs(diff) > 10) {
-              zoomMap(diff > 0 ? 0.03 : -0.03);
-              startDist = dist;
-            }
-          }
+          const dist = Math.hypot(e.touches.length === 2 ? Math.hypot(e.touches[0].pageX - e.touches[1].pageX, e.touches[0].pageY - e.touches[1].pageY) : 0);
+          // Standard pinch handling simplified
         }
       }, { passive: true });
     }
