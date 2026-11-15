@@ -87,17 +87,16 @@
       background: #ffffff;
       border: 2px solid var(--gold-primary);
       border-radius: 10px;
-      padding: 3px 8px;
+      padding: 4px 10px;
       display: flex;
       align-items: center;
       justify-content: center;
       box-shadow: 0 0 14px rgba(212, 175, 55, 0.35);
     }
 
-    .brand-logo-frame img {
+    .brand-logo-frame svg {
       max-width: 100%;
       max-height: 100%;
-      object-fit: contain;
     }
 
     .brand-title h1 {
@@ -218,6 +217,7 @@
 
     .btn-dashboard { background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%); color: #fff; }
     .btn-fdc { background: linear-gradient(135deg, #a855f7 0%, #7e22ce 100%); color: #fff; }
+    .btn-menu { background: linear-gradient(135deg, #d97706 0%, #b45309 100%); color: #fff; }
     .btn-jpg { background: linear-gradient(135deg, #10b981 0%, #047857 100%); color: #fff; }
     .btn-csv { background: var(--gold-grad); color: #111; }
 
@@ -557,7 +557,7 @@
       .hdr-wrap { flex-direction: column; align-items: flex-start; }
       .hdr-controls { width: 100%; justify-content: space-between; }
       .metrics-group { width: 100%; display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
-      .btn-action-group { width: 100%; display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+      .btn-action-group { width: 100%; display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; }
       .btn-action { justify-content: center; padding: 9px 4px; font-size: 0.72rem; }
     }
   </style>
@@ -569,8 +569,9 @@
     <div class="hdr-wrap">
       <div class="brand-section">
         <div class="brand-logo-frame">
-          <img src="logo.png" alt="Logo Platinum Hotel"
-               onerror="this.onerror=null; this.src='logo platinum hotel Balikpapan.png'; this.addEventListener('error', () => { this.src='favicon.png'; });">
+          <svg viewBox="0 0 100 40" xmlns="http://www.w3.org/2000/svg">
+            <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-family="Cinzel, serif" font-weight="900" font-size="28" fill="#d4af37">PLATINUM</text>
+          </svg>
         </div>
         <div class="brand-title">
           <h1>Platinum Hotel & Convention Hall</h1>
@@ -627,6 +628,9 @@
           <button class="btn-action btn-fdc" onclick="openFDCBookingModal()">
             <i class="fa-solid fa-user-plus"></i> + FDC
           </button>
+          <button class="btn-action btn-menu" onclick="openMasterMenuModal()">
+            <i class="fa-solid fa-utensils"></i> Master Menu
+          </button>
           <button class="btn-action btn-jpg" onclick="downloadLayoutJPG()">
             <i class="fa-solid fa-file-image"></i> Share JPG
           </button>
@@ -656,7 +660,7 @@
     </div>
   </div>
 
-  <!-- VIEWPORT DENGAN TITIK HOTSPOT PRESISI TINGGI -->
+  <!-- VIEWPORT DENGAN TITIK HOTSPOT PRESISI MUTLAK DI ATAS MEJA -->
   <main class="viewport-area" id="mapTouchArea">
     <div class="map-frame" id="mapFrame">
       <img id="mainDenahImg" 
@@ -667,7 +671,7 @@
 
       <div class="hotspots-layer">
         
-        <!-- 1. COCKPIT DECK (C1 s/d C13) - DISESUAIKAN PRESISI -->
+        <!-- 1. COCKPIT DECK (C1 s/d C13) - PRESISI TINGGI -->
         <div id="spot-C1" class="spot" style="top: 36.5%; left: 11.5%; width: 5.5%; height: 7.0%;" onclick="openBooking('C1', 'Cockpit Deck Sofa (3 Pax)', 3, 'terrace')"></div>
         <div id="spot-C2" class="spot" style="top: 36.5%; left: 23.5%; width: 5.5%; height: 7.0%;" onclick="openBooking('C2', 'Cockpit Deck Sofa (3 Pax)', 3, 'terrace')"></div>
         <div id="spot-C3" class="spot" style="top: 36.5%; left: 35.0%; width: 5.5%; height: 7.0%;" onclick="openBooking('C3', 'Cockpit Deck Sofa (3 Pax)', 3, 'terrace')"></div>
@@ -678,11 +682,12 @@
         <div id="spot-C7" class="spot round" style="top: 61.5%; left: 30.0%; width: 5.2%; height: 7.8%;" onclick="openBooking('C7', 'Cockpit Table (4 Pax)', 4, 'terrace')"></div>
         <div id="spot-C8" class="spot round" style="top: 61.5%; left: 38.2%; width: 5.2%; height: 7.8%;" onclick="openBooking('C8', 'Cockpit Table (4 Pax)', 4, 'terrace')"></div>
 
-        <div id="spot-C9" class="spot round" style="top: 83.5%; left: 5.2%; width: 5.2%; height: 7.8%;" onclick="openBooking('C9', 'Cockpit Table (4 Pax)', 4, 'terrace')"></div>
-        <div id="spot-C10" class="spot round" style="top: 83.5%; left: 13.5%; width: 5.2%; height: 7.8%;" onclick="openBooking('C10', 'Cockpit Table (4 Pax)', 4, 'terrace')"></div>
-        <div id="spot-C11" class="spot round" style="top: 83.5%; left: 21.8%; width: 5.2%; height: 7.8%;" onclick="openBooking('C11', 'Cockpit Table (4 Pax)', 4, 'terrace')"></div>
-        <div id="spot-C12" class="spot round" style="top: 83.5%; left: 30.0%; width: 5.2%; height: 7.8%;" onclick="openBooking('C12', 'Cockpit Table (4 Pax)', 4, 'terrace')"></div>
-        <div id="spot-C13" class="spot round" style="top: 83.5%; left: 38.2%; width: 5.2%; height: 7.8%;" onclick="openBooking('C13', 'Cockpit Table (4 Pax)', 4, 'terrace')"></div>
+        <!-- BARIS BAWAH COCKPIT (C9 s/d C13) - DIGESER TEPAT DI ATAS LINGKARAN MEJA GAMBAR -->
+        <div id="spot-C9" class="spot round" style="top: 86.5%; left: 5.2%; width: 5.2%; height: 7.8%;" onclick="openBooking('C9', 'Cockpit Table (4 Pax)', 4, 'terrace')"></div>
+        <div id="spot-C10" class="spot round" style="top: 86.5%; left: 13.5%; width: 5.2%; height: 7.8%;" onclick="openBooking('C10', 'Cockpit Table (4 Pax)', 4, 'terrace')"></div>
+        <div id="spot-C11" class="spot round" style="top: 86.5%; left: 21.8%; width: 5.2%; height: 7.8%;" onclick="openBooking('C11', 'Cockpit Table (4 Pax)', 4, 'terrace')"></div>
+        <div id="spot-C12" class="spot round" style="top: 86.5%; left: 30.0%; width: 5.2%; height: 7.8%;" onclick="openBooking('C12', 'Cockpit Table (4 Pax)', 4, 'terrace')"></div>
+        <div id="spot-C13" class="spot round" style="top: 86.5%; left: 38.2%; width: 5.2%; height: 7.8%;" onclick="openBooking('C13', 'Cockpit Table (4 Pax)', 4, 'terrace')"></div>
 
         <!-- 2. LOWER DECK & LOUNGE (BARIS ATAS: L5, L6, L7) -->
         <div id="spot-L5" class="spot round" style="top: 4.8%; left: 51.5%; width: 4.8%; height: 7.0%;" onclick="openBooking('L5', 'Lower Deck Table (4 Pax)', 4, 'lounge')"></div>
@@ -708,12 +713,12 @@
         <div id="spot-L19" class="spot round" style="top: 61.5%; left: 69.0%; width: 4.8%; height: 7.0%;" onclick="openBooking('L19', 'Lower Deck Table (4 Pax)', 4, 'lounge')"></div>
         <div id="spot-L20" class="spot round" style="top: 61.5%; left: 76.5%; width: 4.8%; height: 7.0%;" onclick="openBooking('L20', 'Lower Deck Table (4 Pax)', 4, 'lounge')"></div>
 
-        <!-- BARIS PALING BAWAH / FRONTLINE (L21 s/d L25) -->
-        <div id="spot-L21" class="spot round" style="top: 83.5%; left: 46.5%; width: 4.8%; height: 7.0%;" onclick="openBooking('L21', 'Frontline Table (4 Pax)', 4, 'lounge')"></div>
-        <div id="spot-L22" class="spot round" style="top: 83.5%; left: 54.0%; width: 4.8%; height: 7.0%;" onclick="openBooking('L22', 'Frontline Table (4 Pax)', 4, 'lounge')"></div>
-        <div id="spot-L23" class="spot round" style="top: 83.5%; left: 61.5%; width: 4.8%; height: 7.0%;" onclick="openBooking('L23', 'Frontline Table (4 Pax)', 4, 'lounge')"></div>
-        <div id="spot-L24" class="spot round" style="top: 83.5%; left: 69.0%; width: 4.8%; height: 7.0%;" onclick="openBooking('L24', 'Frontline Table (4 Pax)', 4, 'lounge')"></div>
-        <div id="spot-L25" class="spot round" style="top: 83.5%; left: 76.5%; width: 4.8%; height: 7.0%;" onclick="openBooking('L25', 'Frontline Table (4 Pax)', 4, 'lounge')"></div>
+        <!-- BARIS PALING BAWAH / FRONTLINE (L21 s/d L25) - DIGESER TEPAT DI ATAS LINGKARAN MEJA GAMBAR -->
+        <div id="spot-L21" class="spot round" style="top: 86.5%; left: 46.5%; width: 4.8%; height: 7.0%;" onclick="openBooking('L21', 'Frontline Table (4 Pax)', 4, 'lounge')"></div>
+        <div id="spot-L22" class="spot round" style="top: 86.5%; left: 54.0%; width: 4.8%; height: 7.0%;" onclick="openBooking('L22', 'Frontline Table (4 Pax)', 4, 'lounge')"></div>
+        <div id="spot-L23" class="spot round" style="top: 86.5%; left: 61.5%; width: 4.8%; height: 7.0%;" onclick="openBooking('L23', 'Frontline Table (4 Pax)', 4, 'lounge')"></div>
+        <div id="spot-L24" class="spot round" style="top: 86.5%; left: 69.0%; width: 4.8%; height: 7.0%;" onclick="openBooking('L24', 'Frontline Table (4 Pax)', 4, 'lounge')"></div>
+        <div id="spot-L25" class="spot round" style="top: 86.5%; left: 76.5%; width: 4.8%; height: 7.0%;" onclick="openBooking('L25', 'Frontline Table (4 Pax)', 4, 'lounge')"></div>
 
         <!-- KANAN & BAR AREA -->
         <div id="spot-L8" class="spot round" style="top: 36.5%; left: 85.0%; width: 5.0%; height: 7.2%;" onclick="openBooking('L8', 'Bar Area Table (3 Pax)', 3, 'lounge')"></div>
@@ -791,6 +796,61 @@
         <button class="btn-modal-save" onclick="saveBooking()">
           <i class="fa-solid fa-check"></i> Simpan ke Cloud (Merah)
         </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL MASTER MENU (BARU) -->
+  <div id="masterMenuModal" class="modal-backdrop">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3 style="color: #fbbf24;"><i class="fa-solid fa-utensils"></i> Master Menu & Produk Lounge</h3>
+        <button class="btn-x" onclick="closeMasterMenuModal()"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <div class="modal-body">
+        <div style="background: rgba(217, 119, 6, 0.12); border: 1px solid rgba(217, 119, 6, 0.35); padding: 8px 12px; border-radius: 8px; font-size: 0.72rem; color: #fde68a;">
+          <i class="fa-solid fa-circle-info"></i> Tambahkan daftar menu minuman, cocktail, atau makanan ringan yang tersedia di Infinity Sky Lounge.
+        </div>
+
+        <div class="form-row">
+          <label><i class="fa-solid fa-tag"></i> Nama Menu / Item *</label>
+          <input type="text" id="menuItemName" class="inp-field" placeholder="Contoh: Signature Cocktail Sky Luxury">
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+          <div class="form-row">
+            <label><i class="fa-solid fa-folder"></i> Kategori</label>
+            <select id="menuItemCategory" class="inp-field">
+              <option value="Beverage / Cocktail">Beverage / Cocktail</option>
+              <option value="Wine & Spirits">Wine & Spirits</option>
+              <option value="Food & Platter">Food & Platter</option>
+              <option value="Herbal Wedangan">Herbal Wedangan</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label><i class="fa-solid fa-money-bill"></i> Harga (IDR) *</label>
+            <div class="money-input-box">
+              <span>Rp</span>
+              <input type="text" id="menuItemPrice" class="inp-field" placeholder="150.000" onkeyup="formatCurrencyInput(this)">
+            </div>
+          </div>
+        </div>
+
+        <button class="btn-action btn-menu" style="width:100%; justify-content:center; margin-top:6px;" onclick="addMasterMenuItem()">
+          <i class="fa-solid fa-plus"></i> Tambah ke Daftar Menu
+        </button>
+
+        <hr style="border: 0; border-top: 1px solid #334155; margin: 8px 0;">
+
+        <div style="font-size:0.75rem; font-weight:700; color:#cbd5e1; margin-bottom:4px;">Daftar Menu Aktif:</div>
+        <div id="masterMenuListContent" style="max-height: 180px; overflow-y: auto;">
+          <!-- List item menu akan dirender di sini -->
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn-modal-del" style="background:#334155; color:#cbd5e1;" onclick="closeMasterMenuModal()">Tutup</button>
       </div>
     </div>
   </div>
@@ -964,6 +1024,12 @@
 
     let bookings = {};
     let fdcBookings = [];
+    let masterMenu = [
+      { id: 1, name: 'Signature Sky Cocktail', category: 'Beverage / Cocktail', price: 150000 },
+      { id: 2, name: 'Red Wine Bottle Selection', category: 'Wine & Spirits', price: 1250000 },
+      { id: 3, name: 'Assorted Snack Platter', category: 'Food & Platter', price: 220000 }
+    ];
+
     let currentTable = null;
     let currentCategory = 'lounge';
     let zoomLevel = 1.0;
@@ -1047,6 +1113,68 @@
           fetchAllCloudData();
         })
         .subscribe();
+    }
+
+    // ================= MASTER MENU FUNCTIONS =================
+    function openMasterMenuModal() {
+      renderMasterMenuList();
+      document.getElementById('masterMenuModal').classList.add('open');
+    }
+
+    function closeMasterMenuModal() {
+      document.getElementById('masterMenuModal').classList.remove('open');
+    }
+
+    function addMasterMenuItem() {
+      const name = document.getElementById('menuItemName').value.trim();
+      const category = document.getElementById('menuItemCategory').value;
+      const rawPrice = document.getElementById('menuItemPrice').value.replace(/[^0-9]/g, '');
+
+      if (!name || !rawPrice) {
+        alert('Mohon isi nama menu dan harga.');
+        return;
+      }
+
+      const newItem = {
+        id: Date.now(),
+        name: name,
+        category: category,
+        price: parseInt(rawPrice, 10)
+      };
+
+      masterMenu.push(newItem);
+      document.getElementById('menuItemName').value = '';
+      document.getElementById('menuItemPrice').value = '';
+      renderMasterMenuList();
+    }
+
+    function deleteMasterMenuItem(id) {
+      masterMenu = masterMenu.filter(item => item.id !== id);
+      renderMasterMenuList();
+    }
+
+    function renderMasterMenuList() {
+      const container = document.getElementById('masterMenuListContent');
+      if (masterMenu.length === 0) {
+        container.innerHTML = '<div style="color:#94a3b8; font-size:0.75rem; text-align:center; padding:10px;">Belum ada item menu.</div>';
+        return;
+      }
+
+      let html = '';
+      masterMenu.forEach(item => {
+        html += `
+          <div style="background:#0f172a; border:1px solid #334155; border-radius:6px; padding:6px 10px; margin-bottom:6px; display:flex; justify-content:space-between; align-items:center;">
+            <div>
+              <strong style="color:#fef08a; font-size:0.8rem;">${item.name}</strong>
+              <div style="font-size:0.68rem; color:#94a3b8;">${item.category} | <span style="color:#34d399;">Rp ${item.price.toLocaleString('id-ID')}</span></div>
+            </div>
+            <button onclick="deleteMasterMenuItem(${item.id})" style="background:#7f1d1d; border:none; color:#fca5a5; width:26px; height:26px; border-radius:4px; cursor:pointer;" title="Hapus Menu">
+              <i class="fa-solid fa-trash" style="font-size:0.7rem;"></i>
+            </button>
+          </div>
+        `;
+      });
+      container.innerHTML = html;
     }
 
     function openBooking(tableId, tableType, defaultPax, category) {
