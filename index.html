@@ -315,7 +315,7 @@
       height: 100%;
     }
 
-    /* KOTAK HOTSPOT DRAGGABLE & BISA DIGESER BEBAS */
+    /* KOTAK HOTSPOT DRAGGABLE */
     .spot {
       position: absolute;
       cursor: grab;
@@ -779,6 +779,12 @@
           </div>
         </div>
 
+        <!-- REAL-TIME TANGGAL & JAM KASIR INPUT -->
+        <div class="form-row">
+          <label><i class="fa-solid fa-calendar-days" style="color: #38bdf8;"></i> Waktu Input Kasir (Real-Time Otomatis)</label>
+          <input type="text" id="guestInputTimestamp" class="inp-field" readonly style="color: #38bdf8; font-weight: 700; background: #050b14;">
+        </div>
+
         <div class="form-row">
           <label><i class="fa-solid fa-note-sticky"></i> Catatan Khusus / Special Request</label>
           <input type="text" id="guestNotes" class="inp-field" placeholder="Cth: Request bucket ice, fruit platter...">
@@ -1228,7 +1234,8 @@
               dp: Number(row.dp),
               time: row.arrival_time,
               notes: row.notes,
-              created_by: row.created_by || ''
+              created_by: row.created_by || '',
+              timestamp: row.timestamp || '-'
             };
           });
         }
@@ -1389,6 +1396,12 @@
       const data = bookings[tableId];
       const btnDel = document.getElementById('btnRemoveBooking');
 
+      // Real-time timestamp kasir saat modal dibuka
+      const now = new Date();
+      const dateStr = now.toLocaleDateString('id-ID', { year: 'numeric', month: '2-digit', day: '2-digit' });
+      const timeStr = now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+      document.getElementById('guestInputTimestamp').value = `${dateStr} - ${timeStr} WITA`;
+
       if (data) {
         document.getElementById('guestName').value = data.name || '';
         document.getElementById('guestPhone').value = data.phone || '';
@@ -1397,6 +1410,9 @@
         document.getElementById('guestTime').value = data.time || '21:00 WITA';
         document.getElementById('guestCreatedBy').value = data.created_by || '';
         document.getElementById('guestNotes').value = data.notes || '';
+        if (data.timestamp) {
+          document.getElementById('guestInputTimestamp').value = data.timestamp;
+        }
         btnDel.style.display = 'inline-flex';
       } else {
         document.getElementById('guestName').value = '';
@@ -1426,6 +1442,7 @@
       const phone = document.getElementById('guestPhone').value.trim();
       const rawDP = document.getElementById('guestDP').value.replace(/[^0-9]/g, '');
       const staff = document.getElementById('guestCreatedBy').value.trim();
+      const timestamp = document.getElementById('guestInputTimestamp').value;
 
       if (!name) {
         alert('Silakan masukkan nama tamu pemesan.');
@@ -1460,6 +1477,7 @@
         dp: rawDP ? parseInt(rawDP, 10) : 0,
         arrival_time: document.getElementById('guestTime').value,
         created_by: staff,
+        timestamp: timestamp,
         notes: finalNotes
       };
 
@@ -1499,6 +1517,7 @@
       const dp = document.getElementById('guestDP').value || '0';
       const time = document.getElementById('guestTime').value;
       const staff = document.getElementById('guestCreatedBy').value.trim() || '-';
+      const timestamp = document.getElementById('guestInputTimestamp').value || '-';
       const notes = document.getElementById('guestNotes').value.trim() || '-';
 
       let menuListText = currentCart.length > 0 ? currentCart.map(c => `- ${c.name} (${c.qty}x) @ Rp ${(c.price * c.qty).toLocaleString('id-ID')}`).join('\n') : 'Tidak ada menu tambahan';
@@ -1534,6 +1553,7 @@
             <div class="row"><span class="label">Jam Kedatangan:</span> <span>${time}</span></div>
             <div class="row"><span class="label">Nominal DP Dibayar:</span> <strong style="color: #10b981;">Rp ${dp}</strong></div>
             <div class="row"><span class="label">Petugas / Staff:</span> <span>${staff}</span></div>
+            <div class="row"><span class="label">Waktu Input Kasir:</span> <span>${timestamp}</span></div>
             <div style="margin-top: 15px;">
               <span class="label">Pesanan Menu / Paket:</span>
               <pre style="background: #f8fafc; padding: 10px; border-radius: 6px; font-family: inherit; font-size: 13px; margin-top: 5px; white-space: pre-wrap;">${menuListText}</pre>
@@ -1550,9 +1570,179 @@
       printWindow.document.close();
     }
 
-    function openFDCBookingModal() {}
-    function openReportModal() {}
-    function closeReportModal() {}
+    function openFDCBookingModal() {
+      document.getElementById('fdcName').value = '';
+      document.getElementById('fdcPhone').value = '';
+      document.getElementById('fdcPax').value = '1';
+      document.getElementById('fdcAmount').value = (1 * FDC_DEFAULT_PRICE).toLocaleString('id-ID');
+      document.getElementById('fdcCreatedBy').value = '';
+      document.getElementById('fdcNotes').value = '';
+      document.getElementById('fdcModal').classList.add('open');
+    }
+
+    function closeFDCModal() {
+      document.getElementById('fdcModal').classList.remove('open');
+    }
+
+    function calculateFDCAmount() {
+      const pax = parseInt(document.getElementById('fdcPax').value, 10) || 1;
+      document.getElementById('fdcAmount').value = (pax * FDC_DEFAULT_PRICE).toLocaleString('id-ID');
+    }
+
+    async function saveFDCBooking() {
+      const name = document.getElementById('fdcName').value.trim();
+      const phone = document.getElementById('fdcPhone').value.trim();
+      const pax = parseInt(document.getElementById('fdcPax').value, 10) || 1;
+      const rawAmt = document.getElementById('fdcAmount').value.replace(/[^0-9]/g, '');
+      const staff = document.getElementById('fdcCreatedBy').value.trim();
+
+      if (!name) {
+        alert('Silakan masukkan nama pemesan tiket FDC.');
+        return;
+      }
+
+      const payload = {
+        id: 'KQ-FDC-' + Date.now().toString().slice(-6),
+        guest_name: name,
+        guest_phone: phone,
+        pax: pax,
+        amount: rawAmt ? parseInt(rawAmt, 10) : (pax * FDC_DEFAULT_PRICE),
+        created_by: staff,
+        notes: document.getElementById('fdcNotes').value
+      };
+
+      const { error } = await _supabase.from('kq_fdc_bookings').insert([payload]);
+      if (error) {
+        alert('Gagal menyimpan tiket FDC ke Supabase: ' + error.message);
+        return;
+      }
+
+      closeFDCModal();
+      await fetchAllCloudData();
+    }
+
+    function openFDCListModal() {
+      const container = document.getElementById('fdcListContent');
+      if (fdcBookings.length === 0) {
+        container.innerHTML = '<div style="text-align:center; padding: 25px; color:#94a3b8; font-size:0.85rem;">Belum ada pesanan tiket FDC Standing.</div>';
+      } else {
+        let html = '';
+        fdcBookings.forEach((item) => {
+          html += `
+            <div style="background:#0f172a; border:1px solid #334155; border-radius:8px; padding:10px 12px; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
+              <div>
+                <strong style="color:#d8b4fe; font-size:0.86rem;">${item.name}</strong> 
+                <span style="background:rgba(168,85,247,0.2); color:#c084fc; font-size:0.65rem; padding:2px 6px; border-radius:4px; margin-left:6px; font-weight:700;">${item.pax} Pax</span>
+                <div style="font-size:0.75rem; color:#94a3b8; margin-top:2px;">
+                  WA: ${item.phone || '-'} | Total: <strong style="color:#34d399;">Rp ${(item.amount || 0).toLocaleString('id-ID')}</strong>
+                </div>
+                <div style="font-size:0.7rem; color:#fce08a; margin-top:2px;">
+                  <i class="fa-solid fa-user-pen"></i> By: <strong>${item.created_by || '-'}</strong>
+                </div>
+              </div>
+              <button onclick="deleteFDC('${item.id}')" style="background:#7f1d1d; border:none; color:#fca5a5; width:30px; height:30px; border-radius:6px; cursor:pointer;" title="Hapus Tiket FDC">
+                <i class="fa-solid fa-trash" style="font-size:0.75rem;"></i>
+              </button>
+            </div>
+          `;
+        });
+        container.innerHTML = html;
+      }
+      document.getElementById('fdcListModal').classList.add('open');
+    }
+
+    function closeFDCListModal() {
+      document.getElementById('fdcListModal').classList.remove('open');
+    }
+
+    async function deleteFDC(id) {
+      if (confirm('Hapus pesanan tiket FDC ini dari database?')) {
+        const { error } = await _supabase.from('kq_fdc_bookings').delete().eq('id', id);
+        if (!error) {
+          await fetchAllCloudData();
+          openFDCListModal();
+        } else {
+          alert('Gagal menghapus: ' + error.message);
+        }
+      }
+    }
+
+    function openReportModal() {
+      const bookedKeys = Object.keys(bookings);
+
+      let loungeBooked = 0;
+      let loungeRev = 0;
+      let loungePax = 0;
+
+      let terraceBooked = 0;
+      let terraceRev = 0;
+      let terracePax = 0;
+
+      bookedKeys.forEach(k => {
+        const item = bookings[k];
+        const isTerrace = TERRACE_IDS.includes(k);
+        const dp = item.dp || 0;
+        const pax = parseInt(item.pax || 0, 10);
+
+        if (isTerrace) {
+          terraceBooked++;
+          terraceRev += dp;
+          terracePax += pax;
+        } else {
+          loungeBooked++;
+          loungeRev += dp;
+          loungePax += pax;
+        }
+      });
+
+      const totalLounge = 26;
+      const totalTerrace = 13;
+
+      const loungeLeft = totalLounge - loungeBooked;
+      const terraceLeft = totalTerrace - terraceBooked;
+
+      const loungeOccupancy = Math.round((loungeBooked / totalLounge) * 100);
+      const terraceOccupancy = Math.round((terraceBooked / totalTerrace) * 100);
+
+      let fdcPax = 0;
+      let fdcTotalRev = 0;
+      fdcBookings.forEach(item => {
+        fdcPax += (item.pax || 0);
+        fdcTotalRev += (item.amount || 0);
+      });
+
+      const tableGrossRev = loungeRev + terraceRev;
+      const grandGross = tableGrossRev + fdcTotalRev;
+      const seatingPax = loungePax + terracePax;
+      const totalCrowd = seatingPax + fdcPax;
+
+      document.getElementById('repTotalGross').innerText = 'Rp ' + grandGross.toLocaleString('id-ID');
+      
+      document.getElementById('repLoungeBooked').innerText = loungeBooked;
+      document.getElementById('repLoungeLeft').innerText = loungeLeft;
+      document.getElementById('repLoungeRev').innerText = 'Rp ' + loungeRev.toLocaleString('id-ID');
+      document.getElementById('repLoungeBar').style.width = loungeOccupancy + '%';
+
+      document.getElementById('repTerraceBooked').innerText = terraceBooked;
+      document.getElementById('repTerraceLeft').innerText = terraceLeft;
+      document.getElementById('repTerraceRev').innerText = 'Rp ' + terraceRev.toLocaleString('id-ID');
+      document.getElementById('repTerraceBar').style.width = terraceOccupancy + '%';
+
+      document.getElementById('repTableGrossRev').innerText = 'Rp ' + tableGrossRev.toLocaleString('id-ID');
+      document.getElementById('repTablePaxDetail').innerText = `${seatingPax} Pax dari ${loungeBooked + terraceBooked} meja terisi (${loungeBooked} Lounge + ${terraceBooked} Cockpit)`;
+
+      document.getElementById('repFDCPax').innerText = `${fdcPax} Pax`;
+      document.getElementById('repFDCTotalRev').innerText = `Rp ${fdcTotalRev.toLocaleString('id-ID')} Total FDC Revenue`;
+
+      document.getElementById('repTotalPax').innerText = `${totalCrowd} Total Tamu Hadir`;
+      document.getElementById('repCrowdBreakdown').innerText = `${seatingPax} Seating (${loungePax} Lounge + ${terracePax} Cockpit) + ${fdcPax} Standing FDC`;
+
+      document.getElementById('reportModal').classList.add('open');
+    }
+
+    function closeReportModal() {
+      document.getElementById('reportModal').classList.remove('open');
+    }
 
     function refreshMapNodes() {
       document.querySelectorAll('.spot').forEach(spot => {
@@ -1567,12 +1757,34 @@
 
     function updateMetrics() {
       const bookedKeys = Object.keys(bookings);
+      let loungeCount = 0;
+      let terraceCount = 0;
       let tableDP = 0;
-      bookedKeys.forEach(k => { tableDP += (bookings[k].dp || 0); });
 
-      document.getElementById('statLoungeBooked').innerText = Object.keys(bookings).filter(k => !TERRACE_IDS.includes(k)).length;
-      document.getElementById('statTerraceBooked').innerText = Object.keys(bookings).filter(k => TERRACE_IDS.includes(k)).length;
-      document.getElementById('statDPTotal').innerText = 'Rp ' + tableDP.toLocaleString('id-ID');
+      bookedKeys.forEach(k => {
+        if (TERRACE_IDS.includes(k)) {
+          terraceCount++;
+        } else {
+          loungeCount++;
+        }
+        tableDP += (bookings[k].dp || 0);
+      });
+
+      document.getElementById('statLoungeBooked').innerText = loungeCount;
+      document.getElementById('statTerraceBooked').innerText = terraceCount;
+
+      let fdcPaxTotal = 0;
+      let fdcAmountTotal = 0;
+      fdcBookings.forEach(item => {
+        fdcPaxTotal += (item.pax || 0);
+        fdcAmountTotal += (item.amount || 0);
+      });
+
+      document.getElementById('statFDCPaxTotal').innerText = fdcPaxTotal;
+      const grandTotal = tableDP + fdcAmountTotal;
+      document.getElementById('statDPTotal').innerText = 'Rp ' + grandTotal.toLocaleString('id-ID');
+
+      document.getElementById('legendAvailText').innerText = `Sisa Lounge: ${26 - loungeCount} | Sisa Cockpit: ${13 - terraceCount}`;
       document.getElementById('legendBookedText').innerText = `${bookedKeys.length} Terbooking (Merah)`;
     }
 
@@ -1584,6 +1796,7 @@
     async function downloadLayoutJPG() {
       const loader = document.getElementById('loaderOverlay');
       loader.style.display = 'flex';
+
       const mapEl = document.getElementById('mapFrame');
       const savedTransform = mapEl.style.transform;
       mapEl.style.transform = 'scale(1)';
@@ -1595,6 +1808,7 @@
           allowTaint: true,
           backgroundColor: '#080c14'
         });
+
         const link = document.createElement('a');
         const dateStr = new Date().toISOString().slice(0, 10);
         link.download = `Layout_KingAndQueen_${dateStr}.jpg`;
@@ -1611,19 +1825,26 @@
 
     function exportReservationsCSV() {
       const tableKeys = Object.keys(bookings);
-      if (tableKeys.length === 0) {
+      if (tableKeys.length === 0 && fdcBookings.length === 0) {
         alert('Belum ada data reservasi.');
         return;
       }
-      let csv = 'Nomor Meja,Nama Tamu,WhatsApp,Pax,Nominal DP (IDR),Jam Tiba,Staff,Catatan\n';
+
+      let csv = 'Area Kategori,Nomor Meja/ID,Nama Tamu,WhatsApp,Pax,Nominal Bayar/DP (IDR),Jam Tiba,Created By (Staff),Waktu Input,Catatan Khusus\n';
       tableKeys.forEach(k => {
         const b = bookings[k];
-        csv += `"${k}","${b.name}","${b.phone}","${b.pax}","${b.dp}","${b.time}","${b.created_by || ''}","${b.notes || ''}"\n`;
+        const catLabel = TERRACE_IDS.includes(k) ? 'COCKPIT DECK (C)' : 'LOWER DECK LOUNGE (L)';
+        csv += `"${catLabel}","${k}","${b.name}","${b.phone}","${b.pax}","${b.dp}","${b.time}","${b.created_by || ''}","${b.timestamp || ''}","${b.notes || ''}"\n`;
       });
+
+      fdcBookings.forEach(f => {
+        csv += `"FDC STANDING TICKET","${f.id}","${f.name}","${f.phone}","${f.pax}","${f.amount}","-","${f.created_by || ''}","-","${f.notes || ''}"\n`;
+      });
+
       const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
       const a = document.createElement('a');
       a.href = URL.createObjectURL(blob);
-      a.download = `Reservasi_Lounge_${new Date().toISOString().slice(0, 10)}.csv`;
+      a.download = `Executive_Report_${new Date().toISOString().slice(0, 10)}.csv`;
       a.click();
     }
 
@@ -1644,11 +1865,13 @@
     function initGestures() {
       const area = document.getElementById('mapTouchArea');
       let startDist = 0;
+
       area.addEventListener('touchstart', (e) => {
         if (e.touches.length === 2) {
           startDist = Math.hypot(e.touches[0].pageX - e.touches[1].pageX, e.touches[0].pageY - e.touches[1].pageY);
         }
       }, { passive: true });
+
       area.addEventListener('touchmove', (e) => {
         if (e.touches.length === 2) {
           const dist = Math.hypot(e.touches[0].pageX - e.touches[1].pageX, e.touches[0].pageY - e.touches[1].pageY);
