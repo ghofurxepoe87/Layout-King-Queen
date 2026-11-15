@@ -219,6 +219,7 @@
     .btn-dashboard { background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%); color: #fff; }
     .btn-fdc { background: linear-gradient(135deg, #a855f7 0%, #7e22ce 100%); color: #fff; }
     .btn-menu { background: linear-gradient(135deg, #d97706 0%, #b45309 100%); color: #fff; }
+    .btn-reg { background: linear-gradient(135deg, #0ea5e9 0%, #0369a1 100%); color: #fff; }
     .btn-jpg { background: linear-gradient(135deg, #10b981 0%, #047857 100%); color: #fff; }
     .btn-csv { background: var(--gold-grad); color: #111; }
 
@@ -314,7 +315,7 @@
       height: 100%;
     }
 
-    /* SPOT / HOTSPOT BERSIH TANPA TEKS OVERLAY */
+    /* SPOT MEJA */
     .spot {
       position: absolute;
       cursor: pointer;
@@ -331,7 +332,6 @@
 
     .spot:active { transform: scale(0.96); }
 
-    /* KETIKA SUDAH DIPESAN, OTOMATIS BERUBAH JADI MERAH MENYALA */
     .spot.is-booked {
       background: rgba(220, 38, 38, 0.82) !important;
       border: 2px solid #ff4d4d !important;
@@ -561,7 +561,7 @@
       .hdr-wrap { flex-direction: column; align-items: flex-start; }
       .hdr-controls { width: 100%; justify-content: space-between; }
       .metrics-group { width: 100%; display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
-      .btn-action-group { width: 100%; display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; }
+      .btn-action-group { width: 100%; display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px; }
       .btn-action { justify-content: center; padding: 9px 4px; font-size: 0.72rem; }
     }
   </style>
@@ -634,6 +634,10 @@
           <button class="btn-action btn-menu" onclick="openMasterMenuModal()">
             <i class="fa-solid fa-utensils"></i> Master Menu
           </button>
+          <!-- TOMBOL REGISTRASI / INPUT MEJA TAMBAHAN -->
+          <button class="btn-action btn-reg" onclick="openRegistrationModal()">
+            <i class="fa-solid fa-file-pen"></i> + Input Meja
+          </button>
           <button class="btn-action btn-jpg" onclick="downloadLayoutJPG()">
             <i class="fa-solid fa-file-image"></i> Share JPG
           </button>
@@ -663,7 +667,7 @@
     </div>
   </div>
 
-  <!-- VIEWPORT DENGAN KLIK LANGSUNG DI ATAS MEJA (TANPA OVERLAY) -->
+  <!-- VIEWPORT -->
   <main class="viewport-area" id="mapTouchArea">
     <div class="map-frame" id="mapFrame">
       <img id="mainDenahImg" 
@@ -737,11 +741,11 @@
     </div>
   </main>
 
-  <!-- MODAL RESERVASI MEJA -->
+  <!-- MODAL REGISTRASI & RESERVASI MEJA -->
   <div id="bookingModal" class="modal-backdrop">
     <div class="modal-container">
       <div class="modal-header">
-        <h3><i class="fa-solid fa-chair" style="color: #fef08a;"></i> Reservasi <span id="modalTitle">#L1</span></h3>
+        <h3><i class="fa-solid fa-file-pen" style="color: #fef08a;"></i> Form Registrasi Tamu <span id="modalTitle">#L1</span></h3>
         <button class="btn-x" onclick="closeBookingModal()"><i class="fa-solid fa-xmark"></i></button>
       </div>
 
@@ -831,9 +835,74 @@
             <i class="fa-solid fa-file-pdf"></i> Cetak PDF Tamu
           </button>
           <button class="btn-modal-save" onclick="saveBooking()">
-            <i class="fa-solid fa-check"></i> Simpan ke Cloud (Merah)
+            <i class="fa-solid fa-check"></i> Simpan & Ubah Merah (Cloud)
           </button>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL REGISTRASI CEPAT (DARI TOMBOL HEADER) -->
+  <div id="registrationModal" class="modal-backdrop">
+    <div class="modal-container">
+      <div class="modal-header">
+        <h3><i class="fa-solid fa-file-pen" style="color: #38bdf8;"></i> Registrasi Cepat Meja Baru</h3>
+        <button class="btn-x" onclick="closeRegistrationModal()"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <div class="modal-body">
+        <div class="form-row">
+          <label><i class="fa-solid fa-tag"></i> Pilih Meja / Ketik Nomor Meja *</label>
+          <select id="regTableIdSelect" class="inp-field" onchange="onRegTableSelected(this)">
+            <option value="">-- Pilih Meja Kosong --</option>
+          </select>
+        </div>
+
+        <div class="form-row">
+          <label><i class="fa-solid fa-user"></i> Nama Tamu (Guest Name) *</label>
+          <input type="text" id="regGuestName" class="inp-field" placeholder="Contoh: Jessica Alexandra">
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+          <div class="form-row">
+            <label><i class="fa-brands fa-whatsapp"></i> WhatsApp / HP *</label>
+            <input type="tel" id="regGuestPhone" class="inp-field" placeholder="0812-xxxx-xxxx">
+          </div>
+          <div class="form-row">
+            <label><i class="fa-solid fa-users"></i> Jumlah Pax</label>
+            <input type="number" id="regGuestPax" class="inp-field" value="4" min="1">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <label><i class="fa-solid fa-money-bill-wave" style="color: #34d399;"></i> Nominal DP / Uang Muka (Diisi Manual) *</label>
+          <div class="money-input-box">
+            <span>Rp</span>
+            <input type="text" id="regGuestDP" class="inp-field" placeholder="Contoh: 500.000" onkeyup="formatCurrencyInput(this)">
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+          <div class="form-row">
+            <label><i class="fa-solid fa-clock"></i> Jam Kedatangan</label>
+            <select id="regGuestTime" class="inp-field">
+              <option value="20:00 WITA">20:00 WITA</option>
+              <option value="21:00 WITA" selected>21:00 WITA</option>
+              <option value="22:00 WITA">22:00 WITA</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label><i class="fa-solid fa-user-tag" style="color: var(--gold-primary);"></i> Created By (Staff) *</label>
+            <input type="text" id="regGuestCreatedBy" class="inp-field" placeholder="Ketik nama staff..." value="">
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn-modal-del" style="background:#334155; color:#cbd5e1;" onclick="closeRegistrationModal()">Batal</button>
+        <button class="btn-modal-save" onclick="saveRegistrationBooking()">
+          <i class="fa-solid fa-check"></i> Proses & Ubah Merah
+        </button>
       </div>
     </div>
   </div>
@@ -1058,6 +1127,8 @@
       'L25', 'L26', 'L27', 'L29', 'L29-B'
     ];
 
+    const ALL_TABLE_IDS = [...TERRACE_IDS, ...LOUNGE_IDS];
+
     let bookings = {};
     let fdcBookings = [];
     let masterMenu = [
@@ -1150,6 +1221,81 @@
           fetchAllCloudData();
         })
         .subscribe();
+    }
+
+    // ================= REGISTRASI CEPAT MODAL =================
+    function openRegistrationModal() {
+      const select = document.getElementById('regTableIdSelect');
+      let html = '<option value="">-- Pilih Meja Kosong --</option>';
+      ALL_TABLE_IDS.forEach(id => {
+        if (!bookings[id]) {
+          html += `<option value="${id}">Meja #${id}</option>`;
+        }
+      });
+      select.innerHTML = html;
+
+      document.getElementById('regGuestName').value = '';
+      document.getElementById('regGuestPhone').value = '';
+      document.getElementById('regGuestPax').value = '4';
+      document.getElementById('regGuestDP').value = '';
+      document.getElementById('regGuestCreatedBy').value = localStorage.getItem('last_staff_name') || '';
+      document.getElementById('registrationModal').classList.add('open');
+    }
+
+    function closeRegistrationModal() {
+      document.getElementById('registrationModal').classList.remove('open');
+    }
+
+    function onRegTableSelected(sel) {
+      // Automatic configuration if needed
+    }
+
+    async function saveRegistrationBooking() {
+      const tid = document.getElementById('regTableIdSelect').value;
+      const name = document.getElementById('regGuestName').value.trim();
+      const phone = document.getElementById('regGuestPhone').value.trim();
+      const pax = parseInt(document.getElementById('regGuestPax').value, 10) || 4;
+      const rawDP = document.getElementById('regGuestDP').value.replace(/[^0-9]/g, '');
+      const time = document.getElementById('regGuestTime').value;
+      const staff = document.getElementById('regGuestCreatedBy').value.trim();
+
+      if (!tid) {
+        alert('Silakan pilih nomor meja terlebih dahulu.');
+        return;
+      }
+      if (!name) {
+        alert('Silakan masukkan nama tamu.');
+        return;
+      }
+
+      localStorage.setItem('last_staff_name', staff);
+      const now = new Date();
+      const timestamp = `${now.toLocaleDateString('id-ID')} - ${now.toLocaleTimeString('id-ID')} WITA`;
+
+      const payload = {
+        table_id: String(tid),
+        guest_name: name,
+        guest_phone: phone,
+        category: TERRACE_IDS.includes(tid) ? 'terrace' : 'lounge',
+        pax: pax,
+        dp: rawDP ? parseInt(rawDP, 10) : 0,
+        arrival_time: time,
+        created_by: staff,
+        timestamp: timestamp,
+        notes: 'Registrasi Cepat Kasir'
+      };
+
+      const { error } = await _supabase.from('kq_table_bookings').upsert(payload, { onConflict: 'table_id' });
+      if (error) {
+        alert('Gagal menyimpan ke Supabase: ' + error.message);
+        return;
+      }
+
+      bookings[tid] = payload;
+      refreshMapNodes();
+      updateMetrics();
+      closeRegistrationModal();
+      await fetchAllCloudData();
     }
 
     function openMasterMenuModal() {
@@ -1311,7 +1457,7 @@
         document.getElementById('guestPax').value = defaultPax;
         document.getElementById('guestDP').value = '';
         document.getElementById('guestTime').value = '21:00 WITA';
-        document.getElementById('guestCreatedBy').value = '';
+        document.getElementById('guestCreatedBy').value = localStorage.getItem('last_staff_name') || '';
         document.getElementById('guestNotes').value = '';
         btnDel.style.display = 'none';
       }
@@ -1336,6 +1482,8 @@
         alert('Silakan masukkan nama tamu pemesan.');
         return;
       }
+
+      localStorage.setItem('last_staff_name', staff);
 
       let menuSummary = currentCart.map(c => `${c.name} (${c.qty}x)`).join(', ');
       const customNotes = document.getElementById('guestNotes').value.trim();
@@ -1755,7 +1903,7 @@
             const diff = dist - startDist;
             if (Math.abs(diff) > 10) {
               zoomMap(diff > 0 ? 0.03 : -0.03);
-              startDist = dist;
+              startDist = diff;
             }
           }
         }
