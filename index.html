@@ -2141,7 +2141,7 @@
         return;
       }
 
-      let csv = 'Area Kategori,Nomor Meja/ID,Nama Tamu,WhatsApp,Pax,Total Konsumsi Menu (IDR),DP / Bayar (IDR),Balance Sisa (IDR),Jam Tiba,Created By (Staff),Waktu Input,Detail Menu & Catatan\n';
+      let csv = 'Area Kategori,Nomor Meja/ID,Nama Tamu,WhatsApp,Pax,Total Konsumsi Menu (IDR),DP (IDR),Balance Sisa (IDR),Jam Tiba,Created By (Staff),Waktu Input,Detail Menu & Catatan\n';
       tableKeys.forEach(k => {
         const b = bookings[k];
         const catLabel = TERRACE_IDS.includes(k) ? 'COCKPIT DECK (C)' : 'LOWER DECK LOUNGE (L)';
