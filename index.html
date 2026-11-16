@@ -315,7 +315,7 @@
       height: 100%;
     }
 
-    /* SPOT MEJA */
+    /* SPOT MEJA - TANPA OVERLAY BAYANGAN/TEKS */
     .spot {
       position: absolute;
       cursor: pointer;
@@ -634,7 +634,7 @@
           <button class="btn-action btn-menu" onclick="openMasterMenuModal()">
             <i class="fa-solid fa-utensils"></i> Master Menu
           </button>
-          <!-- TOMBOL REGISTRASI / INPUT MEJA TAMBAHAN -->
+          <!-- TOMBOL REGISTRASI / INPUT MEJA -->
           <button class="btn-action btn-reg" onclick="openRegistrationModal()">
             <i class="fa-solid fa-file-pen"></i> + Input Meja
           </button>
@@ -741,11 +741,11 @@
     </div>
   </main>
 
-  <!-- MODAL REGISTRASI & RESERVASI MEJA -->
+  <!-- MODAL RESERVASI MEJA DENGAN KASIR MENU -->
   <div id="bookingModal" class="modal-backdrop">
     <div class="modal-container">
       <div class="modal-header">
-        <h3><i class="fa-solid fa-file-pen" style="color: #fef08a;"></i> Form Registrasi Tamu <span id="modalTitle">#L1</span></h3>
+        <h3><i class="fa-solid fa-chair" style="color: #fef08a;"></i> Reservasi <span id="modalTitle">#L1</span></h3>
         <button class="btn-x" onclick="closeBookingModal()"><i class="fa-solid fa-xmark"></i></button>
       </div>
 
@@ -835,7 +835,7 @@
             <i class="fa-solid fa-file-pdf"></i> Cetak PDF Tamu
           </button>
           <button class="btn-modal-save" onclick="saveBooking()">
-            <i class="fa-solid fa-check"></i> Simpan & Ubah Merah (Cloud)
+            <i class="fa-solid fa-check"></i> Simpan ke Cloud (Merah)
           </button>
         </div>
       </div>
@@ -846,14 +846,14 @@
   <div id="registrationModal" class="modal-backdrop">
     <div class="modal-container">
       <div class="modal-header">
-        <h3><i class="fa-solid fa-file-pen" style="color: #38bdf8;"></i> Registrasi Cepat Meja Baru</h3>
+        <h3><i class="fa-solid fa-file-pen" style="color: #38bdf8;"></i> Registrasi / Input Meja Fleksibel</h3>
         <button class="btn-x" onclick="closeRegistrationModal()"><i class="fa-solid fa-xmark"></i></button>
       </div>
 
       <div class="modal-body">
         <div class="form-row">
           <label><i class="fa-solid fa-tag"></i> Pilih Meja / Ketik Nomor Meja *</label>
-          <select id="regTableIdSelect" class="inp-field" onchange="onRegTableSelected(this)">
+          <select id="regTableIdSelect" class="inp-field">
             <option value="">-- Pilih Meja Kosong --</option>
           </select>
         </div>
@@ -901,7 +901,7 @@
       <div class="modal-footer">
         <button class="btn-modal-del" style="background:#334155; color:#cbd5e1;" onclick="closeRegistrationModal()">Batal</button>
         <button class="btn-modal-save" onclick="saveRegistrationBooking()">
-          <i class="fa-solid fa-check"></i> Proses & Ubah Merah
+          <i class="fa-solid fa-check"></i> Simpan & Ubah Merah
         </button>
       </div>
     </div>
@@ -1126,7 +1126,6 @@
       'L15', 'L16', 'L17', 'L18', 'L19', 'L20', 'L21', 'L22', 'L23', 'L24', 
       'L25', 'L26', 'L27', 'L29', 'L29-B'
     ];
-
     const ALL_TABLE_IDS = [...TERRACE_IDS, ...LOUNGE_IDS];
 
     let bookings = {};
@@ -1223,10 +1222,10 @@
         .subscribe();
     }
 
-    // ================= REGISTRASI CEPAT MODAL =================
+    // ================= REGISTRASI / INPUT MEJA =================
     function openRegistrationModal() {
       const select = document.getElementById('regTableIdSelect');
-      let html = '<option value="">-- Pilih Meja Kosong --</option>';
+      let html = '<option value="">-- Pilih Meja Kosong / Fleksibel --</option>';
       ALL_TABLE_IDS.forEach(id => {
         if (!bookings[id]) {
           html += `<option value="${id}">Meja #${id}</option>`;
@@ -1246,10 +1245,6 @@
       document.getElementById('registrationModal').classList.remove('open');
     }
 
-    function onRegTableSelected(sel) {
-      // Automatic configuration if needed
-    }
-
     async function saveRegistrationBooking() {
       const tid = document.getElementById('regTableIdSelect').value;
       const name = document.getElementById('regGuestName').value.trim();
@@ -1260,7 +1255,7 @@
       const staff = document.getElementById('regGuestCreatedBy').value.trim();
 
       if (!tid) {
-        alert('Silakan pilih nomor meja terlebih dahulu.');
+        alert('Silakan pilih nomor meja.');
         return;
       }
       if (!name) {
@@ -1282,7 +1277,7 @@
         arrival_time: time,
         created_by: staff,
         timestamp: timestamp,
-        notes: 'Registrasi Cepat Kasir'
+        notes: 'Input via Registrasi Kasir'
       };
 
       const { error } = await _supabase.from('kq_table_bookings').upsert(payload, { onConflict: 'table_id' });
@@ -1903,7 +1898,7 @@
             const diff = dist - startDist;
             if (Math.abs(diff) > 10) {
               zoomMap(diff > 0 ? 0.03 : -0.03);
-              startDist = diff;
+              startDist = dist;
             }
           }
         }
