@@ -57,7 +57,7 @@
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
       border-bottom: 1.5px solid rgba(212, 175, 55, 0.4);
-      padding: clamp(10px, 1.2vw, 14px) clamp(12px, 1.6vw, 24px);
+      padding: 10px 12px;
       position: sticky;
       top: 0;
       z-index: 60;
@@ -68,30 +68,27 @@
       max-width: 1850px;
       margin: 0 auto;
       display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      flex-wrap: wrap;
+      flex-direction: column;
+      gap: 10px;
     }
 
     .brand-section {
       display: flex;
       align-items: center;
-      gap: 12px;
-      flex-shrink: 0;
+      gap: 10px;
     }
 
     .brand-logo-frame {
-      min-width: clamp(84px, 7vw, 110px);
-      height: clamp(44px, 3.8vw, 54px);
+      width: 44px;
+      height: 44px;
       background: #ffffff;
       border: 2px solid var(--gold-primary);
-      border-radius: 10px;
-      padding: 3px 8px;
+      border-radius: 8px;
+      padding: 2px;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 0 14px rgba(212, 175, 55, 0.35);
+      flex-shrink: 0;
     }
 
     .brand-logo-frame img {
@@ -102,179 +99,138 @@
 
     .brand-title h1 {
       font-family: 'Cinzel', serif;
-      font-size: clamp(0.95rem, 1.15vw, 1.3rem);
+      font-size: 0.95rem;
       font-weight: 800;
-      letter-spacing: 1.2px;
+      letter-spacing: 0.5px;
       background: var(--gold-grad);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      line-height: 1.2;
+      line-height: 1.1;
     }
 
     .brand-title p {
-      font-size: clamp(0.66rem, 0.75vw, 0.8rem);
+      font-size: 0.65rem;
       color: #94a3b8;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
       flex-wrap: wrap;
-      margin-top: 3px;
+      margin-top: 2px;
     }
 
     .event-badge {
       background: rgba(236, 72, 153, 0.2);
       border: 1px solid #ec4899;
       color: #f472b6;
-      padding: 2px 7px;
-      border-radius: 12px;
-      font-size: 0.65rem;
+      padding: 2px 6px;
+      border-radius: 10px;
+      font-size: 0.6rem;
       font-weight: 700;
-      letter-spacing: 0.5px;
     }
 
     .hdr-controls {
       display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
+      flex-direction: column;
+      gap: 8px;
     }
 
     .metrics-group {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      flex-wrap: wrap;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 6px;
     }
 
     .metric-card-lg {
-      background: linear-gradient(135deg, rgba(30, 41, 59, 0.85) 0%, rgba(15, 23, 42, 0.95) 100%);
-      border: 1.5px solid rgba(255, 255, 255, 0.12);
-      border-radius: 10px;
-      padding: 7px clamp(10px, 1vw, 14px);
+      background: rgba(30, 41, 59, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 8px;
+      padding: 6px 10px;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
       cursor: pointer;
-      transition: all 0.2s ease;
-      min-width: clamp(105px, 9vw, 135px);
-      box-shadow: 0 3px 12px rgba(0,0,0,0.35);
     }
 
-    .metric-card-lg:hover {
-      background: rgba(51, 65, 85, 0.95);
-      border-color: rgba(212, 175, 55, 0.5);
-      transform: translateY(-1px);
-    }
-
-    .metric-card-lg i { font-size: clamp(1.1rem, 1.25vw, 1.35rem); }
-
-    .metric-card-lg .txt-wrap {
-      display: flex;
-      flex-direction: column;
-      line-height: 1.15;
-    }
-
-    .metric-card-lg .txt-wrap span {
-      font-size: clamp(0.56rem, 0.62vw, 0.66rem);
-      color: #94a3b8;
-      text-transform: uppercase;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-    }
-
-    .metric-card-lg .txt-wrap strong {
-      font-size: clamp(0.95rem, 1.05vw, 1.18rem);
-      font-weight: 800;
-      font-family: 'Cinzel', serif;
-      letter-spacing: 0.3px;
-    }
+    .metric-card-lg i { font-size: 1rem; }
+    .metric-card-lg .txt-wrap { display: flex; flex-direction: column; line-height: 1.1; }
+    .metric-card-lg .txt-wrap span { font-size: 0.55rem; color: #94a3b8; text-transform: uppercase; font-weight: 700; }
+    .metric-card-lg .txt-wrap strong { font-size: 0.85rem; font-family: 'Cinzel', serif; }
 
     .btn-action-group {
-      display: flex;
-      align-items: center;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
       gap: 6px;
-      flex-wrap: wrap;
     }
 
     .btn-action {
       border: none;
-      padding: clamp(7px, 0.8vw, 9px) clamp(10px, 1vw, 15px);
-      border-radius: 9px;
+      padding: 10px 6px;
+      border-radius: 8px;
       font-weight: 700;
-      font-size: clamp(0.72rem, 0.78vw, 0.82rem);
+      font-size: 0.72rem;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 5px;
-      transition: all 0.2s ease;
+      color: #fff;
       touch-action: manipulation;
-      box-shadow: 0 3px 12px rgba(0,0,0,0.35);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
     }
 
-    .btn-action:hover {
-      transform: translateY(-1px);
-      filter: brightness(1.12);
-    }
-
-    .btn-dashboard { background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%); color: #fff; }
-    .btn-fdc { background: linear-gradient(135deg, #a855f7 0%, #7e22ce 100%); color: #fff; }
-    .btn-menu { background: linear-gradient(135deg, #d97706 0%, #b45309 100%); color: #fff; }
-    .btn-reg { background: linear-gradient(135deg, #0ea5e9 0%, #0369a1 100%); color: #fff; }
-    .btn-jpg { background: linear-gradient(135deg, #10b981 0%, #047857 100%); color: #fff; }
+    .btn-dashboard { background: #0284c7; }
+    .btn-fdc { background: #a855f7; }
+    .btn-menu { background: #d97706; }
+    .btn-reg { background: #0ea5e9; grid-column: span 3; }
+    .btn-jpg { background: #10b981; }
     .btn-csv { background: var(--gold-grad); color: #111; }
 
     /* TOOLBAR */
     .toolbar-bar {
       max-width: 1850px;
-      margin: 8px auto 0;
-      padding: 0 clamp(12px, 1.6vw, 24px);
+      margin: 6px auto 0;
+      padding: 0 12px;
       width: 100%;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 10px;
-      flex-wrap: wrap;
+      gap: 8px;
     }
 
     .legend-tag {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 8px;
       background: rgba(15, 23, 42, 0.88);
-      padding: 6px 14px;
-      border-radius: 20px;
+      padding: 6px 10px;
+      border-radius: 16px;
       border: 1px solid rgba(255, 255, 255, 0.1);
-      font-size: clamp(0.68rem, 0.75vw, 0.76rem);
-      flex-wrap: wrap;
+      font-size: 0.65rem;
     }
 
-    .dot-node { width: 9px; height: 9px; border-radius: 50%; }
-    .dot-node.avail { background: #38bdf8; box-shadow: 0 0 6px #38bdf8; }
-    .dot-node.booked { background: #ef4444; box-shadow: 0 0 8px #ef4444; }
+    .dot-node { width: 8px; height: 8px; border-radius: 50%; }
+    .dot-node.avail { background: #38bdf8; }
+    .dot-node.booked { background: #ef4444; }
 
     .zoom-group {
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 4px;
     }
 
     .btn-tool-icon {
-      width: 36px;
-      height: 36px;
-      border-radius: 9px;
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
       background: rgba(30, 41, 59, 0.9);
-      border: 1.5px solid rgba(212, 175, 55, 0.35);
+      border: 1px solid rgba(212, 175, 55, 0.35);
       color: #fff;
-      font-size: 0.88rem;
+      font-size: 0.8rem;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      touch-action: manipulation;
-      transition: background 0.2s;
     }
-
-    .btn-tool-icon:hover { background: rgba(51, 65, 85, 1); }
 
     /* VIEWPORT */
     .viewport-area {
@@ -285,7 +241,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 8px;
+      padding: 6px;
     }
 
     .map-frame {
@@ -294,8 +250,8 @@
       position: relative;
       transform-origin: center center;
       transition: transform 0.12s ease-out;
-      box-shadow: 0 20px 45px rgba(0,0,0,0.85);
-      border-radius: 10px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.8);
+      border-radius: 8px;
       overflow: hidden;
       background: #0f172a;
     }
@@ -315,27 +271,24 @@
       height: 100%;
     }
 
-    /* SPOT MEJA - TANPA OVERLAY BAYANGAN/TEKS */
+    /* KOTAK SPOT TEPAT DI ATAS MEJA (KOREKSI POSISI BARU) */
     .spot {
       position: absolute;
       cursor: pointer;
-      border-radius: 8px;
+      border-radius: 6px;
       background: transparent;
       border: none;
       transition: background 0.15s ease;
       -webkit-tap-highlight-color: transparent;
     }
 
-    .spot:hover {
-      background: rgba(56, 189, 248, 0.25);
-    }
-
-    .spot:active { transform: scale(0.96); }
+    .spot:hover { background: rgba(56, 189, 248, 0.25); }
+    .spot:active { transform: scale(0.95); }
 
     .spot.is-booked {
-      background: rgba(220, 38, 38, 0.82) !important;
+      background: rgba(220, 38, 38, 0.85) !important;
       border: 2px solid #ff4d4d !important;
-      box-shadow: 0 0 16px var(--red-glow), inset 0 0 8px rgba(255,255,255,0.4) !important;
+      box-shadow: 0 0 12px var(--red-glow), inset 0 0 6px rgba(255,255,255,0.4) !important;
       z-index: 5;
     }
 
@@ -343,14 +296,14 @@
     .modal-backdrop {
       position: fixed;
       inset: 0;
-      background: rgba(9, 13, 20, 0.9);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
+      background: rgba(9, 13, 20, 0.92);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
       z-index: 100;
       display: none;
       align-items: center;
       justify-content: center;
-      padding: 14px;
+      padding: 10px;
     }
 
     .modal-backdrop.open { display: flex; }
@@ -358,69 +311,46 @@
     .modal-container {
       background: var(--card-bg);
       border: 1px solid rgba(212, 175, 55, 0.35);
-      border-radius: 14px;
+      border-radius: 12px;
       width: 100%;
-      max-width: 560px;
-      max-height: 92vh;
+      max-width: 520px;
+      max-height: 90vh;
       overflow-y: auto;
-      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.85);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8);
     }
 
     .modal-header {
       background: linear-gradient(135deg, #1f2a3c 0%, #121926 100%);
-      padding: 13px 18px;
+      padding: 12px 16px;
       border-bottom: 1px solid rgba(255, 255, 255, 0.08);
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
 
-    .modal-header h3 {
-      font-family: 'Cinzel', serif;
-      font-size: 1.05rem;
-      color: #fef08a;
-    }
-
-    .btn-x {
-      background: transparent;
-      border: none;
-      color: #94a3b8;
-      font-size: 1.3rem;
-      cursor: pointer;
-      padding: 4px;
-    }
+    .modal-header h3 { font-family: 'Cinzel', serif; font-size: 0.95rem; color: #fef08a; }
+    .btn-x { background: transparent; border: none; color: #94a3b8; font-size: 1.2rem; cursor: pointer; padding: 4px; }
 
     .modal-body {
-      padding: 16px 18px;
+      padding: 14px 16px;
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 10px;
     }
 
-    .form-row {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .form-row label {
-      font-size: 0.75rem;
-      font-weight: 600;
-      color: #cbd5e1;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
+    .form-row { display: flex; flex-direction: column; gap: 4px; }
+    .form-row label { font-size: 0.72rem; font-weight: 600; color: #cbd5e1; display: flex; align-items: center; gap: 6px; }
 
     .inp-field {
       background: #0f172a;
       border: 1px solid #334155;
       border-radius: 8px;
-      padding: 10px 12px;
+      padding: 10px;
       color: #fff;
-      font-size: 0.88rem;
+      font-size: 0.85rem;
       outline: none;
       -webkit-appearance: none;
+      width: 100%;
     }
 
     .inp-field:focus { border-color: var(--gold-primary); }
@@ -428,20 +358,17 @@
     .money-input-box { position: relative; }
     .money-input-box span {
       position: absolute;
-      left: 12px;
+      left: 10px;
       top: 50%;
       transform: translateY(-50%);
       color: var(--gold-primary);
       font-weight: 700;
-      font-size: 0.88rem;
+      font-size: 0.85rem;
     }
-    .money-input-box input {
-      padding-left: 42px;
-      width: 100%;
-    }
+    .money-input-box input { padding-left: 38px; width: 100%; }
 
     .modal-footer {
-      padding: 13px 18px;
+      padding: 12px 16px;
       background: #0f172a;
       border-top: 1px solid rgba(255, 255, 255, 0.08);
       display: flex;
@@ -451,88 +378,18 @@
       flex-wrap: wrap;
     }
 
-    .btn-modal-del {
-      background: #7f1d1d;
-      color: #fca5a5;
-      border: none;
-      padding: 9px 14px;
-      border-radius: 8px;
-      font-size: 0.78rem;
-      font-weight: 600;
-      cursor: pointer;
-    }
+    .btn-modal-del { background: #7f1d1d; color: #fca5a5; border: none; padding: 9px 12px; border-radius: 8px; font-size: 0.75rem; font-weight: 600; cursor: pointer; }
+    .btn-modal-save { background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%); color: #fff; border: none; padding: 9px 16px; border-radius: 8px; font-size: 0.78rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 6px; }
 
-    .btn-modal-save {
-      background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%);
-      color: #fff;
-      border: none;
-      padding: 9px 18px;
-      border-radius: 8px;
-      font-size: 0.8rem;
-      font-weight: 700;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      box-shadow: 0 2px 10px rgba(239, 68, 68, 0.4);
-    }
+    .dash-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .dash-card { background: #0f172a; border: 1px solid #334155; border-radius: 10px; padding: 10px; display: flex; flex-direction: column; gap: 4px; }
+    .dash-card.hero-card { grid-column: span 2; background: linear-gradient(135deg, rgba(212,175,55,0.18) 0%, rgba(15,23,42,0.96) 100%); border-color: rgba(212,175,55,0.45); }
+    .dash-card .card-lbl { font-size: 0.65rem; color: #94a3b8; text-transform: uppercase; font-weight: 700; display: flex; align-items: center; gap: 6px; }
+    .dash-card .card-val { font-size: 1.1rem; font-weight: 800; color: #f8fafc; font-family: 'Cinzel', serif; }
+    .dash-card .card-sub { font-size: 0.65rem; color: #64748b; }
 
-    .dash-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-    }
-
-    .dash-card {
-      background: #0f172a;
-      border: 1px solid #334155;
-      border-radius: 11px;
-      padding: 12px 14px;
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .dash-card.hero-card {
-      grid-column: span 2;
-      background: linear-gradient(135deg, rgba(212,175,55,0.18) 0%, rgba(15,23,42,0.96) 100%);
-      border-color: rgba(212,175,55,0.45);
-    }
-
-    .dash-card .card-lbl {
-      font-size: 0.7rem;
-      color: #94a3b8;
-      text-transform: uppercase;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .dash-card .card-val {
-      font-size: 1.25rem;
-      font-weight: 800;
-      color: #f8fafc;
-      font-family: 'Cinzel', serif;
-    }
-
-    .dash-card .card-sub { font-size: 0.68rem; color: #64748b; }
-
-    .occupancy-bar-wrap {
-      width: 100%;
-      height: 8px;
-      background: #1e293b;
-      border-radius: 4px;
-      overflow: hidden;
-      margin-top: 4px;
-    }
-
-    .occupancy-bar {
-      height: 100%;
-      width: 0%;
-      transition: width 0.4s ease;
-    }
+    .occupancy-bar-wrap { width: 100%; height: 6px; background: #1e293b; border-radius: 3px; overflow: hidden; margin-top: 3px; }
+    .occupancy-bar { height: 100%; width: 0%; transition: width 0.4s ease; }
 
     .loader-overlay {
       position: fixed;
@@ -543,12 +400,12 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 12px;
+      gap: 10px;
     }
 
     .spinner {
-      width: 44px;
-      height: 44px;
+      width: 40px;
+      height: 40px;
       border: 4px solid rgba(212, 175, 55, 0.2);
       border-top-color: var(--gold-primary);
       border-radius: 50%;
@@ -557,12 +414,13 @@
 
     @keyframes spin { to { transform: rotate(360deg); } }
 
-    @media (max-width: 992px) {
-      .hdr-wrap { flex-direction: column; align-items: flex-start; }
-      .hdr-controls { width: 100%; justify-content: space-between; }
-      .metrics-group { width: 100%; display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; }
-      .btn-action-group { width: 100%; display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px; }
-      .btn-action { justify-content: center; padding: 9px 4px; font-size: 0.72rem; }
+    @media (min-width: 992px) {
+      .hdr-wrap { flex-direction: row; align-items: center; }
+      .metrics-group { display: flex; }
+      .metric-card-lg { min-width: 120px; }
+      .btn-action-group { display: flex; flex-wrap: wrap; }
+      .btn-reg { grid-column: auto; }
+      .toolbar-bar { margin: 10px auto 0; }
     }
   </style>
 </head>
@@ -580,7 +438,7 @@
           <h1>Platinum Hotel & Convention Hall</h1>
           <p>
             <span>INFINITY SKY LOUNGE</span>
-            <span class="event-badge"><i class="fa-solid fa-crown"></i> KING & QUEEN OF THE NIGHT</span>
+            <span class="event-badge"><i class="fa-solid fa-crown"></i> KING & QUEEN 2026</span>
           </p>
         </div>
       </div>
@@ -592,7 +450,7 @@
             <i class="fa-solid fa-couch" style="color: var(--amber-lounge);"></i>
             <div class="txt-wrap">
               <span>Lounge (L)</span>
-              <strong><span id="statLoungeBooked" style="color: var(--amber-lounge);">0</span><span style="font-size:0.85rem; color:#64748b;"> / 25</span></strong>
+              <strong><span id="statLoungeBooked" style="color: var(--amber-lounge);">0</span><span style="font-size:0.75rem; color:#64748b;"> / 25</span></strong>
             </div>
           </div>
 
@@ -601,7 +459,7 @@
             <i class="fa-solid fa-cloud-moon" style="color: var(--cyan-terrace);"></i>
             <div class="txt-wrap">
               <span>Cockpit (C)</span>
-              <strong><span id="statTerraceBooked" style="color: var(--cyan-terrace);">0</span><span style="font-size:0.85rem; color:#64748b;"> / 13</span></strong>
+              <strong><span id="statTerraceBooked" style="color: var(--cyan-terrace);">0</span><span style="font-size:0.75rem; color:#64748b;"> / 13</span></strong>
             </div>
           </div>
 
@@ -610,7 +468,7 @@
             <i class="fa-solid fa-ticket" style="color: var(--purple-fdc);"></i>
             <div class="txt-wrap">
               <span>FDC Guests</span>
-              <strong><span id="statFDCPaxTotal" style="color: var(--purple-fdc);">0</span><span style="font-size:0.85rem; color:#64748b;"> Pax</span></strong>
+              <strong><span id="statFDCPaxTotal" style="color: var(--purple-fdc);">0</span><span style="font-size:0.75rem; color:#64748b;"> Pax</span></strong>
             </div>
           </div>
 
@@ -634,7 +492,6 @@
           <button class="btn-action btn-menu" onclick="openMasterMenuModal()">
             <i class="fa-solid fa-utensils"></i> Master Menu
           </button>
-          <!-- TOMBOL REGISTRASI / INPUT MEJA -->
           <button class="btn-action btn-reg" onclick="openRegistrationModal()">
             <i class="fa-solid fa-file-pen"></i> + Input Meja
           </button>
@@ -652,8 +509,8 @@
   <!-- TOOLBAR -->
   <div class="toolbar-bar">
     <div class="legend-tag">
-      <div style="display:flex; align-items:center; gap:6px;"><div class="dot-node avail"></div> <span id="legendAvailText">Lounge: 25 | Cockpit: 13</span></div>
-      <div style="display:flex; align-items:center; gap:6px;"><div class="dot-node booked"></div> <span id="legendBookedText">0 Terbooking (Merah)</span></div>
+      <div style="display:flex; align-items:center; gap:5px;"><div class="dot-node avail"></div> <span id="legendAvailText">Lounge: 25 | Cockpit: 13</span></div>
+      <div style="display:flex; align-items:center; gap:5px;"><div class="dot-node booked"></div> <span id="legendBookedText">0 Booked</span></div>
     </div>
     
     <div class="zoom-group">
@@ -679,63 +536,63 @@
 
       <div class="hotspots-layer">
         
-        <!-- 1. COCKPIT DECK (C1 s/d C13) -->
-        <div id="spot-C1" class="spot" style="top: 35.8%; left: 11.2%; width: 6.2%; height: 7.2%;" onclick="openBooking('C1', 'Cockpit Deck Sofa (3 Pax)', 3, 'terrace')"></div>
-        <div id="spot-C2" class="spot" style="top: 35.8%; left: 21.0%; width: 6.2%; height: 7.2%;" onclick="openBooking('C2', 'Cockpit Deck Sofa (3 Pax)', 3, 'terrace')"></div>
-        <div id="spot-C3" class="spot" style="top: 35.8%; left: 30.8%; width: 6.2%; height: 7.2%;" onclick="openBooking('C3', 'Cockpit Deck Sofa (3 Pax)', 3, 'terrace')"></div>
+        <!-- 1. COCKPIT DECK (C1 s/d C13) - TEPAT DI ATAS MEJA -->
+        <div id="spot-C1" class="spot" style="top: 24.2%; left: 21.0%; width: 5.8%; height: 6.8%;" onclick="openBooking('C1', 'Cockpit Deck Sofa (3 Pax)', 3, 'terrace')"></div>
+        <div id="spot-C2" class="spot" style="top: 24.2%; left: 30.5%; width: 5.8%; height: 6.8%;" onclick="openBooking('C2', 'Cockpit Deck Sofa (3 Pax)', 3, 'terrace')"></div>
+        <div id="spot-C3" class="spot" style="top: 24.2%; left: 40.0%; width: 5.8%; height: 6.8%;" onclick="openBooking('C3', 'Cockpit Deck Sofa (3 Pax)', 3, 'terrace')"></div>
 
-        <div id="spot-C4" class="spot" style="top: 60.5%; left: 5.2%; width: 5.8%; height: 8.0%;" onclick="openBooking('C4', 'Cockpit Table (4 Pax)', 4, 'terrace')"></div>
-        <div id="spot-C5" class="spot" style="top: 60.5%; left: 13.0%; width: 5.8%; height: 8.0%;" onclick="openBooking('C5', 'Cockpit Table (4 Pax)', 4, 'terrace')"></div>
-        <div id="spot-C6" class="spot" style="top: 60.5%; left: 20.8%; width: 5.8%; height: 8.0%;" onclick="openBooking('C6', 'Cockpit Table (4 Pax)', 4, 'terrace')"></div>
-        <div id="spot-C7" class="spot" style="top: 60.5%; left: 28.6%; width: 5.8%; height: 8.0%;" onclick="openBooking('C7', 'Cockpit Table (4 Pax)', 4, 'terrace')"></div>
-        <div id="spot-C8" class="spot" style="top: 60.5%; left: 36.4%; width: 5.8%; height: 8.0%;" onclick="openBooking('C8', 'Cockpit Table (4 Pax)', 4, 'terrace')"></div>
+        <div id="spot-C4" class="spot" style="top: 44.5%; left: 8.5%; width: 5.8%; height: 7.5%;" onclick="openBooking('C4', 'Cockpit Table (4 Pax)', 4, 'terrace')"></div>
+        <div id="spot-C5" class="spot" style="top: 44.5%; left: 16.5%; width: 5.8%; height: 7.5%;" onclick="openBooking('C5', 'Cockpit Table (4 Pax)', 4, 'terrace')"></div>
+        <div id="spot-C6" class="spot" style="top: 44.5%; left: 24.5%; width: 5.8%; height: 7.5%;" onclick="openBooking('C6', 'Cockpit Table (4 Pax)', 4, 'terrace')"></div>
+        <div id="spot-C7" class="spot" style="top: 44.5%; left: 32.5%; width: 5.8%; height: 7.5%;" onclick="openBooking('C7', 'Cockpit Table (4 Pax)', 4, 'terrace')"></div>
+        <div id="spot-C8" class="spot" style="top: 44.5%; left: 40.5%; width: 5.8%; height: 7.5%;" onclick="openBooking('C8', 'Cockpit Table (4 Pax)', 4, 'terrace')"></div>
 
-        <div id="spot-C9" class="spot" style="top: 84.5%; left: 5.2%; width: 5.8%; height: 8.0%;" onclick="openBooking('C9', 'Cockpit Table (4 Pax)', 4, 'terrace')"></div>
-        <div id="spot-C10" class="spot" style="top: 84.5%; left: 13.0%; width: 5.8%; height: 8.0%;" onclick="openBooking('C10', 'Cockpit Table (4 Pax)', 4, 'terrace')"></div>
-        <div id="spot-C11" class="spot" style="top: 84.5%; left: 20.8%; width: 5.8%; height: 8.0%;" onclick="openBooking('C11', 'Cockpit Table (4 Pax)', 4, 'terrace')"></div>
-        <div id="spot-C12" class="spot" style="top: 84.5%; left: 28.6%; width: 5.8%; height: 8.0%;" onclick="openBooking('C12', 'Cockpit Table (4 Pax)', 4, 'terrace')"></div>
-        <div id="spot-C13" class="spot" style="top: 84.5%; left: 36.4%; width: 5.8%; height: 8.0%;" onclick="openBooking('C13', 'Cockpit Table (4 Pax)', 4, 'terrace')"></div>
+        <div id="spot-C9" class="spot" style="top: 67.5%; left: 8.5%; width: 5.8%; height: 7.5%;" onclick="openBooking('C9', 'Cockpit Table (4 Pax)', 4, 'terrace')"></div>
+        <div id="spot-C10" class="spot" style="top: 67.5%; left: 16.5%; width: 5.8%; height: 7.5%;" onclick="openBooking('C10', 'Cockpit Table (4 Pax)', 4, 'terrace')"></div>
+        <div id="spot-C11" class="spot" style="top: 67.5%; left: 24.5%; width: 5.8%; height: 7.5%;" onclick="openBooking('C11', 'Cockpit Table (4 Pax)', 4, 'terrace')"></div>
+        <div id="spot-C12" class="spot" style="top: 67.5%; left: 32.5%; width: 5.8%; height: 7.5%;" onclick="openBooking('C12', 'Cockpit Table (4 Pax)', 4, 'terrace')"></div>
+        <div id="spot-C13" class="spot" style="top: 67.5%; left: 40.5%; width: 5.8%; height: 7.5%;" onclick="openBooking('C13', 'Cockpit Table (4 Pax)', 4, 'terrace')"></div>
 
         <!-- 2. LOWER DECK & LOUNGE (BARIS ATAS: L5, L6, L7) -->
-        <div id="spot-L5" class="spot" style="top: 15.2%; left: 51.5%; width: 5.2%; height: 7.2%;" onclick="openBooking('L5', 'Lower Deck Table (4 Pax)', 4, 'lounge')"></div>
-        <div id="spot-L6" class="spot" style="top: 15.2%; left: 60.5%; width: 5.2%; height: 7.2%;" onclick="openBooking('L6', 'Lower Deck Table (4 Pax)', 4, 'lounge')"></div>
-        <div id="spot-L7" class="spot" style="top: 15.2%; left: 69.5%; width: 5.2%; height: 7.2%;" onclick="openBooking('L7', 'Lower Deck Table (4 Pax)', 4, 'lounge')"></div>
+        <div id="spot-L5" class="spot" style="top: 10.5%; left: 51.5%; width: 5.2%; height: 6.5%;" onclick="openBooking('L5', 'Lower Deck Table (4 Pax)', 4, 'lounge')"></div>
+        <div id="spot-L6" class="spot" style="top: 10.5%; left: 60.5%; width: 5.2%; height: 6.5%;" onclick="openBooking('L6', 'Lower Deck Table (4 Pax)', 4, 'lounge')"></div>
+        <div id="spot-L7" class="spot" style="top: 10.5%; left: 69.5%; width: 5.2%; height: 6.5%;" onclick="openBooking('L7', 'Lower Deck Table (4 Pax)', 4, 'lounge')"></div>
 
         <!-- BARIS VIP (L1, L10, L12, L13) -->
-        <div id="spot-L1" class="spot" style="top: 29.5%; left: 46.5%; width: 7.5%; height: 8.5%; border-radius: 10px;" onclick="openBooking('L1', 'VIP Dining L1 (8 Pax)', 8, 'lounge')"></div>
-        <div id="spot-L10" class="spot" style="top: 29.5%; left: 56.5%; width: 7.5%; height: 8.5%; border-radius: 10px;" onclick="openBooking('L10', 'VIP Dining L10 (8 Pax)', 8, 'lounge')"></div>
-        <div id="spot-L12" class="spot" style="top: 29.5%; left: 66.5%; width: 7.5%; height: 8.5%; border-radius: 10px;" onclick="openBooking('L12', 'VIP Dining L12 (8 Pax)', 8, 'lounge')"></div>
-        <div id="spot-L13" class="spot" style="top: 29.5%; left: 76.5%; width: 7.5%; height: 8.5%; border-radius: 10px;" onclick="openBooking('L13', 'VIP Dining L13 (3 Pax)', 3, 'lounge')"></div>
+        <div id="spot-L1" class="spot" style="top: 21.0%; left: 46.5%; width: 7.5%; height: 8.0%; border-radius: 10px;" onclick="openBooking('L1', 'VIP Dining L1 (8 Pax)', 8, 'lounge')"></div>
+        <div id="spot-L10" class="spot" style="top: 21.0%; left: 56.5%; width: 7.5%; height: 8.0%; border-radius: 10px;" onclick="openBooking('L10', 'VIP Dining L10 (8 Pax)', 8, 'lounge')"></div>
+        <div id="spot-L12" class="spot" style="top: 21.0%; left: 66.5%; width: 7.5%; height: 8.0%; border-radius: 10px;" onclick="openBooking('L12', 'VIP Dining L12 (8 Pax)', 8, 'lounge')"></div>
+        <div id="spot-L13" class="spot" style="top: 21.0%; left: 76.5%; width: 7.5%; height: 8.0%; border-radius: 10px;" onclick="openBooking('L13', 'VIP Dining L13 (3 Pax)', 3, 'lounge')"></div>
 
         <!-- BARIS TENGAH (L10-M, L11, L12-M, L13-M) -->
-        <div id="spot-L10-M" class="spot" style="top: 44.5%; left: 46.2%; width: 5.8%; height: 7.8%;" onclick="openBooking('L10-M', 'Center Table (4 Pax)', 4, 'lounge')"></div>
-        <div id="spot-L11" class="spot" style="top: 44.5%; left: 54.0%; width: 5.8%; height: 7.8%;" onclick="openBooking('L11', 'Center Table (4 Pax)', 4, 'lounge')"></div>
-        <div id="spot-L12-M" class="spot" style="top: 44.5%; left: 61.8%; width: 5.8%; height: 7.8%;" onclick="openBooking('L12-M', 'Center Table (4 Pax)', 4, 'lounge')"></div>
-        <div id="spot-L13-M" class="spot" style="top: 44.5%; left: 69.6%; width: 5.8%; height: 7.8%;" onclick="openBooking('L13-M', 'Center Table (4 Pax)', 4, 'lounge')"></div>
+        <div id="spot-L10-M" class="spot" style="top: 34.5%; left: 46.2%; width: 5.8%; height: 7.2%;" onclick="openBooking('L10-M', 'Center Table (4 Pax)', 4, 'lounge')"></div>
+        <div id="spot-L11" class="spot" style="top: 34.5%; left: 54.0%; width: 5.8%; height: 7.2%;" onclick="openBooking('L11', 'Center Table (4 Pax)', 4, 'lounge')"></div>
+        <div id="spot-L12-M" class="spot" style="top: 34.5%; left: 61.8%; width: 5.8%; height: 7.2%;" onclick="openBooking('L12-M', 'Center Table (4 Pax)', 4, 'lounge')"></div>
+        <div id="spot-L13-M" class="spot" style="top: 34.5%; left: 69.6%; width: 5.8%; height: 7.2%;" onclick="openBooking('L13-M', 'Center Table (4 Pax)', 4, 'lounge')"></div>
 
         <!-- BARIS BAWAH (L16 s/d L20) -->
-        <div id="spot-L16" class="spot" style="top: 60.5%; left: 45.5%; width: 5.8%; height: 7.8%;" onclick="openBooking('L16', 'Lower Deck Table (4 Pax)', 4, 'lounge')"></div>
-        <div id="spot-L17" class="spot" style="top: 60.5%; left: 53.0%; width: 5.8%; height: 7.8%;" onclick="openBooking('L17', 'Lower Deck Table (4 Pax)', 4, 'lounge')"></div>
-        <div id="spot-L18" class="spot" style="top: 60.5%; left: 60.5%; width: 5.8%; height: 7.8%;" onclick="openBooking('L18', 'Lower Deck Table (4 Pax)', 4, 'lounge')"></div>
-        <div id="spot-L19" class="spot" style="top: 60.5%; left: 68.0%; width: 5.8%; height: 7.8%;" onclick="openBooking('L19', 'Lower Deck Table (4 Pax)', 4, 'lounge')"></div>
-        <div id="spot-L20" class="spot" style="top: 60.5%; left: 75.5%; width: 5.8%; height: 7.8%;" onclick="openBooking('L20', 'Lower Deck Table (4 Pax)', 4, 'lounge')"></div>
+        <div id="spot-L16" class="spot" style="top: 48.5%; left: 45.5%; width: 5.8%; height: 7.2%;" onclick="openBooking('L16', 'Lower Deck Table (4 Pax)', 4, 'lounge')"></div>
+        <div id="spot-L17" class="spot" style="top: 48.5%; left: 53.0%; width: 5.8%; height: 7.2%;" onclick="openBooking('L17', 'Lower Deck Table (4 Pax)', 4, 'lounge')"></div>
+        <div id="spot-L18" class="spot" style="top: 48.5%; left: 60.5%; width: 5.8%; height: 7.2%;" onclick="openBooking('L18', 'Lower Deck Table (4 Pax)', 4, 'lounge')"></div>
+        <div id="spot-L19" class="spot" style="top: 48.5%; left: 68.0%; width: 5.8%; height: 7.2%;" onclick="openBooking('L19', 'Lower Deck Table (4 Pax)', 4, 'lounge')"></div>
+        <div id="spot-L20" class="spot" style="top: 48.5%; left: 75.5%; width: 5.8%; height: 7.2%;" onclick="openBooking('L20', 'Lower Deck Table (4 Pax)', 4, 'lounge')"></div>
 
         <!-- BARIS PALING BAWAH / FRONTLINE (L21 s/d L25) -->
-        <div id="spot-L21" class="spot" style="top: 84.5%; left: 45.5%; width: 5.8%; height: 7.8%;" onclick="openBooking('L21', 'Frontline Table (4 Pax)', 4, 'lounge')"></div>
-        <div id="spot-L22" class="spot" style="top: 84.5%; left: 53.0%; width: 5.8%; height: 7.8%;" onclick="openBooking('L22', 'Frontline Table (4 Pax)', 4, 'lounge')"></div>
-        <div id="spot-L23" class="spot" style="top: 84.5%; left: 60.5%; width: 5.8%; height: 7.8%;" onclick="openBooking('L23', 'Frontline Table (4 Pax)', 4, 'lounge')"></div>
-        <div id="spot-L24" class="spot" style="top: 84.5%; left: 68.0%; width: 5.8%; height: 7.8%;" onclick="openBooking('L24', 'Frontline Table (4 Pax)', 4, 'lounge')"></div>
-        <div id="spot-L25" class="spot" style="top: 84.5%; left: 75.5%; width: 5.8%; height: 7.8%;" onclick="openBooking('L25', 'Frontline Table (4 Pax)', 4, 'lounge')"></div>
+        <div id="spot-L21" class="spot" style="top: 67.5%; left: 45.5%; width: 5.8%; height: 7.2%;" onclick="openBooking('L21', 'Frontline Table (4 Pax)', 4, 'lounge')"></div>
+        <div id="spot-L22" class="spot" style="top: 67.5%; left: 53.0%; width: 5.8%; height: 7.2%;" onclick="openBooking('L22', 'Frontline Table (4 Pax)', 4, 'lounge')"></div>
+        <div id="spot-L23" class="spot" style="top: 67.5%; left: 60.5%; width: 5.8%; height: 7.2%;" onclick="openBooking('L23', 'Frontline Table (4 Pax)', 4, 'lounge')"></div>
+        <div id="spot-L24" class="spot" style="top: 67.5%; left: 68.0%; width: 5.8%; height: 7.2%;" onclick="openBooking('L24', 'Frontline Table (4 Pax)', 4, 'lounge')"></div>
+        <div id="spot-L25" class="spot" style="top: 67.5%; left: 75.5%; width: 5.8%; height: 7.2%;" onclick="openBooking('L25', 'Frontline Table (4 Pax)', 4, 'lounge')"></div>
 
         <!-- KANAN & BAR AREA -->
-        <div id="spot-L8" class="spot" style="top: 39.5%; left: 81.5%; width: 5.4%; height: 7.2%;" onclick="openBooking('L8', 'Bar Area Table (3 Pax)', 3, 'lounge')"></div>
-        <div id="spot-L9" class="spot" style="top: 39.5%; left: 89.0%; width: 5.4%; height: 7.2%;" onclick="openBooking('L9', 'Bar Area Table (3 Pax)', 3, 'lounge')"></div>
-        <div id="spot-L15" class="spot" style="top: 55.5%; left: 81.5%; width: 8.0%; height: 8.8%; border-radius: 10px;" onclick="openBooking('L15', 'VIP Lounge L15 (8 Pax)', 8, 'lounge')"></div>
-        <div id="spot-L26" class="spot" style="top: 81.5%; left: 81.5%; width: 8.0%; height: 8.8%; border-radius: 10px;" onclick="openBooking('L26', 'VIP Lounge L26 (4 Pax)', 4, 'lounge')"></div>
+        <div id="spot-L8" class="spot" style="top: 29.5%; left: 81.5%; width: 5.4%; height: 6.8%;" onclick="openBooking('L8', 'Bar Area Table (3 Pax)', 3, 'lounge')"></div>
+        <div id="spot-L9" class="spot" style="top: 29.5%; left: 89.0%; width: 5.4%; height: 6.8%;" onclick="openBooking('L9', 'Bar Area Table (3 Pax)', 3, 'lounge')"></div>
+        <div id="spot-L15" class="spot" style="top: 42.5%; left: 81.5%; width: 8.0%; height: 8.0%; border-radius: 10px;" onclick="openBooking('L15', 'VIP Lounge L15 (8 Pax)', 8, 'lounge')"></div>
+        <div id="spot-L26" class="spot" style="top: 65.5%; left: 81.5%; width: 8.0%; height: 8.0%; border-radius: 10px;" onclick="openBooking('L26', 'VIP Lounge L26 (4 Pax)', 4, 'lounge')"></div>
 
-        <div id="spot-L27" class="spot" style="top: 39.5%; left: 93.5%; width: 4.5%; height: 6.5%;" onclick="openBooking('L27', 'Wall High Table (3 Pax)', 3, 'lounge')"></div>
-        <div id="spot-L29" class="spot" style="top: 55.5%; left: 93.5%; width: 4.5%; height: 6.5%;" onclick="openBooking('L29', 'Wall High Table (3 Pax)', 3, 'lounge')"></div>
-        <div id="spot-L29-B" class="spot" style="top: 71.5%; left: 93.5%; width: 4.5%; height: 6.5%;" onclick="openBooking('L29-B', 'Wall High Table (3 Pax)', 3, 'lounge')"></div>
+        <div id="spot-L27" class="spot" style="top: 29.5%; left: 93.5%; width: 4.5%; height: 6.0%;" onclick="openBooking('L27', 'Wall High Table (3 Pax)', 3, 'lounge')"></div>
+        <div id="spot-L29" class="spot" style="top: 42.5%; left: 93.5%; width: 4.5%; height: 6.0%;" onclick="openBooking('L29', 'Wall High Table (3 Pax)', 3, 'lounge')"></div>
+        <div id="spot-L29-B" class="spot" style="top: 56.5%; left: 93.5%; width: 4.5%; height: 6.0%;" onclick="openBooking('L29-B', 'Wall High Table (3 Pax)', 3, 'lounge')"></div>
 
       </div>
     </div>
@@ -781,7 +638,7 @@
             </button>
           </div>
 
-          <div id="bookingCartItemsContainer" style="display: flex; flex-direction: column; gap: 6px; max-height: 160px; overflow-y: auto;">
+          <div id="bookingCartItemsContainer" style="display: flex; flex-direction: column; gap: 6px; max-height: 150px; overflow-y: auto;">
             <div style="font-size: 0.72rem; color: #64748b; text-align: center; padding: 6px;">Belum ada menu dipilih.</div>
           </div>
 
@@ -842,17 +699,17 @@
     </div>
   </div>
 
-  <!-- MODAL REGISTRASI CEPAT (DARI TOMBOL HEADER) -->
+  <!-- MODAL REGISTRASI / INPUT MEJA -->
   <div id="registrationModal" class="modal-backdrop">
     <div class="modal-container">
       <div class="modal-header">
-        <h3><i class="fa-solid fa-file-pen" style="color: #38bdf8;"></i> Registrasi / Input Meja Fleksibel</h3>
+        <h3><i class="fa-solid fa-file-pen" style="color: #38bdf8;"></i> Input Meja Fleksibel (Registrasi)</h3>
         <button class="btn-x" onclick="closeRegistrationModal()"><i class="fa-solid fa-xmark"></i></button>
       </div>
 
       <div class="modal-body">
         <div class="form-row">
-          <label><i class="fa-solid fa-tag"></i> Pilih Meja / Ketik Nomor Meja *</label>
+          <label><i class="fa-solid fa-tag"></i> Pilih Nomor Meja *</label>
           <select id="regTableIdSelect" class="inp-field">
             <option value="">-- Pilih Meja Kosong --</option>
           </select>
@@ -871,6 +728,31 @@
           <div class="form-row">
             <label><i class="fa-solid fa-users"></i> Jumlah Pax</label>
             <input type="number" id="regGuestPax" class="inp-field" value="4" min="1">
+          </div>
+        </div>
+
+        <!-- KASIR MENU DI REGISTRASI -->
+        <div style="background: rgba(30, 41, 59, 0.7); border: 1px solid #334155; border-radius: 10px; padding: 12px; display: flex; flex-direction: column; gap: 10px;">
+          <label style="font-size: 0.78rem; font-weight: 700; color: #fbbf24; display: flex; align-items: center; gap: 6px;">
+            <i class="fa-solid fa-utensils"></i> Kasir Menu & Paket Promo Lounge
+          </label>
+
+          <div style="display: flex; gap: 6px;">
+            <select id="selectRegMasterMenuDropdown" class="inp-field" style="flex: 1;">
+              <option value="">-- Pilih Menu / Paket Lounge --</option>
+            </select>
+            <button type="button" class="btn-action" style="background: #0284c7; color: #fff; padding: 0 14px;" onclick="addRegCartItemFromDropdown()">
+              <i class="fa-solid fa-plus"></i> Tambah
+            </button>
+          </div>
+
+          <div id="regBookingCartItemsContainer" style="display: flex; flex-direction: column; gap: 6px; max-height: 140px; overflow-y: auto;">
+            <div style="font-size: 0.72rem; color: #64748b; text-align: center; padding: 6px;">Belum ada menu dipilih.</div>
+          </div>
+
+          <div style="background: #090d16; border: 1px solid #10b981; border-radius: 8px; padding: 8px 12px; display: flex; justify-content: space-between; align-items: center;">
+            <span style="font-size: 0.75rem; font-weight: 700; color: #34d399;">Total Estimasi Menu:</span>
+            <strong id="regBookingCartTotalDisplay" style="font-size: 0.95rem; font-family: 'Cinzel', serif; color: #34d399;">Rp 0</strong>
           </div>
         </div>
 
@@ -1138,6 +1020,7 @@
     ];
 
     let currentCart = [];
+    let regCurrentCart = [];
     let currentTable = null;
     let currentCategory = 'lounge';
     let zoomLevel = 1.0;
@@ -1233,6 +1116,10 @@
       });
       select.innerHTML = html;
 
+      populateRegBookingMenuDropdown();
+      regCurrentCart = [];
+      renderRegBookingCart();
+
       document.getElementById('regGuestName').value = '';
       document.getElementById('regGuestPhone').value = '';
       document.getElementById('regGuestPax').value = '4';
@@ -1243,6 +1130,78 @@
 
     function closeRegistrationModal() {
       document.getElementById('registrationModal').classList.remove('open');
+    }
+
+    function populateRegBookingMenuDropdown() {
+      const dropdown = document.getElementById('selectRegMasterMenuDropdown');
+      let html = '<option value="">-- Pilih Menu / Paket Lounge --</option>';
+      masterMenu.forEach(item => {
+        html += `<option value="${item.id}">${item.name} - Rp ${item.price.toLocaleString('id-ID')}</option>`;
+      });
+      dropdown.innerHTML = html;
+    }
+
+    function addRegCartItemFromDropdown() {
+      const dropdown = document.getElementById('selectRegMasterMenuDropdown');
+      const selectedId = parseInt(dropdown.value, 10);
+      if (!selectedId) return;
+
+      const menuItem = masterMenu.find(m => m.id === selectedId);
+      if (!menuItem) return;
+
+      const existing = regCurrentCart.find(c => c.id === selectedId);
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        regCurrentCart.push({ id: menuItem.id, name: menuItem.name, price: menuItem.price, qty: 1 });
+      }
+
+      dropdown.value = '';
+      renderRegBookingCart();
+    }
+
+    function changeRegCartQty(id, delta) {
+      const item = regCurrentCart.find(c => c.id === id);
+      if (item) {
+        item.qty += delta;
+        if (item.qty <= 0) regCurrentCart = regCurrentCart.filter(c => c.id !== id);
+      }
+      renderRegBookingCart();
+    }
+
+    function renderRegBookingCart() {
+      const container = document.getElementById('regBookingCartItemsContainer');
+      const totalDisplay = document.getElementById('regBookingCartTotalDisplay');
+
+      if (regCurrentCart.length === 0) {
+        container.innerHTML = '<div style="font-size: 0.72rem; color: #64748b; text-align: center; padding: 6px;">Belum ada menu dipilih.</div>';
+        totalDisplay.innerText = 'Rp 0';
+        return;
+      }
+
+      let html = '';
+      let grandTotal = 0;
+
+      regCurrentCart.forEach(item => {
+        const subtotal = item.price * item.qty;
+        grandTotal += subtotal;
+        html += `
+          <div style="background: #0f172a; border: 1px solid #334155; border-radius: 8px; padding: 8px 10px; display: flex; justify-content: space-between; align-items: center;">
+            <div>
+              <strong style="color: #f8fafc; font-size: 0.8rem;">${item.name}</strong>
+              <div style="font-size: 0.7rem; color: #34d399;">Rp ${item.price.toLocaleString('id-ID')} × ${item.qty} = <strong>Rp ${subtotal.toLocaleString('id-ID')}</strong></div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 6px;">
+              <button type="button" onclick="changeRegCartQty(${item.id}, -1)" style="background: #334155; border: none; color: #fff; width: 24px; height: 24px; border-radius: 4px; cursor: pointer;"><i class="fa-solid fa-minus" style="font-size: 0.65rem;"></i></button>
+              <span style="font-size: 0.8rem; font-weight: 700; width: 16px; text-align: center;">${item.qty}</span>
+              <button type="button" onclick="changeRegCartQty(${item.id}, 1)" style="background: #334155; border: none; color: #fff; width: 24px; height: 24px; border-radius: 4px; cursor: pointer;"><i class="fa-solid fa-plus" style="font-size: 0.65rem;"></i></button>
+            </div>
+          </div>
+        `;
+      });
+
+      container.innerHTML = html;
+      totalDisplay.innerText = 'Rp ' + grandTotal.toLocaleString('id-ID');
     }
 
     async function saveRegistrationBooking() {
@@ -1267,6 +1226,10 @@
       const now = new Date();
       const timestamp = `${now.toLocaleDateString('id-ID')} - ${now.toLocaleTimeString('id-ID')} WITA`;
 
+      let menuSummary = regCurrentCart.map(c => `${c.name} (${c.qty}x)`).join(', ');
+      const customNotes = document.getElementById('regGuestNotes') ? document.getElementById('regGuestNotes').value.trim() : '';
+      const finalNotes = menuSummary ? (menuSummary + (customNotes ? ' | ' + customNotes : '')) : (customNotes || 'Input via Registrasi Kasir');
+
       const payload = {
         table_id: String(tid),
         guest_name: name,
@@ -1277,7 +1240,7 @@
         arrival_time: time,
         created_by: staff,
         timestamp: timestamp,
-        notes: 'Input via Registrasi Kasir'
+        notes: finalNotes
       };
 
       const { error } = await _supabase.from('kq_table_bookings').upsert(payload, { onConflict: 'table_id' });
@@ -1898,7 +1861,7 @@
             const diff = dist - startDist;
             if (Math.abs(diff) > 10) {
               zoomMap(diff > 0 ? 0.03 : -0.03);
-              startDist = dist;
+              startDist = diff;
             }
           }
         }
