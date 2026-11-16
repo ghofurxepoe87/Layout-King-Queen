@@ -20,16 +20,20 @@
 
   <style>
     :root {
-      --bg-page: #080c14;
+      --bg-page: #f1f5f9;
+      --header-bg: #0077b6;
+      --card-bg: #ffffff;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
       --gold-primary: #d4af37;
       --gold-grad: linear-gradient(135deg, #fce08a 0%, #d4af37 50%, #856108 100%);
       --red-booked: #ef4444;
-      --red-glow: rgba(239, 68, 68, 0.95);
-      --card-bg: rgba(18, 24, 38, 0.98);
+      --red-glow: rgba(239, 68, 68, 0.4);
       --purple-fdc: #a855f7;
       --emerald-accent: #10b981;
-      --cyan-terrace: #38bdf8;
-      --amber-lounge: #f59e0b;
+      --cyan-terrace: #0284c7;
+      --amber-lounge: #d97706;
+      --border-color: #cbd5e1;
     }
 
     * {
@@ -43,7 +47,7 @@
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
       background: var(--bg-page);
-      color: #f8fafc;
+      color: var(--text-main);
       min-height: 100vh;
       min-height: -webkit-fill-available;
       display: flex;
@@ -51,17 +55,15 @@
       overflow-x: hidden;
     }
 
-    /* HEADER */
+    /* HEADER - Platinum Hotel Style */
     header {
-      background: linear-gradient(180deg, rgba(15, 23, 42, 0.98) 0%, rgba(9, 13, 22, 0.96) 100%);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border-bottom: 1.5px solid rgba(212, 175, 55, 0.4);
-      padding: 10px 12px;
+      background: var(--header-bg);
+      border-bottom: 3px solid rgba(212, 175, 55, 0.6);
+      padding: 12px 16px;
       position: sticky;
       top: 0;
       z-index: 60;
-      box-shadow: 0 6px 25px rgba(0,0,0,0.7);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
     }
 
     .hdr-wrap {
@@ -69,26 +71,27 @@
       margin: 0 auto;
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 12px;
     }
 
     .brand-section {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
     }
 
     .brand-logo-frame {
-      width: 44px;
-      height: 44px;
+      width: 48px;
+      height: 48px;
       background: #ffffff;
       border: 2px solid var(--gold-primary);
       border-radius: 8px;
-      padding: 2px;
+      padding: 3px;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
     }
 
     .brand-logo-frame img {
@@ -99,32 +102,32 @@
 
     .brand-title h1 {
       font-family: 'Cinzel', serif;
-      font-size: 0.95rem;
+      font-size: 1.05rem;
       font-weight: 800;
       letter-spacing: 0.5px;
-      background: var(--gold-grad);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      color: #ffffff;
       line-height: 1.1;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.2);
     }
 
     .brand-title p {
-      font-size: 0.65rem;
-      color: #94a3b8;
+      font-size: 0.7rem;
+      color: #e2e8f0;
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
       flex-wrap: wrap;
-      margin-top: 2px;
+      margin-top: 3px;
+      font-weight: 600;
     }
 
     .event-badge {
-      background: rgba(236, 72, 153, 0.2);
-      border: 1px solid #ec4899;
-      color: #f472b6;
-      padding: 2px 6px;
-      border-radius: 10px;
-      font-size: 0.6rem;
+      background: rgba(236, 72, 153, 0.25);
+      border: 1px solid #f472b6;
+      color: #fff;
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-size: 0.62rem;
       font-weight: 700;
     }
 
@@ -137,100 +140,107 @@
     .metrics-group {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 6px;
+      gap: 8px;
     }
 
     .metric-card-lg {
-      background: rgba(30, 41, 59, 0.85);
-      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.25);
       border-radius: 8px;
-      padding: 6px 10px;
+      padding: 8px 12px;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
       cursor: pointer;
+      backdrop-filter: blur(4px);
     }
 
-    .metric-card-lg i { font-size: 1rem; }
-    .metric-card-lg .txt-wrap { display: flex; flex-direction: column; line-height: 1.1; }
-    .metric-card-lg .txt-wrap span { font-size: 0.55rem; color: #94a3b8; text-transform: uppercase; font-weight: 700; }
-    .metric-card-lg .txt-wrap strong { font-size: 0.85rem; font-family: 'Cinzel', serif; }
+    .metric-card-lg i { font-size: 1.1rem; color: #fff; }
+    .metric-card-lg .txt-wrap { display: flex; flex-direction: column; line-height: 1.2; }
+    .metric-card-lg .txt-wrap span { font-size: 0.58rem; color: #e2e8f0; text-transform: uppercase; font-weight: 700; }
+    .metric-card-lg .txt-wrap strong { font-size: 0.9rem; font-family: 'Cinzel', serif; color: #fff; }
 
     .btn-action-group {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 6px;
+      gap: 8px;
     }
 
     .btn-action {
       border: none;
-      padding: 10px 6px;
+      padding: 10px 8px;
       border-radius: 8px;
       font-weight: 700;
-      font-size: 0.72rem;
+      font-size: 0.75rem;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 5px;
+      gap: 6px;
       color: #fff;
       touch-action: manipulation;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      transition: all 0.2s ease;
     }
 
+    .btn-action:active { transform: scale(0.97); }
+
     .btn-dashboard { background: #0284c7; }
-    .btn-fdc { background: #a855f7; }
-    .btn-menu { background: #d97706; }
-    .btn-reg { background: #0ea5e9; grid-column: span 2; }
-    .btn-reset-pos { background: #7f1d1d; }
-    .btn-jpg { background: #10b981; }
-    .btn-csv { background: var(--gold-grad); color: #111; }
+    .btn-fdc { background: #9333ea; }
+    .btn-menu { background: #b45309; }
+    .btn-reg { background: #0891b2; grid-column: span 2; }
+    .btn-reset-pos { background: #991b1b; }
+    .btn-jpg { background: #059669; }
+    .btn-csv { background: #d97706; color: #fff; }
 
     /* TOOLBAR */
     .toolbar-bar {
       max-width: 1850px;
-      margin: 6px auto 0;
-      padding: 0 12px;
+      margin: 10px auto 0;
+      padding: 0 16px;
       width: 100%;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 8px;
+      gap: 10px;
     }
 
     .legend-tag {
       display: flex;
       align-items: center;
-      gap: 8px;
-      background: rgba(15, 23, 42, 0.88);
-      padding: 6px 10px;
-      border-radius: 16px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      font-size: 0.65rem;
+      gap: 10px;
+      background: #ffffff;
+      padding: 8px 14px;
+      border-radius: 20px;
+      border: 1px solid var(--border-color);
+      font-size: 0.7rem;
+      font-weight: 600;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
     }
 
-    .dot-node { width: 8px; height: 8px; border-radius: 50%; }
-    .dot-node.avail { background: #38bdf8; }
+    .dot-node { width: 9px; height: 9px; border-radius: 50%; }
+    .dot-node.avail { background: #0284c7; }
     .dot-node.booked { background: #ef4444; }
 
     .zoom-group {
       display: flex;
       align-items: center;
-      gap: 4px;
+      gap: 6px;
     }
 
     .btn-tool-icon {
-      width: 32px;
-      height: 32px;
+      width: 36px;
+      height: 36px;
       border-radius: 8px;
-      background: rgba(30, 41, 59, 0.9);
-      border: 1px solid rgba(212, 175, 55, 0.35);
-      color: #fff;
-      font-size: 0.8rem;
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      font-size: 0.85rem;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
     }
 
     /* VIEWPORT */
@@ -242,7 +252,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 6px;
+      padding: 10px;
     }
 
     .map-frame {
@@ -251,10 +261,11 @@
       position: relative;
       transform-origin: center center;
       transition: transform 0.12s ease-out;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.8);
-      border-radius: 8px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+      border-radius: 10px;
       overflow: hidden;
-      background: #0f172a;
+      background: #ffffff;
+      border: 1px solid var(--border-color);
     }
 
     .render-3d-img {
@@ -277,30 +288,32 @@
       position: absolute;
       cursor: grab;
       border-radius: 6px;
-      background: rgba(56, 189, 248, 0.2);
-      border: 1.5px dashed rgba(56, 189, 248, 0.8);
+      background: rgba(2, 132, 199, 0.22);
+      border: 1.5px dashed rgba(2, 132, 199, 0.85);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.55rem;
+      font-size: 0.58rem;
       font-weight: 700;
-      color: #fff;
+      color: #0f172a;
       -webkit-tap-highlight-color: transparent;
       touch-action: none;
+      transition: background 0.2s ease;
     }
 
     .spot:active { cursor: grabbing; }
 
     .spot:hover {
-      background: rgba(56, 189, 248, 0.45);
-      border-color: #38bdf8;
+      background: rgba(2, 132, 199, 0.45);
+      border-color: #0284c7;
       z-index: 10;
     }
 
     .spot.is-booked {
-      background: rgba(220, 38, 38, 0.85) !important;
-      border: 2px solid #ff4d4d !important;
-      box-shadow: 0 0 14px var(--red-glow), inset 0 0 6px rgba(255,255,255,0.4) !important;
+      background: rgba(239, 68, 68, 0.88) !important;
+      border: 2px solid #b91c1c !important;
+      box-shadow: 0 0 12px var(--red-glow), inset 0 0 6px rgba(255,255,255,0.6) !important;
+      color: #fff !important;
       z-index: 5;
     }
 
@@ -308,118 +321,119 @@
     .modal-backdrop {
       position: fixed;
       inset: 0;
-      background: rgba(9, 13, 20, 0.92);
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
+      background: rgba(15, 23, 42, 0.7);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
       z-index: 100;
       display: none;
       align-items: center;
       justify-content: center;
-      padding: 10px;
+      padding: 12px;
     }
 
     .modal-backdrop.open { display: flex; }
 
     .modal-container {
       background: var(--card-bg);
-      border: 1px solid rgba(212, 175, 55, 0.35);
+      border: 1px solid var(--border-color);
       border-radius: 12px;
       width: 100%;
       max-width: 520px;
       max-height: 90vh;
       overflow-y: auto;
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
     }
 
     .modal-header {
-      background: linear-gradient(135deg, #1f2a3c 0%, #121926 100%);
-      padding: 12px 16px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      background: #f8fafc;
+      padding: 14px 18px;
+      border-bottom: 1px solid var(--border-color);
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
 
-    .modal-header h3 { font-family: 'Cinzel', serif; font-size: 0.95rem; color: #fef08a; }
-    .btn-x { background: transparent; border: none; color: #94a3b8; font-size: 1.2rem; cursor: pointer; padding: 4px; }
+    .modal-header h3 { font-family: 'Cinzel', serif; font-size: 1rem; color: #0f172a; font-weight: 700; }
+    .btn-x { background: transparent; border: none; color: var(--text-muted); font-size: 1.3rem; cursor: pointer; padding: 4px; }
 
     .modal-body {
-      padding: 14px 16px;
+      padding: 16px 18px;
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 12px;
     }
 
-    .form-row { display: flex; flex-direction: column; gap: 4px; }
-    .form-row label { font-size: 0.72rem; font-weight: 600; color: #cbd5e1; display: flex; align-items: center; gap: 6px; }
+    .form-row { display: flex; flex-direction: column; gap: 5px; }
+    .form-row label { font-size: 0.75rem; font-weight: 700; color: #334155; display: flex; align-items: center; gap: 6px; }
 
     .inp-field {
-      background: #0f172a;
-      border: 1px solid #334155;
+      background: #ffffff;
+      border: 1px solid var(--border-color);
       border-radius: 8px;
-      padding: 10px;
-      color: #fff;
-      font-size: 0.85rem;
+      padding: 11px 12px;
+      color: var(--text-main);
+      font-size: 0.88rem;
       outline: none;
       -webkit-appearance: none;
       width: 100%;
+      font-family: inherit;
     }
 
-    .inp-field:focus { border-color: var(--gold-primary); }
+    .inp-field:focus { border-color: var(--header-bg); box-shadow: 0 0 0 3px rgba(0, 119, 182, 0.15); }
 
     .money-input-box { position: relative; }
     .money-input-box span {
       position: absolute;
-      left: 10px;
+      left: 12px;
       top: 50%;
       transform: translateY(-50%);
-      color: var(--gold-primary);
+      color: var(--header-bg);
       font-weight: 700;
-      font-size: 0.85rem;
+      font-size: 0.88rem;
     }
     .money-input-box input { padding-left: 38px; width: 100%; }
 
     .modal-footer {
-      padding: 12px 16px;
-      background: #0f172a;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 14px 18px;
+      background: #f8fafc;
+      border-top: 1px solid var(--border-color);
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
       flex-wrap: wrap;
     }
 
-    .btn-modal-del { background: #7f1d1d; color: #fca5a5; border: none; padding: 9px 12px; border-radius: 8px; font-size: 0.75rem; font-weight: 600; cursor: pointer; }
-    .btn-modal-save { background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%); color: #fff; border: none; padding: 9px 16px; border-radius: 8px; font-size: 0.78rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 6px; }
+    .btn-modal-del { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; padding: 10px 14px; border-radius: 8px; font-size: 0.78rem; font-weight: 700; cursor: pointer; }
+    .btn-modal-save { background: #0077b6; color: #fff; border: none; padding: 10px 18px; border-radius: 8px; font-size: 0.82rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 6px; box-shadow: 0 2px 6px rgba(0,119,182,0.3); }
 
-    .dash-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
-    .dash-card { background: #0f172a; border: 1px solid #334155; border-radius: 10px; padding: 10px; display: flex; flex-direction: column; gap: 4px; }
-    .dash-card.hero-card { grid-column: span 2; background: linear-gradient(135deg, rgba(212,175,55,0.18) 0%, rgba(15,23,42,0.96) 100%); border-color: rgba(212,175,55,0.45); }
-    .dash-card .card-lbl { font-size: 0.65rem; color: #94a3b8; text-transform: uppercase; font-weight: 700; display: flex; align-items: center; gap: 6px; }
-    .dash-card .card-val { font-size: 1.1rem; font-weight: 800; color: #f8fafc; font-family: 'Cinzel', serif; }
-    .dash-card .card-sub { font-size: 0.65rem; color: #64748b; }
+    .dash-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .dash-card { background: #f8fafc; border: 1px solid var(--border-color); border-radius: 10px; padding: 12px; display: flex; flex-direction: column; gap: 6px; }
+    .dash-card.hero-card { grid-column: span 2; background: linear-gradient(135deg, rgba(0,119,182,0.08) 0%, rgba(248,250,252,1) 100%); border-color: #0077b6; }
+    .dash-card .card-lbl { font-size: 0.68rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700; display: flex; align-items: center; gap: 6px; }
+    .dash-card .card-val { font-size: 1.15rem; font-weight: 800; color: #0f172a; font-family: 'Cinzel', serif; }
+    .dash-card .card-sub { font-size: 0.68rem; color: var(--text-muted); }
 
-    .occupancy-bar-wrap { width: 100%; height: 6px; background: #1e293b; border-radius: 3px; overflow: hidden; margin-top: 3px; }
+    .occupancy-bar-wrap { width: 100%; height: 7px; background: #e2e8f0; border-radius: 4px; overflow: hidden; margin-top: 4px; }
     .occupancy-bar { height: 100%; width: 0%; transition: width 0.4s ease; }
 
     .loader-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.85);
+      background: rgba(15, 23, 42, 0.85);
       z-index: 200;
       display: none;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 10px;
+      gap: 12px;
     }
 
     .spinner {
-      width: 40px;
-      height: 40px;
-      border: 4px solid rgba(212, 175, 55, 0.2);
-      border-top-color: var(--gold-primary);
+      width: 44px;
+      height: 44px;
+      border: 4px solid rgba(255, 255, 255, 0.2);
+      border-top-color: #38bdf8;
       border-radius: 50%;
       animation: spin 0.8s linear infinite;
     }
@@ -427,12 +441,12 @@
     @keyframes spin { to { transform: rotate(360deg); } }
 
     @media (min-width: 992px) {
-      .hdr-wrap { flex-direction: row; align-items: center; }
+      .hdr-wrap { flex-direction: row; align-items: center; justify-content: space-between; }
       .metrics-group { display: flex; }
-      .metric-card-lg { min-width: 120px; }
+      .metric-card-lg { min-width: 130px; }
       .btn-action-group { display: flex; flex-wrap: wrap; }
       .btn-reg { grid-column: auto; }
-      .toolbar-bar { margin: 10px auto 0; }
+      .toolbar-bar { margin: 12px auto 0; }
     }
   </style>
 </head>
@@ -458,34 +472,34 @@
       <div class="hdr-controls">
         <div class="metrics-group">
           <div class="metric-card-lg" onclick="openReportModal()" title="Lihat Inventaris Lounge">
-            <i class="fa-solid fa-couch" style="color: var(--amber-lounge);"></i>
+            <i class="fa-solid fa-couch" style="color: #f59e0b;"></i>
             <div class="txt-wrap">
               <span>Lounge (L)</span>
-              <strong><span id="statLoungeBooked" style="color: var(--amber-lounge);">0</span><span style="font-size:0.75rem; color:#64748b;"> / 25</span></strong>
+              <strong><span id="statLoungeBooked">0</span><span style="font-size:0.75rem; color:#cbd5e1;"> / 25</span></strong>
             </div>
           </div>
 
           <div class="metric-card-lg" onclick="openReportModal()" title="Lihat Inventaris Cockpit Deck">
-            <i class="fa-solid fa-cloud-moon" style="color: var(--cyan-terrace);"></i>
+            <i class="fa-solid fa-cloud-moon" style="color: #38bdf8;"></i>
             <div class="txt-wrap">
               <span>Cockpit (C)</span>
-              <strong><span id="statTerraceBooked" style="color: var(--cyan-terrace);">0</span><span style="font-size:0.75rem; color:#64748b;"> / 13</span></strong>
+              <strong><span id="statTerraceBooked">0</span><span style="font-size:0.75rem; color:#cbd5e1;"> / 13</span></strong>
             </div>
           </div>
 
           <div class="metric-card-lg" onclick="openFDCListModal()" title="Lihat Tamu Tiket FDC Standing">
-            <i class="fa-solid fa-ticket" style="color: var(--purple-fdc);"></i>
+            <i class="fa-solid fa-ticket" style="color: #e879f9;"></i>
             <div class="txt-wrap">
               <span>FDC Guests</span>
-              <strong><span id="statFDCPaxTotal" style="color: var(--purple-fdc);">0</span><span style="font-size:0.75rem; color:#64748b;"> Pax</span></strong>
+              <strong><span id="statFDCPaxTotal">0</span><span style="font-size:0.75rem; color:#cbd5e1;"> Pax</span></strong>
             </div>
           </div>
 
           <div class="metric-card-lg" onclick="openReportModal()" title="Lihat Rincian Pendapatan">
-            <i class="fa-solid fa-money-bill-wave" style="color: var(--emerald-accent);"></i>
+            <i class="fa-solid fa-money-bill-wave" style="color: #34d399;"></i>
             <div class="txt-wrap">
               <span>Total Rev / DP</span>
-              <strong id="statDPTotal" style="color: var(--emerald-accent);">Rp 0</strong>
+              <strong id="statDPTotal">Rp 0</strong>
             </div>
           </div>
         </div>
@@ -520,9 +534,9 @@
   <!-- TOOLBAR -->
   <div class="toolbar-bar">
     <div class="legend-tag">
-      <div style="display:flex; align-items:center; gap:5px;"><div class="dot-node avail"></div> <span id="legendAvailText">Lounge: 25 | Cockpit: 13</span></div>
-      <div style="display:flex; align-items:center; gap:5px;"><div class="dot-node booked"></div> <span id="legendBookedText">0 Booked</span></div>
-      <div style="color:#fbbf24; font-size:0.6rem;"><i class="fa-solid fa-cloud"></i> Posisi Meja Tersinkronisasi Publik ke Supabase!</div>
+      <div style="display:flex; align-items:center; gap:6px;"><div class="dot-node avail"></div> <span id="legendAvailText">Lounge: 25 | Cockpit: 13</span></div>
+      <div style="display:flex; align-items:center; gap:6px;"><div class="dot-node booked"></div> <span id="legendBookedText">0 Booked</span></div>
+      <div style="color: #0284c7; font-size: 0.65rem; font-weight: 700;"><i class="fa-solid fa-cloud"></i> Sinkronisasi Cloud Publik Aktif</div>
     </div>
     
     <div class="zoom-group">
@@ -556,7 +570,7 @@
   <div id="bookingModal" class="modal-backdrop">
     <div class="modal-container">
       <div class="modal-header">
-        <h3><i class="fa-solid fa-chair" style="color: #fef08a;"></i> Reservasi <span id="modalTitle">#L1</span></h3>
+        <h3><i class="fa-solid fa-chair" style="color: #0284c7;"></i> Reservasi <span id="modalTitle">#L1</span></h3>
         <button class="btn-x" onclick="closeBookingModal()"><i class="fa-solid fa-xmark"></i></button>
       </div>
 
@@ -566,7 +580,7 @@
           <input type="text" id="guestName" class="inp-field" placeholder="Contoh: Jessica Alexandra">
         </div>
 
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
           <div class="form-row">
             <label><i class="fa-brands fa-whatsapp"></i> WhatsApp / HP *</label>
             <input type="tel" id="guestPhone" class="inp-field" placeholder="0812-xxxx-xxxx">
@@ -577,8 +591,8 @@
           </div>
         </div>
 
-        <div style="background: rgba(30, 41, 59, 0.7); border: 1px solid #334155; border-radius: 10px; padding: 12px; display: flex; flex-direction: column; gap: 10px;">
-          <label style="font-size: 0.78rem; font-weight: 700; color: #fbbf24; display: flex; align-items: center; gap: 6px;">
+        <div style="background: #f8fafc; border: 1px solid var(--border-color); border-radius: 10px; padding: 12px; display: flex; flex-direction: column; gap: 10px;">
+          <label style="font-size: 0.78rem; font-weight: 700; color: #b45309; display: flex; align-items: center; gap: 6px;">
             <i class="fa-solid fa-utensils"></i> Kasir Menu & Paket Promo Lounge
           </label>
 
@@ -592,24 +606,24 @@
           </div>
 
           <div id="bookingCartItemsContainer" style="display: flex; flex-direction: column; gap: 6px; max-height: 150px; overflow-y: auto;">
-            <div style="font-size: 0.72rem; color: #64748b; text-align: center; padding: 6px;">Belum ada menu dipilih.</div>
+            <div style="font-size: 0.72rem; color: var(--text-muted); text-align: center; padding: 6px;">Belum ada menu dipilih.</div>
           </div>
 
-          <div style="background: #090d16; border: 1px solid #10b981; border-radius: 8px; padding: 8px 12px; display: flex; justify-content: space-between; align-items: center;">
-            <span style="font-size: 0.75rem; font-weight: 700; color: #34d399;">Total Estimasi Menu:</span>
-            <strong id="bookingCartTotalDisplay" style="font-size: 0.95rem; font-family: 'Cinzel', serif; color: #34d399;">Rp 0</strong>
+          <div style="background: #ffffff; border: 1px solid #10b981; border-radius: 8px; padding: 8px 12px; display: flex; justify-content: space-between; align-items: center;">
+            <span style="font-size: 0.75rem; font-weight: 700; color: #059669;">Total Estimasi Menu:</span>
+            <strong id="bookingCartTotalDisplay" style="font-size: 0.95rem; font-family: 'Cinzel', serif; color: #059669;">Rp 0</strong>
           </div>
         </div>
 
         <div class="form-row">
-          <label><i class="fa-solid fa-money-bill-wave" style="color: #34d399;"></i> Nominal DP / Uang Muka (Diisi Manual) *</label>
+          <label><i class="fa-solid fa-money-bill-wave" style="color: #059669;"></i> Nominal DP / Uang Muka (Diisi Manual) *</label>
           <div class="money-input-box">
             <span>Rp</span>
             <input type="text" id="guestDP" class="inp-field" placeholder="Contoh: 500.000" onkeyup="formatCurrencyInput(this)">
           </div>
         </div>
 
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
           <div class="form-row">
             <label><i class="fa-solid fa-clock"></i> Jam Kedatangan</label>
             <select id="guestTime" class="inp-field">
@@ -619,14 +633,14 @@
             </select>
           </div>
           <div class="form-row">
-            <label><i class="fa-solid fa-user-tag" style="color: var(--gold-primary);"></i> Created By (Staff) *</label>
+            <label><i class="fa-solid fa-user-tag" style="color: #0077b6;"></i> Created By (Staff) *</label>
             <input type="text" id="guestCreatedBy" class="inp-field" placeholder="Ketik nama staff..." value="">
           </div>
         </div>
 
         <div class="form-row">
-          <label><i class="fa-solid fa-calendar-days" style="color: #38bdf8;"></i> Waktu Input Kasir (Real-Time Otomatis)</label>
-          <input type="text" id="guestInputTimestamp" class="inp-field" readonly style="color: #38bdf8; font-weight: 700; background: #050b14;">
+          <label><i class="fa-solid fa-calendar-days" style="color: #0284c7;"></i> Waktu Input Kasir (Real-Time Otomatis)</label>
+          <input type="text" id="guestInputTimestamp" class="inp-field" readonly style="color: #0284c7; font-weight: 700; background: #f1f5f9;">
         </div>
 
         <div class="form-row">
@@ -639,8 +653,8 @@
         <button id="btnRemoveBooking" class="btn-modal-del" onclick="deleteBooking()" style="display: none;">
           <i class="fa-solid fa-trash"></i> Hapus
         </button>
-        <div style="display: flex; gap: 6px; flex-wrap: wrap;">
-          <button type="button" class="btn-action" onclick="generateGuestBookingPDF()" style="background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%); color:#fff;">
+        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+          <button type="button" class="btn-action" onclick="generateGuestBookingPDF()" style="background: #0284c7; color:#fff;">
             <i class="fa-solid fa-file-pdf"></i> Cetak PDF Tamu
           </button>
           <button class="btn-modal-save" onclick="saveBooking()">
@@ -655,7 +669,7 @@
   <div id="registrationModal" class="modal-backdrop">
     <div class="modal-container">
       <div class="modal-header">
-        <h3><i class="fa-solid fa-file-pen" style="color: #38bdf8;"></i> Input Meja Fleksibel (Registrasi)</h3>
+        <h3><i class="fa-solid fa-file-pen" style="color: #0284c7;"></i> Input Meja Fleksibel (Registrasi)</h3>
         <button class="btn-x" onclick="closeRegistrationModal()"><i class="fa-solid fa-xmark"></i></button>
       </div>
 
@@ -672,7 +686,7 @@
           <input type="text" id="regGuestName" class="inp-field" placeholder="Contoh: Jessica Alexandra">
         </div>
 
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
           <div class="form-row">
             <label><i class="fa-brands fa-whatsapp"></i> WhatsApp / HP *</label>
             <input type="tel" id="regGuestPhone" class="inp-field" placeholder="0812-xxxx-xxxx">
@@ -683,8 +697,8 @@
           </div>
         </div>
 
-        <div style="background: rgba(30, 41, 59, 0.7); border: 1px solid #334155; border-radius: 10px; padding: 12px; display: flex; flex-direction: column; gap: 10px;">
-          <label style="font-size: 0.78rem; font-weight: 700; color: #fbbf24; display: flex; align-items: center; gap: 6px;">
+        <div style="background: #f8fafc; border: 1px solid var(--border-color); border-radius: 10px; padding: 12px; display: flex; flex-direction: column; gap: 10px;">
+          <label style="font-size: 0.78rem; font-weight: 700; color: #b45309; display: flex; align-items: center; gap: 6px;">
             <i class="fa-solid fa-utensils"></i> Kasir Menu & Paket Promo Lounge
           </label>
 
@@ -698,24 +712,24 @@
           </div>
 
           <div id="regBookingCartItemsContainer" style="display: flex; flex-direction: column; gap: 6px; max-height: 140px; overflow-y: auto;">
-            <div style="font-size: 0.72rem; color: #64748b; text-align: center; padding: 6px;">Belum ada menu dipilih.</div>
+            <div style="font-size: 0.72rem; color: var(--text-muted); text-align: center; padding: 6px;">Belum ada menu dipilih.</div>
           </div>
 
-          <div style="background: #090d16; border: 1px solid #10b981; border-radius: 8px; padding: 8px 12px; display: flex; justify-content: space-between; align-items: center;">
-            <span style="font-size: 0.75rem; font-weight: 700; color: #34d399;">Total Estimasi Menu:</span>
-            <strong id="regBookingCartTotalDisplay" style="font-size: 0.95rem; font-family: 'Cinzel', serif; color: #34d399;">Rp 0</strong>
+          <div style="background: #ffffff; border: 1px solid #10b981; border-radius: 8px; padding: 8px 12px; display: flex; justify-content: space-between; align-items: center;">
+            <span style="font-size: 0.75rem; font-weight: 700; color: #059669;">Total Estimasi Menu:</span>
+            <strong id="regBookingCartTotalDisplay" style="font-size: 0.95rem; font-family: 'Cinzel', serif; color: #059669;">Rp 0</strong>
           </div>
         </div>
 
         <div class="form-row">
-          <label><i class="fa-solid fa-money-bill-wave" style="color: #34d399;"></i> Nominal DP / Uang Muka (Diisi Manual) *</label>
+          <label><i class="fa-solid fa-money-bill-wave" style="color: #059669;"></i> Nominal DP / Uang Muka (Diisi Manual) *</label>
           <div class="money-input-box">
             <span>Rp</span>
             <input type="text" id="regGuestDP" class="inp-field" placeholder="Contoh: 500.000" onkeyup="formatCurrencyInput(this)">
           </div>
         </div>
 
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
           <div class="form-row">
             <label><i class="fa-solid fa-clock"></i> Jam Kedatangan</label>
             <select id="regGuestTime" class="inp-field">
@@ -725,14 +739,14 @@
             </select>
           </div>
           <div class="form-row">
-            <label><i class="fa-solid fa-user-tag" style="color: var(--gold-primary);"></i> Created By (Staff) *</label>
+            <label><i class="fa-solid fa-user-tag" style="color: #0077b6;"></i> Created By (Staff) *</label>
             <input type="text" id="regGuestCreatedBy" class="inp-field" placeholder="Ketik nama staff..." value="">
           </div>
         </div>
       </div>
 
       <div class="modal-footer">
-        <button class="btn-modal-del" style="background:#334155; color:#cbd5e1;" onclick="closeRegistrationModal()">Batal</button>
+        <button class="btn-modal-del" style="background:#e2e8f0; color:#475569; border:none;" onclick="closeRegistrationModal()">Batal</button>
         <button class="btn-modal-save" onclick="saveRegistrationBooking()">
           <i class="fa-solid fa-check"></i> Simpan & Ubah Merah
         </button>
@@ -744,12 +758,12 @@
   <div id="masterMenuModal" class="modal-backdrop">
     <div class="modal-container">
       <div class="modal-header">
-        <h3 style="color: #fbbf24;"><i class="fa-solid fa-utensils"></i> Master Menu & Produk Lounge</h3>
+        <h3 style="color: #b45309;"><i class="fa-solid fa-utensils"></i> Master Menu & Produk Lounge</h3>
         <button class="btn-x" onclick="closeMasterMenuModal()"><i class="fa-solid fa-xmark"></i></button>
       </div>
 
       <div class="modal-body">
-        <div style="background: rgba(217, 119, 6, 0.12); border: 1px solid rgba(217, 119, 6, 0.35); padding: 8px 12px; border-radius: 8px; font-size: 0.72rem; color: #fde68a;">
+        <div style="background: rgba(217, 119, 6, 0.1); border: 1px solid rgba(217, 119, 6, 0.3); padding: 10px 12px; border-radius: 8px; font-size: 0.75rem; color: #b45309; font-weight: 600;">
           <i class="fa-solid fa-circle-info"></i> Tambahkan daftar menu minuman, cocktail, atau paket promo yang otomatis muncul di pilihan kasir reservasi.
         </div>
 
@@ -758,7 +772,7 @@
           <input type="text" id="menuItemName" class="inp-field" placeholder="Contoh: Signature Cocktail Sky Luxury">
         </div>
 
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
           <div class="form-row">
             <label><i class="fa-solid fa-folder"></i> Kategori</label>
             <select id="menuItemCategory" class="inp-field">
@@ -777,18 +791,18 @@
           </div>
         </div>
 
-        <button class="btn-action btn-menu" style="width:100%; justify-content:center; margin-top:6px;" onclick="addMasterMenuItem()">
+        <button class="btn-action btn-menu" style="width:100%; justify-content:center; margin-top:4px;" onclick="addMasterMenuItem()">
           <i class="fa-solid fa-plus"></i> Tambah ke Master Menu
         </button>
 
-        <hr style="border: 0; border-top: 1px solid #334155; margin: 8px 0;">
+        <hr style="border: 0; border-top: 1px solid var(--border-color); margin: 10px 0;">
 
-        <div style="font-size:0.75rem; font-weight:700; color:#cbd5e1; margin-bottom:4px;">Daftar Master Menu Aktif:</div>
+        <div style="font-size:0.78rem; font-weight:700; color:#334155; margin-bottom:4px;">Daftar Master Menu Aktif:</div>
         <div id="masterMenuListContent" style="max-height: 180px; overflow-y: auto;"></div>
       </div>
 
       <div class="modal-footer">
-        <button class="btn-modal-del" style="background:#334155; color:#cbd5e1;" onclick="closeMasterMenuModal()">Tutup</button>
+        <button class="btn-modal-del" style="background:#e2e8f0; color:#475569; border:none;" onclick="closeMasterMenuModal()">Tutup</button>
       </div>
     </div>
   </div>
@@ -797,12 +811,12 @@
   <div id="fdcModal" class="modal-backdrop">
     <div class="modal-container">
       <div class="modal-header">
-        <h3 style="color: #d8b4fe;"><i class="fa-solid fa-ticket"></i> Input Tiket FDC (Standing Party)</h3>
+        <h3 style="color: #9333ea;"><i class="fa-solid fa-ticket"></i> Input Tiket FDC (Standing Party)</h3>
         <button class="btn-x" onclick="closeFDCModal()"><i class="fa-solid fa-xmark"></i></button>
       </div>
 
       <div class="modal-body">
-        <div style="background: rgba(168, 85, 247, 0.12); border: 1px solid rgba(168, 85, 247, 0.35); padding: 8px 12px; border-radius: 8px; font-size: 0.72rem; color: #e9d5ff;">
+        <div style="background: rgba(147, 51, 234, 0.1); border: 1px solid rgba(147, 51, 234, 0.3); padding: 10px 12px; border-radius: 8px; font-size: 0.75rem; color: #7e22ce; font-weight: 600;">
           <i class="fa-solid fa-circle-info"></i> Tiket First Drink Charge (FDC) Standing: <strong>Rp 125.000 / Pax</strong> (Free 1st Drink Voucher).
         </div>
 
@@ -811,7 +825,7 @@
           <input type="text" id="fdcName" class="inp-field" placeholder="Nama pemesan FDC">
         </div>
 
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
           <div class="form-row">
             <label><i class="fa-brands fa-whatsapp"></i> WhatsApp / HP *</label>
             <input type="tel" id="fdcPhone" class="inp-field" placeholder="0812-xxxx-xxxx">
@@ -822,16 +836,16 @@
           </div>
         </div>
 
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
           <div class="form-row">
-            <label><i class="fa-solid fa-money-bill-wave" style="color: #34d399;"></i> Total FDC (@ Rp 125rb) *</label>
+            <label><i class="fa-solid fa-money-bill-wave" style="color: #059669;"></i> Total FDC (@ Rp 125rb) *</label>
             <div class="money-input-box">
               <span>Rp</span>
               <input type="text" id="fdcAmount" class="inp-field" placeholder="125.000" onkeyup="formatCurrencyInput(this)">
             </div>
           </div>
           <div class="form-row">
-            <label><i class="fa-solid fa-user-tag" style="color: #d8b4fe;"></i> Created By (Staff) *</label>
+            <label><i class="fa-solid fa-user-tag" style="color: #9333ea;"></i> Created By (Staff) *</label>
             <input type="text" id="fdcCreatedBy" class="inp-field" placeholder="Ketik nama staff..." value="">
           </div>
         </div>
@@ -843,8 +857,8 @@
       </div>
 
       <div class="modal-footer">
-        <button class="btn-modal-del" style="background:#334155; color:#cbd5e1;" onclick="closeFDCModal()">Batal</button>
-        <button class="btn-modal-save" style="background: linear-gradient(135deg, #a855f7 0%, #7e22ce 100%);" onclick="saveFDCBooking()">
+        <button class="btn-modal-del" style="background:#e2e8f0; color:#475569; border:none;" onclick="closeFDCModal()">Batal</button>
+        <button class="btn-modal-save" style="background: #9333ea;" onclick="saveFDCBooking()">
           <i class="fa-solid fa-check"></i> Simpan Tiket FDC
         </button>
       </div>
@@ -855,63 +869,63 @@
   <div id="reportModal" class="modal-backdrop">
     <div class="modal-container">
       <div class="modal-header">
-        <h3 style="color: #fef08a;"><i class="fa-solid fa-chart-line"></i> Event Executive Dashboard</h3>
+        <h3><i class="fa-solid fa-chart-line" style="color: #0077b6;"></i> Event Executive Dashboard</h3>
         <button class="btn-x" onclick="closeReportModal()"><i class="fa-solid fa-xmark"></i></button>
       </div>
 
       <div class="modal-body">
         <div class="dash-grid">
           <div class="dash-card hero-card">
-            <div class="card-lbl"><i class="fa-solid fa-coins" style="color: var(--gold-primary);"></i> Total Gross Revenue (Meja + FDC)</div>
-            <div class="card-val" id="repTotalGross" style="color: #fef08a;">Rp 0</div>
+            <div class="card-lbl"><i class="fa-solid fa-coins" style="color: #0077b6;"></i> Total Gross Revenue (Meja + FDC)</div>
+            <div class="card-val" id="repTotalGross" style="color: #0077b6;">Rp 0</div>
             <div class="card-sub">Akumulasi seluruh transaksi reservasi meja Lounge, Cockpit & tiket standing</div>
           </div>
 
           <div class="dash-card">
-            <div class="card-lbl"><i class="fa-solid fa-couch" style="color: var(--amber-lounge);"></i> Lounge Tables (L)</div>
-            <div><span id="repLoungeBooked" style="color: var(--amber-lounge); font-size: 1.25rem; font-weight: 800;">0</span> <span style="font-size:0.75rem; color:#94a3b8;">/ 25 Unit</span></div>
+            <div class="card-lbl"><i class="fa-solid fa-couch" style="color: #d97706;"></i> Lounge Tables (L)</div>
+            <div><span id="repLoungeBooked" style="color: #d97706; font-size: 1.25rem; font-weight: 800;">0</span> <span style="font-size:0.75rem; color:var(--text-muted);">/ 25 Unit</span></div>
             <div class="occupancy-bar-wrap">
-              <div id="repLoungeBar" class="occupancy-bar" style="background: var(--amber-lounge);"></div>
+              <div id="repLoungeBar" class="occupancy-bar" style="background: #d97706;"></div>
             </div>
-            <div class="card-sub" style="margin-top: 3px;">
-              Tersisa: <strong id="repLoungeLeft" style="color:#38bdf8;">25</strong> | Rev: <span id="repLoungeRev" style="color:#34d399;">Rp 0</span>
+            <div class="card-sub" style="margin-top: 4px;">
+              Tersisa: <strong id="repLoungeLeft" style="color:#0284c7;">25</strong> | Rev: <span id="repLoungeRev" style="color:#059669;">Rp 0</span>
             </div>
           </div>
 
           <div class="dash-card">
-            <div class="card-lbl"><i class="fa-solid fa-cloud-moon" style="color: var(--cyan-terrace);"></i> Cockpit Deck (C)</div>
-            <div><span id="repTerraceBooked" style="color: var(--cyan-terrace); font-size: 1.25rem; font-weight: 800;">0</span> <span style="font-size:0.75rem; color:#94a3b8;">/ 13 Unit</span></div>
+            <div class="card-lbl"><i class="fa-solid fa-cloud-moon" style="color: #0284c7;"></i> Cockpit Deck (C)</div>
+            <div><span id="repTerraceBooked" style="color: #0284c7; font-size: 1.25rem; font-weight: 800;">0</span> <span style="font-size:0.75rem; color:var(--text-muted);">/ 13 Unit</span></div>
             <div class="occupancy-bar-wrap">
-              <div id="repTerraceBar" class="occupancy-bar" style="background: var(--cyan-terrace);"></div>
+              <div id="repTerraceBar" class="occupancy-bar" style="background: #0284c7;"></div>
             </div>
-            <div class="card-sub" style="margin-top: 3px;">
-              Tersisa: <strong id="repTerraceLeft" style="color:#38bdf8;">13</strong> | Rev: <span id="repTerraceRev" style="color:#34d399;">Rp 0</span>
+            <div class="card-sub" style="margin-top: 4px;">
+              Tersisa: <strong id="repTerraceLeft" style="color:#0284c7;">13</strong> | Rev: <span id="repTerraceRev" style="color:#059669;">Rp 0</span>
             </div>
           </div>
 
           <div class="dash-card">
-            <div class="card-lbl"><i class="fa-solid fa-receipt" style="color: var(--emerald-accent);"></i> Total Revenue Meja</div>
-            <div class="card-val" id="repTableGrossRev" style="font-size: 1rem; color: var(--emerald-accent);">Rp 0</div>
+            <div class="card-lbl"><i class="fa-solid fa-receipt" style="color: #059669;"></i> Total Revenue Meja</div>
+            <div class="card-val" id="repTableGrossRev" style="font-size: 1.05rem; color: #059669;">Rp 0</div>
             <div class="card-sub" id="repTablePaxDetail">0 Pax dari 0 meja terisi</div>
           </div>
 
           <div class="dash-card">
-            <div class="card-lbl"><i class="fa-solid fa-ticket" style="color: var(--purple-fdc);"></i> FDC Standing Ticket</div>
-            <div class="card-val" id="repFDCPax" style="font-size: 1rem; color: #d8b4fe;">0 Pax</div>
+            <div class="card-lbl"><i class="fa-solid fa-ticket" style="color: #9333ea;"></i> FDC Standing Ticket</div>
+            <div class="card-val" id="repFDCPax" style="font-size: 1.05rem; color: #9333ea;">0 Pax</div>
             <div class="card-sub" id="repFDCTotalRev">Rp 0 Total FDC Revenue</div>
           </div>
 
-          <div class="dash-card" style="grid-column: span 2; background: rgba(30, 41, 59, 0.65);">
-            <div class="card-lbl"><i class="fa-solid fa-users" style="color: #f1f5f9;"></i> Total Estimated Attendees (Crowd)</div>
-            <div class="card-val" id="repTotalPax" style="font-size: 1.1rem; color: #f1f5f9;">0 Total Tamu</div>
+          <div class="dash-card" style="grid-column: span 2; background: #f1f5f9;">
+            <div class="card-lbl"><i class="fa-solid fa-users" style="color: #0f172a;"></i> Total Estimated Attendees (Crowd)</div>
+            <div class="card-val" id="repTotalPax" style="font-size: 1.1rem; color: #0f172a;">0 Total Tamu</div>
             <div class="card-sub" id="repCrowdBreakdown">0 Seating (Lounge + Cockpit) + 0 Standing FDC</div>
           </div>
         </div>
       </div>
 
       <div class="modal-footer">
-        <button class="btn-modal-del" style="background:#334155; color:#cbd5e1;" onclick="closeReportModal()">Tutup</button>
-        <button class="btn-action btn-csv" onclick="exportReservationsCSV()">
+        <button class="btn-modal-del" style="background:#e2e8f0; color:#475569; border:none;" onclick="closeReportModal()">Tutup</button>
+        <button class="btn-action btn-csv" onclick="exportReservationsCSV()" style="background: #0077b6;">
           <i class="fa-solid fa-download"></i> Unduh CSV
         </button>
       </div>
@@ -922,7 +936,7 @@
   <div id="fdcListModal" class="modal-backdrop">
     <div class="modal-container">
       <div class="modal-header">
-        <h3 style="color: #d8b4fe;"><i class="fa-solid fa-list-check"></i> Daftar Pesanan FDC (Standing)</h3>
+        <h3><i class="fa-solid fa-list-check" style="color: #9333ea;"></i> Daftar Pesanan FDC (Standing)</h3>
         <button class="btn-x" onclick="closeFDCListModal()"><i class="fa-solid fa-xmark"></i></button>
       </div>
 
@@ -931,7 +945,7 @@
       </div>
 
       <div class="modal-footer">
-        <button class="btn-modal-del" style="background:#334155; color:#cbd5e1;" onclick="closeFDCListModal()">Tutup</button>
+        <button class="btn-modal-del" style="background:#e2e8f0; color:#475569; border:none;" onclick="closeFDCListModal()">Tutup</button>
         <button class="btn-action btn-fdc" onclick="closeFDCListModal(); openFDCBookingModal();">
           + Tambah FDC Baru
         </button>
@@ -942,7 +956,7 @@
   <!-- LOADER SPINNER -->
   <div id="loaderOverlay" class="loader-overlay">
     <div class="spinner"></div>
-    <div style="color: var(--gold-primary); font-weight: 700; font-size: 0.95rem;">Menyiapkan Gambar Denah JPG...</div>
+    <div style="color: #ffffff; font-weight: 700; font-size: 0.95rem;">Menyiapkan Gambar Denah JPG...</div>
     <div style="color: #cbd5e1; font-size: 0.78rem;">Resolusi tajam siap dibagikan ke WhatsApp</div>
   </div>
 
@@ -961,9 +975,7 @@
     ];
     const ALL_TABLE_IDS = [...TERRACE_IDS, ...LOUNGE_IDS];
 
-    // DISINI PERUBAHAN KOORDINAT DAN PAX (DISEMPURNAKAN PRESISI MENGKUTI 3D LAYOUT BARU)
     const DEFAULT_TABLE_CONFIGS = {
-      // Area Cockpit Deck
       'C1': { top: 56.5, left: 9.5, w: 4.5, h: 5.0, type: 'Cockpit Sofa', pax: 3, cat: 'terrace' },
       'C2': { top: 56.5, left: 15.5, w: 4.5, h: 5.0, type: 'Cockpit Sofa', pax: 3, cat: 'terrace' },
       'C3': { top: 56.5, left: 21.5, w: 4.5, h: 5.0, type: 'Cockpit Sofa', pax: 3, cat: 'terrace' },
@@ -978,7 +990,6 @@
       'C12': { top: 83.5, left: 24.5, w: 4.5, h: 5.0, type: 'Cockpit Table', pax: 4, cat: 'terrace' },
       'C13': { top: 83.5, left: 30.5, w: 4.5, h: 5.0, type: 'Cockpit Table', pax: 4, cat: 'terrace' },
 
-      // Area Lower Deck (Lounge)
       'L5': { top: 14.5, left: 49.5, w: 4.5, h: 5.0, type: 'Lower Deck', pax: 4, cat: 'lounge' },
       'L6': { top: 14.5, left: 56.5, w: 4.5, h: 5.0, type: 'Lower Deck', pax: 4, cat: 'lounge' },
       'L7': { top: 14.5, left: 63.5, w: 4.5, h: 5.0, type: 'Lower Deck', pax: 4, cat: 'lounge' },
@@ -1003,7 +1014,6 @@
       'L24': { top: 82.5, left: 61.5, w: 4.5, h: 5.0, type: 'Frontline', pax: 4, cat: 'lounge' },
       'L25': { top: 82.5, left: 68.5, w: 4.5, h: 5.0, type: 'Frontline', pax: 4, cat: 'lounge' },
 
-      // Sisi Kanan (Bar Counter & High Tables)
       'L8': { top: 35.0, left: 79.5, w: 4.0, h: 5.0, type: 'Bar Area', pax: 3, cat: 'lounge' },
       'L9': { top: 43.0, left: 81.5, w: 4.0, h: 5.0, type: 'Bar Area', pax: 3, cat: 'lounge' },
       'L15': { top: 58.0, left: 76.5, w: 6.0, h: 5.0, type: 'VIP Lounge', pax: 6, cat: 'lounge' },
@@ -1347,7 +1357,7 @@
       const totalDisplay = document.getElementById('regBookingCartTotalDisplay');
 
       if (regCurrentCart.length === 0) {
-        container.innerHTML = '<div style="font-size: 0.72rem; color: #64748b; text-align: center; padding: 6px;">Belum ada menu dipilih.</div>';
+        container.innerHTML = '<div style="font-size: 0.72rem; color: var(--text-muted); text-align: center; padding: 6px;">Belum ada menu dipilih.</div>';
         totalDisplay.innerText = 'Rp 0';
         return;
       }
@@ -1359,15 +1369,15 @@
         const subtotal = item.price * item.qty;
         grandTotal += subtotal;
         html += `
-          <div style="background: #0f172a; border: 1px solid #334155; border-radius: 8px; padding: 8px 10px; display: flex; justify-content: space-between; align-items: center;">
+          <div style="background: #ffffff; border: 1px solid var(--border-color); border-radius: 8px; padding: 8px 10px; display: flex; justify-content: space-between; align-items: center;">
             <div>
-              <strong style="color: #f8fafc; font-size: 0.8rem;">${item.name}</strong>
-              <div style="font-size: 0.7rem; color: #34d399;">Rp ${item.price.toLocaleString('id-ID')} × ${item.qty} = <strong>Rp ${subtotal.toLocaleString('id-ID')}</strong></div>
+              <strong style="color: #0f172a; font-size: 0.8rem;">${item.name}</strong>
+              <div style="font-size: 0.7rem; color: #059669;">Rp ${item.price.toLocaleString('id-ID')} × ${item.qty} = <strong>Rp ${subtotal.toLocaleString('id-ID')}</strong></div>
             </div>
             <div style="display: flex; align-items: center; gap: 6px;">
-              <button type="button" onclick="changeRegCartQty(${item.id}, -1)" style="background: #334155; border: none; color: #fff; width: 24px; height: 24px; border-radius: 4px; cursor: pointer;"><i class="fa-solid fa-minus" style="font-size: 0.65rem;"></i></button>
+              <button type="button" onclick="changeRegCartQty(${item.id}, -1)" style="background: #e2e8f0; border: none; color: #0f172a; width: 24px; height: 24px; border-radius: 4px; cursor: pointer;"><i class="fa-solid fa-minus" style="font-size: 0.65rem;"></i></button>
               <span style="font-size: 0.8rem; font-weight: 700; width: 16px; text-align: center;">${item.qty}</span>
-              <button type="button" onclick="changeRegCartQty(${item.id}, 1)" style="background: #334155; border: none; color: #fff; width: 24px; height: 24px; border-radius: 4px; cursor: pointer;"><i class="fa-solid fa-plus" style="font-size: 0.65rem;"></i></button>
+              <button type="button" onclick="changeRegCartQty(${item.id}, 1)" style="background: #e2e8f0; border: none; color: #0f172a; width: 24px; height: 24px; border-radius: 4px; cursor: pointer;"><i class="fa-solid fa-plus" style="font-size: 0.65rem;"></i></button>
             </div>
           </div>
         `;
@@ -1461,18 +1471,18 @@
     function renderMasterMenuList() {
       const container = document.getElementById('masterMenuListContent');
       if (masterMenu.length === 0) {
-        container.innerHTML = '<div style="color:#94a3b8; font-size:0.75rem; text-align:center; padding:10px;">Belum ada item menu.</div>';
+        container.innerHTML = '<div style="color:var(--text-muted); font-size:0.75rem; text-align:center; padding:10px;">Belum ada item menu.</div>';
         return;
       }
       let html = '';
       masterMenu.forEach(item => {
         html += `
-          <div style="background:#0f172a; border:1px solid #334155; border-radius:6px; padding:6px 10px; margin-bottom:6px; display:flex; justify-content:space-between; align-items:center;">
+          <div style="background:#ffffff; border:1px solid var(--border-color); border-radius:6px; padding:8px 10px; margin-bottom:6px; display:flex; justify-content:space-between; align-items:center;">
             <div>
-              <strong style="color:#fef08a; font-size:0.8rem;">${item.name}</strong>
-              <div style="font-size:0.68rem; color:#94a3b8;">${item.category} | <span style="color:#34d399;">Rp ${item.price.toLocaleString('id-ID')}</span></div>
+              <strong style="color:#0f172a; font-size:0.8rem;">${item.name}</strong>
+              <div style="font-size:0.68rem; color:var(--text-muted);">${item.category} | <span style="color:#059669; font-weight:700;">Rp ${item.price.toLocaleString('id-ID')}</span></div>
             </div>
-            <button onclick="deleteMasterMenuItem(${item.id})" style="background:#7f1d1d; border:none; color:#fca5a5; width:26px; height:26px; border-radius:4px; cursor:pointer;" title="Hapus Menu">
+            <button onclick="deleteMasterMenuItem(${item.id})" style="background:#fee2e2; border:none; color:#991b1b; width:26px; height:26px; border-radius:4px; cursor:pointer;" title="Hapus Menu">
               <i class="fa-solid fa-trash" style="font-size:0.7rem;"></i>
             </button>
           </div>
@@ -1523,7 +1533,7 @@
       const totalDisplay = document.getElementById('bookingCartTotalDisplay');
 
       if (currentCart.length === 0) {
-        container.innerHTML = '<div style="font-size: 0.72rem; color: #64748b; text-align: center; padding: 6px;">Belum ada menu dipilih.</div>';
+        container.innerHTML = '<div style="font-size: 0.72rem; color: var(--text-muted); text-align: center; padding: 6px;">Belum ada menu dipilih.</div>';
         totalDisplay.innerText = 'Rp 0';
         return;
       }
@@ -1535,15 +1545,15 @@
         const subtotal = item.price * item.qty;
         grandTotal += subtotal;
         html += `
-          <div style="background: #0f172a; border: 1px solid #334155; border-radius: 8px; padding: 8px 10px; display: flex; justify-content: space-between; align-items: center;">
+          <div style="background: #ffffff; border: 1px solid var(--border-color); border-radius: 8px; padding: 8px 10px; display: flex; justify-content: space-between; align-items: center;">
             <div>
-              <strong style="color: #f8fafc; font-size: 0.8rem;">${item.name}</strong>
-              <div style="font-size: 0.7rem; color: #34d399;">Rp ${item.price.toLocaleString('id-ID')} × ${item.qty} = <strong>Rp ${subtotal.toLocaleString('id-ID')}</strong></div>
+              <strong style="color: #0f172a; font-size: 0.8rem;">${item.name}</strong>
+              <div style="font-size: 0.7rem; color: #059669;">Rp ${item.price.toLocaleString('id-ID')} × ${item.qty} = <strong>Rp ${subtotal.toLocaleString('id-ID')}</strong></div>
             </div>
             <div style="display: flex; align-items: center; gap: 6px;">
-              <button type="button" onclick="changeCartQty(${item.id}, -1)" style="background: #334155; border: none; color: #fff; width: 24px; height: 24px; border-radius: 4px; cursor: pointer;"><i class="fa-solid fa-minus" style="font-size: 0.65rem;"></i></button>
+              <button type="button" onclick="changeCartQty(${item.id}, -1)" style="background: #e2e8f0; border: none; color: #0f172a; width: 24px; height: 24px; border-radius: 4px; cursor: pointer;"><i class="fa-solid fa-minus" style="font-size: 0.65rem;"></i></button>
               <span style="font-size: 0.8rem; font-weight: 700; width: 16px; text-align: center;">${item.qty}</span>
-              <button type="button" onclick="changeCartQty(${item.id}, 1)" style="background: #334155; border: none; color: #fff; width: 24px; height: 24px; border-radius: 4px; cursor: pointer;"><i class="fa-solid fa-plus" style="font-size: 0.65rem;"></i></button>
+              <button type="button" onclick="changeCartQty(${item.id}, 1)" style="background: #e2e8f0; border: none; color: #0f172a; width: 24px; height: 24px; border-radius: 4px; cursor: pointer;"><i class="fa-solid fa-plus" style="font-size: 0.65rem;"></i></button>
             </div>
           </div>
         `;
@@ -1683,8 +1693,8 @@
           <title>Konfirmasi Reservasi - Infinity Sky Lounge</title>
           <style>
             body { font-family: 'Plus Jakarta Sans', Arial, sans-serif; padding: 30px; color: #111; max-width: 600px; margin: 0 auto; }
-            .header { text-align: center; border-bottom: 2px solid #d4af37; padding-bottom: 15px; margin-bottom: 20px; }
-            .header h2 { font-family: Cinzel, serif; color: #b8860b; margin: 0; }
+            .header { text-align: center; border-bottom: 2px solid #0077b6; padding-bottom: 15px; margin-bottom: 20px; }
+            .header h2 { font-family: Cinzel, serif; color: #0077b6; margin: 0; }
             .header p { font-size: 12px; color: #555; margin: 4px 0 0 0; }
             .content { font-size: 14px; line-height: 1.6; }
             .row { display: flex; justify-content: space-between; margin-bottom: 8px; border-bottom: 1px dashed #eee; padding-bottom: 6px; }
@@ -1699,13 +1709,13 @@
             <p>INFINITY SKY LOUNGE &bull; KING & QUEEN OF THE NIGHT 2026</p>
           </div>
           <div class="content">
-            <h3 style="text-align:center; color:#0284c7; margin-bottom: 15px;">BUKTI KONFIRMASI RESERVASI MEJA</h3>
+            <h3 style="text-align:center; color:#0077b6; margin-bottom: 15px;">BUKTI KONFIRMASI RESERVASI MEJA</h3>
             <div class="row"><span class="label">Nomor Meja:</span> <span>${document.getElementById('modalTitle').innerText}</span></div>
             <div class="row"><span class="label">Nama Tamu:</span> <span>${name}</span></div>
             <div class="row"><span class="label">No. WhatsApp:</span> <span>${phone}</span></div>
             <div class="row"><span class="label">Jumlah Pax:</span> <span>${pax} Orang</span></div>
             <div class="row"><span class="label">Jam Kedatangan:</span> <span>${time}</span></div>
-            <div class="row"><span class="label">Nominal DP Dibayar:</span> <strong style="color: #10b981;">Rp ${dp}</strong></div>
+            <div class="row"><span class="label">Nominal DP Dibayar:</span> <strong style="color: #059669;">Rp ${dp}</strong></div>
             <div class="row"><span class="label">Petugas / Staff:</span> <span>${staff}</span></div>
             <div class="row"><span class="label">Waktu Input Kasir:</span> <span>${timestamp}</span></div>
             <div style="margin-top: 15px;">
@@ -1778,23 +1788,23 @@
     function openFDCListModal() {
       const container = document.getElementById('fdcListContent');
       if (fdcBookings.length === 0) {
-        container.innerHTML = '<div style="text-align:center; padding: 25px; color:#94a3b8; font-size:0.85rem;">Belum ada pesanan tiket FDC Standing.</div>';
+        container.innerHTML = '<div style="text-align:center; padding: 25px; color:var(--text-muted); font-size:0.85rem;">Belum ada pesanan tiket FDC Standing.</div>';
       } else {
         let html = '';
         fdcBookings.forEach((item) => {
           html += `
-            <div style="background:#0f172a; border:1px solid #334155; border-radius:8px; padding:10px 12px; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
+            <div style="background:#ffffff; border:1px solid var(--border-color); border-radius:8px; padding:10px 12px; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
               <div>
-                <strong style="color:#d8b4fe; font-size:0.86rem;">${item.name}</strong> 
-                <span style="background:rgba(168,85,247,0.2); color:#c084fc; font-size:0.65rem; padding:2px 6px; border-radius:4px; margin-left:6px; font-weight:700;">${item.pax} Pax</span>
-                <div style="font-size:0.75rem; color:#94a3b8; margin-top:2px;">
-                  WA: ${item.phone || '-'} | Total: <strong style="color:#34d399;">Rp ${(item.amount || 0).toLocaleString('id-ID')}</strong>
+                <strong style="color:#9333ea; font-size:0.86rem;">${item.name}</strong> 
+                <span style="background:rgba(147,51,234,0.12); color:#7e22ce; font-size:0.65rem; padding:2px 6px; border-radius:4px; margin-left:6px; font-weight:700;">${item.pax} Pax</span>
+                <div style="font-size:0.75rem; color:var(--text-muted); margin-top:2px;">
+                  WA: ${item.phone || '-'} | Total: <strong style="color:#059669;">Rp ${(item.amount || 0).toLocaleString('id-ID')}</strong>
                 </div>
-                <div style="font-size:0.7rem; color:#fce08a; margin-top:2px;">
+                <div style="font-size:0.7rem; color:#b45309; margin-top:2px;">
                   <i class="fa-solid fa-user-pen"></i> By: <strong>${item.created_by || '-'}</strong>
                 </div>
               </div>
-              <button onclick="deleteFDC('${item.id}')" style="background:#7f1d1d; border:none; color:#fca5a5; width:30px; height:30px; border-radius:6px; cursor:pointer;" title="Hapus Tiket FDC">
+              <button onclick="deleteFDC('${item.id}')" style="background:#fee2e2; border:none; color:#991b1b; width:30px; height:30px; border-radius:6px; cursor:pointer;" title="Hapus Tiket FDC">
                 <i class="fa-solid fa-trash" style="font-size:0.75rem;"></i>
               </button>
             </div>
@@ -1849,7 +1859,7 @@
         }
       });
 
-      const totalLounge = 25; // Sesuai dengan panjang array LOUNGE_IDS
+      const totalLounge = 25;
       const totalTerrace = 13;
 
       const loungeLeft = totalLounge - loungeBooked;
@@ -1960,7 +1970,7 @@
           scale: 2,
           useCORS: true,
           allowTaint: true,
-          backgroundColor: '#080c14'
+          backgroundColor: '#ffffff'
         });
 
         const link = document.createElement('a');
