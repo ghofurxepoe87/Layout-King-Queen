@@ -569,7 +569,7 @@
     </div>
   </main>
 
-  <!-- MODAL RESERVASI MEJA DENGAN KASIR MENU & BALANCE -->
+  <!-- MODAL RESERVASI MEJA DENGAN KASIR MENU & CUSTOM INPUT -->
   <div id="bookingModal" class="modal-backdrop">
     <div class="modal-container">
       <div class="modal-header">
@@ -594,6 +594,7 @@
           </div>
         </div>
 
+        <!-- KASIR MENU & CUSTOM INPUT -->
         <div style="background: #f8fafc; border: 1px solid var(--border-color); border-radius: 10px; padding: 12px; display: flex; flex-direction: column; gap: 10px;">
           <label style="font-size: 0.8rem; font-weight: 700; color: #b45309; display: flex; align-items: center; gap: 6px;">
             <i class="fa-solid fa-utensils"></i> Kasir Menu & Paket Promo Lounge
@@ -605,6 +606,15 @@
             </select>
             <button type="button" class="btn-action" style="background: #0284c7; color: #fff; padding: 0 16px; min-height: 44px;" onclick="addCartItemFromDropdown()">
               <i class="fa-solid fa-plus"></i> Tambah
+            </button>
+          </div>
+
+          <!-- INPUT MENU CUSTOM MANUAL -->
+          <div style="display: grid; grid-template-columns: 1.3fr 1.2fr auto; gap: 6px;">
+            <input type="text" id="customMenuName" class="inp-field" placeholder="Nama Menu Custom">
+            <input type="text" id="customMenuPrice" class="inp-field" placeholder="Harga Murni (Cth: 54450)" onkeyup="formatCurrencyInput(this)">
+            <button type="button" class="btn-action" style="background: #9333ea; color: #fff; padding: 0 12px;" onclick="addCustomCartItem()">
+              <i class="fa-solid fa-plus"></i> Custom
             </button>
           </div>
 
@@ -626,7 +636,7 @@
           </div>
         </div>
 
-        <!-- KOLOM BALANCE / SISA TAGIHAN OTOMATIS -->
+        <!-- BALANCE / SISA TAGIHAN -->
         <div style="background: #f8fafc; border: 1.5px dashed #0077b6; border-radius: 10px; padding: 12px; display: flex; justify-content: space-between; align-items: center;">
           <div>
             <div style="font-size: 0.72rem; font-weight: 700; color: #0077b6; text-transform: uppercase;"><i class="fa-solid fa-scale-balanced"></i> Balance (Sisa Tagihan / Kembalian)</div>
@@ -741,7 +751,6 @@
           </div>
         </div>
 
-        <!-- KOTAK BALANCE REGISTRASI -->
         <div style="background: #f8fafc; border: 1.5px dashed #0077b6; border-radius: 10px; padding: 12px; display: flex; justify-content: space-between; align-items: center;">
           <div>
             <div style="font-size: 0.72rem; font-weight: 700; color: #0077b6; text-transform: uppercase;"><i class="fa-solid fa-scale-balanced"></i> Balance (Sisa Tagihan / Kembalian)</div>
@@ -1245,6 +1254,13 @@
           bookings = {};
           tableData.forEach(row => {
             const tid = String(row.table_id).trim();
+            let parsedCart = [];
+            try {
+              if (row.cart_items) {
+                parsedCart = typeof row.cart_items === 'string' ? JSON.parse(row.cart_items) : row.cart_items;
+              }
+            } catch(e) { parsedCart = []; }
+
             bookings[tid] = {
               name: row.guest_name,
               phone: row.guest_phone,
@@ -1254,6 +1270,7 @@
               balance: Number(row.balance || 0),
               time: row.arrival_time,
               notes: row.notes,
+              cart_items: parsedCart,
               created_by: row.created_by || '',
               timestamp: row.timestamp || '-'
             };
@@ -1366,6 +1383,26 @@
       renderRegBookingCart();
     }
 
+    function addRegCustomCartItem() {
+      const nameInput = document.getElementById('regCustomMenuName');
+      const priceInput = document.getElementById('regCustomMenuPrice');
+      const name = nameInput.value.trim();
+      const rawPrice = priceInput.value.replace(/[^0-9]/g, '');
+
+      if (!name || !rawPrice) {
+        alert('Masukkan nama menu custom dan harga.');
+        return;
+      }
+
+      const price = parseInt(rawPrice, 10);
+      const customId = 'custom-' + Date.now();
+      regCurrentCart.push({ id: customId, name: name, price: price, qty: 1 });
+
+      nameInput.value = '';
+      priceInput.value = '';
+      renderRegBookingCart();
+    }
+
     function changeRegCartQty(id, delta) {
       const item = regCurrentCart.find(c => c.id === id);
       if (item) {
@@ -1399,9 +1436,9 @@
               <div style="font-size: 0.7rem; color: #059669;">Rp ${item.price.toLocaleString('id-ID')} × ${item.qty} = <strong>Rp ${subtotal.toLocaleString('id-ID')}</strong></div>
             </div>
             <div style="display: flex; align-items: center; gap: 6px;">
-              <button type="button" onclick="changeRegCartQty(${item.id}, -1)" style="background: #e2e8f0; border: none; color: #0f172a; width: 24px; height: 24px; border-radius: 4px; cursor: pointer;"><i class="fa-solid fa-minus" style="font-size: 0.65rem;"></i></button>
+              <button type="button" onclick="changeRegCartQty('${item.id}', -1)" style="background: #e2e8f0; border: none; color: #0f172a; width: 24px; height: 24px; border-radius: 4px; cursor: pointer;"><i class="fa-solid fa-minus" style="font-size: 0.65rem;"></i></button>
               <span style="font-size: 0.8rem; font-weight: 700; width: 16px; text-align: center;">${item.qty}</span>
-              <button type="button" onclick="changeRegCartQty(${item.id}, 1)" style="background: #e2e8f0; border: none; color: #0f172a; width: 24px; height: 24px; border-radius: 4px; cursor: pointer;"><i class="fa-solid fa-plus" style="font-size: 0.65rem;"></i></button>
+              <button type="button" onclick="changeRegCartQty('${item.id}', 1)" style="background: #e2e8f0; border: none; color: #0f172a; width: 24px; height: 24px; border-radius: 4px; cursor: pointer;"><i class="fa-solid fa-plus" style="font-size: 0.65rem;"></i></button>
             </div>
           </div>
         `;
@@ -1424,11 +1461,11 @@
 
       const balanceEl = document.getElementById('bookingBalanceDisplay');
       if (balance > 0) {
-        balanceEl.innerHTML = `<span style="color: #ef4444;">Kurang Rp ${balance.toLocaleString('id-ID')}</span>`;
+        balanceEl.innerHTML = `<span style="color: #ef4444; font-weight:700;">Kurang Rp ${balance.toLocaleString('id-ID')}</span>`;
       } else if (balance < 0) {
-        balanceEl.innerHTML = `<span style="color: #059669;">Lebih/Kembali Rp ${Math.abs(balance).toLocaleString('id-ID')}</span>`;
+        balanceEl.innerHTML = `<span style="color: #059669; font-weight:700;">Kembalian Rp ${Math.abs(balance).toLocaleString('id-ID')}</span>`;
       } else {
-        balanceEl.innerHTML = `<span style="color: #059669;">Lunas (Rp 0)</span>`;
+        balanceEl.innerHTML = `<span style="color: #059669; font-weight:700;">LUNAS (Rp 0)</span>`;
       }
     }
 
@@ -1440,11 +1477,11 @@
 
       const balanceEl = document.getElementById('regBookingBalanceDisplay');
       if (balance > 0) {
-        balanceEl.innerHTML = `<span style="color: #ef4444;">Kurang Rp ${balance.toLocaleString('id-ID')}</span>`;
+        balanceEl.innerHTML = `<span style="color: #ef4444; font-weight:700;">Kurang Rp ${balance.toLocaleString('id-ID')}</span>`;
       } else if (balance < 0) {
-        balanceEl.innerHTML = `<span style="color: #059669;">Lebih/Kembali Rp ${Math.abs(balance).toLocaleString('id-ID')}</span>`;
+        balanceEl.innerHTML = `<span style="color: #059669; font-weight:700;">Kembalian Rp ${Math.abs(balance).toLocaleString('id-ID')}</span>`;
       } else {
-        balanceEl.innerHTML = `<span style="color: #059669;">Lunas (Rp 0)</span>`;
+        balanceEl.innerHTML = `<span style="color: #059669; font-weight:700;">LUNAS (Rp 0)</span>`;
       }
     }
 
@@ -1487,7 +1524,8 @@
         arrival_time: time,
         created_by: staff,
         timestamp: timestamp,
-        notes: finalNotes
+        notes: finalNotes,
+        cart_items: JSON.stringify(regCurrentCart)
       };
 
       const { error } = await _supabase.from('kq_table_bookings').upsert(payload, { onConflict: 'table_id' });
@@ -1584,6 +1622,26 @@
       renderBookingCart();
     }
 
+    function addCustomCartItem() {
+      const nameInput = document.getElementById('customMenuName');
+      const priceInput = document.getElementById('customMenuPrice');
+      const name = nameInput.value.trim();
+      const rawPrice = priceInput.value.replace(/[^0-9]/g, '');
+
+      if (!name || !rawPrice) {
+        alert('Masukkan nama menu custom dan harga.');
+        return;
+      }
+
+      const price = parseInt(rawPrice, 10);
+      const customId = 'custom-' + Date.now();
+      currentCart.push({ id: customId, name: name, price: price, qty: 1 });
+
+      nameInput.value = '';
+      priceInput.value = '';
+      renderBookingCart();
+    }
+
     function changeCartQty(id, delta) {
       const item = currentCart.find(c => c.id === id);
       if (item) {
@@ -1617,9 +1675,9 @@
               <div style="font-size: 0.7rem; color: #059669;">Rp ${item.price.toLocaleString('id-ID')} × ${item.qty} = <strong>Rp ${subtotal.toLocaleString('id-ID')}</strong></div>
             </div>
             <div style="display: flex; align-items: center; gap: 6px;">
-              <button type="button" onclick="changeCartQty(${item.id}, -1)" style="background: #e2e8f0; border: none; color: #0f172a; width: 24px; height: 24px; border-radius: 4px; cursor: pointer;"><i class="fa-solid fa-minus" style="font-size: 0.65rem;"></i></button>
+              <button type="button" onclick="changeCartQty('${item.id}', -1)" style="background: #e2e8f0; border: none; color: #0f172a; width: 24px; height: 24px; border-radius: 4px; cursor: pointer;"><i class="fa-solid fa-minus" style="font-size: 0.65rem;"></i></button>
               <span style="font-size: 0.8rem; font-weight: 700; width: 16px; text-align: center;">${item.qty}</span>
-              <button type="button" onclick="changeCartQty(${item.id}, 1)" style="background: #e2e8f0; border: none; color: #0f172a; width: 24px; height: 24px; border-radius: 4px; cursor: pointer;"><i class="fa-solid fa-plus" style="font-size: 0.65rem;"></i></button>
+              <button type="button" onclick="changeCartQty('${item.id}', 1)" style="background: #e2e8f0; border: none; color: #0f172a; width: 24px; height: 24px; border-radius: 4px; cursor: pointer;"><i class="fa-solid fa-plus" style="font-size: 0.65rem;"></i></button>
             </div>
           </div>
         `;
@@ -1654,6 +1712,9 @@
         document.getElementById('guestTime').value = data.time || '21:00 WITA';
         document.getElementById('guestCreatedBy').value = data.created_by || '';
         document.getElementById('guestNotes').value = data.notes || '';
+        if (data.cart_items && Array.isArray(data.cart_items)) {
+          currentCart = JSON.parse(JSON.stringify(data.cart_items));
+        }
         if (data.timestamp) {
           document.getElementById('guestInputTimestamp').value = data.timestamp;
         }
@@ -1711,7 +1772,8 @@
         arrival_time: document.getElementById('guestTime').value,
         created_by: staff,
         timestamp: timestamp,
-        notes: finalNotes
+        notes: finalNotes,
+        cart_items: JSON.stringify(currentCart)
       };
 
       const { error } = await _supabase
@@ -1750,9 +1812,10 @@
       const name = document.getElementById('guestName').value.trim() || '-';
       const phone = document.getElementById('guestPhone').value.trim() || '-';
       const pax = document.getElementById('guestPax').value || '4';
-      const dp = document.getElementById('guestDP').value || '0';
+      const rawDP = document.getElementById('guestDP').value.replace(/[^0-9]/g, '');
+      const dp = rawDP ? parseInt(rawDP, 10) : 0;
       const totalKonsumsi = calculateCartTotal(currentCart);
-      const balance = totalKonsumsi - (rawDP => rawDP ? parseInt(rawDP, 10) : 0)(document.getElementById('guestDP').value.replace(/[^0-9]/g, ''));
+      const balance = totalKonsumsi - dp;
       const time = document.getElementById('guestTime').value;
       const staff = document.getElementById('guestCreatedBy').value.trim() || '-';
       const timestamp = document.getElementById('guestInputTimestamp').value || '-';
@@ -1790,7 +1853,7 @@
             <div class="row"><span class="label">Jumlah Pax:</span> <span>${pax} Orang</span></div>
             <div class="row"><span class="label">Jam Kedatangan:</span> <span>${time}</span></div>
             <div class="row"><span class="label">Total Konsumsi Menu:</span> <span>Rp ${totalKonsumsi.toLocaleString('id-ID')}</span></div>
-            <div class="row"><span class="label">Nominal DP Dibayar:</span> <strong style="color: #059669;">Rp ${dp}</strong></div>
+            <div class="row"><span class="label">Nominal DP Dibayar:</span> <strong style="color: #059669;">Rp ${dp.toLocaleString('id-ID')}</strong></div>
             <div class="row"><span class="label">Balance (Sisa Tagihan):</span> <strong style="color: #0077b6;">Rp ${balance.toLocaleString('id-ID')}</strong></div>
             <div class="row"><span class="label">Petugas / Staff:</span> <span>${staff}</span></div>
             <div class="row"><span class="label">Waktu Input Kasir:</span> <span>${timestamp}</span></div>
@@ -2070,15 +2133,15 @@
         return;
       }
 
-      let csv = 'Area Kategori,Nomor Meja/ID,Nama Tamu,WhatsApp,Pax,DP (IDR),Balance Sisa (IDR),Jam Tiba,Created By (Staff),Waktu Input,Catatan Khusus\n';
+      let csv = 'Area Kategori,Nomor Meja/ID,Nama Tamu,WhatsApp,Pax,DP (IDR),Balance Sisa (IDR),Jam Tiba,Created By (Staff),Waktu Input,Detail Menu & Catatan\n';
       tableKeys.forEach(k => {
         const b = bookings[k];
         const catLabel = TERRACE_IDS.includes(k) ? 'COCKPIT DECK (C)' : 'LOWER DECK LOUNGE (L)';
-        csv += `"${catLabel}","${k}","${b.name}","${b.phone}","${b.pax}","${b.dp}","${b.balance || 0}","${b.time}","${b.created_by || ''}","${b.timestamp || ''}","${b.notes || ''}"\n`;
+        csv += `"${catLabel}","${k}","${b.name}","${b.phone}","${b.pax}","${b.dp}","${b.balance || 0}","${b.time}","${b.created_by || ''}","${b.timestamp || ''}","${(b.notes || '').replace(/"/g, '""')}"\n`;
       });
 
       fdcBookings.forEach(f => {
-        csv += `"FDC STANDING TICKET","${f.id}","${f.name}","${f.phone}","${f.pax}","${f.amount}","0","-","${f.created_by || ''}","-","${f.notes || ''}"\n`;
+        csv += `"FDC STANDING TICKET","${f.id}","${f.name}","${f.phone}","${f.pax}","${f.amount}","0","-","${f.created_by || ''}","-","${(f.notes || '').replace(/"/g, '""')}"\n`;
       });
 
       const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
