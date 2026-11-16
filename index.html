@@ -457,7 +457,6 @@
 
       <div class="hdr-controls">
         <div class="metrics-group">
-          <!-- 1. LOUNGE MEJA -->
           <div class="metric-card-lg" onclick="openReportModal()" title="Lihat Inventaris Lounge">
             <i class="fa-solid fa-couch" style="color: var(--amber-lounge);"></i>
             <div class="txt-wrap">
@@ -466,7 +465,6 @@
             </div>
           </div>
 
-          <!-- 2. COCKPIT DECK MEJA -->
           <div class="metric-card-lg" onclick="openReportModal()" title="Lihat Inventaris Cockpit Deck">
             <i class="fa-solid fa-cloud-moon" style="color: var(--cyan-terrace);"></i>
             <div class="txt-wrap">
@@ -475,7 +473,6 @@
             </div>
           </div>
 
-          <!-- 3. FDC GUESTS -->
           <div class="metric-card-lg" onclick="openFDCListModal()" title="Lihat Tamu Tiket FDC Standing">
             <i class="fa-solid fa-ticket" style="color: var(--purple-fdc);"></i>
             <div class="txt-wrap">
@@ -484,7 +481,6 @@
             </div>
           </div>
 
-          <!-- 4. TOTAL REVENUE -->
           <div class="metric-card-lg" onclick="openReportModal()" title="Lihat Rincian Pendapatan">
             <i class="fa-solid fa-money-bill-wave" style="color: var(--emerald-accent);"></i>
             <div class="txt-wrap">
@@ -526,7 +522,7 @@
     <div class="legend-tag">
       <div style="display:flex; align-items:center; gap:5px;"><div class="dot-node avail"></div> <span id="legendAvailText">Lounge: 25 | Cockpit: 13</span></div>
       <div style="display:flex; align-items:center; gap:5px;"><div class="dot-node booked"></div> <span id="legendBookedText">0 Booked</span></div>
-      <div style="color:#fbbf24; font-size:0.6rem;"><i class="fa-solid fa-hand-pointer"></i> Geser kotak biru ke posisi meja asli Anda!</div>
+      <div style="color:#fbbf24; font-size:0.6rem;"><i class="fa-solid fa-cloud"></i> Posisi Meja Tersinkronisasi Publik ke Supabase!</div>
     </div>
     
     <div class="zoom-group">
@@ -551,7 +547,7 @@
            onerror="handleImgFallback(this)">
 
       <div class="hotspots-layer" id="hotspotsLayer">
-        <!-- Dinamis Hotspots dengan Drag & Drop Publik / Browser -->
+        <!-- Hotspots injected dynamically with Supabase Cloud Position Sync -->
       </div>
     </div>
   </main>
@@ -581,7 +577,6 @@
           </div>
         </div>
 
-        <!-- KASIR & PEMILIHAN MENU -->
         <div style="background: rgba(30, 41, 59, 0.7); border: 1px solid #334155; border-radius: 10px; padding: 12px; display: flex; flex-direction: column; gap: 10px;">
           <label style="font-size: 0.78rem; font-weight: 700; color: #fbbf24; display: flex; align-items: center; gap: 6px;">
             <i class="fa-solid fa-utensils"></i> Kasir Menu & Paket Promo Lounge
@@ -629,7 +624,6 @@
           </div>
         </div>
 
-        <!-- REAL-TIME TANGGAL & JAM KASIR -->
         <div class="form-row">
           <label><i class="fa-solid fa-calendar-days" style="color: #38bdf8;"></i> Waktu Input Kasir (Real-Time Otomatis)</label>
           <input type="text" id="guestInputTimestamp" class="inp-field" readonly style="color: #38bdf8; font-weight: 700; background: #050b14;">
@@ -689,7 +683,6 @@
           </div>
         </div>
 
-        <!-- KASIR MENU DI REGISTRASI -->
         <div style="background: rgba(30, 41, 59, 0.7); border: 1px solid #334155; border-radius: 10px; padding: 12px; display: flex; flex-direction: column; gap: 10px;">
           <label style="font-size: 0.78rem; font-weight: 700; color: #fbbf24; display: flex; align-items: center; gap: 6px;">
             <i class="fa-solid fa-utensils"></i> Kasir Menu & Paket Promo Lounge
@@ -1028,7 +1021,7 @@
     let currentCategory = 'lounge';
     let zoomLevel = 1.0;
 
-    const possibleImages = ['denah.jpg', 'Denah.jpg', 'denah.JPG'];
+    const possibleImages = ['denah.jpg', 'denah.jpeg', 'Denah.jpg', 'denah.JPG'];
     let imgAttempt = 0;
 
     function handleImgFallback(img) {
@@ -1050,18 +1043,35 @@
     }
 
     window.addEventListener('DOMContentLoaded', async () => {
-      loadTableConfigs();
+      await loadTableConfigsFromCloud();
       renderHotspots();
       await fetchAllCloudData();
       initGestures();
       subscribeRealtime();
     });
 
-    function loadTableConfigs() {
-      const saved = localStorage.getItem('kq_table_configs_v5');
-      if (saved) {
-        try { tableConfigs = JSON.parse(saved); } catch(e) { tableConfigs = {}; }
+    async function loadTableConfigsFromCloud() {
+      try {
+        const { data, error } = await _supabase.from('kq_table_positions').select('*');
+        if (!error && data && data.length > 0) {
+          data.forEach(row => {
+            const tid = String(row.table_id).trim();
+            tableConfigs[tid] = {
+              id: tid,
+              top: Number(row.top),
+              left: Number(row.left),
+              w: Number(row.w),
+              h: Number(row.h),
+              type: DEFAULT_TABLE_CONFIGS[tid]?.type || 'Table',
+              pax: DEFAULT_TABLE_CONFIGS[tid]?.pax || 4,
+              cat: DEFAULT_TABLE_CONFIGS[tid]?.cat || 'lounge'
+            };
+          });
+        }
+      } catch (err) {
+        console.log('Gagal memuat posisi dari cloud, menggunakan default.');
       }
+
       ALL_TABLE_IDS.forEach(id => {
         if (!tableConfigs[id] && DEFAULT_TABLE_CONFIGS[id]) {
           tableConfigs[id] = { id, ...DEFAULT_TABLE_CONFIGS[id] };
@@ -1069,15 +1079,34 @@
       });
     }
 
-    function saveTableConfigs() {
-      localStorage.setItem('kq_table_configs_v5', JSON.stringify(tableConfigs));
+    async function saveTableConfigToCloud(id) {
+      const t = tableConfigs[id];
+      if (!t) return;
+      try {
+        await _supabase.from('kq_table_positions').upsert({
+          table_id: String(id),
+          top: t.top,
+          left: t.left,
+          w: t.w,
+          h: t.h
+        }, { onConflict: 'table_id' });
+      } catch (err) {
+        console.error('Gagal menyimpan posisi ke cloud:', err);
+      }
     }
 
-    function resetHotspotsPosition() {
-      if (confirm('Kembalikan posisi kotak meja ke default?')) {
-        localStorage.removeItem('kq_table_configs_v5');
+    async function resetHotspotsPosition() {
+      if (confirm('Kembalikan posisi kotak meja ke default dan sinkronkan ke cloud?')) {
+        try {
+          await _supabase.from('kq_table_positions').delete().neq('table_id', 'XXX');
+        } catch(e) {}
         tableConfigs = {};
-        loadTableConfigs();
+        ALL_TABLE_IDS.forEach(id => {
+          if (DEFAULT_TABLE_CONFIGS[id]) {
+            tableConfigs[id] = { id, ...DEFAULT_TABLE_CONFIGS[id] };
+            saveTableConfigToCloud(id);
+          }
+        });
         renderHotspots();
         refreshMapNodes();
       }
@@ -1104,7 +1133,6 @@
       layer.innerHTML = html;
     }
 
-    // DRAG AND DROP AKTIF
     let draggingId = null;
     let startX = 0, startY = 0;
     let origTop = 0, origLeft = 0;
@@ -1155,7 +1183,7 @@
 
     function stopDragging(e) {
       if (draggingId && hasDragged) {
-        saveTableConfigs();
+        saveTableConfigToCloud(draggingId);
       }
       draggingId = null;
       document.removeEventListener('mousemove', onDragging);
@@ -1204,6 +1232,22 @@
           }));
         }
 
+        const { data: posData } = await _supabase.from('kq_table_positions').select('*');
+        if (posData && posData.length > 0) {
+          posData.forEach(row => {
+            const tid = String(row.table_id).trim();
+            if (tableConfigs[tid]) {
+              tableConfigs[tid].top = Number(row.top);
+              tableConfigs[tid].left = Number(row.left);
+              const el = document.getElementById(`spot-${tid}`);
+              if (el && draggingId !== tid) {
+                el.style.top = row.top + '%';
+                el.style.left = row.left + '%';
+              }
+            }
+          });
+        }
+
         refreshMapNodes();
         updateMetrics();
       } catch (err) {
@@ -1220,10 +1264,12 @@
         .on('postgres_changes', { event: '*', schema: 'public', table: 'kq_fdc_bookings' }, () => {
           fetchAllCloudData();
         })
+        .on('postgres_changes', { event: '*', schema: 'public', table: 'kq_table_positions' }, () => {
+          fetchAllCloudData();
+        })
         .subscribe();
     }
 
-    // ================= REGISTRASI / INPUT MEJA =================
     function openRegistrationModal() {
       const select = document.getElementById('regTableIdSelect');
       let html = '<option value="">-- Pilih Meja Kosong / Fleksibel --</option>';
