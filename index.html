@@ -1251,6 +1251,7 @@
               category: row.category,
               pax: row.pax,
               dp: Number(row.dp),
+              balance: Number(row.balance || 0),
               time: row.arrival_time,
               notes: row.notes,
               created_by: row.created_by || '',
@@ -1453,6 +1454,9 @@
       const phone = document.getElementById('regGuestPhone').value.trim();
       const pax = parseInt(document.getElementById('regGuestPax').value, 10) || 4;
       const rawDP = document.getElementById('regGuestDP').value.replace(/[^0-9]/g, '');
+      const dp = rawDP ? parseInt(rawDP, 10) : 0;
+      const totalKonsumsi = calculateCartTotal(regCurrentCart);
+      const balance = totalKonsumsi - dp;
       const time = document.getElementById('regGuestTime').value;
       const staff = document.getElementById('regGuestCreatedBy').value.trim();
 
@@ -1478,7 +1482,8 @@
         guest_phone: phone,
         category: TERRACE_IDS.includes(tid) ? 'terrace' : 'lounge',
         pax: pax,
-        dp: rawDP ? parseInt(rawDP, 10) : 0,
+        dp: dp,
+        balance: balance,
         arrival_time: time,
         created_by: staff,
         timestamp: timestamp,
@@ -1678,6 +1683,9 @@
       const name = document.getElementById('guestName').value.trim();
       const phone = document.getElementById('guestPhone').value.trim();
       const rawDP = document.getElementById('guestDP').value.replace(/[^0-9]/g, '');
+      const dp = rawDP ? parseInt(rawDP, 10) : 0;
+      const totalKonsumsi = calculateCartTotal(currentCart);
+      const balance = totalKonsumsi - dp;
       const staff = document.getElementById('guestCreatedBy').value.trim();
       const timestamp = document.getElementById('guestInputTimestamp').value;
 
@@ -1698,7 +1706,8 @@
         guest_phone: phone,
         category: currentCategory,
         pax: parseInt(document.getElementById('guestPax').value, 10) || 4,
-        dp: rawDP ? parseInt(rawDP, 10) : 0,
+        dp: dp,
+        balance: balance,
         arrival_time: document.getElementById('guestTime').value,
         created_by: staff,
         timestamp: timestamp,
@@ -1742,6 +1751,8 @@
       const phone = document.getElementById('guestPhone').value.trim() || '-';
       const pax = document.getElementById('guestPax').value || '4';
       const dp = document.getElementById('guestDP').value || '0';
+      const totalKonsumsi = calculateCartTotal(currentCart);
+      const balance = totalKonsumsi - (rawDP => rawDP ? parseInt(rawDP, 10) : 0)(document.getElementById('guestDP').value.replace(/[^0-9]/g, ''));
       const time = document.getElementById('guestTime').value;
       const staff = document.getElementById('guestCreatedBy').value.trim() || '-';
       const timestamp = document.getElementById('guestInputTimestamp').value || '-';
@@ -1778,7 +1789,9 @@
             <div class="row"><span class="label">No. WhatsApp:</span> <span>${phone}</span></div>
             <div class="row"><span class="label">Jumlah Pax:</span> <span>${pax} Orang</span></div>
             <div class="row"><span class="label">Jam Kedatangan:</span> <span>${time}</span></div>
+            <div class="row"><span class="label">Total Konsumsi Menu:</span> <span>Rp ${totalKonsumsi.toLocaleString('id-ID')}</span></div>
             <div class="row"><span class="label">Nominal DP Dibayar:</span> <strong style="color: #059669;">Rp ${dp}</strong></div>
+            <div class="row"><span class="label">Balance (Sisa Tagihan):</span> <strong style="color: #0077b6;">Rp ${balance.toLocaleString('id-ID')}</strong></div>
             <div class="row"><span class="label">Petugas / Staff:</span> <span>${staff}</span></div>
             <div class="row"><span class="label">Waktu Input Kasir:</span> <span>${timestamp}</span></div>
             <div style="margin-top: 15px;">
@@ -2057,15 +2070,15 @@
         return;
       }
 
-      let csv = 'Area Kategori,Nomor Meja/ID,Nama Tamu,WhatsApp,Pax,Nominal Bayar/DP (IDR),Jam Tiba,Created By (Staff),Waktu Input,Catatan Khusus\n';
+      let csv = 'Area Kategori,Nomor Meja/ID,Nama Tamu,WhatsApp,Pax,DP (IDR),Balance Sisa (IDR),Jam Tiba,Created By (Staff),Waktu Input,Catatan Khusus\n';
       tableKeys.forEach(k => {
         const b = bookings[k];
         const catLabel = TERRACE_IDS.includes(k) ? 'COCKPIT DECK (C)' : 'LOWER DECK LOUNGE (L)';
-        csv += `"${catLabel}","${k}","${b.name}","${b.phone}","${b.pax}","${b.dp}","${b.time}","${b.created_by || ''}","${b.timestamp || ''}","${b.notes || ''}"\n`;
+        csv += `"${catLabel}","${k}","${b.name}","${b.phone}","${b.pax}","${b.dp}","${b.balance || 0}","${b.time}","${b.created_by || ''}","${b.timestamp || ''}","${b.notes || ''}"\n`;
       });
 
       fdcBookings.forEach(f => {
-        csv += `"FDC STANDING TICKET","${f.id}","${f.name}","${f.phone}","${f.pax}","${f.amount}","-","${f.created_by || ''}","-","${f.notes || ''}"\n`;
+        csv += `"FDC STANDING TICKET","${f.id}","${f.name}","${f.phone}","${f.pax}","${f.amount}","0","-","${f.created_by || ''}","-","${f.notes || ''}"\n`;
       });
 
       const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
