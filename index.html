@@ -80,7 +80,6 @@
       gap: 14px;
     }
 
-    /* Logo Frame Diubah Menjadi Lanskap (Memanjang) */
     .brand-logo-frame {
       width: 160px;
       height: 60px;
@@ -570,7 +569,7 @@
     </div>
   </main>
 
-  <!-- MODAL RESERVASI MEJA DENGAN KASIR MENU -->
+  <!-- MODAL RESERVASI MEJA DENGAN KASIR MENU & BALANCE -->
   <div id="bookingModal" class="modal-backdrop">
     <div class="modal-container">
       <div class="modal-header">
@@ -623,8 +622,17 @@
           <label><i class="fa-solid fa-money-bill-wave" style="color: #059669;"></i> Nominal DP / Uang Muka (Diisi Manual) *</label>
           <div class="money-input-box">
             <span>Rp</span>
-            <input type="text" id="guestDP" class="inp-field" placeholder="Contoh: 500.000" onkeyup="formatCurrencyInput(this)">
+            <input type="text" id="guestDP" class="inp-field" placeholder="Contoh: 500.000" onkeyup="formatCurrencyInput(this); updateBalanceDisplay();">
           </div>
+        </div>
+
+        <!-- KOLOM BALANCE / SISA TAGIHAN OTOMATIS -->
+        <div style="background: #f8fafc; border: 1.5px dashed #0077b6; border-radius: 10px; padding: 12px; display: flex; justify-content: space-between; align-items: center;">
+          <div>
+            <div style="font-size: 0.72rem; font-weight: 700; color: #0077b6; text-transform: uppercase;"><i class="fa-solid fa-scale-balanced"></i> Balance (Sisa Tagihan / Kembalian)</div>
+            <div style="font-size: 0.65rem; color: var(--text-muted);">Total Konsumsi dikurangi Uang Muka (DP)</div>
+          </div>
+          <strong id="bookingBalanceDisplay" style="font-size: 1.05rem; font-family: 'Cinzel', serif; color: #0f172a;">Rp 0</strong>
         </div>
 
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
@@ -729,8 +737,17 @@
           <label><i class="fa-solid fa-money-bill-wave" style="color: #059669;"></i> Nominal DP / Uang Muka (Diisi Manual) *</label>
           <div class="money-input-box">
             <span>Rp</span>
-            <input type="text" id="regGuestDP" class="inp-field" placeholder="Contoh: 500.000" onkeyup="formatCurrencyInput(this)">
+            <input type="text" id="regGuestDP" class="inp-field" placeholder="Contoh: 500.000" onkeyup="formatCurrencyInput(this); updateRegBalanceDisplay();">
           </div>
+        </div>
+
+        <!-- KOTAK BALANCE REGISTRASI -->
+        <div style="background: #f8fafc; border: 1.5px dashed #0077b6; border-radius: 10px; padding: 12px; display: flex; justify-content: space-between; align-items: center;">
+          <div>
+            <div style="font-size: 0.72rem; font-weight: 700; color: #0077b6; text-transform: uppercase;"><i class="fa-solid fa-scale-balanced"></i> Balance (Sisa Tagihan / Kembalian)</div>
+            <div style="font-size: 0.65rem; color: var(--text-muted);">Total Konsumsi dikurangi Uang Muka (DP)</div>
+          </div>
+          <strong id="regBookingBalanceDisplay" style="font-size: 1.05rem; font-family: 'Cinzel', serif; color: #0f172a;">Rp 0</strong>
         </div>
 
         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
@@ -1312,6 +1329,7 @@
       document.getElementById('regGuestPax').value = '4';
       document.getElementById('regGuestDP').value = '';
       document.getElementById('regGuestCreatedBy').value = localStorage.getItem('last_staff_name') || '';
+      updateRegBalanceDisplay();
       document.getElementById('registrationModal').classList.add('open');
     }
 
@@ -1363,6 +1381,7 @@
       if (regCurrentCart.length === 0) {
         container.innerHTML = '<div style="font-size: 0.75rem; color: var(--text-muted); text-align: center; padding: 6px;">Belum ada menu dipilih.</div>';
         totalDisplay.innerText = 'Rp 0';
+        updateRegBalanceDisplay();
         return;
       }
 
@@ -1389,6 +1408,43 @@
 
       container.innerHTML = html;
       totalDisplay.innerText = 'Rp ' + grandTotal.toLocaleString('id-ID');
+      updateRegBalanceDisplay();
+    }
+
+    function calculateCartTotal(cartArray) {
+      return cartArray.reduce((sum, item) => sum + (item.price * item.qty), 0);
+    }
+
+    function updateBalanceDisplay() {
+      const totalKonsumsi = calculateCartTotal(currentCart);
+      const rawDP = document.getElementById('guestDP').value.replace(/[^0-9]/g, '');
+      const dp = rawDP ? parseInt(rawDP, 10) : 0;
+      const balance = totalKonsumsi - dp;
+
+      const balanceEl = document.getElementById('bookingBalanceDisplay');
+      if (balance > 0) {
+        balanceEl.innerHTML = `<span style="color: #ef4444;">Kurang Rp ${balance.toLocaleString('id-ID')}</span>`;
+      } else if (balance < 0) {
+        balanceEl.innerHTML = `<span style="color: #059669;">Lebih/Kembali Rp ${Math.abs(balance).toLocaleString('id-ID')}</span>`;
+      } else {
+        balanceEl.innerHTML = `<span style="color: #059669;">Lunas (Rp 0)</span>`;
+      }
+    }
+
+    function updateRegBalanceDisplay() {
+      const totalKonsumsi = calculateCartTotal(regCurrentCart);
+      const rawDP = document.getElementById('regGuestDP').value.replace(/[^0-9]/g, '');
+      const dp = rawDP ? parseInt(rawDP, 10) : 0;
+      const balance = totalKonsumsi - dp;
+
+      const balanceEl = document.getElementById('regBookingBalanceDisplay');
+      if (balance > 0) {
+        balanceEl.innerHTML = `<span style="color: #ef4444;">Kurang Rp ${balance.toLocaleString('id-ID')}</span>`;
+      } else if (balance < 0) {
+        balanceEl.innerHTML = `<span style="color: #059669;">Lebih/Kembali Rp ${Math.abs(balance).toLocaleString('id-ID')}</span>`;
+      } else {
+        balanceEl.innerHTML = `<span style="color: #059669;">Lunas (Rp 0)</span>`;
+      }
     }
 
     async function saveRegistrationBooking() {
@@ -1539,6 +1595,7 @@
       if (currentCart.length === 0) {
         container.innerHTML = '<div style="font-size: 0.75rem; color: var(--text-muted); text-align: center; padding: 6px;">Belum ada menu dipilih.</div>';
         totalDisplay.innerText = 'Rp 0';
+        updateBalanceDisplay();
         return;
       }
 
@@ -1565,6 +1622,7 @@
 
       container.innerHTML = html;
       totalDisplay.innerText = 'Rp ' + grandTotal.toLocaleString('id-ID');
+      updateBalanceDisplay();
     }
 
     function openBooking(tableId, tableType, defaultPax, category) {
@@ -1607,6 +1665,7 @@
       }
 
       renderBookingCart();
+      updateBalanceDisplay();
       document.getElementById('bookingModal').classList.add('open');
     }
 
