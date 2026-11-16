@@ -80,14 +80,14 @@
       gap: 14px;
     }
 
-    /* Perbaikan Frame & Logo agar terlihat besar penuh */
+    /* Perbaikan Logo: Tampil Utuh, Proporsional, dan Jelas */
     .brand-logo-frame {
       width: 72px;
       height: 72px;
       background: #ffffff;
       border: 2.5px solid var(--gold-primary);
       border-radius: 10px;
-      padding: 2px;
+      padding: 6px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -97,10 +97,9 @@
     }
 
     .brand-logo-frame img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover; /* Diubah menjadi cover agar logo memenuhi kotak */
-      transform: scale(1.15); /* Sedikit diperbesar agar area transparan luar terpotong */
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain; /* Memastikan seluruh logo tampil proporsional tanpa terpotong */
     }
 
     .brand-title h1 {
