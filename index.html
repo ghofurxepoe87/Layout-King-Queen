@@ -874,7 +874,7 @@
     </div>
   </div>
 
-  <!-- MODAL MASTER MENU -->
+  <!-- MODAL MASTER MENU (TERHUBUNG CLOUD SUPABASE) -->
   <div id="masterMenuModal" class="modal-backdrop">
     <div class="modal-container">
       <div class="modal-header">
@@ -884,7 +884,7 @@
 
       <div class="modal-body">
         <div style="background: rgba(217, 119, 6, 0.1); border: 1px solid rgba(217, 119, 6, 0.3); padding: 10px 12px; border-radius: 8px; font-size: 0.78rem; color: #b45309; font-weight: 600;">
-          <i class="fa-solid fa-circle-info"></i> Tambahkan atau edit daftar menu minuman, cocktail, atau paket promo yang muncul di kasir.
+          <i class="fa-solid fa-cloud"></i> Semua item di bawah ini tersimpan permanen di Cloud Supabase dan tidak hilang saat di-refresh.
         </div>
 
         <input type="hidden" id="editMasterMenuId" value="">
@@ -913,7 +913,7 @@
         </div>
 
         <button id="btnSaveMasterMenu" class="btn-action btn-menu" style="width:100%; justify-content:center; margin-top:4px;" onclick="saveMasterMenuItem()">
-          <i class="fa-solid fa-plus"></i> Tambah ke Master Menu
+          <i class="fa-solid fa-plus"></i> Simpan ke Cloud Master Menu
         </button>
 
         <hr style="border: 0; border-top: 1px solid var(--border-color); margin: 10px 0;">
@@ -1145,10 +1145,7 @@
       'L29': { top: 62.0, left: 92.0, w: 4.0, h: 4.5, type: 'High Table', pax: 3, cat: 'lounge' }
     };
 
-    let tableConfigs = {};
-    let bookings = {};
-    let fdcBookings = [];
-    let masterMenu = [
+    const FALLBACK_MENU = [
       { id: 1, name: 'Signature Sky Cocktail', category: 'Beverage / Cocktail', price: 150000 },
       { id: 2, name: 'Red Wine Bottle Selection', category: 'Wine & Spirits', price: 1250000 },
       { id: 3, name: 'Assorted Snack Platter', category: 'Food & Platter', price: 220000 },
@@ -1156,14 +1153,18 @@
       { id: 5, name: 'Package 1.800 (2x Mix Combo, 1x Choices Spirit, 4 Soft Drink or Juice)', category: 'Package Promo', price: 1800000 }
     ];
 
+    let tableConfigs = {};
+    let bookings = {};
+    let fdcBookings = [];
+    let masterMenu = [...FALLBACK_MENU];
+
     let currentCart = [];
     let regCurrentCart = [];
     let currentTable = null;
     let currentCategory = 'lounge';
     let zoomLevel = 1.0;
 
-    // Variabel untuk tracking edit item cart
-    let editingTargetCartType = 'booking'; // 'booking' atau 'reg'
+    let editingTargetCartType = 'booking';
     let editingItemId = null;
 
     const possibleImages = ['denah.jpg', 'denah.jpeg', 'Denah.jpg', 'denah.JPG'];
@@ -1190,10 +1191,37 @@
     window.addEventListener('DOMContentLoaded', async () => {
       await loadTableConfigsFromCloud();
       renderHotspots();
+      await fetchMasterMenuFromCloud();
       await fetchAllCloudData();
       initGestures();
       subscribeRealtime();
     });
+
+    // --- LOAD MASTER MENU DARI SUPABASE ---
+    async function fetchMasterMenuFromCloud() {
+      try {
+        const { data, error } = await _supabase
+          .from('kq_master_menu')
+          .select('*')
+          .order('id', { ascending: true });
+
+        if (!error && data && data.length > 0) {
+          masterMenu = data.map(row => ({
+            id: Number(row.id),
+            name: row.name,
+            category: row.category || 'Package Promo',
+            price: Number(row.price)
+          }));
+        }
+      } catch (err) {
+        console.log('Menggunakan menu default lokal (tabel kq_master_menu belum dibuat).');
+      }
+      populateBookingMenuDropdown();
+      populateRegBookingMenuDropdown();
+      if (document.getElementById('masterMenuModal').classList.contains('open')) {
+        renderMasterMenuList();
+      }
+    }
 
     async function loadTableConfigsFromCloud() {
       try {
@@ -1421,6 +1449,9 @@
         .on('postgres_changes', { event: '*', schema: 'public', table: 'kq_table_positions' }, () => {
           fetchAllCloudData();
         })
+        .on('postgres_changes', { event: '*', schema: 'public', table: 'kq_master_menu' }, () => {
+          fetchMasterMenuFromCloud();
+        })
         .subscribe();
     }
 
@@ -1499,6 +1530,7 @@
 
     function populateRegBookingMenuDropdown() {
       const dropdown = document.getElementById('selectRegMasterMenuDropdown');
+      if (!dropdown) return;
       let html = '<option value="">-- Pilih Menu / Paket Lounge --</option>';
       masterMenu.forEach(item => {
         html += `<option value="${item.id}">${item.name} - Rp ${item.price.toLocaleString('id-ID')}</option>`;
@@ -1687,12 +1719,12 @@
       await fetchAllCloudData();
     }
 
-    // --- MASTER MENU MODAL (DENGAN FITUR EDIT) ---
+    // --- MASTER MENU MODAL (TERHUBUNG CLOUD SUPABASE) ---
     function openMasterMenuModal() {
       document.getElementById('editMasterMenuId').value = '';
       document.getElementById('menuItemName').value = '';
       document.getElementById('menuItemPrice').value = '';
-      document.getElementById('btnSaveMasterMenu').innerHTML = '<i class="fa-solid fa-plus"></i> Tambah ke Master Menu';
+      document.getElementById('btnSaveMasterMenu').innerHTML = '<i class="fa-solid fa-plus"></i> Simpan ke Cloud Master Menu';
       renderMasterMenuList();
       document.getElementById('masterMenuModal').classList.add('open');
     }
@@ -1709,10 +1741,10 @@
       document.getElementById('menuItemName').value = item.name;
       document.getElementById('menuItemCategory').value = item.category;
       document.getElementById('menuItemPrice').value = item.price.toLocaleString('id-ID');
-      document.getElementById('btnSaveMasterMenu').innerHTML = '<i class="fa-solid fa-check"></i> Simpan Perubahan Menu';
+      document.getElementById('btnSaveMasterMenu').innerHTML = '<i class="fa-solid fa-check"></i> Update Menu di Cloud';
     }
 
-    function saveMasterMenuItem() {
+    async function saveMasterMenuItem() {
       const editId = document.getElementById('editMasterMenuId').value;
       const name = document.getElementById('menuItemName').value.trim();
       const category = document.getElementById('menuItemCategory').value;
@@ -1723,26 +1755,46 @@
         return;
       }
 
-      if (editId) {
-        const existing = masterMenu.find(m => String(m.id) === String(editId));
-        if (existing) {
-          existing.name = name;
-          existing.category = category;
-          existing.price = parseInt(rawPrice, 10);
-        }
-      } else {
-        masterMenu.push({ id: Date.now(), name, category, price: parseInt(rawPrice, 10) });
+      const priceNum = parseInt(rawPrice, 10);
+      const itemId = editId ? Number(editId) : Date.now();
+
+      const { error } = await _supabase
+        .from('kq_master_menu')
+        .upsert({
+          id: itemId,
+          name: name,
+          category: category,
+          price: priceNum
+        }, { onConflict: 'id' });
+
+      if (error) {
+        alert('Gagal menyimpan ke Cloud Supabase: ' + error.message + '\nPastikan Anda sudah menjalankan SQL pembuatan tabel kq_master_menu.');
+        return;
       }
 
       document.getElementById('editMasterMenuId').value = '';
       document.getElementById('menuItemName').value = '';
       document.getElementById('menuItemPrice').value = '';
-      document.getElementById('btnSaveMasterMenu').innerHTML = '<i class="fa-solid fa-plus"></i> Tambah ke Master Menu';
+      document.getElementById('btnSaveMasterMenu').innerHTML = '<i class="fa-solid fa-plus"></i> Simpan ke Cloud Master Menu';
+      
+      await fetchMasterMenuFromCloud();
       renderMasterMenuList();
     }
 
-    function deleteMasterMenuItem(id) {
-      masterMenu = masterMenu.filter(item => String(item.id) !== String(id));
+    async function deleteMasterMenuItem(id) {
+      if (!confirm('Hapus menu ini secara permanen dari Cloud?')) return;
+
+      const { error } = await _supabase
+        .from('kq_master_menu')
+        .delete()
+        .eq('id', Number(id));
+
+      if (error) {
+        alert('Gagal menghapus menu: ' + error.message);
+        return;
+      }
+
+      await fetchMasterMenuFromCloud();
       renderMasterMenuList();
     }
 
@@ -1777,6 +1829,7 @@
     // --- KASIR BOOKING MEJA ---
     function populateBookingMenuDropdown() {
       const dropdown = document.getElementById('selectMasterMenuDropdown');
+      if (!dropdown) return;
       let html = '<option value="">-- Pilih Menu / Paket Lounge --</option>';
       masterMenu.forEach(item => {
         html += `<option value="${item.id}">${item.name} - Rp ${item.price.toLocaleString('id-ID')}</option>`;
