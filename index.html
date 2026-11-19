@@ -55,7 +55,7 @@
       overflow-x: hidden;
     }
 
-    /* HEADER - Platinum Hotel Style (Fully Optimized for iOS, Android & PC) */
+    /* HEADER */
     header {
       background: var(--header-bg);
       border-bottom: 3px solid rgba(212, 175, 55, 0.6);
@@ -286,7 +286,7 @@
       height: 100%;
     }
 
-    /* SPOT MEJA - DRAGGABLE & TERSINKRONISASI CLOUD */
+    /* SPOT MEJA */
     .spot {
       position: absolute;
       cursor: grab;
@@ -341,7 +341,7 @@
       border: 1px solid var(--border-color);
       border-radius: 12px;
       width: 100%;
-      max-width: 520px;
+      max-width: 540px;
       max-height: 90vh;
       overflow-y: auto;
       box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
@@ -409,6 +409,55 @@
 
     .btn-modal-del { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; padding: 10px 14px; border-radius: 8px; font-size: 0.8rem; font-weight: 700; cursor: pointer; }
     .btn-modal-save { background: #0077b6; color: #fff; border: none; padding: 10px 18px; border-radius: 8px; font-size: 0.85rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 6px; box-shadow: 0 2px 6px rgba(0,119,182,0.3); }
+
+    .cart-item-card {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .cart-qty-controls {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+
+    .btn-qty {
+      background: #e2e8f0;
+      border: none;
+      color: #0f172a;
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+    }
+
+    .btn-qty:active { background: #cbd5e1; }
+
+    .btn-edit-item {
+      background: #e0f2fe;
+      border: 1px solid #bae6fd;
+      color: #0284c7;
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btn-edit-item:hover { background: #bae6fd; }
 
     .dash-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
     .dash-card { background: #f8fafc; border: 1px solid var(--border-color); border-radius: 10px; padding: 12px; display: flex; flex-direction: column; gap: 6px; }
@@ -569,7 +618,7 @@
     </div>
   </main>
 
-  <!-- MODAL RESERVASI MEJA DENGAN KASIR MENU & CUSTOM INPUT -->
+  <!-- MODAL RESERVASI MEJA DENGAN KASIR MENU, EDIT ITEM & CUSTOM INPUT -->
   <div id="bookingModal" class="modal-backdrop">
     <div class="modal-container">
       <div class="modal-header">
@@ -612,13 +661,13 @@
           <!-- INPUT MENU CUSTOM MANUAL -->
           <div style="display: grid; grid-template-columns: 1.3fr 1.2fr auto; gap: 6px;">
             <input type="text" id="customMenuName" class="inp-field" placeholder="Nama Menu Custom">
-            <input type="text" id="customMenuPrice" class="inp-field" placeholder="Harga Murni (Cth: 54450)" onkeyup="formatCurrencyInput(this)">
+            <input type="text" id="customMenuPrice" class="inp-field" placeholder="Harga (Cth: 150000)" onkeyup="formatCurrencyInput(this)">
             <button type="button" class="btn-action" style="background: #9333ea; color: #fff; padding: 0 12px;" onclick="addCustomCartItem()">
               <i class="fa-solid fa-plus"></i> Custom
             </button>
           </div>
 
-          <div id="bookingCartItemsContainer" style="display: flex; flex-direction: column; gap: 6px; max-height: 150px; overflow-y: auto;">
+          <div id="bookingCartItemsContainer" style="display: flex; flex-direction: column; gap: 6px; max-height: 180px; overflow-y: auto;">
             <div style="font-size: 0.75rem; color: var(--text-muted); text-align: center; padding: 6px;">Belum ada menu dipilih.</div>
           </div>
 
@@ -687,6 +736,39 @@
     </div>
   </div>
 
+  <!-- MODAL EDIT ITEM KERANJANG (POP-UP INLINE EDIT) -->
+  <div id="editCartItemModal" class="modal-backdrop" style="z-index: 150;">
+    <div class="modal-container" style="max-width: 400px;">
+      <div class="modal-header">
+        <h3><i class="fa-solid fa-pen-to-square" style="color: #0284c7;"></i> Edit Item Pesanan</h3>
+        <button class="btn-x" onclick="closeEditCartItemModal()"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-row">
+          <label>Nama Item Menu</label>
+          <input type="text" id="editItemName" class="inp-field">
+        </div>
+        <div class="form-row">
+          <label>Harga Satuan (IDR)</label>
+          <div class="money-input-box">
+            <span>Rp</span>
+            <input type="text" id="editItemPrice" class="inp-field" onkeyup="formatCurrencyInput(this)">
+          </div>
+        </div>
+        <div class="form-row">
+          <label>Jumlah (Qty)</label>
+          <input type="number" id="editItemQty" class="inp-field" min="1">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-modal-del" style="background:#e2e8f0; color:#475569; border:none;" onclick="closeEditCartItemModal()">Batal</button>
+        <button class="btn-modal-save" onclick="saveEditedCartItem()">
+          <i class="fa-solid fa-check"></i> Simpan Perubahan
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- MODAL REGISTRASI / INPUT MEJA -->
   <div id="registrationModal" class="modal-backdrop">
     <div class="modal-container">
@@ -735,13 +817,13 @@
 
           <div style="display: grid; grid-template-columns: 1.3fr 1.2fr auto; gap: 6px;">
             <input type="text" id="regCustomMenuName" class="inp-field" placeholder="Nama Menu Custom">
-            <input type="text" id="regCustomMenuPrice" class="inp-field" placeholder="Harga Murni (Cth: 54450)" onkeyup="formatCurrencyInput(this)">
+            <input type="text" id="regCustomMenuPrice" class="inp-field" placeholder="Harga (Cth: 150000)" onkeyup="formatCurrencyInput(this)">
             <button type="button" class="btn-action" style="background: #9333ea; color: #fff; padding: 0 12px;" onclick="addRegCustomCartItem()">
               <i class="fa-solid fa-plus"></i> Custom
             </button>
           </div>
 
-          <div id="regBookingCartItemsContainer" style="display: flex; flex-direction: column; gap: 6px; max-height: 140px; overflow-y: auto;">
+          <div id="regBookingCartItemsContainer" style="display: flex; flex-direction: column; gap: 6px; max-height: 150px; overflow-y: auto;">
             <div style="font-size: 0.75rem; color: var(--text-muted); text-align: center; padding: 6px;">Belum ada menu dipilih.</div>
           </div>
 
@@ -802,9 +884,10 @@
 
       <div class="modal-body">
         <div style="background: rgba(217, 119, 6, 0.1); border: 1px solid rgba(217, 119, 6, 0.3); padding: 10px 12px; border-radius: 8px; font-size: 0.78rem; color: #b45309; font-weight: 600;">
-          <i class="fa-solid fa-circle-info"></i> Tambahkan daftar menu minuman, cocktail, atau paket promo yang otomatis muncul di pilihan kasir reservasi.
+          <i class="fa-solid fa-circle-info"></i> Tambahkan atau edit daftar menu minuman, cocktail, atau paket promo yang muncul di kasir.
         </div>
 
+        <input type="hidden" id="editMasterMenuId" value="">
         <div class="form-row">
           <label><i class="fa-solid fa-tag"></i> Nama Menu / Item *</label>
           <input type="text" id="menuItemName" class="inp-field" placeholder="Contoh: Signature Cocktail Sky Luxury">
@@ -829,7 +912,7 @@
           </div>
         </div>
 
-        <button class="btn-action btn-menu" style="width:100%; justify-content:center; margin-top:4px;" onclick="addMasterMenuItem()">
+        <button id="btnSaveMasterMenu" class="btn-action btn-menu" style="width:100%; justify-content:center; margin-top:4px;" onclick="saveMasterMenuItem()">
           <i class="fa-solid fa-plus"></i> Tambah ke Master Menu
         </button>
 
@@ -1069,7 +1152,8 @@
       { id: 1, name: 'Signature Sky Cocktail', category: 'Beverage / Cocktail', price: 150000 },
       { id: 2, name: 'Red Wine Bottle Selection', category: 'Wine & Spirits', price: 1250000 },
       { id: 3, name: 'Assorted Snack Platter', category: 'Food & Platter', price: 220000 },
-      { id: 4, name: 'Social Lounge Package 3', category: 'Package Promo', price: 1500000 }
+      { id: 4, name: 'Package 1.500.000 (Big Bites, Beer Bucket, and Soft Drink)', category: 'Package Promo', price: 1500000 },
+      { id: 5, name: 'Package 1.800 (2x Mix Combo, 1x Choices Spirit, 4 Soft Drink or Juice)', category: 'Package Promo', price: 1800000 }
     ];
 
     let currentCart = [];
@@ -1077,6 +1161,10 @@
     let currentTable = null;
     let currentCategory = 'lounge';
     let zoomLevel = 1.0;
+
+    // Variabel untuk tracking edit item cart
+    let editingTargetCartType = 'booking'; // 'booking' atau 'reg'
+    let editingItemId = null;
 
     const possibleImages = ['denah.jpg', 'denah.jpeg', 'Denah.jpg', 'denah.JPG'];
     let imgAttempt = 0;
@@ -1336,6 +1424,52 @@
         .subscribe();
     }
 
+    // --- FUNGSI EDIT ITEM KERANJANG (POPUP INLINE) ---
+    function openEditCartItemModal(cartType, id) {
+      editingTargetCartType = cartType;
+      editingItemId = String(id);
+      const targetCart = cartType === 'booking' ? currentCart : regCurrentCart;
+      const item = targetCart.find(c => String(c.id) === editingItemId);
+      if (!item) return;
+
+      document.getElementById('editItemName').value = item.name;
+      document.getElementById('editItemPrice').value = item.price.toLocaleString('id-ID');
+      document.getElementById('editItemQty').value = item.qty;
+      document.getElementById('editCartItemModal').classList.add('open');
+    }
+
+    function closeEditCartItemModal() {
+      document.getElementById('editCartItemModal').classList.remove('open');
+      editingItemId = null;
+    }
+
+    function saveEditedCartItem() {
+      const newName = document.getElementById('editItemName').value.trim();
+      const rawPrice = document.getElementById('editItemPrice').value.replace(/[^0-9]/g, '');
+      const newQty = parseInt(document.getElementById('editItemQty').value, 10) || 1;
+
+      if (!newName || !rawPrice) {
+        alert('Nama dan harga item tidak boleh kosong.');
+        return;
+      }
+
+      const targetCart = editingTargetCartType === 'booking' ? currentCart : regCurrentCart;
+      const item = targetCart.find(c => String(c.id) === editingItemId);
+      if (item) {
+        item.name = newName;
+        item.price = parseInt(rawPrice, 10);
+        item.qty = Math.max(1, newQty);
+      }
+
+      closeEditCartItemModal();
+      if (editingTargetCartType === 'booking') {
+        renderBookingCart();
+      } else {
+        renderRegBookingCart();
+      }
+    }
+
+    // --- REGISTRASI MODAL ---
     function openRegistrationModal() {
       const select = document.getElementById('regTableIdSelect');
       let html = '<option value="">-- Pilih Meja Kosong / Fleksibel --</option>';
@@ -1374,17 +1508,17 @@
 
     function addRegCartItemFromDropdown() {
       const dropdown = document.getElementById('selectRegMasterMenuDropdown');
-      const selectedId = parseInt(dropdown.value, 10);
+      const selectedId = String(dropdown.value);
       if (!selectedId) return;
 
-      const menuItem = masterMenu.find(m => m.id === selectedId);
+      const menuItem = masterMenu.find(m => String(m.id) === selectedId);
       if (!menuItem) return;
 
-      const existing = regCurrentCart.find(c => c.id === selectedId);
+      const existing = regCurrentCart.find(c => String(c.id) === selectedId);
       if (existing) {
         existing.qty += 1;
       } else {
-        regCurrentCart.push({ id: menuItem.id, name: menuItem.name, price: menuItem.price, qty: 1 });
+        regCurrentCart.push({ id: String(menuItem.id), name: menuItem.name, price: menuItem.price, qty: 1 });
       }
 
       dropdown.value = '';
@@ -1412,10 +1546,13 @@
     }
 
     function changeRegCartQty(id, delta) {
-      const item = regCurrentCart.find(c => c.id === id);
+      const targetId = String(id);
+      const item = regCurrentCart.find(c => String(c.id) === targetId);
       if (item) {
         item.qty += delta;
-        if (item.qty <= 0) regCurrentCart = regCurrentCart.filter(c => c.id !== id);
+        if (item.qty <= 0) {
+          regCurrentCart = regCurrentCart.filter(c => String(c.id) !== targetId);
+        }
       }
       renderRegBookingCart();
     }
@@ -1438,15 +1575,16 @@
         const subtotal = item.price * item.qty;
         grandTotal += subtotal;
         html += `
-          <div style="background: #ffffff; border: 1px solid var(--border-color); border-radius: 8px; padding: 8px 10px; display: flex; justify-content: space-between; align-items: center;">
-            <div>
-              <strong style="color: #0f172a; font-size: 0.8rem;">${item.name}</strong>
-              <div style="font-size: 0.7rem; color: #059669;">Rp ${item.price.toLocaleString('id-ID')} × ${item.qty} = <strong>Rp ${subtotal.toLocaleString('id-ID')}</strong></div>
+          <div class="cart-item-card">
+            <div style="flex: 1;">
+              <strong style="color: #0f172a; font-size: 0.8rem; display: block; line-height: 1.2;">${item.name}</strong>
+              <div style="font-size: 0.7rem; color: #059669; margin-top: 2px;">Rp ${item.price.toLocaleString('id-ID')} × ${item.qty} = <strong>Rp ${subtotal.toLocaleString('id-ID')}</strong></div>
             </div>
-            <div style="display: flex; align-items: center; gap: 6px;">
-              <button type="button" onclick="changeRegCartQty('${item.id}', -1)" style="background: #e2e8f0; border: none; color: #0f172a; width: 24px; height: 24px; border-radius: 4px; cursor: pointer;"><i class="fa-solid fa-minus" style="font-size: 0.65rem;"></i></button>
-              <span style="font-size: 0.8rem; font-weight: 700; width: 16px; text-align: center;">${item.qty}</span>
-              <button type="button" onclick="changeRegCartQty('${item.id}', 1)" style="background: #e2e8f0; border: none; color: #0f172a; width: 24px; height: 24px; border-radius: 4px; cursor: pointer;"><i class="fa-solid fa-plus" style="font-size: 0.65rem;"></i></button>
+            <div class="cart-qty-controls">
+              <button type="button" class="btn-edit-item" onclick="openEditCartItemModal('reg', '${item.id}')" title="Edit Item"><i class="fa-solid fa-pen" style="font-size: 0.65rem;"></i></button>
+              <button type="button" class="btn-qty" onclick="changeRegCartQty('${item.id}', -1)"><i class="fa-solid fa-minus" style="font-size: 0.65rem;"></i></button>
+              <span style="font-size: 0.82rem; font-weight: 700; min-width: 18px; text-align: center;">${item.qty}</span>
+              <button type="button" class="btn-qty" onclick="changeRegCartQty('${item.id}', 1)"><i class="fa-solid fa-plus" style="font-size: 0.65rem;"></i></button>
             </div>
           </div>
         `;
@@ -1549,7 +1687,12 @@
       await fetchAllCloudData();
     }
 
+    // --- MASTER MENU MODAL (DENGAN FITUR EDIT) ---
     function openMasterMenuModal() {
+      document.getElementById('editMasterMenuId').value = '';
+      document.getElementById('menuItemName').value = '';
+      document.getElementById('menuItemPrice').value = '';
+      document.getElementById('btnSaveMasterMenu').innerHTML = '<i class="fa-solid fa-plus"></i> Tambah ke Master Menu';
       renderMasterMenuList();
       document.getElementById('masterMenuModal').classList.add('open');
     }
@@ -1558,7 +1701,19 @@
       document.getElementById('masterMenuModal').classList.remove('open');
     }
 
-    function addMasterMenuItem() {
+    function editMasterMenuItem(id) {
+      const item = masterMenu.find(m => String(m.id) === String(id));
+      if (!item) return;
+
+      document.getElementById('editMasterMenuId').value = item.id;
+      document.getElementById('menuItemName').value = item.name;
+      document.getElementById('menuItemCategory').value = item.category;
+      document.getElementById('menuItemPrice').value = item.price.toLocaleString('id-ID');
+      document.getElementById('btnSaveMasterMenu').innerHTML = '<i class="fa-solid fa-check"></i> Simpan Perubahan Menu';
+    }
+
+    function saveMasterMenuItem() {
+      const editId = document.getElementById('editMasterMenuId').value;
       const name = document.getElementById('menuItemName').value.trim();
       const category = document.getElementById('menuItemCategory').value;
       const rawPrice = document.getElementById('menuItemPrice').value.replace(/[^0-9]/g, '');
@@ -1568,14 +1723,26 @@
         return;
       }
 
-      masterMenu.push({ id: Date.now(), name, category, price: parseInt(rawPrice, 10) });
+      if (editId) {
+        const existing = masterMenu.find(m => String(m.id) === String(editId));
+        if (existing) {
+          existing.name = name;
+          existing.category = category;
+          existing.price = parseInt(rawPrice, 10);
+        }
+      } else {
+        masterMenu.push({ id: Date.now(), name, category, price: parseInt(rawPrice, 10) });
+      }
+
+      document.getElementById('editMasterMenuId').value = '';
       document.getElementById('menuItemName').value = '';
       document.getElementById('menuItemPrice').value = '';
+      document.getElementById('btnSaveMasterMenu').innerHTML = '<i class="fa-solid fa-plus"></i> Tambah ke Master Menu';
       renderMasterMenuList();
     }
 
     function deleteMasterMenuItem(id) {
-      masterMenu = masterMenu.filter(item => item.id !== id);
+      masterMenu = masterMenu.filter(item => String(item.id) !== String(id));
       renderMasterMenuList();
     }
 
@@ -1588,20 +1755,26 @@
       let html = '';
       masterMenu.forEach(item => {
         html += `
-          <div style="background:#ffffff; border:1px solid var(--border-color); border-radius:6px; padding:8px 10px; margin-bottom:6px; display:flex; justify-content:space-between; align-items:center;">
-            <div>
+          <div style="background:#ffffff; border:1px solid var(--border-color); border-radius:6px; padding:8px 10px; margin-bottom:6px; display:flex; justify-content:space-between; align-items:center; gap: 8px;">
+            <div style="flex: 1;">
               <strong style="color:#0f172a; font-size:0.8rem;">${item.name}</strong>
               <div style="font-size:0.68rem; color:var(--text-muted);">${item.category} | <span style="color:#059669; font-weight:700;">Rp ${item.price.toLocaleString('id-ID')}</span></div>
             </div>
-            <button onclick="deleteMasterMenuItem(${item.id})" style="background:#fee2e2; border:none; color:#991b1b; width:26px; height:26px; border-radius:4px; cursor:pointer;" title="Hapus Menu">
-              <i class="fa-solid fa-trash" style="font-size:0.7rem;"></i>
-            </button>
+            <div style="display:flex; gap: 6px; flex-shrink: 0;">
+              <button onclick="editMasterMenuItem('${item.id}')" style="background:#e0f2fe; border:none; color:#0284c7; width:28px; height:28px; border-radius:4px; cursor:pointer;" title="Edit Menu">
+                <i class="fa-solid fa-pen" style="font-size:0.7rem;"></i>
+              </button>
+              <button onclick="deleteMasterMenuItem('${item.id}')" style="background:#fee2e2; border:none; color:#991b1b; width:28px; height:28px; border-radius:4px; cursor:pointer;" title="Hapus Menu">
+                <i class="fa-solid fa-trash" style="font-size:0.7rem;"></i>
+              </button>
+            </div>
           </div>
         `;
       });
       container.innerHTML = html;
     }
 
+    // --- KASIR BOOKING MEJA ---
     function populateBookingMenuDropdown() {
       const dropdown = document.getElementById('selectMasterMenuDropdown');
       let html = '<option value="">-- Pilih Menu / Paket Lounge --</option>';
@@ -1613,17 +1786,17 @@
 
     function addCartItemFromDropdown() {
       const dropdown = document.getElementById('selectMasterMenuDropdown');
-      const selectedId = parseInt(dropdown.value, 10);
+      const selectedId = String(dropdown.value);
       if (!selectedId) return;
 
-      const menuItem = masterMenu.find(m => m.id === selectedId);
+      const menuItem = masterMenu.find(m => String(m.id) === selectedId);
       if (!menuItem) return;
 
-      const existing = currentCart.find(c => c.id === selectedId);
+      const existing = currentCart.find(c => String(c.id) === selectedId);
       if (existing) {
         existing.qty += 1;
       } else {
-        currentCart.push({ id: menuItem.id, name: menuItem.name, price: menuItem.price, qty: 1 });
+        currentCart.push({ id: String(menuItem.id), name: menuItem.name, price: menuItem.price, qty: 1 });
       }
 
       dropdown.value = '';
@@ -1651,10 +1824,13 @@
     }
 
     function changeCartQty(id, delta) {
-      const item = currentCart.find(c => c.id === id);
+      const targetId = String(id);
+      const item = currentCart.find(c => String(c.id) === targetId);
       if (item) {
         item.qty += delta;
-        if (item.qty <= 0) currentCart = currentCart.filter(c => c.id !== id);
+        if (item.qty <= 0) {
+          currentCart = currentCart.filter(c => String(c.id) !== targetId);
+        }
       }
       renderBookingCart();
     }
@@ -1677,15 +1853,16 @@
         const subtotal = item.price * item.qty;
         grandTotal += subtotal;
         html += `
-          <div style="background: #ffffff; border: 1px solid var(--border-color); border-radius: 8px; padding: 8px 10px; display: flex; justify-content: space-between; align-items: center;">
-            <div>
-              <strong style="color: #0f172a; font-size: 0.8rem;">${item.name}</strong>
-              <div style="font-size: 0.7rem; color: #059669;">Rp ${item.price.toLocaleString('id-ID')} × ${item.qty} = <strong>Rp ${subtotal.toLocaleString('id-ID')}</strong></div>
+          <div class="cart-item-card">
+            <div style="flex: 1;">
+              <strong style="color: #0f172a; font-size: 0.8rem; display: block; line-height: 1.2;">${item.name}</strong>
+              <div style="font-size: 0.7rem; color: #059669; margin-top: 2px;">Rp ${item.price.toLocaleString('id-ID')} × ${item.qty} = <strong>Rp ${subtotal.toLocaleString('id-ID')}</strong></div>
             </div>
-            <div style="display: flex; align-items: center; gap: 6px;">
-              <button type="button" onclick="changeCartQty('${item.id}', -1)" style="background: #e2e8f0; border: none; color: #0f172a; width: 24px; height: 24px; border-radius: 4px; cursor: pointer;"><i class="fa-solid fa-minus" style="font-size: 0.65rem;"></i></button>
-              <span style="font-size: 0.8rem; font-weight: 700; width: 16px; text-align: center;">${item.qty}</span>
-              <button type="button" onclick="changeCartQty('${item.id}', 1)" style="background: #e2e8f0; border: none; color: #0f172a; width: 24px; height: 24px; border-radius: 4px; cursor: pointer;"><i class="fa-solid fa-plus" style="font-size: 0.65rem;"></i></button>
+            <div class="cart-qty-controls">
+              <button type="button" class="btn-edit-item" onclick="openEditCartItemModal('booking', '${item.id}')" title="Edit Item"><i class="fa-solid fa-pen" style="font-size: 0.65rem;"></i></button>
+              <button type="button" class="btn-qty" onclick="changeCartQty('${item.id}', -1)"><i class="fa-solid fa-minus" style="font-size: 0.65rem;"></i></button>
+              <span style="font-size: 0.82rem; font-weight: 700; min-width: 18px; text-align: center;">${item.qty}</span>
+              <button type="button" class="btn-qty" onclick="changeCartQty('${item.id}', 1)"><i class="fa-solid fa-plus" style="font-size: 0.65rem;"></i></button>
             </div>
           </div>
         `;
