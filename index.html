@@ -267,8 +267,13 @@
       box-shadow: 0 20px 40px rgba(0,0,0,0.2);
       border-radius: 10px;
       overflow: hidden;
-      background: #ffffff;
+      background: #0f172a;
       border: 1px solid var(--border-color);
+    }
+
+    .map-img-wrapper {
+      position: relative;
+      width: 100%;
     }
 
     .render-3d-img {
@@ -284,6 +289,19 @@
       left: 0;
       width: 100%;
       height: 100%;
+    }
+
+    /* DISCLAIMER BAR DI BAWAH GAMBAR */
+    .map-disclaimer-bar {
+      background: #090d16;
+      color: #cbd5e1;
+      text-align: center;
+      font-size: 0.72rem;
+      font-style: italic;
+      font-weight: 500;
+      padding: 8px 12px;
+      border-top: 1px solid rgba(212, 175, 55, 0.35);
+      letter-spacing: 0.3px;
     }
 
     /* SPOT MEJA */
@@ -605,15 +623,22 @@
   <!-- VIEWPORT -->
   <main class="viewport-area" id="mapTouchArea">
     <div class="map-frame" id="mapFrame">
-      <img id="mainDenahImg" 
-           src="denah.jpg" 
-           alt="Infinity Sky Lounge - King & Queen 2026" 
-           class="render-3d-img"
-           crossorigin="anonymous"
-           onerror="handleImgFallback(this)">
+      <div class="map-img-wrapper">
+        <img id="mainDenahImg" 
+             src="denah.jpg" 
+             alt="Infinity Sky Lounge - King & Queen 2026" 
+             class="render-3d-img"
+             crossorigin="anonymous"
+             onerror="handleImgFallback(this)">
 
-      <div class="hotspots-layer" id="hotspotsLayer">
-        <!-- Hotspots injected dynamically with Supabase Cloud Position Sync -->
+        <div class="hotspots-layer" id="hotspotsLayer">
+          <!-- Hotspots injected dynamically with Supabase Cloud Position Sync -->
+        </div>
+      </div>
+
+      <!-- DISCLAIMER TEXT -->
+      <div class="map-disclaimer-bar">
+        "The images shown are for illustration purposes only."
       </div>
     </div>
   </main>
@@ -2339,7 +2364,7 @@
           scale: 2,
           useCORS: true,
           allowTaint: true,
-          backgroundColor: '#ffffff'
+          backgroundColor: '#090d16'
         });
 
         const link = document.createElement('a');
