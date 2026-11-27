@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
-  <title>Infinity Sky Lounge - King & Queen OF THE NIGHT 2026</title>
+  <title>Rooftop Bar & Lounge - NYE 2027 | Platinum Hotel Balikpapan</title>
   
   <link rel="icon" type="image/png" href="favicon.png">
   <link rel="apple-touch-icon" href="favicon.png">
@@ -533,15 +533,15 @@
         <div class="brand-title">
           <h1>Platinum Hotel & Convention Hall</h1>
           <p>
-            <span>INFINITY SKY LOUNGE</span>
-            <span class="event-badge"><i class="fa-solid fa-crown"></i> KING & QUEEN 2026</span>
+            <span>ROOFTOP BAR & LOUNGE</span>
+            <span class="event-badge"><i class="fa-solid fa-crown"></i> NYE 2027</span>
           </p>
         </div>
       </div>
 
       <div class="hdr-controls">
         <div class="metrics-group">
-          <div class="metric-card-lg" onclick="openReportModal()" title="Lihat Inventaris Lounge">
+          <div class="metric-card-lg" onclick="openReportModal()" title="Lihat Inventaris Lower Deck">
             <i class="fa-solid fa-couch" style="color: #f59e0b;"></i>
             <div class="txt-wrap">
               <span>Lounge (L)</span>
@@ -606,7 +606,7 @@
     <div class="legend-tag">
       <div style="display:flex; align-items:center; gap:6px;"><div class="dot-node avail"></div> <span id="legendAvailText">Lounge: 25 | Cockpit: 13</span></div>
       <div style="display:flex; align-items:center; gap:6px;"><div class="dot-node booked"></div> <span id="legendBookedText">0 Booked</span></div>
-      <div style="color: #0284c7; font-size: 0.7rem; font-weight: 700;"><i class="fa-solid fa-cloud"></i> Sinkronisasi Cloud Publik Aktif</div>
+      <div style="color: #0284c7; font-size: 0.7rem; font-weight: 700;"><i class="fa-solid fa-cloud"></i> Rooftop Cloud Sync Aktif</div>
     </div>
     
     <div class="zoom-group">
@@ -626,7 +626,7 @@
       <div class="map-img-wrapper">
         <img id="mainDenahImg" 
              src="denah.jpg" 
-             alt="Infinity Sky Lounge - King & Queen 2026" 
+             alt="Rooftop Bar & Lounge - NYE 2027" 
              class="render-3d-img"
              crossorigin="anonymous"
              onerror="handleImgFallback(this)">
@@ -671,12 +671,12 @@
         <!-- KASIR MENU & CUSTOM INPUT -->
         <div style="background: #f8fafc; border: 1px solid var(--border-color); border-radius: 10px; padding: 12px; display: flex; flex-direction: column; gap: 10px;">
           <label style="font-size: 0.8rem; font-weight: 700; color: #b45309; display: flex; align-items: center; gap: 6px;">
-            <i class="fa-solid fa-utensils"></i> Kasir Menu & Paket Promo Lounge
+            <i class="fa-solid fa-utensils"></i> Kasir Menu & Paket Promo Rooftop
           </label>
 
           <div style="display: flex; gap: 8px;">
             <select id="selectMasterMenuDropdown" class="inp-field" style="flex: 1;">
-              <option value="">-- Pilih Menu / Paket Lounge --</option>
+              <option value="">-- Pilih Menu / Paket Rooftop --</option>
             </select>
             <button type="button" class="btn-action" style="background: #0284c7; color: #fff; padding: 0 16px; min-height: 44px;" onclick="addCartItemFromDropdown()">
               <i class="fa-solid fa-plus"></i> Tambah
@@ -828,12 +828,12 @@
 
         <div style="background: #f8fafc; border: 1px solid var(--border-color); border-radius: 10px; padding: 12px; display: flex; flex-direction: column; gap: 10px;">
           <label style="font-size: 0.8rem; font-weight: 700; color: #b45309; display: flex; align-items: center; gap: 6px;">
-            <i class="fa-solid fa-utensils"></i> Kasir Menu & Paket Promo Lounge
+            <i class="fa-solid fa-utensils"></i> Kasir Menu & Paket Promo Rooftop
           </label>
 
           <div style="display: flex; gap: 8px;">
             <select id="selectRegMasterMenuDropdown" class="inp-field" style="flex: 1;">
-              <option value="">-- Pilih Menu / Paket Lounge --</option>
+              <option value="">-- Pilih Menu / Paket Rooftop --</option>
             </select>
             <button type="button" class="btn-action" style="background: #0284c7; color: #fff; padding: 0 16px; min-height: 44px;" onclick="addRegCartItemFromDropdown()">
               <i class="fa-solid fa-plus"></i> Tambah
@@ -899,17 +899,17 @@
     </div>
   </div>
 
-  <!-- MODAL MASTER MENU (100% CLOUD SUPABASE) -->
+  <!-- MODAL MASTER MENU (100% CLOUD SUPABASE rt_master_menu) -->
   <div id="masterMenuModal" class="modal-backdrop">
     <div class="modal-container">
       <div class="modal-header">
-        <h3 style="color: #b45309;"><i class="fa-solid fa-utensils"></i> Master Menu & Produk Lounge</h3>
+        <h3 style="color: #b45309;"><i class="fa-solid fa-utensils"></i> Master Menu & Produk Rooftop</h3>
         <button class="btn-x" onclick="closeMasterMenuModal()"><i class="fa-solid fa-xmark"></i></button>
       </div>
 
       <div class="modal-body">
         <div style="background: rgba(217, 119, 6, 0.1); border: 1px solid rgba(217, 119, 6, 0.3); padding: 10px 12px; border-radius: 8px; font-size: 0.78rem; color: #b45309; font-weight: 600;">
-          <i class="fa-solid fa-cloud"></i> Semua item di bawah ini tersimpan permanen di Cloud Supabase dan tidak hilang saat di-refresh.
+          <i class="fa-solid fa-cloud"></i> Semua item di bawah ini tersimpan permanen di Cloud Supabase (`rt_master_menu`).
         </div>
 
         <input type="hidden" id="editMasterMenuId" value="">
@@ -1015,7 +1015,7 @@
   <div id="reportModal" class="modal-backdrop">
     <div class="modal-container">
       <div class="modal-header">
-        <h3><i class="fa-solid fa-chart-line" style="color: #0077b6;"></i> Event Executive Dashboard</h3>
+        <h3><i class="fa-solid fa-chart-line" style="color: #0077b6;"></i> Rooftop Event Executive Dashboard</h3>
         <button class="btn-x" onclick="closeReportModal()"><i class="fa-solid fa-xmark"></i></button>
       </div>
 
@@ -1024,11 +1024,11 @@
           <div class="dash-card hero-card">
             <div class="card-lbl"><i class="fa-solid fa-coins" style="color: #0077b6;"></i> Total Gross Revenue (Meja + FDC)</div>
             <div class="card-val" id="repTotalGross" style="color: #0077b6;">Rp 0</div>
-            <div class="card-sub">Akumulasi seluruh transaksi reservasi meja Lounge, Cockpit & tiket standing</div>
+            <div class="card-sub">Akumulasi seluruh transaksi reservasi meja Rooftop, Cockpit & tiket standing</div>
           </div>
 
           <div class="dash-card">
-            <div class="card-lbl"><i class="fa-solid fa-couch" style="color: #d97706;"></i> Lounge Tables (L)</div>
+            <div class="card-lbl"><i class="fa-solid fa-couch" style="color: #d97706;"></i> Lower Deck (L)</div>
             <div><span id="repLoungeBooked" style="color: #d97706; font-size: 1.25rem; font-weight: 800;">0</span> <span style="font-size:0.75rem; color:var(--text-muted);">/ 25 Unit</span></div>
             <div class="occupancy-bar-wrap">
               <div id="repLoungeBar" class="occupancy-bar" style="background: #d97706;"></div>
@@ -1064,7 +1064,7 @@
           <div class="dash-card" style="grid-column: span 2; background: #f1f5f9;">
             <div class="card-lbl"><i class="fa-solid fa-users" style="color: #0f172a;"></i> Total Estimated Attendees (Crowd)</div>
             <div class="card-val" id="repTotalPax" style="font-size: 1.1rem; color: #0f172a;">0 Total Tamu</div>
-            <div class="card-sub" id="repCrowdBreakdown">0 Seating (Lounge + Cockpit) + 0 Standing FDC</div>
+            <div class="card-sub" id="repCrowdBreakdown">0 Seating (Lower Deck + Cockpit) + 0 Standing FDC</div>
           </div>
         </div>
       </div>
@@ -1214,10 +1214,10 @@
       subscribeRealtime();
     });
 
-    // --- LOAD MASTER MENU 100% DARI SUPABASE ---
+    // --- LOAD MASTER MENU 100% DARI SUPABASE (rt_master_menu) ---
     async function fetchMasterMenuFromCloud() {
       const { data, error } = await _supabase
-        .from('kq_master_menu')
+        .from('rt_master_menu')
         .select('*')
         .order('id', { ascending: true });
 
@@ -1242,7 +1242,7 @@
 
     async function loadTableConfigsFromCloud() {
       try {
-        const { data, error } = await _supabase.from('kq_table_positions').select('*');
+        const { data, error } = await _supabase.from('rt_table_positions').select('*');
         if (!error && data && data.length > 0) {
           data.forEach(row => {
             const tid = String(row.table_id).trim();
@@ -1273,7 +1273,7 @@
       const t = tableConfigs[id];
       if (!t) return;
       try {
-        await _supabase.from('kq_table_positions').upsert({
+        await _supabase.from('rt_table_positions').upsert({
           table_id: String(id),
           top: t.top,
           left: t.left,
@@ -1288,7 +1288,7 @@
     async function resetHotspotsPosition() {
       if (confirm('Kembalikan posisi kotak meja ke default presisi 3D terbaru dan sinkronkan ke cloud?')) {
         try {
-          await _supabase.from('kq_table_positions').delete().neq('table_id', 'XXX');
+          await _supabase.from('rt_table_positions').delete().neq('table_id', 'XXX');
         } catch(e) {}
         tableConfigs = {};
         ALL_TABLE_IDS.forEach(id => {
@@ -1390,7 +1390,7 @@
 
     async function fetchAllCloudData() {
       try {
-        const { data: tableData, error: tErr } = await _supabase.from('kq_table_bookings').select('*');
+        const { data: tableData, error: tErr } = await _supabase.from('rt_table_bookings').select('*');
         if (!tErr && tableData) {
           bookings = {};
           tableData.forEach(row => {
@@ -1418,7 +1418,7 @@
           });
         }
 
-        const { data: fdcData, error: fErr } = await _supabase.from('kq_fdc_bookings').select('*');
+        const { data: fdcData, error: fErr } = await _supabase.from('rt_fdc_bookings').select('*');
         if (!fErr && fdcData) {
           fdcBookings = fdcData.map(row => ({
             id: row.id,
@@ -1431,7 +1431,7 @@
           }));
         }
 
-        const { data: posData } = await _supabase.from('kq_table_positions').select('*');
+        const { data: posData } = await _supabase.from('rt_table_positions').select('*');
         if (posData && posData.length > 0) {
           posData.forEach(row => {
             const tid = String(row.table_id).trim();
@@ -1456,17 +1456,17 @@
 
     function subscribeRealtime() {
       _supabase
-        .channel('schema-kq-changes')
-        .on('postgres_changes', { event: '*', schema: 'public', table: 'kq_table_bookings' }, () => {
+        .channel('schema-rt-changes')
+        .on('postgres_changes', { event: '*', schema: 'public', table: 'rt_table_bookings' }, () => {
           fetchAllCloudData();
         })
-        .on('postgres_changes', { event: '*', schema: 'public', table: 'kq_fdc_bookings' }, () => {
+        .on('postgres_changes', { event: '*', schema: 'public', table: 'rt_fdc_bookings' }, () => {
           fetchAllCloudData();
         })
-        .on('postgres_changes', { event: '*', schema: 'public', table: 'kq_table_positions' }, () => {
+        .on('postgres_changes', { event: '*', schema: 'public', table: 'rt_table_positions' }, () => {
           fetchAllCloudData();
         })
-        .on('postgres_changes', { event: '*', schema: 'public', table: 'kq_master_menu' }, () => {
+        .on('postgres_changes', { event: '*', schema: 'public', table: 'rt_master_menu' }, () => {
           fetchMasterMenuFromCloud();
         })
         .subscribe();
@@ -1548,7 +1548,7 @@
     function populateRegBookingMenuDropdown() {
       const dropdown = document.getElementById('selectRegMasterMenuDropdown');
       if (!dropdown) return;
-      let html = '<option value="">-- Pilih Menu / Paket Lounge --</option>';
+      let html = '<option value="">-- Pilih Menu / Paket Rooftop --</option>';
       masterMenu.forEach(item => {
         html += `<option value="${item.id}">${item.name} - Rp ${item.price.toLocaleString('id-ID')}</option>`;
       });
@@ -1723,7 +1723,7 @@
         cart_items: JSON.stringify(regCurrentCart)
       };
 
-      const { error } = await _supabase.from('kq_table_bookings').upsert(payload, { onConflict: 'table_id' });
+      const { error } = await _supabase.from('rt_table_bookings').upsert(payload, { onConflict: 'table_id' });
       if (error) {
         alert('Gagal menyimpan ke Supabase: ' + error.message);
         return;
@@ -1736,7 +1736,7 @@
       await fetchAllCloudData();
     }
 
-    // --- MASTER MENU MODAL (100% CLOUD SUPABASE) ---
+    // --- MASTER MENU MODAL (100% CLOUD SUPABASE rt_master_menu) ---
     function openMasterMenuModal() {
       document.getElementById('editMasterMenuId').value = '';
       document.getElementById('menuItemName').value = '';
@@ -1776,7 +1776,7 @@
       const itemId = editId ? Number(editId) : Date.now();
 
       const { error } = await _supabase
-        .from('kq_master_menu')
+        .from('rt_master_menu')
         .upsert({
           id: itemId,
           name: name,
@@ -1802,7 +1802,7 @@
       if (!confirm('Hapus menu ini secara permanen dari Cloud?')) return;
 
       const { error } = await _supabase
-        .from('kq_master_menu')
+        .from('rt_master_menu')
         .delete()
         .eq('id', Number(id));
 
@@ -1847,7 +1847,7 @@
     function populateBookingMenuDropdown() {
       const dropdown = document.getElementById('selectMasterMenuDropdown');
       if (!dropdown) return;
-      let html = '<option value="">-- Pilih Menu / Paket Lounge --</option>';
+      let html = '<option value="">-- Pilih Menu / Paket Rooftop --</option>';
       masterMenu.forEach(item => {
         html += `<option value="${item.id}">${item.name} - Rp ${item.price.toLocaleString('id-ID')}</option>`;
       });
@@ -2032,7 +2032,7 @@
       };
 
       const { error } = await _supabase
-        .from('kq_table_bookings')
+        .from('rt_table_bookings')
         .upsert(payload, { onConflict: 'table_id' });
 
       if (error) {
@@ -2050,7 +2050,7 @@
 
     async function deleteBooking() {
       if (confirm('Batalkan reservasi #' + currentTable + '? Meja akan kembali tersedia.')) {
-        const { error } = await _supabase.from('kq_table_bookings').delete().eq('table_id', String(currentTable));
+        const { error } = await _supabase.from('rt_table_bookings').delete().eq('table_id', String(currentTable));
         if (!error) {
           delete bookings[currentTable];
           refreshMapNodes();
@@ -2082,7 +2082,7 @@
       printWindow.document.write(`
         <html>
         <head>
-          <title>Konfirmasi Reservasi - Infinity Sky Lounge</title>
+          <title>Konfirmasi Reservasi - Rooftop Bar & Lounge NYE 2027</title>
           <style>
             body { font-family: 'Plus Jakarta Sans', Arial, sans-serif; padding: 30px; color: #111; max-width: 600px; margin: 0 auto; }
             .header { text-align: center; border-bottom: 2px solid #0077b6; padding-bottom: 15px; margin-bottom: 20px; }
@@ -2098,7 +2098,7 @@
         <body onload="window.print(); window.close();">
           <div class="header">
             <h2>PLATINUM HOTEL & CONVENTION HALL</h2>
-            <p>INFINITY SKY LOUNGE &bull; KING & QUEEN OF THE NIGHT 2026</p>
+            <p>ROOFTOP BAR & LOUNGE &bull; NYE 2027 CELEBRATION</p>
           </div>
           <div class="content">
             <h3 style="text-align:center; color:#0077b6; margin-bottom: 15px;">BUKTI KONFIRMASI RESERVASI MEJA</h3>
@@ -2119,7 +2119,7 @@
             <div style="margin-top: 10px;"><span class="label">Catatan Khusus:</span> <span>${notes}</span></div>
           </div>
           <div class="footer">
-            <p>Terima kasih atas reservasi Anda di Infinity Sky Lounge Balikpapan.</p>
+            <p>Terima kasih atas reservasi Anda di Rooftop Bar & Lounge Platinum Hotel Balikpapan.</p>
             <p>Simpan bukti konfirmasi ini untuk ditunjukkan kepada petugas saat kedatangan.</p>
           </div>
         </body>
@@ -2160,7 +2160,7 @@
       }
 
       const payload = {
-        id: 'KQ-FDC-' + Date.now().toString().slice(-6),
+        id: 'RT-FDC-' + Date.now().toString().slice(-6),
         guest_name: name,
         guest_phone: phone,
         pax: pax,
@@ -2169,7 +2169,7 @@
         notes: document.getElementById('fdcNotes').value
       };
 
-      const { error } = await _supabase.from('kq_fdc_bookings').insert([payload]);
+      const { error } = await _supabase.from('rt_fdc_bookings').insert([payload]);
       if (error) {
         alert('Gagal menyimpan tiket FDC ke Supabase: ' + error.message);
         return;
@@ -2215,7 +2215,7 @@
 
     async function deleteFDC(id) {
       if (confirm('Hapus pesanan tiket FDC ini dari database?')) {
-        const { error } = await _supabase.from('kq_fdc_bookings').delete().eq('id', id);
+        const { error } = await _supabase.from('rt_fdc_bookings').delete().eq('id', id);
         if (!error) {
           await fetchAllCloudData();
           openFDCListModal();
@@ -2287,13 +2287,13 @@
       document.getElementById('repTerraceBar').style.width = terraceOccupancy + '%';
 
       document.getElementById('repTableGrossRev').innerText = 'Rp ' + tableGrossRev.toLocaleString('id-ID');
-      document.getElementById('repTablePaxDetail').innerText = `${seatingPax} Pax dari ${loungeBooked + terraceBooked} meja terisi (${loungeBooked} Lounge + ${terraceBooked} Cockpit)`;
+      document.getElementById('repTablePaxDetail').innerText = `${seatingPax} Pax dari ${loungeBooked + terraceBooked} meja terisi (${loungeBooked} Lower Deck + ${terraceBooked} Cockpit)`;
 
       document.getElementById('repFDCPax').innerText = `${fdcPax} Pax`;
       document.getElementById('repFDCTotalRev').innerText = `Rp ${fdcTotalRev.toLocaleString('id-ID')} Total FDC Revenue`;
 
       document.getElementById('repTotalPax').innerText = `${totalCrowd} Total Tamu Hadir`;
-      document.getElementById('repCrowdBreakdown').innerText = `${seatingPax} Seating (${loungePax} Lounge + ${terracePax} Cockpit) + ${fdcPax} Standing FDC`;
+      document.getElementById('repCrowdBreakdown').innerText = `${seatingPax} Seating (${loungePax} Lower Deck + ${terracePax} Cockpit) + ${fdcPax} Standing FDC`;
 
       document.getElementById('reportModal').classList.add('open');
     }
@@ -2369,7 +2369,7 @@
 
         const link = document.createElement('a');
         const dateStr = new Date().toISOString().slice(0, 10);
-        link.download = `Layout_KingAndQueen_${dateStr}.jpg`;
+        link.download = `Rooftop_NYE2027_${dateStr}.jpg`;
         link.href = canvas.toDataURL('image/jpeg', 0.92);
         link.click();
       } catch (err) {
@@ -2406,7 +2406,7 @@
       const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
       const a = document.createElement('a');
       a.href = URL.createObjectURL(blob);
-      a.download = `Executive_Report_${new Date().toISOString().slice(0, 10)}.csv`;
+      a.download = `Rooftop_NYE2027_Report_${new Date().toISOString().slice(0, 10)}.csv`;
       a.click();
     }
 
