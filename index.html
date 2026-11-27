@@ -1314,9 +1314,9 @@
         <div class="auto-pdf-box">
           <label class="auto-pdf-toggle">
             <input type="checkbox" id="autoPdfBooking" checked>
-            <span>Auto-Generate PDF &amp; Send Confirmation Email on Save</span>
+            <span>Auto-Email Confirmation Letter &amp; Open PDF on Save</span>
           </label>
-          <span style="font-size: 0.68rem;">Sender: fbmbpn@platinumhotelindonesia.com</span>
+          <span style="font-size: 0.68rem;">From: fbmbpn@platinumhotelindonesia.com</span>
         </div>
       </div>
 
@@ -1488,9 +1488,9 @@
         <div class="auto-pdf-box">
           <label class="auto-pdf-toggle">
             <input type="checkbox" id="autoPdfRegistration" checked>
-            <span>Auto-Generate PDF &amp; Send Confirmation Email after Registration</span>
+            <span>Auto-Email Confirmation Letter &amp; Open PDF after Registration</span>
           </label>
-          <span style="font-size: 0.68rem;">Sender: fbmbpn@platinumhotelindonesia.com</span>
+          <span style="font-size: 0.68rem;">From: fbmbpn@platinumhotelindonesia.com</span>
         </div>
       </div>
 
@@ -2185,7 +2185,7 @@
       openBooking(tableId, cfg.type, cfg.pax, cfg.cat);
     }
 
-    /* EMAIL & WHATSAPP CONFIRMATION */
+    /* FORMAL ENGLISH CONFIRMATION EMAIL BODY */
     function buildConfirmationEmailHtml(d) {
       const itemsRows = d.cart && d.cart.length > 0
         ? d.cart.map((c, idx) => `
@@ -2206,16 +2206,16 @@
           : 'Settled in Full (Rp 0)';
 
       return `
-        <div style="font-family:'Plus Jakarta Sans',Arial,sans-serif;max-width:680px;margin:0 auto;color:#0f172a;line-height:1.6;">
+        <div style="font-family:'Plus Jakarta Sans',Arial,sans-serif;max-width:680px;margin:0 auto;color:#0f172a;line-height:1.62;">
           <div style="background:#073b69;color:#ffffff;padding:18px 22px;border-bottom:3px solid #c59b38;">
             <div style="font-family:'Cinzel',Georgia,serif;font-size:16px;font-weight:800;letter-spacing:0.6px;">PLATINUM HOTEL &amp; CONVENTION HALL</div>
             <div style="font-size:11px;font-weight:700;color:#f5d77f;letter-spacing:0.8px;margin-top:3px;">ROOFTOP BAR &amp; LOUNGE &bull; NEW YEAR'S EVE 2027 CELEBRATION</div>
             <div style="font-size:11px;color:#dbeafe;margin-top:2px;">Jl. Soekarno Hatta, Balikpapan, East Kalimantan, Indonesia</div>
           </div>
           <div style="padding:22px;border:1px solid #d6e0eb;border-top:none;background:#ffffff;">
-            <div style="font-size:13px;font-weight:800;color:#073b69;text-align:center;letter-spacing:0.8px;margin-bottom:16px;">OFFICIAL RESERVATION CONFIRMATION</div>
+            <div style="font-size:13.5px;font-weight:800;color:#073b69;text-align:center;letter-spacing:0.9px;margin-bottom:16px;">OFFICIAL RESERVATION CONFIRMATION</div>
             <p style="font-size:13px;margin-bottom:12px;">Dear <strong>${escapeHtml(d.name)}</strong>,</p>
-            <p style="font-size:13px;margin-bottom:16px;">Thank you for choosing <strong>Rooftop Bar &amp; Lounge at Platinum Hotel &amp; Convention Hall Balikpapan</strong> to celebrate <strong>New Year's Eve 2027</strong>. We are pleased to confirm your table reservation under the following details:</p>
+            <p style="font-size:13px;margin-bottom:16px;">Thank you for selecting <strong>Rooftop Bar &amp; Lounge at Platinum Hotel &amp; Convention Hall Balikpapan</strong> to celebrate <strong>New Year's Eve 2027</strong>. We are delighted to confirm your table reservation with the following details:</p>
 
             <table style="width:100%;border-collapse:collapse;margin-bottom:16px;font-size:12.5px;">
               <tr><td style="padding:6px 8px;border-bottom:1px solid #e2e8f0;color:#475569;width:36%;"><strong>Reference Number</strong></td><td style="padding:6px 8px;border-bottom:1px solid #e2e8f0;">${escapeHtml(d.docRef)}</td></tr>
@@ -2225,7 +2225,7 @@
               <tr><td style="padding:6px 8px;border-bottom:1px solid #e2e8f0;color:#475569;"><strong>Venue &amp; Table</strong></td><td style="padding:6px 8px;border-bottom:1px solid #e2e8f0;"><strong>Rooftop Bar &amp; Lounge — ${escapeHtml(d.tableLabel)}</strong></td></tr>
               <tr><td style="padding:6px 8px;border-bottom:1px solid #e2e8f0;color:#475569;"><strong>Number of Guests (Pax)</strong></td><td style="padding:6px 8px;border-bottom:1px solid #e2e8f0;">${escapeHtml(String(d.pax))} Guests</td></tr>
               <tr><td style="padding:6px 8px;border-bottom:1px solid #e2e8f0;color:#475569;"><strong>Arrival Time</strong></td><td style="padding:6px 8px;border-bottom:1px solid #e2e8f0;">${escapeHtml(d.time)}</td></tr>
-              <tr><td style="padding:6px 8px;border-bottom:1px solid #e2e8f0;color:#475569;"><strong>Special Requests</strong></td><td style="padding:6px 8px;border-bottom:1px solid #e2e8f0;">${escapeHtml(d.notes)}</td></tr>
+              <tr><td style="padding:6px 8px;border-bottom:1px solid #e2e8f0;color:#475569;"><strong>Special Notes</strong></td><td style="padding:6px 8px;border-bottom:1px solid #e2e8f0;">${escapeHtml(d.notes)}</td></tr>
             </table>
 
             <table style="width:100%;border-collapse:collapse;margin-bottom:16px;font-size:12px;">
@@ -2260,7 +2260,7 @@
               <strong>Reservation Terms &amp; Conditions:</strong>
               <ul style="margin:6px 0 0 18px;">
                 <li style="margin-bottom:4px;">Please present this confirmation letter (printed or digital) to our greeter upon arrival at Rooftop Bar &amp; Lounge.</li>
-                <li style="margin-bottom:4px;">Tables are held for the scheduled arrival time; kindly notify our team in advance if your arrival schedule changes.</li>
+                <li style="margin-bottom:4px;">Tables will be held for the scheduled arrival time; please inform our team in advance should your arrival time change.</li>
                 <li>Any remaining balance or applicable charges shall be settled in accordance with outlet policies.</li>
               </ul>
             </div>
@@ -2314,7 +2314,7 @@
         });
 
         if (showFeedback) {
-          alert(`Confirmation letter has been dispatched to ${email}.`);
+          alert(`Official reservation confirmation has been sent to ${email}.`);
         }
         return true;
       } catch (err) {
@@ -2360,16 +2360,16 @@
         '_Rooftop Bar & Lounge — New Year\'s Eve 2027_',
         '',
         `Dear *${d.name}*,`,
-        'Thank you for choosing Rooftop Bar & Lounge to celebrate New Year\'s Eve 2027. Here are your confirmed reservation details:',
+        'Thank you for selecting Rooftop Bar & Lounge at Platinum Hotel & Convention Hall Balikpapan to celebrate New Year\'s Eve 2027. We are delighted to confirm your table reservation with the following details:',
         '',
         `*Ref:* ${d.docRef}`,
         `*Table:* ${d.tableLabel}`,
         `*Guests:* ${d.pax} Pax`,
         `*Arrival Time:* ${d.time}`,
         `*Estimated Menu Total:* Rp ${Number(d.totalKonsumsi).toLocaleString('id-ID')}`,
-        `*Deposit (DP):* Rp ${Number(d.dp).toLocaleString('id-ID')}`,
+        `*Deposit Received (DP):* Rp ${Number(d.dp).toLocaleString('id-ID')}`,
         `*${balanceText}*`,
-        `*Special Requests:* ${d.notes}`,
+        `*Special Notes:* ${d.notes}`,
         '',
         '*Selected Menu / Packages:*',
         itemsText,
