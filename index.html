@@ -626,7 +626,7 @@
       align-items: center;
       justify-content: space-between;
       gap: 10px;
-      font-size: 0.76rem;
+      font-size: 0.75rem;
       color: #7c5812;
       font-weight: 700;
     }
@@ -1045,9 +1045,14 @@
             <input type="tel" id="guestPhone" class="inp-field" placeholder="0812-xxxx-xxxx">
           </div>
           <div class="form-row">
-            <label><i class="fa-solid fa-users"></i> Jumlah Pax</label>
-            <input type="number" id="guestPax" class="inp-field" value="4" min="1">
+            <label><i class="fa-solid fa-envelope"></i> Email Tamu (Auto-Send)</label>
+            <input type="email" id="guestEmail" class="inp-field" placeholder="tamu@email.com">
           </div>
+        </div>
+
+        <div class="form-row">
+          <label><i class="fa-solid fa-users"></i> Jumlah Pax</label>
+          <input type="number" id="guestPax" class="inp-field" value="4" min="1">
         </div>
 
         <div style="background: #f4f9fe; border: 1px solid var(--border-blue); border-radius: 10px; padding: 12px; display: flex; flex-direction: column; gap: 10px;">
@@ -1131,9 +1136,9 @@
         <div class="auto-pdf-box">
           <label class="auto-pdf-toggle">
             <input type="checkbox" id="autoPdfBooking" checked>
-            <span>Auto-Cetak / Kirim PDF Konfirmasi saat Simpan</span>
+            <span>Auto-PDF &amp; Kirim Email Konfirmasi saat Simpan</span>
           </label>
-          <span style="font-size: 0.68rem;">Official PDF</span>
+          <span style="font-size: 0.68rem;">fbmbpn@platinumhotelindonesia.com</span>
         </div>
       </div>
 
@@ -1146,7 +1151,7 @@
             <i class="fa-solid fa-file-pdf"></i> Cetak PDF
           </button>
           <button class="btn-modal-save" onclick="saveBooking()">
-            <i class="fa-solid fa-check-double"></i> Simpan Registrasi
+            <i class="fa-solid fa-paper-plane"></i> Simpan &amp; Kirim
           </button>
         </div>
       </div>
@@ -1213,9 +1218,14 @@
             <input type="tel" id="regGuestPhone" class="inp-field" placeholder="0812-xxxx-xxxx">
           </div>
           <div class="form-row">
-            <label><i class="fa-solid fa-users"></i> Jumlah Pax</label>
-            <input type="number" id="regGuestPax" class="inp-field" value="4" min="1">
+            <label><i class="fa-solid fa-envelope"></i> Email Tamu (Auto-Send)</label>
+            <input type="email" id="regGuestEmail" class="inp-field" placeholder="tamu@email.com">
           </div>
+        </div>
+
+        <div class="form-row">
+          <label><i class="fa-solid fa-users"></i> Jumlah Pax</label>
+          <input type="number" id="regGuestPax" class="inp-field" value="4" min="1">
         </div>
 
         <div style="background: #f4f9fe; border: 1px solid var(--border-blue); border-radius: 10px; padding: 12px; display: flex; flex-direction: column; gap: 10px;">
@@ -1294,9 +1304,9 @@
         <div class="auto-pdf-box">
           <label class="auto-pdf-toggle">
             <input type="checkbox" id="autoPdfRegistration" checked>
-            <span>Auto-Cetak / Kirim PDF setelah Registrasi Selesai</span>
+            <span>Auto-PDF &amp; Kirim Email setelah Registrasi Selesai</span>
           </label>
-          <span style="font-size: 0.68rem;">Otomatis</span>
+          <span style="font-size: 0.68rem;">fbmbpn@platinumhotelindonesia.com</span>
         </div>
       </div>
 
@@ -1307,7 +1317,7 @@
             <i class="fa-solid fa-file-pdf"></i> Preview PDF
           </button>
           <button class="btn-modal-save" onclick="saveRegistrationBooking()">
-            <i class="fa-solid fa-paper-plane"></i> Simpan &amp; Kirim PDF
+            <i class="fa-solid fa-paper-plane"></i> Simpan &amp; Kirim
           </button>
         </div>
       </div>
@@ -1524,6 +1534,7 @@
   <script>
     const SUPABASE_URL = 'https://hupvhnvztvzqbdhuukpt.supabase.co';
     const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imh1cHZobnZ6dHZ6cWJkaHV1a3B0Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTAyNDY4NTIsImV4cCI6MjEwNTgyMjg1Mn0.E-XiAzngGIe_KAe2Znk201Jy55zwLUMOwL4cHhxQCPQ';
+    const ROOFTOP_EMAIL_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbwR6imlybZ032a0KKDlD_VDu2Hfo2VivNNqQAszmUKShOR8BaqXTjbH3wAvuqvTv-vP/exec';
 
     const _supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
     const FDC_DEFAULT_PRICE = 125000;
@@ -1819,6 +1830,7 @@
             bookings[tid] = {
               name: row.guest_name,
               phone: row.guest_phone,
+              email: row.guest_email || '',
               category: row.category,
               pax: row.pax,
               dp: Number(row.dp),
@@ -1876,6 +1888,20 @@
         .on('postgres_changes', { event: '*', schema: 'public', table: 'rt_table_positions' }, () => fetchAllCloudData())
         .on('postgres_changes', { event: '*', schema: 'public', table: 'rt_master_menu' }, () => fetchMasterMenuFromCloud())
         .subscribe();
+    }
+
+    async function sendConfirmationEmailToGuest(emailPayload) {
+      if (!ROOFTOP_EMAIL_WEBHOOK_URL) return;
+      try {
+        await fetch(ROOFTOP_EMAIL_WEBHOOK_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(emailPayload)
+        });
+      } catch (err) {
+        console.error('Gagal mengirim notifikasi email:', err);
+      }
     }
 
     function openEditCartItemModal(cartType, id) {
@@ -1936,6 +1962,7 @@
 
       document.getElementById('regGuestName').value = '';
       document.getElementById('regGuestPhone').value = '';
+      document.getElementById('regGuestEmail').value = '';
       document.getElementById('regGuestPax').value = '4';
       document.getElementById('regGuestDP').value = '';
       document.getElementById('regGuestCreatedBy').value = localStorage.getItem('last_staff_name') || '';
@@ -2065,6 +2092,7 @@
       const tid = document.getElementById('regTableIdSelect').value;
       const name = document.getElementById('regGuestName').value.trim();
       const phone = document.getElementById('regGuestPhone').value.trim();
+      const email = document.getElementById('regGuestEmail').value.trim();
       const pax = parseInt(document.getElementById('regGuestPax').value, 10) || 4;
       const rawDP = document.getElementById('regGuestDP').value.replace(/[^0-9]/g, '');
       const dp = rawDP ? parseInt(rawDP, 10) : 0;
@@ -2094,6 +2122,7 @@
         table_id: String(tid),
         guest_name: name,
         guest_phone: phone,
+        guest_email: email,
         category: TERRACE_IDS.includes(tid) ? 'terrace' : 'lounge',
         pax,
         dp,
@@ -2112,10 +2141,14 @@
       }
 
       const cfg = tableConfigs[tid] || DEFAULT_TABLE_CONFIGS[tid];
+      const docRef = `PHB-RT-NYE27-${tid}-${now.getTime().toString().slice(-4)}`;
+      const tableLabel = `#${tid} (${cfg?.type || 'Rooftop Table'})`;
+
       const pdfData = {
-        tableLabel: `#${tid} (${cfg?.type || 'Rooftop Table'})`,
+        tableLabel,
         name,
         phone: phone || '-',
+        email: email || '-',
         pax,
         time,
         totalKonsumsi,
@@ -2125,7 +2158,7 @@
         timestamp,
         notes: customNotes || '-',
         cart: [...regCurrentCart],
-        docRef: `PHB-RT-NYE27-${tid}-${now.getTime().toString().slice(-4)}`
+        docRef
       };
 
       bookings[tid] = payload;
@@ -2135,6 +2168,22 @@
       await fetchAllCloudData();
 
       if (autoPdf) {
+        await sendConfirmationEmailToGuest({
+          doc_ref: docRef,
+          table_id: tid,
+          table_label: tableLabel,
+          guest_name: name,
+          guest_phone: phone || '-',
+          guest_email: email,
+          pax,
+          arrival_time: time,
+          total_konsumsi: totalKonsumsi,
+          dp,
+          balance,
+          created_by: staff || '-',
+          notes: customNotes || '-',
+          cart_items: regCurrentCart
+        });
         openConfirmationPDFWindow(pdfData);
       }
     }
@@ -2343,6 +2392,7 @@
       if (data) {
         document.getElementById('guestName').value = data.name || '';
         document.getElementById('guestPhone').value = data.phone || '';
+        document.getElementById('guestEmail').value = data.email || '';
         document.getElementById('guestPax').value = data.pax || defaultPax;
         document.getElementById('guestDP').value = data.dp ? parseInt(data.dp, 10).toLocaleString('id-ID') : '';
         document.getElementById('guestTime').value = data.time || '21:00 WITA';
@@ -2358,6 +2408,7 @@
       } else {
         document.getElementById('guestName').value = '';
         document.getElementById('guestPhone').value = '';
+        document.getElementById('guestEmail').value = '';
         document.getElementById('guestPax').value = defaultPax;
         document.getElementById('guestDP').value = '';
         document.getElementById('guestTime').value = '21:00 WITA';
@@ -2379,6 +2430,7 @@
     async function saveBooking() {
       const name = document.getElementById('guestName').value.trim();
       const phone = document.getElementById('guestPhone').value.trim();
+      const email = document.getElementById('guestEmail').value.trim();
       const rawDP = document.getElementById('guestDP').value.replace(/[^0-9]/g, '');
       const dp = rawDP ? parseInt(rawDP, 10) : 0;
       const totalKonsumsi = calculateCartTotal(currentCart);
@@ -2403,6 +2455,7 @@
         table_id: String(currentTable),
         guest_name: name,
         guest_phone: phone,
+        guest_email: email,
         category: currentCategory,
         pax,
         dp,
@@ -2420,10 +2473,14 @@
         return;
       }
 
+      const tableLabel = document.getElementById('modalTitle').innerText;
+      const docRef = `PHB-RT-NYE27-${currentTable}-${Date.now().toString().slice(-4)}`;
+
       const pdfData = {
-        tableLabel: document.getElementById('modalTitle').innerText,
+        tableLabel,
         name,
         phone: phone || '-',
+        email: email || '-',
         pax,
         time,
         totalKonsumsi,
@@ -2433,7 +2490,7 @@
         timestamp,
         notes: customNotes || '-',
         cart: [...currentCart],
-        docRef: `PHB-RT-NYE27-${currentTable}-${Date.now().toString().slice(-4)}`
+        docRef
       };
 
       bookings[currentTable] = payload;
@@ -2443,6 +2500,22 @@
       await fetchAllCloudData();
 
       if (autoPdf) {
+        await sendConfirmationEmailToGuest({
+          doc_ref: docRef,
+          table_id: currentTable,
+          table_label: tableLabel,
+          guest_name: name,
+          guest_phone: phone || '-',
+          guest_email: email,
+          pax,
+          arrival_time: time,
+          total_konsumsi: totalKonsumsi,
+          dp,
+          balance,
+          created_by: staff || '-',
+          notes: customNotes || '-',
+          cart_items: currentCart
+        });
         openConfirmationPDFWindow(pdfData);
       }
     }
@@ -2474,6 +2547,7 @@
           tableLabel: tid === 'PENDING' ? 'Belum Dipilih' : `#${tid} (${cfg?.type || 'Rooftop Table'})`,
           name: document.getElementById('regGuestName').value.trim() || '-',
           phone: document.getElementById('regGuestPhone').value.trim() || '-',
+          email: document.getElementById('regGuestEmail').value.trim() || '-',
           pax: document.getElementById('regGuestPax').value || '4',
           time: document.getElementById('regGuestTime').value || '21:00 WITA',
           totalKonsumsi,
@@ -2494,6 +2568,7 @@
         tableLabel: document.getElementById('modalTitle').innerText || '-',
         name: document.getElementById('guestName').value.trim() || '-',
         phone: document.getElementById('guestPhone').value.trim() || '-',
+        email: document.getElementById('guestEmail').value.trim() || '-',
         pax: document.getElementById('guestPax').value || '4',
         time: document.getElementById('guestTime').value || '21:00 WITA',
         totalKonsumsi,
@@ -2747,6 +2822,10 @@
             <tr>
               <td class="info-label">Nomor WhatsApp / Telepon</td>
               <td class="info-val">${escapeHtml(d.phone)}</td>
+            </tr>
+            <tr>
+              <td class="info-label">Email Konfirmasi</td>
+              <td class="info-val">${escapeHtml(d.email)}</td>
             </tr>
             <tr>
               <td class="info-label">Venue &amp; Nomor Meja</td>
@@ -3077,7 +3156,7 @@
         return;
       }
 
-      let csv = 'Area Kategori,Nomor Meja/ID,Nama Tamu,WhatsApp,Pax,DP (IDR),Total Konsumsi (IDR),Balance Sisa / Kurang Lebih (IDR),Jam Tiba,Created By (Staff),Waktu Input,Detail Menu & Catatan\n';
+      let csv = 'Area Kategori,Nomor Meja/ID,Nama Tamu,WhatsApp,Email,Pax,DP (IDR),Total Konsumsi (IDR),Balance Sisa / Kurang Lebih (IDR),Jam Tiba,Created By (Staff),Waktu Input,Detail Menu & Catatan\n';
       tableKeys.forEach(k => {
         const b = bookings[k];
         const catLabel = TERRACE_IDS.includes(k) ? 'COCKPIT DECK (C)' : 'LOWER DECK LOUNGE (L)';
@@ -3085,11 +3164,11 @@
         if (b.cart_items && Array.isArray(b.cart_items)) {
           menuTotal = b.cart_items.reduce((s, i) => s + (i.price * i.qty), 0);
         }
-        csv += `"${catLabel}","${k}","${b.name}","${b.phone}","${b.pax}","${b.dp}","${menuTotal}","${b.balance || 0}","${b.time}","${b.created_by || ''}","${b.timestamp || ''}","${(b.notes || '').replace(/"/g, '""')}"\n`;
+        csv += `"${catLabel}","${k}","${b.name}","${b.phone}","${b.email || ''}","${b.pax}","${b.dp}","${menuTotal}","${b.balance || 0}","${b.time}","${b.created_by || ''}","${b.timestamp || ''}","${(b.notes || '').replace(/"/g, '""')}"\n`;
       });
 
       fdcBookings.forEach(f => {
-        csv += `"FDC STANDING TICKET","${f.id}","${f.name}","${f.phone}","${f.pax}","${f.amount}","${f.amount}","0","-","${f.created_by || ''}","-","${(f.notes || '').replace(/"/g, '""')}"\n`;
+        csv += `"FDC STANDING TICKET","${f.id}","${f.name}","${f.phone}","","${f.pax}","${f.amount}","${f.amount}","0","-","${f.created_by || ''}","-","${(f.notes || '').replace(/"/g, '""')}"\n`;
       });
 
       const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
