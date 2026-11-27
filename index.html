@@ -20,23 +20,22 @@
 
   <style>
     :root {
-      --bg-page: #0b1120;
-      --bg-surface: #111827;
-      --header-grad: linear-gradient(135deg, #090e1a 0%, #111c33 55%, #0c1322 100%);
-      --card-light: #ffffff;
-      --card-soft: #f8fafc;
-      --text-light: #f8fafc;
-      --text-muted-light: #cbd5e1;
-      --text-dark: #0f172a;
-      --text-muted-dark: #64748b;
-      --gold-1: #f5d77f;
-      --gold-2: #d4af37;
-      --gold-3: #9a7018;
-      --gold-grad: linear-gradient(135deg, #f5d77f 0%, #d4af37 52%, #9a7018 100%);
+      --bg-page: #edf2f7;
+      --bg-card: #ffffff;
+      --bg-soft: #f8fafc;
+      --navy-header: linear-gradient(180deg, #0b528c 0%, #073d6b 100%);
+      --navy-primary: #0b4f8a;
+      --navy-dark: #073b69;
+      --gold-accent: #c59b38;
+      --gold-soft: #fffbeb;
+      --teal-badge: #0d7a6c;
+      --emerald-soft: #ecfdf5;
+      --text-main: #0f172a;
+      --text-muted: #526071;
+      --border-subtle: #d6e0eb;
+      --border-blue: #9ec0df;
       --red-booked: #ef4444;
-      --red-glow: rgba(239, 68, 68, 0.45);
-      --border-gold: rgba(212, 175, 55, 0.42);
-      --border-light: #cbd5e1;
+      --red-glow: rgba(239, 68, 68, 0.42);
     }
 
     * {
@@ -53,11 +52,8 @@
 
     body {
       font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-      background:
-        radial-gradient(circle at top right, rgba(212, 175, 55, 0.08), transparent 36%),
-        radial-gradient(circle at bottom left, rgba(56, 189, 248, 0.06), transparent 40%),
-        var(--bg-page);
-      color: var(--text-light);
+      background: var(--bg-page);
+      color: var(--text-main);
       min-height: 100vh;
       min-height: -webkit-fill-available;
       display: flex;
@@ -66,15 +62,15 @@
       padding-bottom: env(safe-area-inset-bottom);
     }
 
-    /* HEADER ELEGANT */
+    /* HEADER PLATINUM ROYAL BLUE */
     header {
-      background: var(--header-grad);
-      border-bottom: 1.5px solid var(--border-gold);
+      background: var(--navy-header);
+      border-bottom: 2px solid var(--gold-accent);
       padding: calc(12px + env(safe-area-inset-top)) 16px 14px;
       position: sticky;
       top: 0;
       z-index: 60;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+      box-shadow: 0 6px 20px rgba(7, 59, 105, 0.22);
     }
 
     .hdr-wrap {
@@ -99,17 +95,17 @@
     }
 
     .brand-logo-frame {
-      width: 124px;
-      height: 48px;
+      width: 126px;
+      height: 50px;
       background: #ffffff;
-      border: 1.5px solid var(--gold-2);
+      border: 1.5px solid rgba(255, 255, 255, 0.85);
       border-radius: 10px;
       padding: 4px 8px;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
       overflow: hidden;
     }
 
@@ -121,14 +117,15 @@
 
     .brand-title {
       min-width: 0;
+      color: #ffffff;
     }
 
     .brand-title h1 {
-      font-family: 'Cinzel', serif;
-      font-size: 0.98rem;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 1.02rem;
       font-weight: 800;
-      letter-spacing: 0.5px;
-      color: var(--text-light);
+      letter-spacing: 0.2px;
+      color: #ffffff;
       line-height: 1.2;
       white-space: nowrap;
       overflow: hidden;
@@ -136,31 +133,30 @@
     }
 
     .brand-title p {
-      font-size: 0.7rem;
-      color: var(--gold-1);
+      font-size: 0.72rem;
+      color: #e2effa;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 7px;
       flex-wrap: wrap;
       margin-top: 4px;
       font-weight: 600;
-      letter-spacing: 0.4px;
     }
 
     .event-badge {
-      background: rgba(212, 175, 55, 0.14);
-      border: 1px solid rgba(245, 215, 127, 0.55);
-      color: var(--gold-1);
+      background: rgba(255, 255, 255, 0.14);
+      border: 1px solid rgba(255, 255, 255, 0.32);
+      color: #ffffff;
       padding: 2px 9px;
-      border-radius: 999px;
-      font-size: 0.62rem;
+      border-radius: 6px;
+      font-size: 0.63rem;
       font-weight: 700;
       display: inline-flex;
       align-items: center;
       gap: 5px;
     }
 
-    /* METRICS */
+    /* METRICS CARDS */
     .metrics-group {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -168,21 +164,20 @@
     }
 
     .metric-card-lg {
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(212, 175, 55, 0.25);
-      border-radius: 10px;
-      padding: 9px 12px;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 9px;
+      padding: 8px 12px;
       display: flex;
       align-items: center;
       gap: 10px;
       cursor: pointer;
-      min-height: 50px;
-      transition: transform 0.16s ease, border-color 0.16s ease, background 0.16s ease;
+      min-height: 48px;
+      transition: background 0.16s ease, transform 0.15s ease;
     }
 
     .metric-card-lg:hover {
-      background: rgba(212, 175, 55, 0.09);
-      border-color: rgba(245, 215, 127, 0.55);
+      background: rgba(255, 255, 255, 0.2);
     }
 
     .metric-card-lg:active {
@@ -190,16 +185,15 @@
     }
 
     .metric-icon-box {
-      width: 32px;
-      height: 32px;
-      border-radius: 8px;
-      background: rgba(212, 175, 55, 0.14);
-      border: 1px solid rgba(212, 175, 55, 0.35);
+      width: 30px;
+      height: 30px;
+      border-radius: 7px;
+      background: rgba(255, 255, 255, 0.16);
       display: flex;
       align-items: center;
       justify-content: center;
-      color: var(--gold-1);
-      font-size: 0.9rem;
+      color: #ffffff;
+      font-size: 0.88rem;
       flex-shrink: 0;
     }
 
@@ -211,16 +205,17 @@
     }
 
     .metric-card-lg .txt-wrap span {
-      font-size: 0.6rem;
-      color: var(--text-muted-light);
+      font-size: 0.58rem;
+      color: #dbeafe;
       text-transform: uppercase;
       font-weight: 700;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.4px;
     }
 
     .metric-card-lg .txt-wrap strong {
       font-size: 0.88rem;
-      font-family: 'Cinzel', serif;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 800;
       color: #ffffff;
       white-space: nowrap;
       overflow: hidden;
@@ -233,16 +228,14 @@
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 8px;
       padding-top: 2px;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
     }
 
     .btn-action {
       border: 1px solid transparent;
       padding: 10px 12px;
-      border-radius: 9px;
+      border-radius: 8px;
       font-weight: 700;
-      font-size: 0.74rem;
-      letter-spacing: 0.25px;
+      font-size: 0.75rem;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
@@ -251,11 +244,11 @@
       touch-action: manipulation;
       min-height: 42px;
       white-space: nowrap;
-      transition: transform 0.15s ease, filter 0.15s ease, box-shadow 0.15s ease;
+      transition: transform 0.15s ease, background 0.15s ease, filter 0.15s ease;
     }
 
     .btn-action:hover {
-      filter: brightness(1.06);
+      filter: brightness(0.98);
     }
 
     .btn-action:active {
@@ -263,75 +256,78 @@
     }
 
     .btn-reg {
-      background: var(--gold-grad);
-      color: #141006;
-      border-color: rgba(245, 215, 127, 0.7);
-      box-shadow: 0 4px 14px rgba(212, 175, 55, 0.25);
+      background: #ffffff;
+      color: var(--navy-dark);
+      border-color: #ffffff;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.14);
     }
 
     .btn-fdc {
-      background: rgba(168, 85, 247, 0.18);
-      color: #f3e8ff;
-      border-color: rgba(192, 132, 252, 0.45);
+      background: rgba(6, 41, 74, 0.55);
+      color: #ffffff;
+      border-color: rgba(255, 255, 255, 0.26);
     }
 
     .btn-menu {
-      background: rgba(212, 175, 55, 0.15);
-      color: var(--gold-1);
-      border-color: rgba(212, 175, 55, 0.45);
+      background: rgba(6, 41, 74, 0.55);
+      color: #ffffff;
+      border-color: rgba(255, 255, 255, 0.26);
     }
 
     .btn-dashboard {
-      background: rgba(14, 165, 233, 0.18);
-      color: #e0f2fe;
-      border-color: rgba(56, 189, 248, 0.45);
+      background: rgba(6, 41, 74, 0.55);
+      color: #ffffff;
+      border-color: rgba(255, 255, 255, 0.26);
     }
 
     .btn-jpg {
-      background: rgba(16, 185, 129, 0.18);
-      color: #d1fae5;
-      border-color: rgba(52, 211, 153, 0.45);
+      background: #ffffff;
+      color: var(--navy-dark);
+      border-color: #ffffff;
     }
 
     .btn-csv {
-      background: rgba(245, 158, 11, 0.18);
-      color: #fef3c7;
-      border-color: rgba(251, 191, 36, 0.45);
+      background: rgba(6, 41, 74, 0.55);
+      color: #ffffff;
+      border-color: rgba(255, 255, 255, 0.26);
     }
 
     .btn-reset-pos {
-      background: rgba(239, 68, 68, 0.16);
-      color: #fecaca;
-      border-color: rgba(248, 113, 113, 0.4);
+      background: rgba(6, 41, 74, 0.45);
+      color: #e2effa;
+      border-color: rgba(255, 255, 255, 0.22);
       grid-column: span 2;
     }
 
-    /* TOOLBAR */
+    /* TOOLBAR CARD */
     .toolbar-bar {
       max-width: 1840px;
-      margin: 10px auto 0;
+      margin: 12px auto 0;
       padding: 0 16px;
       width: 100%;
+    }
+
+    .toolbar-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 10px 14px;
       display: flex;
       align-items: center;
       justify-content: space-between;
       flex-wrap: wrap;
       gap: 10px;
+      box-shadow: 0 3px 10px rgba(15, 23, 42, 0.04);
     }
 
     .legend-tag {
       display: flex;
       align-items: center;
       flex-wrap: wrap;
-      gap: 12px;
-      background: rgba(17, 24, 39, 0.9);
-      padding: 8px 14px;
-      border-radius: 999px;
-      border: 1px solid rgba(212, 175, 55, 0.28);
-      font-size: 0.72rem;
-      font-weight: 600;
-      color: var(--text-light);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+      gap: 10px;
+      font-size: 0.74rem;
+      font-weight: 700;
+      color: var(--text-main);
     }
 
     .dot-node {
@@ -342,19 +338,20 @@
     }
 
     .dot-node.avail {
-      background: #38bdf8;
-      box-shadow: 0 0 8px rgba(56, 189, 248, 0.7);
+      background: var(--navy-primary);
     }
 
     .dot-node.booked {
-      background: #ef4444;
-      box-shadow: 0 0 8px rgba(239, 68, 68, 0.8);
+      background: var(--red-booked);
     }
 
     .sync-pill {
-      color: var(--gold-1);
-      font-size: 0.7rem;
+      background: var(--teal-badge);
+      color: #ffffff;
+      font-size: 0.68rem;
       font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 6px;
       display: inline-flex;
       align-items: center;
       gap: 5px;
@@ -367,12 +364,12 @@
     }
 
     .btn-tool-icon {
-      width: 38px;
-      height: 38px;
-      border-radius: 9px;
-      background: rgba(17, 24, 39, 0.92);
-      border: 1px solid rgba(212, 175, 55, 0.32);
-      color: var(--gold-1);
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: var(--bg-soft);
+      border: 1px solid var(--border-subtle);
+      color: var(--navy-primary);
       font-size: 0.85rem;
       display: inline-flex;
       align-items: center;
@@ -382,7 +379,7 @@
     }
 
     .btn-tool-icon:hover {
-      background: rgba(212, 175, 55, 0.14);
+      background: #e6eff8;
     }
 
     .btn-tool-icon:active {
@@ -408,11 +405,11 @@
       position: relative;
       transform-origin: center center;
       transition: transform 0.14s ease-out;
-      box-shadow: 0 24px 50px rgba(0, 0, 0, 0.55);
+      box-shadow: 0 14px 34px rgba(15, 23, 42, 0.12);
       border-radius: 12px;
       overflow: hidden;
-      background: #070b14;
-      border: 1.5px solid rgba(212, 175, 55, 0.45);
+      background: #ffffff;
+      border: 1.5px solid var(--border-blue);
     }
 
     .map-img-wrapper {
@@ -435,15 +432,15 @@
     }
 
     .map-disclaimer-bar {
-      background: #070b14;
-      color: #cbd5e1;
+      background: var(--navy-dark);
+      color: #e2effa;
       text-align: center;
       font-size: 0.72rem;
       font-style: italic;
       font-weight: 500;
-      padding: 9px 14px;
-      border-top: 1px solid rgba(212, 175, 55, 0.35);
-      letter-spacing: 0.3px;
+      padding: 8px 14px;
+      border-top: 1.5px solid var(--gold-accent);
+      letter-spacing: 0.25px;
     }
 
     /* SPOT MEJA */
@@ -451,14 +448,14 @@
       position: absolute;
       cursor: grab;
       border-radius: 6px;
-      background: rgba(56, 189, 248, 0.22);
-      border: 1.5px dashed rgba(125, 211, 252, 0.9);
+      background: rgba(11, 79, 138, 0.24);
+      border: 1.5px dashed rgba(11, 79, 138, 0.85);
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 0.58rem;
       font-weight: 700;
-      color: #ffffff;
+      color: #0f172a;
       touch-action: none;
       transition: background 0.18s ease, border-color 0.18s ease;
     }
@@ -468,15 +465,15 @@
     }
 
     .spot:hover {
-      background: rgba(212, 175, 55, 0.36);
-      border-color: var(--gold-1);
+      background: rgba(197, 155, 56, 0.34);
+      border-color: var(--navy-dark);
       z-index: 10;
     }
 
     .spot.is-booked {
       background: rgba(239, 68, 68, 0.88) !important;
-      border: 2px solid #fca5a5 !important;
-      box-shadow: 0 0 14px var(--red-glow), inset 0 0 6px rgba(255, 255, 255, 0.55) !important;
+      border: 2px solid #b91c1c !important;
+      box-shadow: 0 0 12px var(--red-glow), inset 0 0 6px rgba(255, 255, 255, 0.55) !important;
       color: #ffffff !important;
       z-index: 5;
     }
@@ -485,9 +482,9 @@
     .modal-backdrop {
       position: fixed;
       inset: 0;
-      background: rgba(4, 7, 15, 0.78);
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
+      background: rgba(15, 23, 42, 0.62);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
       z-index: 100;
       display: none;
       align-items: center;
@@ -501,9 +498,9 @@
     }
 
     .modal-container {
-      background: var(--card-light);
-      color: var(--text-dark);
-      border: 1.5px solid rgba(212, 175, 55, 0.55);
+      background: var(--bg-card);
+      color: var(--text-main);
+      border: 1.5px solid var(--border-blue);
       border-radius: 14px;
       width: 100%;
       max-width: 560px;
@@ -511,14 +508,14 @@
       display: flex;
       flex-direction: column;
       overflow: hidden;
-      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
+      box-shadow: 0 20px 45px rgba(7, 59, 105, 0.24);
     }
 
     .modal-header {
-      background: linear-gradient(135deg, #0b1120 0%, #162238 100%);
+      background: var(--navy-header);
       color: #ffffff;
       padding: 14px 18px;
-      border-bottom: 1.5px solid rgba(212, 175, 55, 0.45);
+      border-bottom: 2px solid var(--gold-accent);
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -527,20 +524,19 @@
     }
 
     .modal-header h3 {
-      font-family: 'Cinzel', serif;
+      font-family: 'Plus Jakarta Sans', sans-serif;
       font-size: 0.98rem;
-      color: var(--gold-1);
+      color: #ffffff;
       font-weight: 800;
-      letter-spacing: 0.4px;
       display: flex;
       align-items: center;
       gap: 8px;
     }
 
     .btn-x {
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.16);
-      color: #f8fafc;
+      background: rgba(255, 255, 255, 0.14);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      color: #ffffff;
       width: 34px;
       height: 34px;
       border-radius: 8px;
@@ -576,7 +572,7 @@
     .form-row label {
       font-size: 0.76rem;
       font-weight: 700;
-      color: #1e293b;
+      color: var(--navy-dark);
       display: flex;
       align-items: center;
       gap: 6px;
@@ -584,10 +580,10 @@
 
     .inp-field {
       background: #ffffff;
-      border: 1px solid var(--border-light);
+      border: 1px solid var(--border-subtle);
       border-radius: 8px;
       padding: 10px 12px;
-      color: var(--text-dark);
+      color: var(--text-main);
       font-size: 0.9rem;
       outline: none;
       width: 100%;
@@ -597,8 +593,8 @@
     }
 
     .inp-field:focus {
-      border-color: var(--gold-3);
-      box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
+      border-color: var(--navy-primary);
+      box-shadow: 0 0 0 3px rgba(11, 79, 138, 0.14);
     }
 
     .money-input-box {
@@ -610,7 +606,7 @@
     .money-input-box span {
       position: absolute;
       left: 12px;
-      color: #92400e;
+      color: var(--navy-primary);
       font-weight: 800;
       font-size: 0.88rem;
       pointer-events: none;
@@ -622,8 +618,8 @@
     }
 
     .auto-pdf-box {
-      background: #fffbeb;
-      border: 1px solid #f59e0b;
+      background: var(--gold-soft);
+      border: 1px solid #e6c46d;
       border-radius: 9px;
       padding: 10px 12px;
       display: flex;
@@ -631,7 +627,7 @@
       justify-content: space-between;
       gap: 10px;
       font-size: 0.76rem;
-      color: #78350f;
+      color: #7c5812;
       font-weight: 700;
     }
 
@@ -645,14 +641,14 @@
     .auto-pdf-toggle input[type="checkbox"] {
       width: 18px;
       height: 18px;
-      accent-color: #b45309;
+      accent-color: var(--navy-primary);
       cursor: pointer;
     }
 
     .modal-footer {
       padding: 12px 18px;
-      background: var(--card-soft);
-      border-top: 1px solid #e2e8f0;
+      background: var(--bg-soft);
+      border-top: 1px solid var(--border-subtle);
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -689,9 +685,9 @@
     }
 
     .btn-modal-pdf {
-      background: #0f172a;
-      color: var(--gold-1);
-      border: 1px solid #d4af37;
+      background: #ffffff;
+      color: var(--navy-dark);
+      border: 1px solid var(--border-blue);
       padding: 10px 14px;
       border-radius: 8px;
       font-size: 0.8rem;
@@ -704,24 +700,24 @@
     }
 
     .btn-modal-save {
-      background: linear-gradient(135deg, #d4af37 0%, #9a7018 100%);
+      background: var(--navy-primary);
       color: #ffffff;
-      border: none;
+      border: 1px solid var(--navy-dark);
       padding: 10px 16px;
       border-radius: 8px;
       font-size: 0.82rem;
-      font-weight: 800;
+      font-weight: 700;
       cursor: pointer;
       min-height: 40px;
       display: inline-flex;
       align-items: center;
       gap: 7px;
-      box-shadow: 0 4px 12px rgba(154, 112, 24, 0.3);
+      box-shadow: 0 3px 10px rgba(11, 79, 138, 0.22);
     }
 
     .cart-item-card {
       background: #ffffff;
-      border: 1px solid var(--border-light);
+      border: 1px solid var(--border-subtle);
       border-radius: 8px;
       padding: 9px 10px;
       display: flex;
@@ -738,9 +734,9 @@
     }
 
     .btn-qty {
-      background: #e2e8f0;
-      border: none;
-      color: #0f172a;
+      background: #e6eff8;
+      border: 1px solid #c3d7eb;
+      color: var(--navy-dark);
       width: 28px;
       height: 28px;
       border-radius: 6px;
@@ -752,9 +748,9 @@
     }
 
     .btn-edit-item {
-      background: #fef3c7;
-      border: 1px solid #fcd34d;
-      color: #92400e;
+      background: var(--gold-soft);
+      border: 1px solid #e6c46d;
+      color: #8c6313;
       width: 28px;
       height: 28px;
       border-radius: 6px;
@@ -771,8 +767,8 @@
     }
 
     .dash-card {
-      background: #f8fafc;
-      border: 1px solid #cbd5e1;
+      background: var(--bg-soft);
+      border: 1px solid var(--border-subtle);
       border-radius: 10px;
       padding: 12px;
       display: flex;
@@ -781,13 +777,13 @@
     }
 
     .dash-card.hero-card {
-      background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
-      border-color: #d4af37;
+      background: #f4f9fe;
+      border-color: var(--border-blue);
     }
 
     .dash-card .card-lbl {
       font-size: 0.7rem;
-      color: var(--text-muted-dark);
+      color: var(--text-muted);
       text-transform: uppercase;
       font-weight: 700;
       display: flex;
@@ -798,13 +794,12 @@
     .dash-card .card-val {
       font-size: 1.15rem;
       font-weight: 800;
-      color: #0f172a;
-      font-family: 'Cinzel', serif;
+      color: var(--navy-dark);
     }
 
     .dash-card .card-sub {
       font-size: 0.72rem;
-      color: var(--text-muted-dark);
+      color: var(--text-muted);
     }
 
     .occupancy-bar-wrap {
@@ -825,7 +820,7 @@
     .loader-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(7, 11, 20, 0.88);
+      background: rgba(7, 59, 105, 0.78);
       z-index: 200;
       display: none;
       flex-direction: column;
@@ -837,8 +832,8 @@
     .spinner {
       width: 44px;
       height: 44px;
-      border: 4px solid rgba(212, 175, 55, 0.22);
-      border-top-color: var(--gold-1);
+      border: 4px solid rgba(255, 255, 255, 0.25);
+      border-top-color: #ffffff;
       border-radius: 50%;
       animation: spin 0.8s linear infinite;
     }
@@ -890,7 +885,6 @@
         display: flex;
         flex-wrap: wrap;
         justify-content: flex-end;
-        border-top: none;
         padding-top: 0;
         gap: 8px;
       }
@@ -918,7 +912,7 @@
             <h1>Platinum Hotel &amp; Convention Hall</h1>
             <p>
               <span>ROOFTOP BAR &amp; LOUNGE</span>
-              <span class="event-badge"><i class="fa-solid fa-crown"></i> NYE 2027 ROYAL GALA</span>
+              <span class="event-badge"><i class="fa-solid fa-crown"></i> NYE 2027</span>
             </p>
           </div>
         </div>
@@ -928,7 +922,7 @@
             <div class="metric-icon-box"><i class="fa-solid fa-couch"></i></div>
             <div class="txt-wrap">
               <span>Lounge (L)</span>
-              <strong><span id="statLoungeBooked">0</span><span style="font-size:0.74rem; color:#cbd5e1;"> / 25</span></strong>
+              <strong><span id="statLoungeBooked">0</span><span style="font-size:0.74rem; color:#dbeafe;"> / 25</span></strong>
             </div>
           </div>
 
@@ -936,7 +930,7 @@
             <div class="metric-icon-box"><i class="fa-solid fa-cloud-moon"></i></div>
             <div class="txt-wrap">
               <span>Cockpit (C)</span>
-              <strong><span id="statTerraceBooked">0</span><span style="font-size:0.74rem; color:#cbd5e1;"> / 13</span></strong>
+              <strong><span id="statTerraceBooked">0</span><span style="font-size:0.74rem; color:#dbeafe;"> / 13</span></strong>
             </div>
           </div>
 
@@ -944,12 +938,12 @@
             <div class="metric-icon-box"><i class="fa-solid fa-ticket"></i></div>
             <div class="txt-wrap">
               <span>FDC Guests</span>
-              <strong><span id="statFDCPaxTotal">0</span><span style="font-size:0.74rem; color:#cbd5e1;"> Pax</span></strong>
+              <strong><span id="statFDCPaxTotal">0</span><span style="font-size:0.74rem; color:#dbeafe;"> Pax</span></strong>
             </div>
           </div>
 
           <div class="metric-card-lg" onclick="openReportModal()" title="Lihat Rincian Pendapatan">
-            <div class="metric-icon-box"><i class="fa-solid fa-gem"></i></div>
+            <div class="metric-icon-box"><i class="fa-solid fa-coins"></i></div>
             <div class="txt-wrap">
               <span>Total Rev / DP</span>
               <strong id="statDPTotal">Rp 0</strong>
@@ -986,26 +980,28 @@
 
   <!-- TOOLBAR -->
   <div class="toolbar-bar">
-    <div class="legend-tag">
-      <div style="display:flex; align-items:center; gap:6px;">
-        <span class="dot-node avail"></span>
-        <span id="legendAvailText">Sisa Lounge: 25 | Sisa Cockpit: 13</span>
+    <div class="toolbar-card">
+      <div class="legend-tag">
+        <div style="display:flex; align-items:center; gap:6px;">
+          <span class="dot-node avail"></span>
+          <span id="legendAvailText">Sisa Lounge: 25 | Sisa Cockpit: 13</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:6px;">
+          <span class="dot-node booked"></span>
+          <span id="legendBookedText">0 Booked</span>
+        </div>
+        <span class="sync-pill"><i class="fa-solid fa-circle"></i> Synced + Supabase Cloud</span>
       </div>
-      <div style="display:flex; align-items:center; gap:6px;">
-        <span class="dot-node booked"></span>
-        <span id="legendBookedText">0 Booked</span>
-      </div>
-      <span class="sync-pill"><i class="fa-solid fa-shield-halved"></i> RT Cloud Sync</span>
-    </div>
 
-    <div class="zoom-group">
-      <label class="btn-tool-icon" title="Pilih Gambar Denah dari Perangkat">
-        <i class="fa-solid fa-image"></i>
-        <input type="file" id="localImgPicker" accept="image/*" style="display: none;" onchange="loadLocalImage(event)">
-      </label>
-      <button class="btn-tool-icon" onclick="zoomMap(0.1)" title="Perbesar Denah"><i class="fa-solid fa-plus"></i></button>
-      <button class="btn-tool-icon" onclick="zoomMap(-0.1)" title="Perkecil Denah"><i class="fa-solid fa-minus"></i></button>
-      <button class="btn-tool-icon" onclick="resetZoom()" title="Reset Zoom"><i class="fa-solid fa-expand"></i></button>
+      <div class="zoom-group">
+        <label class="btn-tool-icon" title="Pilih Gambar Denah dari Perangkat">
+          <i class="fa-solid fa-image"></i>
+          <input type="file" id="localImgPicker" accept="image/*" style="display: none;" onchange="loadLocalImage(event)">
+        </label>
+        <button class="btn-tool-icon" onclick="zoomMap(0.1)" title="Perbesar Denah"><i class="fa-solid fa-plus"></i></button>
+        <button class="btn-tool-icon" onclick="zoomMap(-0.1)" title="Perkecil Denah"><i class="fa-solid fa-minus"></i></button>
+        <button class="btn-tool-icon" onclick="resetZoom()" title="Reset Zoom"><i class="fa-solid fa-expand"></i></button>
+      </div>
     </div>
   </div>
 
@@ -1033,7 +1029,7 @@
   <div id="bookingModal" class="modal-backdrop">
     <div class="modal-container">
       <div class="modal-header">
-        <h3><i class="fa-solid fa-crown"></i> Reservasi <span id="modalTitle">#L1</span></h3>
+        <h3><i class="fa-solid fa-chair"></i> Reservasi <span id="modalTitle">#L1</span></h3>
         <button class="btn-x" onclick="closeBookingModal()"><i class="fa-solid fa-xmark"></i></button>
       </div>
 
@@ -1054,9 +1050,9 @@
           </div>
         </div>
 
-        <div style="background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 10px; padding: 12px; display: flex; flex-direction: column; gap: 10px;">
-          <label style="font-size: 0.78rem; font-weight: 800; color: #92400e; display: flex; align-items: center; gap: 6px;">
-            <i class="fa-solid fa-champagne-glasses"></i> Kasir Menu &amp; Paket Promo Rooftop
+        <div style="background: #f4f9fe; border: 1px solid var(--border-blue); border-radius: 10px; padding: 12px; display: flex; flex-direction: column; gap: 10px;">
+          <label style="font-size: 0.78rem; font-weight: 800; color: var(--navy-dark); display: flex; align-items: center; gap: 6px;">
+            <i class="fa-solid fa-utensils"></i> Kasir Menu &amp; Paket Promo Rooftop
           </label>
 
           <div style="display: flex; gap: 8px;">
@@ -1079,12 +1075,12 @@
           </div>
 
           <div id="bookingCartItemsContainer" style="display: flex; flex-direction: column; gap: 6px; max-height: 170px; overflow-y: auto;">
-            <div style="font-size: 0.75rem; color: var(--text-muted-dark); text-align: center; padding: 6px;">Belum ada menu dipilih.</div>
+            <div style="font-size: 0.75rem; color: var(--text-muted); text-align: center; padding: 6px;">Belum ada menu dipilih.</div>
           </div>
 
           <div style="background: #ffffff; border: 1px solid #10b981; border-radius: 8px; padding: 10px 14px; display: flex; justify-content: space-between; align-items: center;">
             <span style="font-size: 0.78rem; font-weight: 700; color: #047857;">Total Estimasi Menu:</span>
-            <strong id="bookingCartTotalDisplay" style="font-size: 0.98rem; font-family: 'Cinzel', serif; color: #047857;">Rp 0</strong>
+            <strong id="bookingCartTotalDisplay" style="font-size: 0.98rem; color: #047857;">Rp 0</strong>
           </div>
         </div>
 
@@ -1096,14 +1092,14 @@
           </div>
         </div>
 
-        <div style="background: #f8fafc; border: 1.5px dashed #b45309; border-radius: 10px; padding: 12px; display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+        <div style="background: #f8fafc; border: 1.5px dashed var(--navy-primary); border-radius: 10px; padding: 12px; display: flex; justify-content: space-between; align-items: center; gap: 8px;">
           <div>
-            <div style="font-size: 0.72rem; font-weight: 800; color: #92400e; text-transform: uppercase;">
+            <div style="font-size: 0.72rem; font-weight: 800; color: var(--navy-dark); text-transform: uppercase;">
               <i class="fa-solid fa-scale-balanced"></i> Balance (Sisa Tagihan / Kembalian)
             </div>
-            <div style="font-size: 0.66rem; color: var(--text-muted-dark);">Total Konsumsi dikurangi Uang Muka (DP)</div>
+            <div style="font-size: 0.66rem; color: var(--text-muted);">Total Konsumsi dikurangi Uang Muka (DP)</div>
           </div>
-          <strong id="bookingBalanceDisplay" style="font-size: 0.96rem; font-family: 'Cinzel', serif; text-align: right;">LUNAS (Rp 0)</strong>
+          <strong id="bookingBalanceDisplay" style="font-size: 0.95rem; text-align: right;">LUNAS (Rp 0)</strong>
         </div>
 
         <div class="form-grid-2">
@@ -1137,7 +1133,7 @@
             <input type="checkbox" id="autoPdfBooking" checked>
             <span>Auto-Cetak / Kirim PDF Konfirmasi saat Simpan</span>
           </label>
-          <span style="font-size: 0.68rem;">Format Resmi Platinum</span>
+          <span style="font-size: 0.68rem;">Official PDF</span>
         </div>
       </div>
 
@@ -1222,9 +1218,9 @@
           </div>
         </div>
 
-        <div style="background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 10px; padding: 12px; display: flex; flex-direction: column; gap: 10px;">
-          <label style="font-size: 0.78rem; font-weight: 800; color: #92400e; display: flex; align-items: center; gap: 6px;">
-            <i class="fa-solid fa-champagne-glasses"></i> Kasir Menu &amp; Paket Promo Rooftop
+        <div style="background: #f4f9fe; border: 1px solid var(--border-blue); border-radius: 10px; padding: 12px; display: flex; flex-direction: column; gap: 10px;">
+          <label style="font-size: 0.78rem; font-weight: 800; color: var(--navy-dark); display: flex; align-items: center; gap: 6px;">
+            <i class="fa-solid fa-utensils"></i> Kasir Menu &amp; Paket Promo Rooftop
           </label>
 
           <div style="display: flex; gap: 8px;">
@@ -1247,12 +1243,12 @@
           </div>
 
           <div id="regBookingCartItemsContainer" style="display: flex; flex-direction: column; gap: 6px; max-height: 150px; overflow-y: auto;">
-            <div style="font-size: 0.75rem; color: var(--text-muted-dark); text-align: center; padding: 6px;">Belum ada menu dipilih.</div>
+            <div style="font-size: 0.75rem; color: var(--text-muted); text-align: center; padding: 6px;">Belum ada menu dipilih.</div>
           </div>
 
           <div style="background: #ffffff; border: 1px solid #10b981; border-radius: 8px; padding: 10px 14px; display: flex; justify-content: space-between; align-items: center;">
             <span style="font-size: 0.78rem; font-weight: 700; color: #047857;">Total Estimasi Menu:</span>
-            <strong id="regBookingCartTotalDisplay" style="font-size: 0.98rem; font-family: 'Cinzel', serif; color: #047857;">Rp 0</strong>
+            <strong id="regBookingCartTotalDisplay" style="font-size: 0.98rem; color: #047857;">Rp 0</strong>
           </div>
         </div>
 
@@ -1264,14 +1260,14 @@
           </div>
         </div>
 
-        <div style="background: #f8fafc; border: 1.5px dashed #b45309; border-radius: 10px; padding: 12px; display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+        <div style="background: #f8fafc; border: 1.5px dashed var(--navy-primary); border-radius: 10px; padding: 12px; display: flex; justify-content: space-between; align-items: center; gap: 8px;">
           <div>
-            <div style="font-size: 0.72rem; font-weight: 800; color: #92400e; text-transform: uppercase;">
+            <div style="font-size: 0.72rem; font-weight: 800; color: var(--navy-dark); text-transform: uppercase;">
               <i class="fa-solid fa-scale-balanced"></i> Balance (Sisa Tagihan / Kembalian)
             </div>
-            <div style="font-size: 0.66rem; color: var(--text-muted-dark);">Total Konsumsi dikurangi Uang Muka (DP)</div>
+            <div style="font-size: 0.66rem; color: var(--text-muted);">Total Konsumsi dikurangi Uang Muka (DP)</div>
           </div>
-          <strong id="regBookingBalanceDisplay" style="font-size: 0.96rem; font-family: 'Cinzel', serif; text-align: right;">LUNAS (Rp 0)</strong>
+          <strong id="regBookingBalanceDisplay" style="font-size: 0.95rem; text-align: right;">LUNAS (Rp 0)</strong>
         </div>
 
         <div class="form-grid-2">
@@ -1327,7 +1323,7 @@
       </div>
 
       <div class="modal-body">
-        <div style="background: #fffbeb; border: 1px solid #f59e0b; padding: 10px 12px; border-radius: 8px; font-size: 0.78rem; color: #92400e; font-weight: 600;">
+        <div style="background: #f4f9fe; border: 1px solid var(--border-blue); padding: 10px 12px; border-radius: 8px; font-size: 0.78rem; color: var(--navy-dark); font-weight: 600;">
           <i class="fa-solid fa-cloud"></i> Semua item di bawah ini tersimpan permanen di Cloud Supabase (tabel <strong>rt_master_menu</strong>).
         </div>
 
@@ -1360,9 +1356,9 @@
           <i class="fa-solid fa-plus"></i> Simpan ke Cloud Master Menu
         </button>
 
-        <hr style="border: 0; border-top: 1px solid #e2e8f0; margin: 6px 0;">
+        <hr style="border: 0; border-top: 1px solid var(--border-subtle); margin: 6px 0;">
 
-        <div style="font-size:0.8rem; font-weight:700; color:#1e293b;">Daftar Master Menu Aktif:</div>
+        <div style="font-size:0.8rem; font-weight:700; color:var(--navy-dark);">Daftar Master Menu Aktif:</div>
         <div id="masterMenuListContent" style="max-height: 190px; overflow-y: auto;"></div>
       </div>
 
@@ -1381,7 +1377,7 @@
       </div>
 
       <div class="modal-body">
-        <div style="background: #faf5ff; border: 1px solid #d8b4fe; padding: 10px 12px; border-radius: 8px; font-size: 0.78rem; color: #6b21a8; font-weight: 600;">
+        <div style="background: var(--emerald-soft); border: 1px solid #a7f3d0; padding: 10px 12px; border-radius: 8px; font-size: 0.78rem; color: #065f46; font-weight: 600;">
           <i class="fa-solid fa-circle-info"></i> Tiket First Drink Charge (FDC) Standing: <strong>Rp 125.000 / Pax</strong> (termasuk 1x First Drink Voucher).
         </div>
 
@@ -1423,7 +1419,7 @@
 
       <div class="modal-footer">
         <button class="btn-modal-secondary" onclick="closeFDCModal()">Batal</button>
-        <button class="btn-modal-save" style="background: #7e22ce;" onclick="saveFDCBooking()">
+        <button class="btn-modal-save" onclick="saveFDCBooking()">
           <i class="fa-solid fa-check"></i> Simpan Tiket FDC
         </button>
       </div>
@@ -1441,30 +1437,30 @@
       <div class="modal-body">
         <div class="dash-grid">
           <div class="dash-card hero-card">
-            <div class="card-lbl"><i class="fa-solid fa-crown" style="color: #b45309;"></i> Total Gross Revenue (Meja + FDC)</div>
-            <div class="card-val" id="repTotalGross" style="color: #92400e;">Rp 0</div>
+            <div class="card-lbl"><i class="fa-solid fa-coins" style="color: var(--navy-primary);"></i> Total Gross Revenue (Meja + FDC)</div>
+            <div class="card-val" id="repTotalGross">Rp 0</div>
             <div class="card-sub">Akumulasi seluruh transaksi reservasi meja Rooftop, Cockpit &amp; tiket standing</div>
           </div>
 
           <div class="dash-card">
-            <div class="card-lbl"><i class="fa-solid fa-couch" style="color: #d97706;"></i> Lower Deck (L)</div>
-            <div><span id="repLoungeBooked" style="color: #d97706; font-size: 1.25rem; font-weight: 800;">0</span> <span style="font-size:0.75rem; color:var(--text-muted-dark);">/ 25 Unit</span></div>
+            <div class="card-lbl"><i class="fa-solid fa-couch" style="color: var(--gold-accent);"></i> Lower Deck (L)</div>
+            <div><span id="repLoungeBooked" style="color: var(--navy-dark); font-size: 1.25rem; font-weight: 800;">0</span> <span style="font-size:0.75rem; color:var(--text-muted);">/ 25 Unit</span></div>
             <div class="occupancy-bar-wrap">
-              <div id="repLoungeBar" class="occupancy-bar" style="background: #d97706;"></div>
+              <div id="repLoungeBar" class="occupancy-bar" style="background: var(--gold-accent);"></div>
             </div>
             <div class="card-sub">
-              Tersisa: <strong id="repLoungeLeft" style="color:#0284c7;">25</strong> | Rev: <span id="repLoungeRev" style="color:#059669; font-weight:700;">Rp 0</span>
+              Tersisa: <strong id="repLoungeLeft" style="color:var(--navy-primary);">25</strong> | Rev: <span id="repLoungeRev" style="color:#059669; font-weight:700;">Rp 0</span>
             </div>
           </div>
 
           <div class="dash-card">
-            <div class="card-lbl"><i class="fa-solid fa-cloud-moon" style="color: #0284c7;"></i> Cockpit Deck (C)</div>
-            <div><span id="repTerraceBooked" style="color: #0284c7; font-size: 1.25rem; font-weight: 800;">0</span> <span style="font-size:0.75rem; color:var(--text-muted-dark);">/ 13 Unit</span></div>
+            <div class="card-lbl"><i class="fa-solid fa-cloud-moon" style="color: var(--navy-primary);"></i> Cockpit Deck (C)</div>
+            <div><span id="repTerraceBooked" style="color: var(--navy-dark); font-size: 1.25rem; font-weight: 800;">0</span> <span style="font-size:0.75rem; color:var(--text-muted);">/ 13 Unit</span></div>
             <div class="occupancy-bar-wrap">
-              <div id="repTerraceBar" class="occupancy-bar" style="background: #0284c7;"></div>
+              <div id="repTerraceBar" class="occupancy-bar" style="background: var(--navy-primary);"></div>
             </div>
             <div class="card-sub">
-              Tersisa: <strong id="repTerraceLeft" style="color:#0284c7;">13</strong> | Rev: <span id="repTerraceRev" style="color:#059669; font-weight:700;">Rp 0</span>
+              Tersisa: <strong id="repTerraceLeft" style="color:var(--navy-primary);">13</strong> | Rev: <span id="repTerraceRev" style="color:#059669; font-weight:700;">Rp 0</span>
             </div>
           </div>
 
@@ -1475,14 +1471,14 @@
           </div>
 
           <div class="dash-card">
-            <div class="card-lbl"><i class="fa-solid fa-ticket" style="color: #7e22ce;"></i> FDC Standing Ticket</div>
-            <div class="card-val" id="repFDCPax" style="font-size: 1.05rem; color: #7e22ce;">0 Pax</div>
+            <div class="card-lbl"><i class="fa-solid fa-ticket" style="color: var(--teal-badge);"></i> FDC Standing Ticket</div>
+            <div class="card-val" id="repFDCPax" style="font-size: 1.05rem; color: var(--teal-badge);">0 Pax</div>
             <div class="card-sub" id="repFDCTotalRev">Rp 0 Total FDC Revenue</div>
           </div>
 
-          <div class="dash-card wide-card" style="background: #f1f5f9;">
-            <div class="card-lbl"><i class="fa-solid fa-users" style="color: #0f172a;"></i> Total Estimated Attendees (Crowd)</div>
-            <div class="card-val" id="repTotalPax" style="font-size: 1.1rem; color: #0f172a;">0 Total Tamu Hadir</div>
+          <div class="dash-card wide-card">
+            <div class="card-lbl"><i class="fa-solid fa-users" style="color: var(--navy-dark);"></i> Total Estimated Attendees (Crowd)</div>
+            <div class="card-val" id="repTotalPax" style="font-size: 1.1rem;">0 Total Tamu Hadir</div>
             <div class="card-sub" id="repCrowdBreakdown">0 Seating (Lower Deck + Cockpit) + 0 Standing FDC</div>
           </div>
         </div>
@@ -1511,7 +1507,7 @@
 
       <div class="modal-footer">
         <button class="btn-modal-secondary" onclick="closeFDCListModal()">Tutup</button>
-        <button class="btn-modal-save" style="background: #7e22ce;" onclick="closeFDCListModal(); openFDCBookingModal();">
+        <button class="btn-modal-save" onclick="closeFDCListModal(); openFDCBookingModal();">
           + Tambah FDC Baru
         </button>
       </div>
@@ -1521,8 +1517,8 @@
   <!-- LOADER SPINNER -->
   <div id="loaderOverlay" class="loader-overlay">
     <div class="spinner"></div>
-    <div style="color: var(--gold-1); font-weight: 700; font-size: 0.95rem; font-family: 'Cinzel', serif;">Menyiapkan Dokumen / Denah...</div>
-    <div style="color: #cbd5e1; font-size: 0.78rem;">Mohon tunggu sebentar</div>
+    <div style="color: #ffffff; font-weight: 700; font-size: 0.95rem;">Menyiapkan Dokumen / Denah...</div>
+    <div style="color: #dbeafe; font-size: 0.78rem;">Mohon tunggu sebentar</div>
   </div>
 
   <script>
@@ -2010,7 +2006,7 @@
       const totalDisplay = document.getElementById('regBookingCartTotalDisplay');
 
       if (regCurrentCart.length === 0) {
-        container.innerHTML = '<div style="font-size: 0.75rem; color: var(--text-muted-dark); text-align: center; padding: 6px;">Belum ada menu dipilih.</div>';
+        container.innerHTML = '<div style="font-size: 0.75rem; color: var(--text-muted); text-align: center; padding: 6px;">Belum ada menu dipilih.</div>';
         totalDisplay.innerText = 'Rp 0';
         updateRegBalanceDisplay();
         return;
@@ -2046,7 +2042,7 @@
     }
 
     function formatBalanceText(balance) {
-      if (balance > 0) return `<span style="color: #e11d48; font-weight:800;">Kurang Rp ${balance.toLocaleString('id-ID')}</span>`;
+      if (balance > 0) return `<span style="color: #dc2626; font-weight:800;">Kurang Rp ${balance.toLocaleString('id-ID')}</span>`;
       if (balance < 0) return `<span style="color: #059669; font-weight:800;">Kembalian Rp ${Math.abs(balance).toLocaleString('id-ID')}</span>`;
       return `<span style="color: #059669; font-weight:800;">LUNAS (Rp 0)</span>`;
     }
@@ -2214,19 +2210,19 @@
     function renderMasterMenuList() {
       const container = document.getElementById('masterMenuListContent');
       if (masterMenu.length === 0) {
-        container.innerHTML = '<div style="color:var(--text-muted-dark); font-size:0.76rem; text-align:center; padding:12px;">Belum ada item menu di Cloud. Silakan tambahkan di atas.</div>';
+        container.innerHTML = '<div style="color:var(--text-muted); font-size:0.76rem; text-align:center; padding:12px;">Belum ada item menu di Cloud. Silakan tambahkan di atas.</div>';
         return;
       }
       let html = '';
       masterMenu.forEach(item => {
         html += `
-          <div style="background:#ffffff; border:1px solid #cbd5e1; border-radius:8px; padding:8px 10px; margin-bottom:6px; display:flex; justify-content:space-between; align-items:center; gap: 8px;">
+          <div style="background:#ffffff; border:1px solid var(--border-subtle); border-radius:8px; padding:8px 10px; margin-bottom:6px; display:flex; justify-content:space-between; align-items:center; gap: 8px;">
             <div style="flex: 1;">
               <strong style="color:#0f172a; font-size:0.82rem;">${escapeHtml(item.name)}</strong>
-              <div style="font-size:0.7rem; color:var(--text-muted-dark);">${escapeHtml(item.category)} · <span style="color:#059669; font-weight:700;">Rp ${item.price.toLocaleString('id-ID')}</span></div>
+              <div style="font-size:0.7rem; color:var(--text-muted);">${escapeHtml(item.category)} · <span style="color:#059669; font-weight:700;">Rp ${item.price.toLocaleString('id-ID')}</span></div>
             </div>
             <div style="display:flex; gap: 6px; flex-shrink: 0;">
-              <button onclick="editMasterMenuItem('${item.id}')" style="background:#fef3c7; border:1px solid #fcd34d; color:#92400e; width:28px; height:28px; border-radius:6px; cursor:pointer;" title="Edit Menu">
+              <button onclick="editMasterMenuItem('${item.id}')" style="background:var(--gold-soft); border:1px solid #e6c46d; color:#8c6313; width:28px; height:28px; border-radius:6px; cursor:pointer;" title="Edit Menu">
                 <i class="fa-solid fa-pen" style="font-size:0.7rem;"></i>
               </button>
               <button onclick="deleteMasterMenuItem('${item.id}')" style="background:#fee2e2; border:1px solid #fca5a5; color:#991b1b; width:28px; height:28px; border-radius:6px; cursor:pointer;" title="Hapus Menu">
@@ -2297,7 +2293,7 @@
       const totalDisplay = document.getElementById('bookingCartTotalDisplay');
 
       if (currentCart.length === 0) {
-        container.innerHTML = '<div style="font-size: 0.75rem; color: var(--text-muted-dark); text-align: center; padding: 6px;">Belum ada menu dipilih.</div>';
+        container.innerHTML = '<div style="font-size: 0.75rem; color: var(--text-muted); text-align: center; padding: 6px;">Belum ada menu dipilih.</div>';
         totalDisplay.innerText = 'Rp 0';
         updateBalanceDisplay();
         return;
@@ -2562,7 +2558,7 @@
               display: flex;
               justify-content: space-between;
               align-items: center;
-              border-bottom: 2.5px solid #b88b28;
+              border-bottom: 2.5px solid #0b4f8a;
               padding-bottom: 14px;
               margin-bottom: 18px;
             }
@@ -2570,7 +2566,7 @@
               font-family: 'Cinzel', serif;
               font-size: 16px;
               font-weight: 800;
-              color: #0f172a;
+              color: #073b69;
               letter-spacing: 0.6px;
             }
             .hotel-sub {
@@ -2592,9 +2588,9 @@
             }
             .doc-badge {
               display: inline-block;
-              background: #fef9e7;
-              border: 1px solid #d4af37;
-              color: #8c6719;
+              background: #f4f9fe;
+              border: 1px solid #9ec0df;
+              color: #073b69;
               font-weight: 700;
               font-size: 10px;
               padding: 3px 9px;
@@ -2607,7 +2603,7 @@
               font-family: 'Cinzel', serif;
               font-size: 15px;
               font-weight: 800;
-              color: #0f172a;
+              color: #073b69;
               letter-spacing: 1px;
               margin: 12px 0 16px;
             }
@@ -2641,8 +2637,8 @@
               font-size: 11.5px;
             }
             .items-table th {
-              background: #0f172a;
-              color: #f7e199;
+              background: #073b69;
+              color: #ffffff;
               padding: 7px 8px;
               text-align: left;
               font-weight: 700;
@@ -2654,7 +2650,7 @@
             .summary-box {
               background: #f8fafc;
               border: 1px solid #cbd5e1;
-              border-left: 4px solid #b88b28;
+              border-left: 4px solid #0b4f8a;
               border-radius: 6px;
               padding: 10px 14px;
               margin-bottom: 14px;
@@ -2674,8 +2670,8 @@
             .terms-box {
               font-size: 11px;
               color: #334155;
-              background: #fffdf7;
-              border: 1px solid #f3e5ab;
+              background: #f4f9fe;
+              border: 1px solid #c9dff3;
               border-radius: 6px;
               padding: 10px 14px;
               margin-bottom: 18px;
@@ -2898,19 +2894,19 @@
     function openFDCListModal() {
       const container = document.getElementById('fdcListContent');
       if (fdcBookings.length === 0) {
-        container.innerHTML = '<div style="text-align:center; padding: 25px; color:var(--text-muted-dark); font-size:0.85rem;">Belum ada pesanan tiket FDC Standing.</div>';
+        container.innerHTML = '<div style="text-align:center; padding: 25px; color:var(--text-muted); font-size:0.85rem;">Belum ada pesanan tiket FDC Standing.</div>';
       } else {
         let html = '';
         fdcBookings.forEach((item) => {
           html += `
-            <div style="background:#ffffff; border:1px solid #cbd5e1; border-radius:8px; padding:10px 12px; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
+            <div style="background:#ffffff; border:1px solid var(--border-subtle); border-radius:8px; padding:10px 12px; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
               <div>
-                <strong style="color:#7e22ce; font-size:0.86rem;">${escapeHtml(item.name)}</strong>
-                <span style="background:rgba(126,34,206,0.12); color:#6b21a8; font-size:0.66rem; padding:2px 6px; border-radius:4px; margin-left:6px; font-weight:700;">${item.pax} Pax</span>
-                <div style="font-size:0.75rem; color:var(--text-muted-dark); margin-top:2px;">
+                <strong style="color:var(--navy-dark); font-size:0.86rem;">${escapeHtml(item.name)}</strong>
+                <span style="background:#e6eff8; color:var(--navy-dark); font-size:0.66rem; padding:2px 6px; border-radius:4px; margin-left:6px; font-weight:700;">${item.pax} Pax</span>
+                <div style="font-size:0.75rem; color:var(--text-muted); margin-top:2px;">
                   WA: ${escapeHtml(item.phone || '-')} · Total: <strong style="color:#059669;">Rp ${(item.amount || 0).toLocaleString('id-ID')}</strong>
                 </div>
-                <div style="font-size:0.7rem; color:#92400e; margin-top:2px;">
+                <div style="font-size:0.7rem; color:#8c6313; margin-top:2px;">
                   <i class="fa-solid fa-user-pen"></i> By: <strong>${escapeHtml(item.created_by || '-')}</strong>
                 </div>
               </div>
@@ -3057,7 +3053,7 @@
           scale: 2,
           useCORS: true,
           allowTaint: true,
-          backgroundColor: '#070b14'
+          backgroundColor: '#ffffff'
         });
 
         const link = document.createElement('a');
