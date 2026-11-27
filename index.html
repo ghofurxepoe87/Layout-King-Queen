@@ -4,14 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
   <title>Rooftop Bar & Lounge - NYE 2027 | Platinum Hotel Balikpapan</title>
-  
+
   <link rel="icon" type="image/png" href="favicon.png">
   <link rel="apple-touch-icon" href="favicon.png">
 
   <!-- Fonts & Icons -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;800;900&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <!-- Supabase JS Client & HTML2Canvas -->
@@ -20,20 +20,23 @@
 
   <style>
     :root {
-      --bg-page: #f1f5f9;
-      --header-bg: #0077b6;
-      --card-bg: #ffffff;
-      --text-main: #1e293b;
-      --text-muted: #64748b;
-      --gold-primary: #d4af37;
-      --gold-grad: linear-gradient(135deg, #fce08a 0%, #d4af37 50%, #856108 100%);
+      --bg-page: #0b1120;
+      --bg-surface: #111827;
+      --header-grad: linear-gradient(135deg, #090e1a 0%, #111c33 55%, #0c1322 100%);
+      --card-light: #ffffff;
+      --card-soft: #f8fafc;
+      --text-light: #f8fafc;
+      --text-muted-light: #cbd5e1;
+      --text-dark: #0f172a;
+      --text-muted-dark: #64748b;
+      --gold-1: #f5d77f;
+      --gold-2: #d4af37;
+      --gold-3: #9a7018;
+      --gold-grad: linear-gradient(135deg, #f5d77f 0%, #d4af37 52%, #9a7018 100%);
       --red-booked: #ef4444;
-      --red-glow: rgba(239, 68, 68, 0.4);
-      --purple-fdc: #9333ea;
-      --emerald-accent: #059669;
-      --cyan-terrace: #0284c7;
-      --amber-lounge: #d97706;
-      --border-color: #cbd5e1;
+      --red-glow: rgba(239, 68, 68, 0.45);
+      --border-gold: rgba(212, 175, 55, 0.42);
+      --border-light: #cbd5e1;
     }
 
     * {
@@ -41,34 +44,48 @@
       margin: 0;
       padding: 0;
       -webkit-tap-highlight-color: transparent;
-      user-select: none;
+    }
+
+    html {
+      height: 100%;
+      -webkit-text-size-adjust: 100%;
     }
 
     body {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      background: var(--bg-page);
-      color: var(--text-main);
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background:
+        radial-gradient(circle at top right, rgba(212, 175, 55, 0.08), transparent 36%),
+        radial-gradient(circle at bottom left, rgba(56, 189, 248, 0.06), transparent 40%),
+        var(--bg-page);
+      color: var(--text-light);
       min-height: 100vh;
       min-height: -webkit-fill-available;
       display: flex;
       flex-direction: column;
       overflow-x: hidden;
+      padding-bottom: env(safe-area-inset-bottom);
     }
 
-    /* HEADER */
+    /* HEADER ELEGANT */
     header {
-      background: var(--header-bg);
-      border-bottom: 3px solid rgba(212, 175, 55, 0.6);
-      padding: 12px 16px;
+      background: var(--header-grad);
+      border-bottom: 1.5px solid var(--border-gold);
+      padding: calc(12px + env(safe-area-inset-top)) 16px 14px;
       position: sticky;
       top: 0;
       z-index: 60;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
     }
 
     .hdr-wrap {
-      max-width: 1850px;
+      max-width: 1840px;
       margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .hdr-top-row {
       display: flex;
       flex-direction: column;
       gap: 12px;
@@ -78,20 +95,21 @@
       display: flex;
       align-items: center;
       gap: 12px;
+      min-width: 0;
     }
 
     .brand-logo-frame {
-      width: 140px;
-      height: 52px;
+      width: 124px;
+      height: 48px;
       background: #ffffff;
-      border: 2px solid var(--gold-primary);
-      border-radius: 8px;
-      padding: 3px 6px;
+      border: 1.5px solid var(--gold-2);
+      border-radius: 10px;
+      padding: 4px 8px;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.25);
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
       overflow: hidden;
     }
 
@@ -101,129 +119,246 @@
       object-fit: contain;
     }
 
+    .brand-title {
+      min-width: 0;
+    }
+
     .brand-title h1 {
       font-family: 'Cinzel', serif;
-      font-size: 1.05rem;
+      font-size: 0.98rem;
       font-weight: 800;
       letter-spacing: 0.5px;
-      color: #ffffff;
+      color: var(--text-light);
       line-height: 1.2;
-      text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .brand-title p {
       font-size: 0.7rem;
-      color: #e2e8f0;
+      color: var(--gold-1);
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
       flex-wrap: wrap;
-      margin-top: 3px;
+      margin-top: 4px;
       font-weight: 600;
+      letter-spacing: 0.4px;
     }
 
     .event-badge {
-      background: rgba(236, 72, 153, 0.25);
-      border: 1px solid #f472b6;
-      color: #fff;
-      padding: 2px 8px;
-      border-radius: 12px;
+      background: rgba(212, 175, 55, 0.14);
+      border: 1px solid rgba(245, 215, 127, 0.55);
+      color: var(--gold-1);
+      padding: 2px 9px;
+      border-radius: 999px;
       font-size: 0.62rem;
       font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
     }
 
-    .hdr-controls {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
+    /* METRICS */
     .metrics-group {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 8px;
     }
 
     .metric-card-lg {
-      background: rgba(255, 255, 255, 0.15);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      border-radius: 8px;
-      padding: 8px 12px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(212, 175, 55, 0.25);
+      border-radius: 10px;
+      padding: 9px 12px;
       display: flex;
       align-items: center;
       gap: 10px;
       cursor: pointer;
-      backdrop-filter: blur(4px);
-      min-height: 48px;
+      min-height: 50px;
+      transition: transform 0.16s ease, border-color 0.16s ease, background 0.16s ease;
     }
 
-    .metric-card-lg i { font-size: 1.15rem; color: #fff; }
-    .metric-card-lg .txt-wrap { display: flex; flex-direction: column; line-height: 1.2; }
-    .metric-card-lg .txt-wrap span { font-size: 0.58rem; color: #f8fafc; text-transform: uppercase; font-weight: 700; }
-    .metric-card-lg .txt-wrap strong { font-size: 0.9rem; font-family: 'Cinzel', serif; color: #fff; }
+    .metric-card-lg:hover {
+      background: rgba(212, 175, 55, 0.09);
+      border-color: rgba(245, 215, 127, 0.55);
+    }
 
+    .metric-card-lg:active {
+      transform: scale(0.98);
+    }
+
+    .metric-icon-box {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: rgba(212, 175, 55, 0.14);
+      border: 1px solid rgba(212, 175, 55, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold-1);
+      font-size: 0.9rem;
+      flex-shrink: 0;
+    }
+
+    .metric-card-lg .txt-wrap {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.2;
+      min-width: 0;
+    }
+
+    .metric-card-lg .txt-wrap span {
+      font-size: 0.6rem;
+      color: var(--text-muted-light);
+      text-transform: uppercase;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    .metric-card-lg .txt-wrap strong {
+      font-size: 0.88rem;
+      font-family: 'Cinzel', serif;
+      color: #ffffff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* ACTION BUTTONS */
     .btn-action-group {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 8px;
+      padding-top: 2px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
     }
 
     .btn-action {
-      border: none;
-      padding: 10px 8px;
-      border-radius: 8px;
+      border: 1px solid transparent;
+      padding: 10px 12px;
+      border-radius: 9px;
       font-weight: 700;
-      font-size: 0.75rem;
+      font-size: 0.74rem;
+      letter-spacing: 0.25px;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 6px;
-      color: #fff;
+      gap: 7px;
       touch-action: manipulation;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-      transition: all 0.2s ease;
-      min-height: 44px;
+      min-height: 42px;
+      white-space: nowrap;
+      transition: transform 0.15s ease, filter 0.15s ease, box-shadow 0.15s ease;
     }
 
-    .btn-action:active { transform: scale(0.97); }
+    .btn-action:hover {
+      filter: brightness(1.06);
+    }
 
-    .btn-dashboard { background: #0284c7; }
-    .btn-fdc { background: #9333ea; }
-    .btn-menu { background: #b45309; }
-    .btn-reg { background: #0891b2; grid-column: span 2; }
-    .btn-reset-pos { background: #991b1b; }
-    .btn-jpg { background: #059669; }
-    .btn-csv { background: #d97706; color: #fff; }
+    .btn-action:active {
+      transform: scale(0.97);
+    }
+
+    .btn-reg {
+      background: var(--gold-grad);
+      color: #141006;
+      border-color: rgba(245, 215, 127, 0.7);
+      box-shadow: 0 4px 14px rgba(212, 175, 55, 0.25);
+    }
+
+    .btn-fdc {
+      background: rgba(168, 85, 247, 0.18);
+      color: #f3e8ff;
+      border-color: rgba(192, 132, 252, 0.45);
+    }
+
+    .btn-menu {
+      background: rgba(212, 175, 55, 0.15);
+      color: var(--gold-1);
+      border-color: rgba(212, 175, 55, 0.45);
+    }
+
+    .btn-dashboard {
+      background: rgba(14, 165, 233, 0.18);
+      color: #e0f2fe;
+      border-color: rgba(56, 189, 248, 0.45);
+    }
+
+    .btn-jpg {
+      background: rgba(16, 185, 129, 0.18);
+      color: #d1fae5;
+      border-color: rgba(52, 211, 153, 0.45);
+    }
+
+    .btn-csv {
+      background: rgba(245, 158, 11, 0.18);
+      color: #fef3c7;
+      border-color: rgba(251, 191, 36, 0.45);
+    }
+
+    .btn-reset-pos {
+      background: rgba(239, 68, 68, 0.16);
+      color: #fecaca;
+      border-color: rgba(248, 113, 113, 0.4);
+      grid-column: span 2;
+    }
 
     /* TOOLBAR */
     .toolbar-bar {
-      max-width: 1850px;
+      max-width: 1840px;
       margin: 10px auto 0;
       padding: 0 16px;
       width: 100%;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      flex-wrap: wrap;
       gap: 10px;
     }
 
     .legend-tag {
       display: flex;
       align-items: center;
-      gap: 10px;
-      background: #ffffff;
+      flex-wrap: wrap;
+      gap: 12px;
+      background: rgba(17, 24, 39, 0.9);
       padding: 8px 14px;
-      border-radius: 20px;
-      border: 1px solid var(--border-color);
-      font-size: 0.7rem;
+      border-radius: 999px;
+      border: 1px solid rgba(212, 175, 55, 0.28);
+      font-size: 0.72rem;
       font-weight: 600;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      color: var(--text-light);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
     }
 
-    .dot-node { width: 9px; height: 9px; border-radius: 50%; }
-    .dot-node.avail { background: #0284c7; }
-    .dot-node.booked { background: #ef4444; }
+    .dot-node {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .dot-node.avail {
+      background: #38bdf8;
+      box-shadow: 0 0 8px rgba(56, 189, 248, 0.7);
+    }
+
+    .dot-node.booked {
+      background: #ef4444;
+      box-shadow: 0 0 8px rgba(239, 68, 68, 0.8);
+    }
+
+    .sync-pill {
+      color: var(--gold-1);
+      font-size: 0.7rem;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
 
     .zoom-group {
       display: flex;
@@ -232,43 +367,52 @@
     }
 
     .btn-tool-icon {
-      width: 36px;
-      height: 36px;
-      border-radius: 8px;
-      background: #ffffff;
-      border: 1px solid var(--border-color);
-      color: var(--text-main);
+      width: 38px;
+      height: 38px;
+      border-radius: 9px;
+      background: rgba(17, 24, 39, 0.92);
+      border: 1px solid rgba(212, 175, 55, 0.32);
+      color: var(--gold-1);
       font-size: 0.85rem;
-      display: flex;
+      display: inline-flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      transition: background 0.15s ease, transform 0.15s ease;
+    }
+
+    .btn-tool-icon:hover {
+      background: rgba(212, 175, 55, 0.14);
+    }
+
+    .btn-tool-icon:active {
+      transform: scale(0.96);
     }
 
     /* VIEWPORT */
     .viewport-area {
       flex: 1;
       position: relative;
-      overflow: hidden;
+      overflow: auto;
+      -webkit-overflow-scrolling: touch;
       touch-action: pan-x pan-y pinch-zoom;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 10px;
+      padding: 12px 16px 20px;
     }
 
     .map-frame {
       width: 100%;
-      max-width: 1300px;
+      max-width: 1320px;
       position: relative;
       transform-origin: center center;
-      transition: transform 0.12s ease-out;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-      border-radius: 10px;
+      transition: transform 0.14s ease-out;
+      box-shadow: 0 24px 50px rgba(0, 0, 0, 0.55);
+      border-radius: 12px;
       overflow: hidden;
-      background: #0f172a;
-      border: 1px solid var(--border-color);
+      background: #070b14;
+      border: 1.5px solid rgba(212, 175, 55, 0.45);
     }
 
     .map-img-wrapper {
@@ -285,21 +429,19 @@
 
     .hotspots-layer {
       position: absolute;
-      top: 0;
-      left: 0;
+      inset: 0;
       width: 100%;
       height: 100%;
     }
 
-    /* DISCLAIMER BAR DI BAWAH GAMBAR */
     .map-disclaimer-bar {
-      background: #090d16;
+      background: #070b14;
       color: #cbd5e1;
       text-align: center;
       font-size: 0.72rem;
       font-style: italic;
       font-weight: 500;
-      padding: 8px 12px;
+      padding: 9px 14px;
       border-top: 1px solid rgba(212, 175, 55, 0.35);
       letter-spacing: 0.3px;
     }
@@ -309,32 +451,33 @@
       position: absolute;
       cursor: grab;
       border-radius: 6px;
-      background: rgba(2, 132, 199, 0.22);
-      border: 1.5px dashed rgba(2, 132, 199, 0.85);
+      background: rgba(56, 189, 248, 0.22);
+      border: 1.5px dashed rgba(125, 211, 252, 0.9);
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 0.58rem;
       font-weight: 700;
-      color: #0f172a;
-      -webkit-tap-highlight-color: transparent;
+      color: #ffffff;
       touch-action: none;
-      transition: background 0.2s ease;
+      transition: background 0.18s ease, border-color 0.18s ease;
     }
 
-    .spot:active { cursor: grabbing; }
+    .spot:active {
+      cursor: grabbing;
+    }
 
     .spot:hover {
-      background: rgba(2, 132, 199, 0.45);
-      border-color: #0284c7;
+      background: rgba(212, 175, 55, 0.36);
+      border-color: var(--gold-1);
       z-index: 10;
     }
 
     .spot.is-booked {
       background: rgba(239, 68, 68, 0.88) !important;
-      border: 2px solid #b91c1c !important;
-      box-shadow: 0 0 12px var(--red-glow), inset 0 0 6px rgba(255,255,255,0.6) !important;
-      color: #fff !important;
+      border: 2px solid #fca5a5 !important;
+      box-shadow: 0 0 14px var(--red-glow), inset 0 0 6px rgba(255, 255, 255, 0.55) !important;
+      color: #ffffff !important;
       z-index: 5;
     }
 
@@ -342,97 +485,245 @@
     .modal-backdrop {
       position: fixed;
       inset: 0;
-      background: rgba(15, 23, 42, 0.7);
-      backdrop-filter: blur(5px);
-      -webkit-backdrop-filter: blur(5px);
+      background: rgba(4, 7, 15, 0.78);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
       z-index: 100;
       display: none;
       align-items: center;
       justify-content: center;
       padding: 12px;
+      overflow-y: auto;
     }
 
-    .modal-backdrop.open { display: flex; }
+    .modal-backdrop.open {
+      display: flex;
+    }
 
     .modal-container {
-      background: var(--card-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
+      background: var(--card-light);
+      color: var(--text-dark);
+      border: 1.5px solid rgba(212, 175, 55, 0.55);
+      border-radius: 14px;
       width: 100%;
-      max-width: 540px;
+      max-width: 560px;
       max-height: 90vh;
-      overflow-y: auto;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
     }
 
     .modal-header {
-      background: #f8fafc;
+      background: linear-gradient(135deg, #0b1120 0%, #162238 100%);
+      color: #ffffff;
       padding: 14px 18px;
-      border-bottom: 1px solid var(--border-color);
+      border-bottom: 1.5px solid rgba(212, 175, 55, 0.45);
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
     }
 
-    .modal-header h3 { font-family: 'Cinzel', serif; font-size: 1rem; color: #0f172a; font-weight: 700; }
-    .btn-x { background: transparent; border: none; color: var(--text-muted); font-size: 1.3rem; cursor: pointer; padding: 4px; }
+    .modal-header h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 0.98rem;
+      color: var(--gold-1);
+      font-weight: 800;
+      letter-spacing: 0.4px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-x {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      color: #f8fafc;
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      font-size: 1.05rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
 
     .modal-body {
       padding: 16px 18px;
       display: flex;
       flex-direction: column;
       gap: 12px;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
     }
 
-    .form-row { display: flex; flex-direction: column; gap: 5px; }
-    .form-row label { font-size: 0.78rem; font-weight: 700; color: #334155; display: flex; align-items: center; gap: 6px; }
+    .form-grid-2 {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+
+    .form-row {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .form-row label {
+      font-size: 0.76rem;
+      font-weight: 700;
+      color: #1e293b;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
 
     .inp-field {
       background: #ffffff;
-      border: 1px solid var(--border-color);
+      border: 1px solid var(--border-light);
       border-radius: 8px;
-      padding: 11px 12px;
-      color: var(--text-main);
+      padding: 10px 12px;
+      color: var(--text-dark);
       font-size: 0.9rem;
       outline: none;
-      -webkit-appearance: none;
       width: 100%;
+      min-height: 42px;
       font-family: inherit;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
     }
 
-    .inp-field:focus { border-color: var(--header-bg); box-shadow: 0 0 0 3px rgba(0, 119, 182, 0.15); }
+    .inp-field:focus {
+      border-color: var(--gold-3);
+      box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
+    }
 
-    .money-input-box { position: relative; }
+    .money-input-box {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
     .money-input-box span {
       position: absolute;
       left: 12px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: var(--header-bg);
-      font-weight: 700;
-      font-size: 0.9rem;
+      color: #92400e;
+      font-weight: 800;
+      font-size: 0.88rem;
+      pointer-events: none;
     }
-    .money-input-box input { padding-left: 38px; width: 100%; }
+
+    .money-input-box input {
+      padding-left: 38px;
+      width: 100%;
+    }
+
+    .auto-pdf-box {
+      background: #fffbeb;
+      border: 1px solid #f59e0b;
+      border-radius: 9px;
+      padding: 10px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      font-size: 0.76rem;
+      color: #78350f;
+      font-weight: 700;
+    }
+
+    .auto-pdf-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+
+    .auto-pdf-toggle input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      accent-color: #b45309;
+      cursor: pointer;
+    }
 
     .modal-footer {
-      padding: 14px 18px;
-      background: #f8fafc;
-      border-top: 1px solid var(--border-color);
+      padding: 12px 18px;
+      background: var(--card-soft);
+      border-top: 1px solid #e2e8f0;
       display: flex;
       justify-content: space-between;
       align-items: center;
       gap: 10px;
       flex-wrap: wrap;
+      flex-shrink: 0;
     }
 
-    .btn-modal-del { background: #fee2e2; color: #991b1b; border: 1px solid #fca5a5; padding: 10px 14px; border-radius: 8px; font-size: 0.8rem; font-weight: 700; cursor: pointer; }
-    .btn-modal-save { background: #0077b6; color: #fff; border: none; padding: 10px 18px; border-radius: 8px; font-size: 0.85rem; font-weight: 700; cursor: pointer; display: flex; align-items: center; gap: 6px; box-shadow: 0 2px 6px rgba(0,119,182,0.3); }
+    .btn-modal-secondary {
+      background: #e2e8f0;
+      color: #334155;
+      border: none;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      min-height: 40px;
+    }
+
+    .btn-modal-del {
+      background: #fee2e2;
+      color: #991b1b;
+      border: 1px solid #fca5a5;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      min-height: 40px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-modal-pdf {
+      background: #0f172a;
+      color: var(--gold-1);
+      border: 1px solid #d4af37;
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      min-height: 40px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-modal-save {
+      background: linear-gradient(135deg, #d4af37 0%, #9a7018 100%);
+      color: #ffffff;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      font-weight: 800;
+      cursor: pointer;
+      min-height: 40px;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      box-shadow: 0 4px 12px rgba(154, 112, 24, 0.3);
+    }
 
     .cart-item-card {
       background: #ffffff;
-      border: 1px solid var(--border-color);
+      border: 1px solid var(--border-light);
       border-radius: 8px;
-      padding: 10px;
+      padding: 9px 10px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -442,7 +733,7 @@
     .cart-qty-controls {
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 5px;
       flex-shrink: 0;
     }
 
@@ -460,12 +751,10 @@
       font-weight: 700;
     }
 
-    .btn-qty:active { background: #cbd5e1; }
-
     .btn-edit-item {
-      background: #e0f2fe;
-      border: 1px solid #bae6fd;
-      color: #0284c7;
+      background: #fef3c7;
+      border: 1px solid #fcd34d;
+      color: #92400e;
       width: 28px;
       height: 28px;
       border-radius: 6px;
@@ -475,22 +764,68 @@
       justify-content: center;
     }
 
-    .btn-edit-item:hover { background: #bae6fd; }
+    .dash-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
 
-    .dash-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
-    .dash-card { background: #f8fafc; border: 1px solid var(--border-color); border-radius: 10px; padding: 12px; display: flex; flex-direction: column; gap: 6px; }
-    .dash-card.hero-card { grid-column: span 2; background: linear-gradient(135deg, rgba(0,119,182,0.08) 0%, rgba(248,250,252,1) 100%); border-color: #0077b6; }
-    .dash-card .card-lbl { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; font-weight: 700; display: flex; align-items: center; gap: 6px; }
-    .dash-card .card-val { font-size: 1.2rem; font-weight: 800; color: #0f172a; font-family: 'Cinzel', serif; }
-    .dash-card .card-sub { font-size: 0.7rem; color: var(--text-muted); }
+    .dash-card {
+      background: #f8fafc;
+      border: 1px solid #cbd5e1;
+      border-radius: 10px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
 
-    .occupancy-bar-wrap { width: 100%; height: 7px; background: #e2e8f0; border-radius: 4px; overflow: hidden; margin-top: 4px; }
-    .occupancy-bar { height: 100%; width: 0%; transition: width 0.4s ease; }
+    .dash-card.hero-card {
+      background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+      border-color: #d4af37;
+    }
+
+    .dash-card .card-lbl {
+      font-size: 0.7rem;
+      color: var(--text-muted-dark);
+      text-transform: uppercase;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .dash-card .card-val {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #0f172a;
+      font-family: 'Cinzel', serif;
+    }
+
+    .dash-card .card-sub {
+      font-size: 0.72rem;
+      color: var(--text-muted-dark);
+    }
+
+    .occupancy-bar-wrap {
+      width: 100%;
+      height: 7px;
+      background: #e2e8f0;
+      border-radius: 4px;
+      overflow: hidden;
+      margin-top: 2px;
+    }
+
+    .occupancy-bar {
+      height: 100%;
+      width: 0%;
+      transition: width 0.4s ease;
+    }
 
     .loader-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(15, 23, 42, 0.85);
+      background: rgba(7, 11, 20, 0.88);
       z-index: 200;
       display: none;
       flex-direction: column;
@@ -502,21 +837,69 @@
     .spinner {
       width: 44px;
       height: 44px;
-      border: 4px solid rgba(255, 255, 255, 0.2);
-      border-top-color: #38bdf8;
+      border: 4px solid rgba(212, 175, 55, 0.22);
+      border-top-color: var(--gold-1);
       border-radius: 50%;
       animation: spin 0.8s linear infinite;
     }
 
-    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
 
-    @media (min-width: 992px) {
-      .hdr-wrap { flex-direction: row; align-items: center; justify-content: space-between; }
-      .metrics-group { display: flex; }
-      .metric-card-lg { min-width: 140px; }
-      .btn-action-group { display: flex; flex-wrap: wrap; }
-      .btn-reg { grid-column: auto; }
-      .toolbar-bar { margin: 12px auto 0; }
+    /* TABLET & SMALL DESKTOP */
+    @media (min-width: 640px) {
+      .form-grid-2 {
+        grid-template-columns: 1fr 1fr;
+      }
+      .dash-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .dash-card.hero-card,
+      .dash-card.wide-card {
+        grid-column: span 2;
+      }
+      .btn-action-group {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+      .btn-reset-pos {
+        grid-column: span 2;
+      }
+    }
+
+    /* PC / WIDE DESKTOP */
+    @media (min-width: 1140px) {
+      .hdr-top-row {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+      }
+      .brand-title h1 {
+        font-size: 1.12rem;
+      }
+      .metrics-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .metric-card-lg {
+        min-width: 146px;
+      }
+      .btn-action-group {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        border-top: none;
+        padding-top: 0;
+        gap: 8px;
+      }
+      .btn-reset-pos {
+        grid-column: auto;
+      }
+      .toolbar-bar {
+        margin: 14px auto 0;
+      }
     }
   </style>
 </head>
@@ -525,78 +908,78 @@
   <!-- HEADER -->
   <header>
     <div class="hdr-wrap">
-      <div class="brand-section">
-        <div class="brand-logo-frame">
-          <img src="Logo.png" alt="Logo Platinum Hotel"
-               onerror="this.onerror=null; this.src='logo.png'; this.addEventListener('error', () => { this.src='favicon.png'; });">
+      <div class="hdr-top-row">
+        <div class="brand-section">
+          <div class="brand-logo-frame">
+            <img src="Logo.png" alt="Logo Platinum Hotel & Convention Hall"
+                 onerror="this.onerror=null; this.src='logo.png'; this.addEventListener('error', () => { this.src='favicon.png'; });">
+          </div>
+          <div class="brand-title">
+            <h1>Platinum Hotel &amp; Convention Hall</h1>
+            <p>
+              <span>ROOFTOP BAR &amp; LOUNGE</span>
+              <span class="event-badge"><i class="fa-solid fa-crown"></i> NYE 2027 ROYAL GALA</span>
+            </p>
+          </div>
         </div>
-        <div class="brand-title">
-          <h1>Platinum Hotel & Convention Hall</h1>
-          <p>
-            <span>ROOFTOP BAR & LOUNGE</span>
-            <span class="event-badge"><i class="fa-solid fa-crown"></i> NYE 2027</span>
-          </p>
-        </div>
-      </div>
 
-      <div class="hdr-controls">
         <div class="metrics-group">
           <div class="metric-card-lg" onclick="openReportModal()" title="Lihat Inventaris Lower Deck">
-            <i class="fa-solid fa-couch" style="color: #f59e0b;"></i>
+            <div class="metric-icon-box"><i class="fa-solid fa-couch"></i></div>
             <div class="txt-wrap">
               <span>Lounge (L)</span>
-              <strong><span id="statLoungeBooked">0</span><span style="font-size:0.75rem; color:#e2e8f0;"> / 25</span></strong>
+              <strong><span id="statLoungeBooked">0</span><span style="font-size:0.74rem; color:#cbd5e1;"> / 25</span></strong>
             </div>
           </div>
 
           <div class="metric-card-lg" onclick="openReportModal()" title="Lihat Inventaris Cockpit Deck">
-            <i class="fa-solid fa-cloud-moon" style="color: #38bdf8;"></i>
+            <div class="metric-icon-box"><i class="fa-solid fa-cloud-moon"></i></div>
             <div class="txt-wrap">
               <span>Cockpit (C)</span>
-              <strong><span id="statTerraceBooked">0</span><span style="font-size:0.75rem; color:#e2e8f0;"> / 13</span></strong>
+              <strong><span id="statTerraceBooked">0</span><span style="font-size:0.74rem; color:#cbd5e1;"> / 13</span></strong>
             </div>
           </div>
 
           <div class="metric-card-lg" onclick="openFDCListModal()" title="Lihat Tamu Tiket FDC Standing">
-            <i class="fa-solid fa-ticket" style="color: #e879f9;"></i>
+            <div class="metric-icon-box"><i class="fa-solid fa-ticket"></i></div>
             <div class="txt-wrap">
               <span>FDC Guests</span>
-              <strong><span id="statFDCPaxTotal">0</span><span style="font-size:0.75rem; color:#e2e8f0;"> Pax</span></strong>
+              <strong><span id="statFDCPaxTotal">0</span><span style="font-size:0.74rem; color:#cbd5e1;"> Pax</span></strong>
             </div>
           </div>
 
           <div class="metric-card-lg" onclick="openReportModal()" title="Lihat Rincian Pendapatan">
-            <i class="fa-solid fa-money-bill-wave" style="color: #34d399;"></i>
+            <div class="metric-icon-box"><i class="fa-solid fa-gem"></i></div>
             <div class="txt-wrap">
               <span>Total Rev / DP</span>
               <strong id="statDPTotal">Rp 0</strong>
             </div>
           </div>
         </div>
+      </div>
 
-        <div class="btn-action-group">
-          <button class="btn-action btn-dashboard" onclick="openReportModal()">
-            <i class="fa-solid fa-chart-pie"></i> Report
-          </button>
-          <button class="btn-action btn-fdc" onclick="openFDCBookingModal()">
-            <i class="fa-solid fa-user-plus"></i> + FDC
-          </button>
-          <button class="btn-action btn-menu" onclick="openMasterMenuModal()">
-            <i class="fa-solid fa-utensils"></i> Master Menu
-          </button>
-          <button class="btn-action btn-reg" onclick="openRegistrationModal()">
-            <i class="fa-solid fa-file-pen"></i> + Input Meja
-          </button>
-          <button class="btn-action btn-reset-pos" onclick="resetHotspotsPosition()" title="Reset Posisi Kotak">
-            <i class="fa-solid fa-arrows-rotate"></i> Reset Meja
-          </button>
-          <button class="btn-action btn-jpg" onclick="downloadLayoutJPG()">
-            <i class="fa-solid fa-file-image"></i> Share JPG
-          </button>
-          <button class="btn-action btn-csv" onclick="exportReservationsCSV()">
-            <i class="fa-solid fa-file-csv"></i> CSV
-          </button>
-        </div>
+      <div class="btn-action-group">
+        <button class="btn-action btn-reg" onclick="openRegistrationModal()">
+          <i class="fa-solid fa-file-pen"></i> + Registrasi Meja
+        </button>
+        <button class="btn-action btn-fdc" onclick="openFDCBookingModal()">
+          <i class="fa-solid fa-ticket"></i> + Tiket FDC
+        </button>
+        <button class="btn-action btn-menu" onclick="openMasterMenuModal()">
+          <i class="fa-solid fa-utensils"></i> Master Menu
+        </button>
+        <button class="btn-action btn-dashboard" onclick="openReportModal()">
+          <i class="fa-solid fa-chart-line"></i> Executive Report
+        </button>
+        <button class="btn-action btn-jpg" onclick="downloadLayoutJPG()">
+          <i class="fa-solid fa-file-image"></i> Export JPG
+        </button>
+        <button class="btn-action btn-csv" onclick="exportReservationsCSV()">
+          <i class="fa-solid fa-file-csv"></i> Export CSV
+        </button>
+        <button class="btn-action btn-reset-pos" onclick="resetHotspotsPosition()" title="Reset Posisi Kotak Meja">
+          <i class="fa-solid fa-arrows-rotate"></i> Reset Layout
+        </button>
       </div>
     </div>
   </header>
@@ -604,19 +987,25 @@
   <!-- TOOLBAR -->
   <div class="toolbar-bar">
     <div class="legend-tag">
-      <div style="display:flex; align-items:center; gap:6px;"><div class="dot-node avail"></div> <span id="legendAvailText">Lounge: 25 | Cockpit: 13</span></div>
-      <div style="display:flex; align-items:center; gap:6px;"><div class="dot-node booked"></div> <span id="legendBookedText">0 Booked</span></div>
-      <div style="color: #0284c7; font-size: 0.7rem; font-weight: 700;"><i class="fa-solid fa-cloud"></i> Rooftop Cloud Sync Aktif</div>
+      <div style="display:flex; align-items:center; gap:6px;">
+        <span class="dot-node avail"></span>
+        <span id="legendAvailText">Sisa Lounge: 25 | Sisa Cockpit: 13</span>
+      </div>
+      <div style="display:flex; align-items:center; gap:6px;">
+        <span class="dot-node booked"></span>
+        <span id="legendBookedText">0 Booked</span>
+      </div>
+      <span class="sync-pill"><i class="fa-solid fa-shield-halved"></i> RT Cloud Sync</span>
     </div>
-    
+
     <div class="zoom-group">
       <label class="btn-tool-icon" title="Pilih Gambar Denah dari Perangkat">
         <i class="fa-solid fa-image"></i>
         <input type="file" id="localImgPicker" accept="image/*" style="display: none;" onchange="loadLocalImage(event)">
       </label>
-      <button class="btn-tool-icon" onclick="zoomMap(0.1)"><i class="fa-solid fa-plus"></i></button>
-      <button class="btn-tool-icon" onclick="zoomMap(-0.1)"><i class="fa-solid fa-minus"></i></button>
-      <button class="btn-tool-icon" onclick="resetZoom()"><i class="fa-solid fa-arrows-rotate"></i></button>
+      <button class="btn-tool-icon" onclick="zoomMap(0.1)" title="Perbesar Denah"><i class="fa-solid fa-plus"></i></button>
+      <button class="btn-tool-icon" onclick="zoomMap(-0.1)" title="Perkecil Denah"><i class="fa-solid fa-minus"></i></button>
+      <button class="btn-tool-icon" onclick="resetZoom()" title="Reset Zoom"><i class="fa-solid fa-expand"></i></button>
     </div>
   </div>
 
@@ -624,40 +1013,37 @@
   <main class="viewport-area" id="mapTouchArea">
     <div class="map-frame" id="mapFrame">
       <div class="map-img-wrapper">
-        <img id="mainDenahImg" 
-             src="denah.jpg" 
-             alt="Rooftop Bar & Lounge - NYE 2027" 
+        <img id="mainDenahImg"
+             src="denah.jpg"
+             alt="Rooftop Bar & Lounge - NYE 2027"
              class="render-3d-img"
              crossorigin="anonymous"
              onerror="handleImgFallback(this)">
 
-        <div class="hotspots-layer" id="hotspotsLayer">
-          <!-- Hotspots injected dynamically with Supabase Cloud Position Sync -->
-        </div>
+        <div class="hotspots-layer" id="hotspotsLayer"></div>
       </div>
 
-      <!-- DISCLAIMER TEXT -->
       <div class="map-disclaimer-bar">
         "The images shown are for illustration purposes only."
       </div>
     </div>
   </main>
 
-  <!-- MODAL RESERVASI MEJA DENGAN KASIR MENU, EDIT ITEM & CUSTOM INPUT -->
+  <!-- MODAL RESERVASI / EDIT MEJA -->
   <div id="bookingModal" class="modal-backdrop">
     <div class="modal-container">
       <div class="modal-header">
-        <h3><i class="fa-solid fa-chair" style="color: #0284c7;"></i> Reservasi <span id="modalTitle">#L1</span></h3>
+        <h3><i class="fa-solid fa-crown"></i> Reservasi <span id="modalTitle">#L1</span></h3>
         <button class="btn-x" onclick="closeBookingModal()"><i class="fa-solid fa-xmark"></i></button>
       </div>
 
       <div class="modal-body">
         <div class="form-row">
           <label><i class="fa-solid fa-user"></i> Nama Tamu (Guest Name) *</label>
-          <input type="text" id="guestName" class="inp-field" placeholder="Contoh: Jessica Alexandra">
+          <input type="text" id="guestName" class="inp-field" placeholder="Contoh: Bpk. Hendra Wijaya">
         </div>
 
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+        <div class="form-grid-2">
           <div class="form-row">
             <label><i class="fa-brands fa-whatsapp"></i> WhatsApp / HP *</label>
             <input type="tel" id="guestPhone" class="inp-field" placeholder="0812-xxxx-xxxx">
@@ -668,80 +1054,90 @@
           </div>
         </div>
 
-        <!-- KASIR MENU & CUSTOM INPUT -->
-        <div style="background: #f8fafc; border: 1px solid var(--border-color); border-radius: 10px; padding: 12px; display: flex; flex-direction: column; gap: 10px;">
-          <label style="font-size: 0.8rem; font-weight: 700; color: #b45309; display: flex; align-items: center; gap: 6px;">
-            <i class="fa-solid fa-utensils"></i> Kasir Menu & Paket Promo Rooftop
+        <div style="background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 10px; padding: 12px; display: flex; flex-direction: column; gap: 10px;">
+          <label style="font-size: 0.78rem; font-weight: 800; color: #92400e; display: flex; align-items: center; gap: 6px;">
+            <i class="fa-solid fa-champagne-glasses"></i> Kasir Menu &amp; Paket Promo Rooftop
           </label>
 
           <div style="display: flex; gap: 8px;">
             <select id="selectMasterMenuDropdown" class="inp-field" style="flex: 1;">
               <option value="">-- Pilih Menu / Paket Rooftop --</option>
             </select>
-            <button type="button" class="btn-action" style="background: #0284c7; color: #fff; padding: 0 16px; min-height: 44px;" onclick="addCartItemFromDropdown()">
+            <button type="button" class="btn-modal-save" style="padding: 0 14px;" onclick="addCartItemFromDropdown()">
               <i class="fa-solid fa-plus"></i> Tambah
             </button>
           </div>
 
-          <!-- INPUT MENU CUSTOM MANUAL -->
-          <div style="display: grid; grid-template-columns: 1.3fr 1.2fr auto; gap: 6px;">
+          <div class="form-grid-2">
             <input type="text" id="customMenuName" class="inp-field" placeholder="Nama Menu Custom">
-            <input type="text" id="customMenuPrice" class="inp-field" placeholder="Harga (Cth: 150000)" onkeyup="formatCurrencyInput(this)">
-            <button type="button" class="btn-action" style="background: #9333ea; color: #fff; padding: 0 12px;" onclick="addCustomCartItem()">
-              <i class="fa-solid fa-plus"></i> Custom
-            </button>
+            <div style="display: flex; gap: 6px;">
+              <input type="text" id="customMenuPrice" class="inp-field" placeholder="Harga (150000)" onkeyup="formatCurrencyInput(this)">
+              <button type="button" class="btn-modal-pdf" style="padding: 0 12px;" onclick="addCustomCartItem()">
+                <i class="fa-solid fa-plus"></i>
+              </button>
+            </div>
           </div>
 
-          <div id="bookingCartItemsContainer" style="display: flex; flex-direction: column; gap: 6px; max-height: 180px; overflow-y: auto;">
-            <div style="font-size: 0.75rem; color: var(--text-muted); text-align: center; padding: 6px;">Belum ada menu dipilih.</div>
+          <div id="bookingCartItemsContainer" style="display: flex; flex-direction: column; gap: 6px; max-height: 170px; overflow-y: auto;">
+            <div style="font-size: 0.75rem; color: var(--text-muted-dark); text-align: center; padding: 6px;">Belum ada menu dipilih.</div>
           </div>
 
           <div style="background: #ffffff; border: 1px solid #10b981; border-radius: 8px; padding: 10px 14px; display: flex; justify-content: space-between; align-items: center;">
-            <span style="font-size: 0.78rem; font-weight: 700; color: #059669;">Total Estimasi Menu:</span>
-            <strong id="bookingCartTotalDisplay" style="font-size: 1rem; font-family: 'Cinzel', serif; color: #059669;">Rp 0</strong>
+            <span style="font-size: 0.78rem; font-weight: 700; color: #047857;">Total Estimasi Menu:</span>
+            <strong id="bookingCartTotalDisplay" style="font-size: 0.98rem; font-family: 'Cinzel', serif; color: #047857;">Rp 0</strong>
           </div>
         </div>
 
         <div class="form-row">
-          <label><i class="fa-solid fa-money-bill-wave" style="color: #059669;"></i> Nominal DP / Uang Muka (Diisi Manual) *</label>
+          <label><i class="fa-solid fa-money-bill-wave" style="color: #059669;"></i> Nominal DP / Uang Muka *</label>
           <div class="money-input-box">
             <span>Rp</span>
             <input type="text" id="guestDP" class="inp-field" placeholder="Contoh: 500.000" onkeyup="formatCurrencyInput(this); updateBalanceDisplay();">
           </div>
         </div>
 
-        <!-- BALANCE / SISA TAGIHAN -->
-        <div style="background: #f8fafc; border: 1.5px dashed #0077b6; border-radius: 10px; padding: 12px; display: flex; justify-content: space-between; align-items: center;">
+        <div style="background: #f8fafc; border: 1.5px dashed #b45309; border-radius: 10px; padding: 12px; display: flex; justify-content: space-between; align-items: center; gap: 8px;">
           <div>
-            <div style="font-size: 0.72rem; font-weight: 700; color: #0077b6; text-transform: uppercase;"><i class="fa-solid fa-scale-balanced"></i> Balance (Sisa Tagihan / Kembalian)</div>
-            <div style="font-size: 0.65rem; color: var(--text-muted);">Total Konsumsi dikurangi Uang Muka (DP)</div>
+            <div style="font-size: 0.72rem; font-weight: 800; color: #92400e; text-transform: uppercase;">
+              <i class="fa-solid fa-scale-balanced"></i> Balance (Sisa Tagihan / Kembalian)
+            </div>
+            <div style="font-size: 0.66rem; color: var(--text-muted-dark);">Total Konsumsi dikurangi Uang Muka (DP)</div>
           </div>
-          <strong id="bookingBalanceDisplay" style="font-size: 1.05rem; font-family: 'Cinzel', serif; color: #0f172a;">Rp 0</strong>
+          <strong id="bookingBalanceDisplay" style="font-size: 0.96rem; font-family: 'Cinzel', serif; text-align: right;">LUNAS (Rp 0)</strong>
         </div>
 
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+        <div class="form-grid-2">
           <div class="form-row">
             <label><i class="fa-solid fa-clock"></i> Jam Kedatangan</label>
             <select id="guestTime" class="inp-field">
+              <option value="19:30 WITA">19:30 WITA</option>
               <option value="20:00 WITA">20:00 WITA</option>
               <option value="21:00 WITA" selected>21:00 WITA</option>
               <option value="22:00 WITA">22:00 WITA</option>
             </select>
           </div>
           <div class="form-row">
-            <label><i class="fa-solid fa-user-tag" style="color: #0077b6;"></i> Created By (Staff) *</label>
-            <input type="text" id="guestCreatedBy" class="inp-field" placeholder="Ketik nama staff..." value="">
+            <label><i class="fa-solid fa-user-tie"></i> Created By (Staff) *</label>
+            <input type="text" id="guestCreatedBy" class="inp-field" placeholder="Ketik nama staff...">
           </div>
         </div>
 
         <div class="form-row">
-          <label><i class="fa-solid fa-calendar-days" style="color: #0284c7;"></i> Waktu Input Kasir (Real-Time Otomatis)</label>
-          <input type="text" id="guestInputTimestamp" class="inp-field" readonly style="color: #0284c7; font-weight: 700; background: #f1f5f9;">
+          <label><i class="fa-solid fa-calendar-check"></i> Waktu Input Kasir (Real-Time Otomatis)</label>
+          <input type="text" id="guestInputTimestamp" class="inp-field" readonly style="font-weight: 700; background: #f1f5f9;">
         </div>
 
         <div class="form-row">
           <label><i class="fa-solid fa-note-sticky"></i> Catatan Khusus / Special Request</label>
-          <input type="text" id="guestNotes" class="inp-field" placeholder="Cth: Request bucket ice, fruit platter...">
+          <input type="text" id="guestNotes" class="inp-field" placeholder="Cth: Request bucket ice, fruit platter, perayaan ulang tahun...">
+        </div>
+
+        <div class="auto-pdf-box">
+          <label class="auto-pdf-toggle">
+            <input type="checkbox" id="autoPdfBooking" checked>
+            <span>Auto-Cetak / Kirim PDF Konfirmasi saat Simpan</span>
+          </label>
+          <span style="font-size: 0.68rem;">Format Resmi Platinum</span>
         </div>
       </div>
 
@@ -749,23 +1145,23 @@
         <button id="btnRemoveBooking" class="btn-modal-del" onclick="deleteBooking()" style="display: none;">
           <i class="fa-solid fa-trash"></i> Hapus
         </button>
-        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-          <button type="button" class="btn-action" onclick="generateGuestBookingPDF()" style="background: #0284c7; color:#fff; min-height: 42px; padding: 8px 14px;">
-            <i class="fa-solid fa-file-pdf"></i> Cetak PDF Tamu
+        <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-left: auto;">
+          <button type="button" class="btn-modal-pdf" onclick="generateGuestBookingPDF('booking')">
+            <i class="fa-solid fa-file-pdf"></i> Cetak PDF
           </button>
           <button class="btn-modal-save" onclick="saveBooking()">
-            <i class="fa-solid fa-check"></i> Simpan ke Cloud (Merah)
+            <i class="fa-solid fa-check-double"></i> Simpan Registrasi
           </button>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- MODAL EDIT ITEM KERANJANG (POP-UP INLINE EDIT) -->
+  <!-- MODAL EDIT ITEM KERANJANG -->
   <div id="editCartItemModal" class="modal-backdrop" style="z-index: 150;">
-    <div class="modal-container" style="max-width: 400px;">
+    <div class="modal-container" style="max-width: 410px;">
       <div class="modal-header">
-        <h3><i class="fa-solid fa-pen-to-square" style="color: #0284c7;"></i> Edit Item Pesanan</h3>
+        <h3><i class="fa-solid fa-pen-to-square"></i> Edit Item Pesanan</h3>
         <button class="btn-x" onclick="closeEditCartItemModal()"><i class="fa-solid fa-xmark"></i></button>
       </div>
       <div class="modal-body">
@@ -786,7 +1182,7 @@
         </div>
       </div>
       <div class="modal-footer">
-        <button class="btn-modal-del" style="background:#e2e8f0; color:#475569; border:none;" onclick="closeEditCartItemModal()">Batal</button>
+        <button class="btn-modal-secondary" onclick="closeEditCartItemModal()">Batal</button>
         <button class="btn-modal-save" onclick="saveEditedCartItem()">
           <i class="fa-solid fa-check"></i> Simpan Perubahan
         </button>
@@ -794,17 +1190,17 @@
     </div>
   </div>
 
-  <!-- MODAL REGISTRASI / INPUT MEJA -->
+  <!-- MODAL REGISTRASI MEJA BARU -->
   <div id="registrationModal" class="modal-backdrop">
     <div class="modal-container">
       <div class="modal-header">
-        <h3><i class="fa-solid fa-file-pen" style="color: #0284c7;"></i> Input Meja Fleksibel (Registrasi)</h3>
+        <h3><i class="fa-solid fa-file-pen"></i> Registrasi Meja Rooftop NYE 2027</h3>
         <button class="btn-x" onclick="closeRegistrationModal()"><i class="fa-solid fa-xmark"></i></button>
       </div>
 
       <div class="modal-body">
         <div class="form-row">
-          <label><i class="fa-solid fa-tag"></i> Pilih Nomor Meja *</label>
+          <label><i class="fa-solid fa-chair"></i> Pilih Nomor Meja *</label>
           <select id="regTableIdSelect" class="inp-field">
             <option value="">-- Pilih Meja Kosong --</option>
           </select>
@@ -812,10 +1208,10 @@
 
         <div class="form-row">
           <label><i class="fa-solid fa-user"></i> Nama Tamu (Guest Name) *</label>
-          <input type="text" id="regGuestName" class="inp-field" placeholder="Contoh: Jessica Alexandra">
+          <input type="text" id="regGuestName" class="inp-field" placeholder="Contoh: Ibu Clarissa Putri">
         </div>
 
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+        <div class="form-grid-2">
           <div class="form-row">
             <label><i class="fa-brands fa-whatsapp"></i> WhatsApp / HP *</label>
             <input type="tel" id="regGuestPhone" class="inp-field" placeholder="0812-xxxx-xxxx">
@@ -826,106 +1222,129 @@
           </div>
         </div>
 
-        <div style="background: #f8fafc; border: 1px solid var(--border-color); border-radius: 10px; padding: 12px; display: flex; flex-direction: column; gap: 10px;">
-          <label style="font-size: 0.8rem; font-weight: 700; color: #b45309; display: flex; align-items: center; gap: 6px;">
-            <i class="fa-solid fa-utensils"></i> Kasir Menu & Paket Promo Rooftop
+        <div style="background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 10px; padding: 12px; display: flex; flex-direction: column; gap: 10px;">
+          <label style="font-size: 0.78rem; font-weight: 800; color: #92400e; display: flex; align-items: center; gap: 6px;">
+            <i class="fa-solid fa-champagne-glasses"></i> Kasir Menu &amp; Paket Promo Rooftop
           </label>
 
           <div style="display: flex; gap: 8px;">
             <select id="selectRegMasterMenuDropdown" class="inp-field" style="flex: 1;">
               <option value="">-- Pilih Menu / Paket Rooftop --</option>
             </select>
-            <button type="button" class="btn-action" style="background: #0284c7; color: #fff; padding: 0 16px; min-height: 44px;" onclick="addRegCartItemFromDropdown()">
+            <button type="button" class="btn-modal-save" style="padding: 0 14px;" onclick="addRegCartItemFromDropdown()">
               <i class="fa-solid fa-plus"></i> Tambah
             </button>
           </div>
 
-          <div style="display: grid; grid-template-columns: 1.3fr 1.2fr auto; gap: 6px;">
+          <div class="form-grid-2">
             <input type="text" id="regCustomMenuName" class="inp-field" placeholder="Nama Menu Custom">
-            <input type="text" id="regCustomMenuPrice" class="inp-field" placeholder="Harga (Cth: 150000)" onkeyup="formatCurrencyInput(this)">
-            <button type="button" class="btn-action" style="background: #9333ea; color: #fff; padding: 0 12px;" onclick="addRegCustomCartItem()">
-              <i class="fa-solid fa-plus"></i> Custom
-            </button>
+            <div style="display: flex; gap: 6px;">
+              <input type="text" id="regCustomMenuPrice" class="inp-field" placeholder="Harga (150000)" onkeyup="formatCurrencyInput(this)">
+              <button type="button" class="btn-modal-pdf" style="padding: 0 12px;" onclick="addRegCustomCartItem()">
+                <i class="fa-solid fa-plus"></i>
+              </button>
+            </div>
           </div>
 
           <div id="regBookingCartItemsContainer" style="display: flex; flex-direction: column; gap: 6px; max-height: 150px; overflow-y: auto;">
-            <div style="font-size: 0.75rem; color: var(--text-muted); text-align: center; padding: 6px;">Belum ada menu dipilih.</div>
+            <div style="font-size: 0.75rem; color: var(--text-muted-dark); text-align: center; padding: 6px;">Belum ada menu dipilih.</div>
           </div>
 
           <div style="background: #ffffff; border: 1px solid #10b981; border-radius: 8px; padding: 10px 14px; display: flex; justify-content: space-between; align-items: center;">
-            <span style="font-size: 0.78rem; font-weight: 700; color: #059669;">Total Estimasi Menu:</span>
-            <strong id="regBookingCartTotalDisplay" style="font-size: 1rem; font-family: 'Cinzel', serif; color: #059669;">Rp 0</strong>
+            <span style="font-size: 0.78rem; font-weight: 700; color: #047857;">Total Estimasi Menu:</span>
+            <strong id="regBookingCartTotalDisplay" style="font-size: 0.98rem; font-family: 'Cinzel', serif; color: #047857;">Rp 0</strong>
           </div>
         </div>
 
         <div class="form-row">
-          <label><i class="fa-solid fa-money-bill-wave" style="color: #059669;"></i> Nominal DP / Uang Muka (Diisi Manual) *</label>
+          <label><i class="fa-solid fa-money-bill-wave" style="color: #059669;"></i> Nominal DP / Uang Muka *</label>
           <div class="money-input-box">
             <span>Rp</span>
             <input type="text" id="regGuestDP" class="inp-field" placeholder="Contoh: 500.000" onkeyup="formatCurrencyInput(this); updateRegBalanceDisplay();">
           </div>
         </div>
 
-        <div style="background: #f8fafc; border: 1.5px dashed #0077b6; border-radius: 10px; padding: 12px; display: flex; justify-content: space-between; align-items: center;">
+        <div style="background: #f8fafc; border: 1.5px dashed #b45309; border-radius: 10px; padding: 12px; display: flex; justify-content: space-between; align-items: center; gap: 8px;">
           <div>
-            <div style="font-size: 0.72rem; font-weight: 700; color: #0077b6; text-transform: uppercase;"><i class="fa-solid fa-scale-balanced"></i> Balance (Sisa Tagihan / Kembalian)</div>
-            <div style="font-size: 0.65rem; color: var(--text-muted);">Total Konsumsi dikurangi Uang Muka (DP)</div>
+            <div style="font-size: 0.72rem; font-weight: 800; color: #92400e; text-transform: uppercase;">
+              <i class="fa-solid fa-scale-balanced"></i> Balance (Sisa Tagihan / Kembalian)
+            </div>
+            <div style="font-size: 0.66rem; color: var(--text-muted-dark);">Total Konsumsi dikurangi Uang Muka (DP)</div>
           </div>
-          <strong id="regBookingBalanceDisplay" style="font-size: 1.05rem; font-family: 'Cinzel', serif; color: #0f172a;">Rp 0</strong>
+          <strong id="regBookingBalanceDisplay" style="font-size: 0.96rem; font-family: 'Cinzel', serif; text-align: right;">LUNAS (Rp 0)</strong>
         </div>
 
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+        <div class="form-grid-2">
           <div class="form-row">
             <label><i class="fa-solid fa-clock"></i> Jam Kedatangan</label>
             <select id="regGuestTime" class="inp-field">
+              <option value="19:30 WITA">19:30 WITA</option>
               <option value="20:00 WITA">20:00 WITA</option>
               <option value="21:00 WITA" selected>21:00 WITA</option>
               <option value="22:00 WITA">22:00 WITA</option>
             </select>
           </div>
           <div class="form-row">
-            <label><i class="fa-solid fa-user-tag" style="color: #0077b6;"></i> Created By (Staff) *</label>
-            <input type="text" id="regGuestCreatedBy" class="inp-field" placeholder="Ketik nama staff..." value="">
+            <label><i class="fa-solid fa-user-tie"></i> Created By (Staff) *</label>
+            <input type="text" id="regGuestCreatedBy" class="inp-field" placeholder="Ketik nama staff...">
           </div>
+        </div>
+
+        <div class="form-row">
+          <label><i class="fa-solid fa-note-sticky"></i> Catatan Khusus / Special Request</label>
+          <input type="text" id="regGuestNotes" class="inp-field" placeholder="Cth: Sofa dekat view kota, ucapan tahun baru...">
+        </div>
+
+        <div class="auto-pdf-box">
+          <label class="auto-pdf-toggle">
+            <input type="checkbox" id="autoPdfRegistration" checked>
+            <span>Auto-Cetak / Kirim PDF setelah Registrasi Selesai</span>
+          </label>
+          <span style="font-size: 0.68rem;">Otomatis</span>
         </div>
       </div>
 
       <div class="modal-footer">
-        <button class="btn-modal-del" style="background:#e2e8f0; color:#475569; border:none;" onclick="closeRegistrationModal()">Batal</button>
-        <button class="btn-modal-save" onclick="saveRegistrationBooking()">
-          <i class="fa-solid fa-check"></i> Simpan & Ubah Merah
-        </button>
+        <button class="btn-modal-secondary" onclick="closeRegistrationModal()">Batal</button>
+        <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-left: auto;">
+          <button type="button" class="btn-modal-pdf" onclick="generateGuestBookingPDF('reg')">
+            <i class="fa-solid fa-file-pdf"></i> Preview PDF
+          </button>
+          <button class="btn-modal-save" onclick="saveRegistrationBooking()">
+            <i class="fa-solid fa-paper-plane"></i> Simpan &amp; Kirim PDF
+          </button>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- MODAL MASTER MENU (100% CLOUD SUPABASE rt_master_menu) -->
+  <!-- MODAL MASTER MENU (rt_master_menu) -->
   <div id="masterMenuModal" class="modal-backdrop">
     <div class="modal-container">
       <div class="modal-header">
-        <h3 style="color: #b45309;"><i class="fa-solid fa-utensils"></i> Master Menu & Produk Rooftop</h3>
+        <h3><i class="fa-solid fa-utensils"></i> Master Menu &amp; Produk Rooftop</h3>
         <button class="btn-x" onclick="closeMasterMenuModal()"><i class="fa-solid fa-xmark"></i></button>
       </div>
 
       <div class="modal-body">
-        <div style="background: rgba(217, 119, 6, 0.1); border: 1px solid rgba(217, 119, 6, 0.3); padding: 10px 12px; border-radius: 8px; font-size: 0.78rem; color: #b45309; font-weight: 600;">
-          <i class="fa-solid fa-cloud"></i> Semua item di bawah ini tersimpan permanen di Cloud Supabase (`rt_master_menu`).
+        <div style="background: #fffbeb; border: 1px solid #f59e0b; padding: 10px 12px; border-radius: 8px; font-size: 0.78rem; color: #92400e; font-weight: 600;">
+          <i class="fa-solid fa-cloud"></i> Semua item di bawah ini tersimpan permanen di Cloud Supabase (tabel <strong>rt_master_menu</strong>).
         </div>
 
         <input type="hidden" id="editMasterMenuId" value="">
         <div class="form-row">
           <label><i class="fa-solid fa-tag"></i> Nama Menu / Item *</label>
-          <input type="text" id="menuItemName" class="inp-field" placeholder="Contoh: Signature Cocktail Sky Luxury">
+          <input type="text" id="menuItemName" class="inp-field" placeholder="Contoh: Royal Sky Countdown Package">
         </div>
 
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+        <div class="form-grid-2">
           <div class="form-row">
             <label><i class="fa-solid fa-folder"></i> Kategori</label>
             <select id="menuItemCategory" class="inp-field">
-              <option value="Beverage / Cocktail">Beverage / Cocktail</option>
-              <option value="Wine & Spirits">Wine & Spirits</option>
-              <option value="Food & Platter">Food & Platter</option>
               <option value="Package Promo">Package Promo</option>
+              <option value="Beverage / Cocktail">Beverage / Cocktail</option>
+              <option value="Wine & Spirits">Wine &amp; Spirits</option>
+              <option value="Food & Platter">Food &amp; Platter</option>
             </select>
           </div>
           <div class="form-row">
@@ -937,18 +1356,18 @@
           </div>
         </div>
 
-        <button id="btnSaveMasterMenu" class="btn-action btn-menu" style="width:100%; justify-content:center; margin-top:4px;" onclick="saveMasterMenuItem()">
+        <button id="btnSaveMasterMenu" class="btn-modal-save" style="width:100%; justify-content:center; margin-top:2px;" onclick="saveMasterMenuItem()">
           <i class="fa-solid fa-plus"></i> Simpan ke Cloud Master Menu
         </button>
 
-        <hr style="border: 0; border-top: 1px solid var(--border-color); margin: 10px 0;">
+        <hr style="border: 0; border-top: 1px solid #e2e8f0; margin: 6px 0;">
 
-        <div style="font-size:0.8rem; font-weight:700; color:#334155; margin-bottom:4px;">Daftar Master Menu Aktif:</div>
-        <div id="masterMenuListContent" style="max-height: 180px; overflow-y: auto;"></div>
+        <div style="font-size:0.8rem; font-weight:700; color:#1e293b;">Daftar Master Menu Aktif:</div>
+        <div id="masterMenuListContent" style="max-height: 190px; overflow-y: auto;"></div>
       </div>
 
       <div class="modal-footer">
-        <button class="btn-modal-del" style="background:#e2e8f0; color:#475569; border:none;" onclick="closeMasterMenuModal()">Tutup</button>
+        <button class="btn-modal-secondary" onclick="closeMasterMenuModal()">Tutup</button>
       </div>
     </div>
   </div>
@@ -957,13 +1376,13 @@
   <div id="fdcModal" class="modal-backdrop">
     <div class="modal-container">
       <div class="modal-header">
-        <h3><i class="fa-solid fa-ticket" style="color: #9333ea;"></i> Input Tiket FDC (Standing Party)</h3>
+        <h3><i class="fa-solid fa-ticket"></i> Input Tiket FDC (Standing Party)</h3>
         <button class="btn-x" onclick="closeFDCModal()"><i class="fa-solid fa-xmark"></i></button>
       </div>
 
       <div class="modal-body">
-        <div style="background: rgba(147, 51, 234, 0.1); border: 1px solid rgba(147, 51, 234, 0.3); padding: 10px 12px; border-radius: 8px; font-size: 0.78rem; color: #7e22ce; font-weight: 600;">
-          <i class="fa-solid fa-circle-info"></i> Tiket First Drink Charge (FDC) Standing: <strong>Rp 125.000 / Pax</strong> (Free 1st Drink Voucher).
+        <div style="background: #faf5ff; border: 1px solid #d8b4fe; padding: 10px 12px; border-radius: 8px; font-size: 0.78rem; color: #6b21a8; font-weight: 600;">
+          <i class="fa-solid fa-circle-info"></i> Tiket First Drink Charge (FDC) Standing: <strong>Rp 125.000 / Pax</strong> (termasuk 1x First Drink Voucher).
         </div>
 
         <div class="form-row">
@@ -971,7 +1390,7 @@
           <input type="text" id="fdcName" class="inp-field" placeholder="Nama pemesan FDC">
         </div>
 
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+        <div class="form-grid-2">
           <div class="form-row">
             <label><i class="fa-brands fa-whatsapp"></i> WhatsApp / HP *</label>
             <input type="tel" id="fdcPhone" class="inp-field" placeholder="0812-xxxx-xxxx">
@@ -982,7 +1401,7 @@
           </div>
         </div>
 
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+        <div class="form-grid-2">
           <div class="form-row">
             <label><i class="fa-solid fa-money-bill-wave" style="color: #059669;"></i> Total FDC (@ Rp 125rb) *</label>
             <div class="money-input-box">
@@ -991,8 +1410,8 @@
             </div>
           </div>
           <div class="form-row">
-            <label><i class="fa-solid fa-user-tag" style="color: #9333ea;"></i> Created By (Staff) *</label>
-            <input type="text" id="fdcCreatedBy" class="inp-field" placeholder="Ketik nama staff..." value="">
+            <label><i class="fa-solid fa-user-tie"></i> Created By (Staff) *</label>
+            <input type="text" id="fdcCreatedBy" class="inp-field" placeholder="Ketik nama staff...">
           </div>
         </div>
 
@@ -1003,8 +1422,8 @@
       </div>
 
       <div class="modal-footer">
-        <button class="btn-modal-del" style="background:#e2e8f0; color:#475569; border:none;" onclick="closeFDCModal()">Batal</button>
-        <button class="btn-modal-save" style="background: #9333ea;" onclick="saveFDCBooking()">
+        <button class="btn-modal-secondary" onclick="closeFDCModal()">Batal</button>
+        <button class="btn-modal-save" style="background: #7e22ce;" onclick="saveFDCBooking()">
           <i class="fa-solid fa-check"></i> Simpan Tiket FDC
         </button>
       </div>
@@ -1015,37 +1434,37 @@
   <div id="reportModal" class="modal-backdrop">
     <div class="modal-container">
       <div class="modal-header">
-        <h3><i class="fa-solid fa-chart-line" style="color: #0077b6;"></i> Rooftop Event Executive Dashboard</h3>
+        <h3><i class="fa-solid fa-chart-line"></i> Rooftop Executive Dashboard</h3>
         <button class="btn-x" onclick="closeReportModal()"><i class="fa-solid fa-xmark"></i></button>
       </div>
 
       <div class="modal-body">
         <div class="dash-grid">
           <div class="dash-card hero-card">
-            <div class="card-lbl"><i class="fa-solid fa-coins" style="color: #0077b6;"></i> Total Gross Revenue (Meja + FDC)</div>
-            <div class="card-val" id="repTotalGross" style="color: #0077b6;">Rp 0</div>
-            <div class="card-sub">Akumulasi seluruh transaksi reservasi meja Rooftop, Cockpit & tiket standing</div>
+            <div class="card-lbl"><i class="fa-solid fa-crown" style="color: #b45309;"></i> Total Gross Revenue (Meja + FDC)</div>
+            <div class="card-val" id="repTotalGross" style="color: #92400e;">Rp 0</div>
+            <div class="card-sub">Akumulasi seluruh transaksi reservasi meja Rooftop, Cockpit &amp; tiket standing</div>
           </div>
 
           <div class="dash-card">
             <div class="card-lbl"><i class="fa-solid fa-couch" style="color: #d97706;"></i> Lower Deck (L)</div>
-            <div><span id="repLoungeBooked" style="color: #d97706; font-size: 1.25rem; font-weight: 800;">0</span> <span style="font-size:0.75rem; color:var(--text-muted);">/ 25 Unit</span></div>
+            <div><span id="repLoungeBooked" style="color: #d97706; font-size: 1.25rem; font-weight: 800;">0</span> <span style="font-size:0.75rem; color:var(--text-muted-dark);">/ 25 Unit</span></div>
             <div class="occupancy-bar-wrap">
               <div id="repLoungeBar" class="occupancy-bar" style="background: #d97706;"></div>
             </div>
-            <div class="card-sub" style="margin-top: 4px;">
-              Tersisa: <strong id="repLoungeLeft" style="color:#0284c7;">25</strong> | Rev: <span id="repLoungeRev" style="color:#059669;">Rp 0</span>
+            <div class="card-sub">
+              Tersisa: <strong id="repLoungeLeft" style="color:#0284c7;">25</strong> | Rev: <span id="repLoungeRev" style="color:#059669; font-weight:700;">Rp 0</span>
             </div>
           </div>
 
           <div class="dash-card">
             <div class="card-lbl"><i class="fa-solid fa-cloud-moon" style="color: #0284c7;"></i> Cockpit Deck (C)</div>
-            <div><span id="repTerraceBooked" style="color: #0284c7; font-size: 1.25rem; font-weight: 800;">0</span> <span style="font-size:0.75rem; color:var(--text-muted);">/ 13 Unit</span></div>
+            <div><span id="repTerraceBooked" style="color: #0284c7; font-size: 1.25rem; font-weight: 800;">0</span> <span style="font-size:0.75rem; color:var(--text-muted-dark);">/ 13 Unit</span></div>
             <div class="occupancy-bar-wrap">
               <div id="repTerraceBar" class="occupancy-bar" style="background: #0284c7;"></div>
             </div>
-            <div class="card-sub" style="margin-top: 4px;">
-              Tersisa: <strong id="repTerraceLeft" style="color:#0284c7;">13</strong> | Rev: <span id="repTerraceRev" style="color:#059669;">Rp 0</span>
+            <div class="card-sub">
+              Tersisa: <strong id="repTerraceLeft" style="color:#0284c7;">13</strong> | Rev: <span id="repTerraceRev" style="color:#059669; font-weight:700;">Rp 0</span>
             </div>
           </div>
 
@@ -1056,22 +1475,22 @@
           </div>
 
           <div class="dash-card">
-            <div class="card-lbl"><i class="fa-solid fa-ticket" style="color: #9333ea;"></i> FDC Standing Ticket</div>
-            <div class="card-val" id="repFDCPax" style="font-size: 1.05rem; color: #9333ea;">0 Pax</div>
+            <div class="card-lbl"><i class="fa-solid fa-ticket" style="color: #7e22ce;"></i> FDC Standing Ticket</div>
+            <div class="card-val" id="repFDCPax" style="font-size: 1.05rem; color: #7e22ce;">0 Pax</div>
             <div class="card-sub" id="repFDCTotalRev">Rp 0 Total FDC Revenue</div>
           </div>
 
-          <div class="dash-card" style="grid-column: span 2; background: #f1f5f9;">
+          <div class="dash-card wide-card" style="background: #f1f5f9;">
             <div class="card-lbl"><i class="fa-solid fa-users" style="color: #0f172a;"></i> Total Estimated Attendees (Crowd)</div>
-            <div class="card-val" id="repTotalPax" style="font-size: 1.1rem; color: #0f172a;">0 Total Tamu</div>
+            <div class="card-val" id="repTotalPax" style="font-size: 1.1rem; color: #0f172a;">0 Total Tamu Hadir</div>
             <div class="card-sub" id="repCrowdBreakdown">0 Seating (Lower Deck + Cockpit) + 0 Standing FDC</div>
           </div>
         </div>
       </div>
 
       <div class="modal-footer">
-        <button class="btn-modal-del" style="background:#e2e8f0; color:#475569; border:none;" onclick="closeReportModal()">Tutup</button>
-        <button class="btn-action btn-csv" onclick="exportReservationsCSV()" style="background: #0077b6;">
+        <button class="btn-modal-secondary" onclick="closeReportModal()">Tutup</button>
+        <button class="btn-modal-save" onclick="exportReservationsCSV()">
           <i class="fa-solid fa-download"></i> Unduh CSV
         </button>
       </div>
@@ -1082,7 +1501,7 @@
   <div id="fdcListModal" class="modal-backdrop">
     <div class="modal-container">
       <div class="modal-header">
-        <h3><i class="fa-solid fa-list-check" style="color: #9333ea;"></i> Daftar Pesanan FDC (Standing)</h3>
+        <h3><i class="fa-solid fa-list-check"></i> Daftar Pesanan FDC (Standing)</h3>
         <button class="btn-x" onclick="closeFDCListModal()"><i class="fa-solid fa-xmark"></i></button>
       </div>
 
@@ -1091,8 +1510,8 @@
       </div>
 
       <div class="modal-footer">
-        <button class="btn-modal-del" style="background:#e2e8f0; color:#475569; border:none;" onclick="closeFDCListModal()">Tutup</button>
-        <button class="btn-action btn-fdc" onclick="closeFDCListModal(); openFDCBookingModal();">
+        <button class="btn-modal-secondary" onclick="closeFDCListModal()">Tutup</button>
+        <button class="btn-modal-save" style="background: #7e22ce;" onclick="closeFDCListModal(); openFDCBookingModal();">
           + Tambah FDC Baru
         </button>
       </div>
@@ -1102,8 +1521,8 @@
   <!-- LOADER SPINNER -->
   <div id="loaderOverlay" class="loader-overlay">
     <div class="spinner"></div>
-    <div style="color: #ffffff; font-weight: 700; font-size: 0.95rem;">Menyiapkan Gambar Denah JPG...</div>
-    <div style="color: #cbd5e1; font-size: 0.78rem;">Resolusi tajam siap dibagikan ke WhatsApp</div>
+    <div style="color: var(--gold-1); font-weight: 700; font-size: 0.95rem; font-family: 'Cinzel', serif;">Menyiapkan Dokumen / Denah...</div>
+    <div style="color: #cbd5e1; font-size: 0.78rem;">Mohon tunggu sebentar</div>
   </div>
 
   <script>
@@ -1115,8 +1534,8 @@
 
     const TERRACE_IDS = ['C1', 'C2', 'C3', 'C4', 'C5', 'C6', 'C7', 'C8', 'C9', 'C10', 'C11', 'C12', 'C13'];
     const LOUNGE_IDS = [
-      'L1', 'L2', 'L3', 'L5', 'L6', 'L7', 'L8', 'L9', 'L10', 'L11', 'L12', 'L13', 
-      'L15', 'L16', 'L17', 'L18', 'L19', 'L20', 'L21', 'L22', 'L23', 'L24', 
+      'L1', 'L2', 'L3', 'L5', 'L6', 'L7', 'L8', 'L9', 'L10', 'L11', 'L12', 'L13',
+      'L15', 'L16', 'L17', 'L18', 'L19', 'L20', 'L21', 'L22', 'L23', 'L24',
       'L25', 'L26', 'L27', 'L28', 'L29'
     ];
     const ALL_TABLE_IDS = [...TERRACE_IDS, ...LOUNGE_IDS];
@@ -1142,7 +1561,7 @@
       'L1': { top: 29.5, left: 47.0, w: 6.0, h: 6.0, type: 'VIP Dining', pax: 8, cat: 'lounge' },
       'L2': { top: 29.5, left: 58.5, w: 6.0, h: 6.0, type: 'VIP Dining', pax: 8, cat: 'lounge' },
       'L3': { top: 29.5, left: 69.5, w: 6.0, h: 6.0, type: 'VIP Dining', pax: 8, cat: 'lounge' },
-      
+
       'L10': { top: 45.0, left: 42.5, w: 4.5, h: 5.0, type: 'Center Table', pax: 4, cat: 'lounge' },
       'L11': { top: 45.0, left: 49.5, w: 4.5, h: 5.0, type: 'Center Table', pax: 4, cat: 'lounge' },
       'L12': { top: 45.0, left: 56.5, w: 4.5, h: 5.0, type: 'Center Table', pax: 4, cat: 'lounge' },
@@ -1214,7 +1633,6 @@
       subscribeRealtime();
     });
 
-    // --- LOAD MASTER MENU 100% DARI SUPABASE (rt_master_menu) ---
     async function fetchMasterMenuFromCloud() {
       const { data, error } = await _supabase
         .from('rt_master_menu')
@@ -1222,7 +1640,7 @@
         .order('id', { ascending: true });
 
       if (error) {
-        console.error('Error memuat Master Menu dari Supabase:', error.message);
+        console.error('Error memuat rt_master_menu:', error.message);
         return;
       }
 
@@ -1259,7 +1677,7 @@
           });
         }
       } catch (err) {
-        console.log('Gagal memuat posisi dari cloud, menggunakan default.');
+        console.log('Menggunakan posisi default.');
       }
 
       ALL_TABLE_IDS.forEach(id => {
@@ -1281,15 +1699,15 @@
           h: t.h
         }, { onConflict: 'table_id' });
       } catch (err) {
-        console.error('Gagal menyimpan posisi ke cloud:', err);
+        console.error('Gagal menyimpan posisi:', err);
       }
     }
 
     async function resetHotspotsPosition() {
-      if (confirm('Kembalikan posisi kotak meja ke default presisi 3D terbaru dan sinkronkan ke cloud?')) {
+      if (confirm('Kembalikan posisi kotak meja ke default presisi 3D dan sinkronkan ke cloud?')) {
         try {
           await _supabase.from('rt_table_positions').delete().neq('table_id', 'XXX');
-        } catch(e) {}
+        } catch (e) {}
         tableConfigs = {};
         ALL_TABLE_IDS.forEach(id => {
           if (DEFAULT_TABLE_CONFIGS[id]) {
@@ -1311,7 +1729,7 @@
         if (!t) return;
         const isBookedClass = bookings[id] ? 'is-booked' : '';
         html += `
-          <div id="spot-${id}" class="spot ${isBookedClass}" 
+          <div id="spot-${id}" class="spot ${isBookedClass}"
                style="top: ${t.top}%; left: ${t.left}%; width: ${t.w}%; height: ${t.h}%;"
                data-id="${id}"
                onmousedown="initDrag(event, '${id}')"
@@ -1341,7 +1759,7 @@
 
       document.addEventListener('mousemove', onDragging);
       document.addEventListener('mouseup', stopDragging);
-      document.addEventListener('touchmove', onDragging, {passive: false});
+      document.addEventListener('touchmove', onDragging, { passive: false });
       document.addEventListener('touchend', stopDragging);
     }
 
@@ -1371,7 +1789,7 @@
       }
     }
 
-    function stopDragging(e) {
+    function stopDragging() {
       if (draggingId && hasDragged) {
         saveTableConfigToCloud(draggingId);
       }
@@ -1400,7 +1818,7 @@
               if (row.cart_items) {
                 parsedCart = typeof row.cart_items === 'string' ? JSON.parse(row.cart_items) : row.cart_items;
               }
-            } catch(e) { parsedCart = []; }
+            } catch (e) { parsedCart = []; }
 
             bookings[tid] = {
               name: row.guest_name,
@@ -1457,22 +1875,13 @@
     function subscribeRealtime() {
       _supabase
         .channel('schema-rt-changes')
-        .on('postgres_changes', { event: '*', schema: 'public', table: 'rt_table_bookings' }, () => {
-          fetchAllCloudData();
-        })
-        .on('postgres_changes', { event: '*', schema: 'public', table: 'rt_fdc_bookings' }, () => {
-          fetchAllCloudData();
-        })
-        .on('postgres_changes', { event: '*', schema: 'public', table: 'rt_table_positions' }, () => {
-          fetchAllCloudData();
-        })
-        .on('postgres_changes', { event: '*', schema: 'public', table: 'rt_master_menu' }, () => {
-          fetchMasterMenuFromCloud();
-        })
+        .on('postgres_changes', { event: '*', schema: 'public', table: 'rt_table_bookings' }, () => fetchAllCloudData())
+        .on('postgres_changes', { event: '*', schema: 'public', table: 'rt_fdc_bookings' }, () => fetchAllCloudData())
+        .on('postgres_changes', { event: '*', schema: 'public', table: 'rt_table_positions' }, () => fetchAllCloudData())
+        .on('postgres_changes', { event: '*', schema: 'public', table: 'rt_master_menu' }, () => fetchMasterMenuFromCloud())
         .subscribe();
     }
 
-    // --- FUNGSI EDIT ITEM KERANJANG (POPUP INLINE) ---
     function openEditCartItemModal(cartType, id) {
       editingTargetCartType = cartType;
       editingItemId = String(id);
@@ -1510,20 +1919,17 @@
       }
 
       closeEditCartItemModal();
-      if (editingTargetCartType === 'booking') {
-        renderBookingCart();
-      } else {
-        renderRegBookingCart();
-      }
+      if (editingTargetCartType === 'booking') renderBookingCart();
+      else renderRegBookingCart();
     }
 
-    // --- REGISTRASI MODAL ---
     function openRegistrationModal() {
       const select = document.getElementById('regTableIdSelect');
-      let html = '<option value="">-- Pilih Meja Kosong / Fleksibel --</option>';
+      let html = '<option value="">-- Pilih Meja Kosong --</option>';
       ALL_TABLE_IDS.forEach(id => {
         if (!bookings[id]) {
-          html += `<option value="${id}">Meja #${id}</option>`;
+          const cfg = tableConfigs[id] || DEFAULT_TABLE_CONFIGS[id];
+          html += `<option value="${id}">Meja #${id} (${cfg?.type || 'Table'} · ${cfg?.pax || 4} Pax)</option>`;
         }
       });
       select.innerHTML = html;
@@ -1537,6 +1943,7 @@
       document.getElementById('regGuestPax').value = '4';
       document.getElementById('regGuestDP').value = '';
       document.getElementById('regGuestCreatedBy').value = localStorage.getItem('last_staff_name') || '';
+      document.getElementById('regGuestNotes').value = '';
       updateRegBalanceDisplay();
       document.getElementById('registrationModal').classList.add('open');
     }
@@ -1564,11 +1971,8 @@
       if (!menuItem) return;
 
       const existing = regCurrentCart.find(c => String(c.id) === selectedId);
-      if (existing) {
-        existing.qty += 1;
-      } else {
-        regCurrentCart.push({ id: String(menuItem.id), name: menuItem.name, price: menuItem.price, qty: 1 });
-      }
+      if (existing) existing.qty += 1;
+      else regCurrentCart.push({ id: String(menuItem.id), name: menuItem.name, price: menuItem.price, qty: 1 });
 
       dropdown.value = '';
       renderRegBookingCart();
@@ -1585,10 +1989,7 @@
         return;
       }
 
-      const price = parseInt(rawPrice, 10);
-      const customId = 'custom-' + Date.now();
-      regCurrentCart.push({ id: customId, name: name, price: price, qty: 1 });
-
+      regCurrentCart.push({ id: 'custom-' + Date.now(), name, price: parseInt(rawPrice, 10), qty: 1 });
       nameInput.value = '';
       priceInput.value = '';
       renderRegBookingCart();
@@ -1599,9 +2000,7 @@
       const item = regCurrentCart.find(c => String(c.id) === targetId);
       if (item) {
         item.qty += delta;
-        if (item.qty <= 0) {
-          regCurrentCart = regCurrentCart.filter(c => String(c.id) !== targetId);
-        }
+        if (item.qty <= 0) regCurrentCart = regCurrentCart.filter(c => String(c.id) !== targetId);
       }
       renderRegBookingCart();
     }
@@ -1611,7 +2010,7 @@
       const totalDisplay = document.getElementById('regBookingCartTotalDisplay');
 
       if (regCurrentCart.length === 0) {
-        container.innerHTML = '<div style="font-size: 0.75rem; color: var(--text-muted); text-align: center; padding: 6px;">Belum ada menu dipilih.</div>';
+        container.innerHTML = '<div style="font-size: 0.75rem; color: var(--text-muted-dark); text-align: center; padding: 6px;">Belum ada menu dipilih.</div>';
         totalDisplay.innerText = 'Rp 0';
         updateRegBalanceDisplay();
         return;
@@ -1619,15 +2018,14 @@
 
       let html = '';
       let grandTotal = 0;
-
       regCurrentCart.forEach(item => {
         const subtotal = item.price * item.qty;
         grandTotal += subtotal;
         html += `
           <div class="cart-item-card">
             <div style="flex: 1;">
-              <strong style="color: #0f172a; font-size: 0.8rem; display: block; line-height: 1.2;">${item.name}</strong>
-              <div style="font-size: 0.7rem; color: #059669; margin-top: 2px;">Rp ${item.price.toLocaleString('id-ID')} × ${item.qty} = <strong>Rp ${subtotal.toLocaleString('id-ID')}</strong></div>
+              <strong style="color: #0f172a; font-size: 0.8rem; display: block; line-height: 1.2;">${escapeHtml(item.name)}</strong>
+              <div style="font-size: 0.7rem; color: #047857; margin-top: 2px;">Rp ${item.price.toLocaleString('id-ID')} × ${item.qty} = <strong>Rp ${subtotal.toLocaleString('id-ID')}</strong></div>
             </div>
             <div class="cart-qty-controls">
               <button type="button" class="btn-edit-item" onclick="openEditCartItemModal('reg', '${item.id}')" title="Edit Item"><i class="fa-solid fa-pen" style="font-size: 0.65rem;"></i></button>
@@ -1638,7 +2036,6 @@
           </div>
         `;
       });
-
       container.innerHTML = html;
       totalDisplay.innerText = 'Rp ' + grandTotal.toLocaleString('id-ID');
       updateRegBalanceDisplay();
@@ -1648,36 +2045,24 @@
       return cartArray.reduce((sum, item) => sum + (item.price * item.qty), 0);
     }
 
+    function formatBalanceText(balance) {
+      if (balance > 0) return `<span style="color: #e11d48; font-weight:800;">Kurang Rp ${balance.toLocaleString('id-ID')}</span>`;
+      if (balance < 0) return `<span style="color: #059669; font-weight:800;">Kembalian Rp ${Math.abs(balance).toLocaleString('id-ID')}</span>`;
+      return `<span style="color: #059669; font-weight:800;">LUNAS (Rp 0)</span>`;
+    }
+
     function updateBalanceDisplay() {
       const totalKonsumsi = calculateCartTotal(currentCart);
       const rawDP = document.getElementById('guestDP').value.replace(/[^0-9]/g, '');
       const dp = rawDP ? parseInt(rawDP, 10) : 0;
-      const balance = totalKonsumsi - dp;
-
-      const balanceEl = document.getElementById('bookingBalanceDisplay');
-      if (balance > 0) {
-        balanceEl.innerHTML = `<span style="color: #ef4444; font-weight:700;">Kurang Rp ${balance.toLocaleString('id-ID')}</span>`;
-      } else if (balance < 0) {
-        balanceEl.innerHTML = `<span style="color: #059669; font-weight:700;">Kembalian Rp ${Math.abs(balance).toLocaleString('id-ID')}</span>`;
-      } else {
-        balanceEl.innerHTML = `<span style="color: #059669; font-weight:700;">LUNAS (Rp 0)</span>`;
-      }
+      document.getElementById('bookingBalanceDisplay').innerHTML = formatBalanceText(totalKonsumsi - dp);
     }
 
     function updateRegBalanceDisplay() {
       const totalKonsumsi = calculateCartTotal(regCurrentCart);
       const rawDP = document.getElementById('regGuestDP').value.replace(/[^0-9]/g, '');
       const dp = rawDP ? parseInt(rawDP, 10) : 0;
-      const balance = totalKonsumsi - dp;
-
-      const balanceEl = document.getElementById('regBookingBalanceDisplay');
-      if (balance > 0) {
-        balanceEl.innerHTML = `<span style="color: #ef4444; font-weight:700;">Kurang Rp ${balance.toLocaleString('id-ID')}</span>`;
-      } else if (balance < 0) {
-        balanceEl.innerHTML = `<span style="color: #059669; font-weight:700;">Kembalian Rp ${Math.abs(balance).toLocaleString('id-ID')}</span>`;
-      } else {
-        balanceEl.innerHTML = `<span style="color: #059669; font-weight:700;">LUNAS (Rp 0)</span>`;
-      }
+      document.getElementById('regBookingBalanceDisplay').innerHTML = formatBalanceText(totalKonsumsi - dp);
     }
 
     async function saveRegistrationBooking() {
@@ -1691,9 +2076,11 @@
       const balance = totalKonsumsi - dp;
       const time = document.getElementById('regGuestTime').value;
       const staff = document.getElementById('regGuestCreatedBy').value.trim();
+      const customNotes = document.getElementById('regGuestNotes').value.trim();
+      const autoPdf = document.getElementById('autoPdfRegistration').checked;
 
       if (!tid) {
-        alert('Silakan pilih nomor meja.');
+        alert('Silakan pilih nomor meja terlebih dahulu.');
         return;
       }
       if (!name) {
@@ -1701,24 +2088,23 @@
         return;
       }
 
-      localStorage.setItem('last_staff_name', staff);
+      if (staff) localStorage.setItem('last_staff_name', staff);
       const now = new Date();
       const timestamp = `${now.toLocaleDateString('id-ID')} - ${now.toLocaleTimeString('id-ID')} WITA`;
-
-      let menuSummary = regCurrentCart.map(c => `${c.name} (${c.qty}x)`).join(', ');
-      const finalNotes = menuSummary ? `Menu: ${menuSummary}` : 'Input via Registrasi Kasir';
+      const menuSummary = regCurrentCart.map(c => `${c.name} (${c.qty}x)`).join(', ');
+      const finalNotes = menuSummary ? (menuSummary + (customNotes ? ' | ' + customNotes : '')) : (customNotes || 'Registrasi Meja Rooftop NYE 2027');
 
       const payload = {
         table_id: String(tid),
         guest_name: name,
         guest_phone: phone,
         category: TERRACE_IDS.includes(tid) ? 'terrace' : 'lounge',
-        pax: pax,
-        dp: dp,
-        balance: balance,
+        pax,
+        dp,
+        balance,
         arrival_time: time,
         created_by: staff,
-        timestamp: timestamp,
+        timestamp,
         notes: finalNotes,
         cart_items: JSON.stringify(regCurrentCart)
       };
@@ -1729,14 +2115,34 @@
         return;
       }
 
+      const cfg = tableConfigs[tid] || DEFAULT_TABLE_CONFIGS[tid];
+      const pdfData = {
+        tableLabel: `#${tid} (${cfg?.type || 'Rooftop Table'})`,
+        name,
+        phone: phone || '-',
+        pax,
+        time,
+        totalKonsumsi,
+        dp,
+        balance,
+        staff: staff || '-',
+        timestamp,
+        notes: customNotes || '-',
+        cart: [...regCurrentCart],
+        docRef: `PHB-RT-NYE27-${tid}-${now.getTime().toString().slice(-4)}`
+      };
+
       bookings[tid] = payload;
       refreshMapNodes();
       updateMetrics();
       closeRegistrationModal();
       await fetchAllCloudData();
+
+      if (autoPdf) {
+        openConfirmationPDFWindow(pdfData);
+      }
     }
 
-    // --- MASTER MENU MODAL (100% CLOUD SUPABASE rt_master_menu) ---
     function openMasterMenuModal() {
       document.getElementById('editMasterMenuId').value = '';
       document.getElementById('menuItemName').value = '';
@@ -1772,17 +2178,13 @@
         return;
       }
 
-      const priceNum = parseInt(rawPrice, 10);
       const itemId = editId ? Number(editId) : Date.now();
-
-      const { error } = await _supabase
-        .from('rt_master_menu')
-        .upsert({
-          id: itemId,
-          name: name,
-          category: category,
-          price: priceNum
-        }, { onConflict: 'id' });
+      const { error } = await _supabase.from('rt_master_menu').upsert({
+        id: itemId,
+        name,
+        category,
+        price: parseInt(rawPrice, 10)
+      }, { onConflict: 'id' });
 
       if (error) {
         alert('Gagal menyimpan ke Cloud Supabase: ' + error.message);
@@ -1793,24 +2195,18 @@
       document.getElementById('menuItemName').value = '';
       document.getElementById('menuItemPrice').value = '';
       document.getElementById('btnSaveMasterMenu').innerHTML = '<i class="fa-solid fa-plus"></i> Simpan ke Cloud Master Menu';
-      
+
       await fetchMasterMenuFromCloud();
       renderMasterMenuList();
     }
 
     async function deleteMasterMenuItem(id) {
       if (!confirm('Hapus menu ini secara permanen dari Cloud?')) return;
-
-      const { error } = await _supabase
-        .from('rt_master_menu')
-        .delete()
-        .eq('id', Number(id));
-
+      const { error } = await _supabase.from('rt_master_menu').delete().eq('id', Number(id));
       if (error) {
         alert('Gagal menghapus menu: ' + error.message);
         return;
       }
-
       await fetchMasterMenuFromCloud();
       renderMasterMenuList();
     }
@@ -1818,22 +2214,22 @@
     function renderMasterMenuList() {
       const container = document.getElementById('masterMenuListContent');
       if (masterMenu.length === 0) {
-        container.innerHTML = '<div style="color:var(--text-muted); font-size:0.75rem; text-align:center; padding:10px;">Belum ada item menu di Cloud. Silakan tambahkan di atas.</div>';
+        container.innerHTML = '<div style="color:var(--text-muted-dark); font-size:0.76rem; text-align:center; padding:12px;">Belum ada item menu di Cloud. Silakan tambahkan di atas.</div>';
         return;
       }
       let html = '';
       masterMenu.forEach(item => {
         html += `
-          <div style="background:#ffffff; border:1px solid var(--border-color); border-radius:6px; padding:8px 10px; margin-bottom:6px; display:flex; justify-content:space-between; align-items:center; gap: 8px;">
+          <div style="background:#ffffff; border:1px solid #cbd5e1; border-radius:8px; padding:8px 10px; margin-bottom:6px; display:flex; justify-content:space-between; align-items:center; gap: 8px;">
             <div style="flex: 1;">
-              <strong style="color:#0f172a; font-size:0.8rem;">${item.name}</strong>
-              <div style="font-size:0.68rem; color:var(--text-muted);">${item.category} | <span style="color:#059669; font-weight:700;">Rp ${item.price.toLocaleString('id-ID')}</span></div>
+              <strong style="color:#0f172a; font-size:0.82rem;">${escapeHtml(item.name)}</strong>
+              <div style="font-size:0.7rem; color:var(--text-muted-dark);">${escapeHtml(item.category)} · <span style="color:#059669; font-weight:700;">Rp ${item.price.toLocaleString('id-ID')}</span></div>
             </div>
             <div style="display:flex; gap: 6px; flex-shrink: 0;">
-              <button onclick="editMasterMenuItem('${item.id}')" style="background:#e0f2fe; border:none; color:#0284c7; width:28px; height:28px; border-radius:4px; cursor:pointer;" title="Edit Menu">
+              <button onclick="editMasterMenuItem('${item.id}')" style="background:#fef3c7; border:1px solid #fcd34d; color:#92400e; width:28px; height:28px; border-radius:6px; cursor:pointer;" title="Edit Menu">
                 <i class="fa-solid fa-pen" style="font-size:0.7rem;"></i>
               </button>
-              <button onclick="deleteMasterMenuItem('${item.id}')" style="background:#fee2e2; border:none; color:#991b1b; width:28px; height:28px; border-radius:4px; cursor:pointer;" title="Hapus Menu">
+              <button onclick="deleteMasterMenuItem('${item.id}')" style="background:#fee2e2; border:1px solid #fca5a5; color:#991b1b; width:28px; height:28px; border-radius:6px; cursor:pointer;" title="Hapus Menu">
                 <i class="fa-solid fa-trash" style="font-size:0.7rem;"></i>
               </button>
             </div>
@@ -1843,7 +2239,6 @@
       container.innerHTML = html;
     }
 
-    // --- KASIR BOOKING MEJA ---
     function populateBookingMenuDropdown() {
       const dropdown = document.getElementById('selectMasterMenuDropdown');
       if (!dropdown) return;
@@ -1863,11 +2258,8 @@
       if (!menuItem) return;
 
       const existing = currentCart.find(c => String(c.id) === selectedId);
-      if (existing) {
-        existing.qty += 1;
-      } else {
-        currentCart.push({ id: String(menuItem.id), name: menuItem.name, price: menuItem.price, qty: 1 });
-      }
+      if (existing) existing.qty += 1;
+      else currentCart.push({ id: String(menuItem.id), name: menuItem.name, price: menuItem.price, qty: 1 });
 
       dropdown.value = '';
       renderBookingCart();
@@ -1884,10 +2276,7 @@
         return;
       }
 
-      const price = parseInt(rawPrice, 10);
-      const customId = 'custom-' + Date.now();
-      currentCart.push({ id: customId, name: name, price: price, qty: 1 });
-
+      currentCart.push({ id: 'custom-' + Date.now(), name, price: parseInt(rawPrice, 10), qty: 1 });
       nameInput.value = '';
       priceInput.value = '';
       renderBookingCart();
@@ -1898,9 +2287,7 @@
       const item = currentCart.find(c => String(c.id) === targetId);
       if (item) {
         item.qty += delta;
-        if (item.qty <= 0) {
-          currentCart = currentCart.filter(c => String(c.id) !== targetId);
-        }
+        if (item.qty <= 0) currentCart = currentCart.filter(c => String(c.id) !== targetId);
       }
       renderBookingCart();
     }
@@ -1910,7 +2297,7 @@
       const totalDisplay = document.getElementById('bookingCartTotalDisplay');
 
       if (currentCart.length === 0) {
-        container.innerHTML = '<div style="font-size: 0.75rem; color: var(--text-muted); text-align: center; padding: 6px;">Belum ada menu dipilih.</div>';
+        container.innerHTML = '<div style="font-size: 0.75rem; color: var(--text-muted-dark); text-align: center; padding: 6px;">Belum ada menu dipilih.</div>';
         totalDisplay.innerText = 'Rp 0';
         updateBalanceDisplay();
         return;
@@ -1918,15 +2305,14 @@
 
       let html = '';
       let grandTotal = 0;
-
       currentCart.forEach(item => {
         const subtotal = item.price * item.qty;
         grandTotal += subtotal;
         html += `
           <div class="cart-item-card">
             <div style="flex: 1;">
-              <strong style="color: #0f172a; font-size: 0.8rem; display: block; line-height: 1.2;">${item.name}</strong>
-              <div style="font-size: 0.7rem; color: #059669; margin-top: 2px;">Rp ${item.price.toLocaleString('id-ID')} × ${item.qty} = <strong>Rp ${subtotal.toLocaleString('id-ID')}</strong></div>
+              <strong style="color: #0f172a; font-size: 0.8rem; display: block; line-height: 1.2;">${escapeHtml(item.name)}</strong>
+              <div style="font-size: 0.7rem; color: #047857; margin-top: 2px;">Rp ${item.price.toLocaleString('id-ID')} × ${item.qty} = <strong>Rp ${subtotal.toLocaleString('id-ID')}</strong></div>
             </div>
             <div class="cart-qty-controls">
               <button type="button" class="btn-edit-item" onclick="openEditCartItemModal('booking', '${item.id}')" title="Edit Item"><i class="fa-solid fa-pen" style="font-size: 0.65rem;"></i></button>
@@ -1937,7 +2323,6 @@
           </div>
         `;
       });
-
       container.innerHTML = html;
       totalDisplay.innerText = 'Rp ' + grandTotal.toLocaleString('id-ID');
       updateBalanceDisplay();
@@ -2002,18 +2387,20 @@
       const dp = rawDP ? parseInt(rawDP, 10) : 0;
       const totalKonsumsi = calculateCartTotal(currentCart);
       const balance = totalKonsumsi - dp;
+      const pax = parseInt(document.getElementById('guestPax').value, 10) || 4;
+      const time = document.getElementById('guestTime').value;
       const staff = document.getElementById('guestCreatedBy').value.trim();
       const timestamp = document.getElementById('guestInputTimestamp').value;
+      const customNotes = document.getElementById('guestNotes').value.trim();
+      const autoPdf = document.getElementById('autoPdfBooking').checked;
 
       if (!name) {
         alert('Silakan masukkan nama tamu pemesan.');
         return;
       }
 
-      localStorage.setItem('last_staff_name', staff);
-
-      let menuSummary = currentCart.map(c => `${c.name} (${c.qty}x)`).join(', ');
-      const customNotes = document.getElementById('guestNotes').value.trim();
+      if (staff) localStorage.setItem('last_staff_name', staff);
+      const menuSummary = currentCart.map(c => `${c.name} (${c.qty}x)`).join(', ');
       const finalNotes = menuSummary ? (menuSummary + (customNotes ? ' | ' + customNotes : '')) : customNotes;
 
       const payload = {
@@ -2021,31 +2408,47 @@
         guest_name: name,
         guest_phone: phone,
         category: currentCategory,
-        pax: parseInt(document.getElementById('guestPax').value, 10) || 4,
-        dp: dp,
-        balance: balance,
-        arrival_time: document.getElementById('guestTime').value,
+        pax,
+        dp,
+        balance,
+        arrival_time: time,
         created_by: staff,
-        timestamp: timestamp,
+        timestamp,
         notes: finalNotes,
         cart_items: JSON.stringify(currentCart)
       };
 
-      const { error } = await _supabase
-        .from('rt_table_bookings')
-        .upsert(payload, { onConflict: 'table_id' });
-
+      const { error } = await _supabase.from('rt_table_bookings').upsert(payload, { onConflict: 'table_id' });
       if (error) {
         alert('Gagal menyimpan ke database Supabase: ' + error.message);
         return;
       }
 
+      const pdfData = {
+        tableLabel: document.getElementById('modalTitle').innerText,
+        name,
+        phone: phone || '-',
+        pax,
+        time,
+        totalKonsumsi,
+        dp,
+        balance,
+        staff: staff || '-',
+        timestamp,
+        notes: customNotes || '-',
+        cart: [...currentCart],
+        docRef: `PHB-RT-NYE27-${currentTable}-${Date.now().toString().slice(-4)}`
+      };
+
       bookings[currentTable] = payload;
       refreshMapNodes();
       updateMetrics();
       closeBookingModal();
-      
       await fetchAllCloudData();
+
+      if (autoPdf) {
+        openConfirmationPDFWindow(pdfData);
+      }
     }
 
     async function deleteBooking() {
@@ -2063,64 +2466,366 @@
       }
     }
 
-    function generateGuestBookingPDF() {
-      const name = document.getElementById('guestName').value.trim() || '-';
-      const phone = document.getElementById('guestPhone').value.trim() || '-';
-      const pax = document.getElementById('guestPax').value || '4';
+    function collectCurrentModalPDFData(mode) {
+      if (mode === 'reg') {
+        const tid = document.getElementById('regTableIdSelect').value || 'PENDING';
+        const cfg = tableConfigs[tid] || DEFAULT_TABLE_CONFIGS[tid];
+        const totalKonsumsi = calculateCartTotal(regCurrentCart);
+        const rawDP = document.getElementById('regGuestDP').value.replace(/[^0-9]/g, '');
+        const dp = rawDP ? parseInt(rawDP, 10) : 0;
+        const now = new Date();
+        return {
+          tableLabel: tid === 'PENDING' ? 'Belum Dipilih' : `#${tid} (${cfg?.type || 'Rooftop Table'})`,
+          name: document.getElementById('regGuestName').value.trim() || '-',
+          phone: document.getElementById('regGuestPhone').value.trim() || '-',
+          pax: document.getElementById('regGuestPax').value || '4',
+          time: document.getElementById('regGuestTime').value || '21:00 WITA',
+          totalKonsumsi,
+          dp,
+          balance: totalKonsumsi - dp,
+          staff: document.getElementById('regGuestCreatedBy').value.trim() || '-',
+          timestamp: `${now.toLocaleDateString('id-ID')} - ${now.toLocaleTimeString('id-ID')} WITA`,
+          notes: document.getElementById('regGuestNotes').value.trim() || '-',
+          cart: [...regCurrentCart],
+          docRef: `PHB-RT-NYE27-${tid}-${now.getTime().toString().slice(-4)}`
+        };
+      }
+
+      const totalKonsumsi = calculateCartTotal(currentCart);
       const rawDP = document.getElementById('guestDP').value.replace(/[^0-9]/g, '');
       const dp = rawDP ? parseInt(rawDP, 10) : 0;
-      const totalKonsumsi = calculateCartTotal(currentCart);
-      const balance = totalKonsumsi - dp;
-      const time = document.getElementById('guestTime').value;
-      const staff = document.getElementById('guestCreatedBy').value.trim() || '-';
-      const timestamp = document.getElementById('guestInputTimestamp').value || '-';
-      const notes = document.getElementById('guestNotes').value.trim() || '-';
+      return {
+        tableLabel: document.getElementById('modalTitle').innerText || '-',
+        name: document.getElementById('guestName').value.trim() || '-',
+        phone: document.getElementById('guestPhone').value.trim() || '-',
+        pax: document.getElementById('guestPax').value || '4',
+        time: document.getElementById('guestTime').value || '21:00 WITA',
+        totalKonsumsi,
+        dp,
+        balance: totalKonsumsi - dp,
+        staff: document.getElementById('guestCreatedBy').value.trim() || '-',
+        timestamp: document.getElementById('guestInputTimestamp').value || '-',
+        notes: document.getElementById('guestNotes').value.trim() || '-',
+        cart: [...currentCart],
+        docRef: `PHB-RT-NYE27-${(currentTable || 'TBL')}-${Date.now().toString().slice(-4)}`
+      };
+    }
 
-      let menuListText = currentCart.length > 0 ? currentCart.map(c => `- ${c.name} (${c.qty}x) @ Rp ${(c.price * c.qty).toLocaleString('id-ID')}`).join('\n') : 'Tidak ada menu tambahan';
+    function generateGuestBookingPDF(mode = 'booking') {
+      openConfirmationPDFWindow(collectCurrentModalPDFData(mode));
+    }
 
-      let printWindow = window.open('', '_blank');
+    function openConfirmationPDFWindow(d) {
+      const itemsRows = d.cart && d.cart.length > 0
+        ? d.cart.map((c, idx) => `
+            <tr>
+              <td>${idx + 1}</td>
+              <td>${escapeHtml(c.name)}</td>
+              <td style="text-align:center;">${c.qty}</td>
+              <td style="text-align:right;">Rp ${Number(c.price).toLocaleString('id-ID')}</td>
+              <td style="text-align:right;"><strong>Rp ${(Number(c.price) * Number(c.qty)).toLocaleString('id-ID')}</strong></td>
+            </tr>
+          `).join('')
+        : `<tr><td colspan="5" style="text-align:center; color:#64748b; font-style:italic;">Paket / Konsumsi sesuai kesepakatan reservasi meja</td></tr>`;
+
+      const balanceStatusText = d.balance > 0
+        ? `Sisa Pembayaran: Rp ${d.balance.toLocaleString('id-ID')}`
+        : d.balance < 0
+          ? `Kelebihan / Kembalian: Rp ${Math.abs(d.balance).toLocaleString('id-ID')}`
+          : 'Lunas / Terpenuhi (Rp 0)';
+
+      const printWindow = window.open('', '_blank');
+      if (!printWindow) {
+        alert('Izinkan pop-up browser agar dokumen PDF konfirmasi dapat terbuka otomatis.');
+        return;
+      }
+
       printWindow.document.write(`
-        <html>
+        <!DOCTYPE html>
+        <html lang="id">
         <head>
-          <title>Konfirmasi Reservasi - Rooftop Bar & Lounge NYE 2027</title>
+          <meta charset="UTF-8">
+          <title>Official Reservation Confirmation - ${escapeHtml(d.name)}</title>
+          <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;800&family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
           <style>
-            body { font-family: 'Plus Jakarta Sans', Arial, sans-serif; padding: 30px; color: #111; max-width: 600px; margin: 0 auto; }
-            .header { text-align: center; border-bottom: 2px solid #0077b6; padding-bottom: 15px; margin-bottom: 20px; }
-            .header h2 { font-family: Cinzel, serif; color: #0077b6; margin: 0; }
-            .header p { font-size: 12px; color: #555; margin: 4px 0 0 0; }
-            .content { font-size: 14px; line-height: 1.6; }
-            .row { display: flex; justify-content: space-between; margin-bottom: 8px; border-bottom: 1px dashed #eee; padding-bottom: 6px; }
-            .label { font-weight: bold; color: #333; }
-            .footer { margin-top: 30px; text-align: center; font-size: 11px; color: #777; border-top: 1px solid #ddd; padding-top: 10px; }
-            @media print { body { padding: 10px; } }
+            * { box-sizing: border-box; }
+            body {
+              font-family: 'Plus Jakarta Sans', Arial, sans-serif;
+              color: #0f172a;
+              background: #ffffff;
+              padding: 28px 34px;
+              max-width: 760px;
+              margin: 0 auto;
+              line-height: 1.55;
+            }
+            .letterhead {
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              border-bottom: 2.5px solid #b88b28;
+              padding-bottom: 14px;
+              margin-bottom: 18px;
+            }
+            .hotel-name {
+              font-family: 'Cinzel', serif;
+              font-size: 16px;
+              font-weight: 800;
+              color: #0f172a;
+              letter-spacing: 0.6px;
+            }
+            .hotel-sub {
+              font-size: 11px;
+              font-weight: 700;
+              color: #9a7018;
+              letter-spacing: 0.8px;
+              margin-top: 2px;
+            }
+            .hotel-addr {
+              font-size: 10.5px;
+              color: #475569;
+              margin-top: 2px;
+            }
+            .doc-meta {
+              text-align: right;
+              font-size: 11px;
+              color: #334155;
+            }
+            .doc-badge {
+              display: inline-block;
+              background: #fef9e7;
+              border: 1px solid #d4af37;
+              color: #8c6719;
+              font-weight: 700;
+              font-size: 10px;
+              padding: 3px 9px;
+              border-radius: 999px;
+              margin-bottom: 5px;
+              letter-spacing: 0.5px;
+            }
+            .doc-title {
+              text-align: center;
+              font-family: 'Cinzel', serif;
+              font-size: 15px;
+              font-weight: 800;
+              color: #0f172a;
+              letter-spacing: 1px;
+              margin: 12px 0 16px;
+            }
+            .greeting {
+              font-size: 12.5px;
+              margin-bottom: 12px;
+            }
+            .info-grid {
+              width: 100%;
+              border-collapse: collapse;
+              margin-bottom: 14px;
+              font-size: 12px;
+            }
+            .info-grid td {
+              padding: 6px 8px;
+              border-bottom: 1px solid #e2e8f0;
+              vertical-align: top;
+            }
+            .info-label {
+              width: 34%;
+              font-weight: 700;
+              color: #334155;
+            }
+            .info-val {
+              color: #0f172a;
+            }
+            .items-table {
+              width: 100%;
+              border-collapse: collapse;
+              margin: 10px 0 14px;
+              font-size: 11.5px;
+            }
+            .items-table th {
+              background: #0f172a;
+              color: #f7e199;
+              padding: 7px 8px;
+              text-align: left;
+              font-weight: 700;
+            }
+            .items-table td {
+              padding: 7px 8px;
+              border-bottom: 1px solid #e2e8f0;
+            }
+            .summary-box {
+              background: #f8fafc;
+              border: 1px solid #cbd5e1;
+              border-left: 4px solid #b88b28;
+              border-radius: 6px;
+              padding: 10px 14px;
+              margin-bottom: 14px;
+              font-size: 12px;
+            }
+            .summary-line {
+              display: flex;
+              justify-content: space-between;
+              margin-bottom: 4px;
+            }
+            .summary-line:last-child {
+              margin-bottom: 0;
+              padding-top: 5px;
+              border-top: 1px dashed #cbd5e1;
+              font-weight: 700;
+            }
+            .terms-box {
+              font-size: 11px;
+              color: #334155;
+              background: #fffdf7;
+              border: 1px solid #f3e5ab;
+              border-radius: 6px;
+              padding: 10px 14px;
+              margin-bottom: 18px;
+            }
+            .terms-box ul {
+              margin-left: 16px;
+              margin-top: 4px;
+            }
+            .terms-box li {
+              margin-bottom: 3px;
+            }
+            .sign-area {
+              display: flex;
+              justify-content: space-between;
+              gap: 24px;
+              margin-top: 22px;
+              font-size: 11.5px;
+            }
+            .sign-col {
+              flex: 1;
+              text-align: center;
+            }
+            .sign-space {
+              height: 58px;
+              border-bottom: 1px solid #94a3b8;
+              margin: 8px 16px;
+            }
+            .footer-note {
+              margin-top: 22px;
+              padding-top: 10px;
+              border-top: 1px solid #e2e8f0;
+              text-align: center;
+              font-family: 'Cormorant Garamond', serif;
+              font-style: italic;
+              font-size: 13px;
+              color: #475569;
+            }
+            @page {
+              size: A4 portrait;
+              margin: 14mm;
+            }
+            @media print {
+              body { padding: 0; }
+            }
           </style>
         </head>
-        <body onload="window.print(); window.close();">
-          <div class="header">
-            <h2>PLATINUM HOTEL & CONVENTION HALL</h2>
-            <p>ROOFTOP BAR & LOUNGE &bull; NYE 2027 CELEBRATION</p>
-          </div>
-          <div class="content">
-            <h3 style="text-align:center; color:#0077b6; margin-bottom: 15px;">BUKTI KONFIRMASI RESERVASI MEJA</h3>
-            <div class="row"><span class="label">Nomor Meja:</span> <span>${document.getElementById('modalTitle').innerText}</span></div>
-            <div class="row"><span class="label">Nama Tamu:</span> <span>${name}</span></div>
-            <div class="row"><span class="label">No. WhatsApp:</span> <span>${phone}</span></div>
-            <div class="row"><span class="label">Jumlah Pax:</span> <span>${pax} Orang</span></div>
-            <div class="row"><span class="label">Jam Kedatangan:</span> <span>${time}</span></div>
-            <div class="row"><span class="label">Total Konsumsi Menu:</span> <span>Rp ${totalKonsumsi.toLocaleString('id-ID')}</span></div>
-            <div class="row"><span class="label">Nominal DP Dibayar:</span> <strong style="color: #059669;">Rp ${dp.toLocaleString('id-ID')}</strong></div>
-            <div class="row"><span class="label">Balance (Sisa Tagihan):</span> <strong style="color: #0077b6;">Rp ${balance.toLocaleString('id-ID')}</strong></div>
-            <div class="row"><span class="label">Petugas / Staff:</span> <span>${staff}</span></div>
-            <div class="row"><span class="label">Waktu Input Kasir:</span> <span>${timestamp}</span></div>
-            <div style="margin-top: 15px;">
-              <span class="label">Pesanan Menu / Paket:</span>
-              <pre style="background: #f8fafc; padding: 10px; border-radius: 6px; font-family: inherit; font-size: 13px; margin-top: 5px; white-space: pre-wrap;">${menuListText}</pre>
+        <body onload="setTimeout(() => { window.print(); }, 250);">
+          <div class="letterhead">
+            <div>
+              <div class="hotel-name">PLATINUM HOTEL &amp; CONVENTION HALL</div>
+              <div class="hotel-sub">ROOFTOP BAR &amp; LOUNGE · NEW YEAR'S EVE 2027 CELEBRATION</div>
+              <div class="hotel-addr">Jl. Soekarno Hatta, Balikpapan, Kalimantan Timur</div>
             </div>
-            <div style="margin-top: 10px;"><span class="label">Catatan Khusus:</span> <span>${notes}</span></div>
+            <div class="doc-meta">
+              <div class="doc-badge">OFFICIAL RESERVATION CONFIRMATION</div>
+              <div><strong>Ref:</strong> ${escapeHtml(d.docRef)}</div>
+              <div><strong>Tanggal Cetak:</strong> ${escapeHtml(d.timestamp)}</div>
+            </div>
           </div>
-          <div class="footer">
-            <p>Terima kasih atas reservasi Anda di Rooftop Bar & Lounge Platinum Hotel Balikpapan.</p>
-            <p>Simpan bukti konfirmasi ini untuk ditunjukkan kepada petugas saat kedatangan.</p>
+
+          <div class="doc-title">SURAT KONFIRMASI RESERVASI MEJA</div>
+
+          <div class="greeting">
+            Dengan hormat <strong>${escapeHtml(d.name)}</strong>,<br>
+            Terima kasih atas kepercayaan Anda memilih <strong>Rooftop Bar &amp; Lounge, Platinum Hotel &amp; Convention Hall Balikpapan</strong> untuk merayakan malam pergantian tahun <strong>New Year's Eve 2027</strong>. Berikut adalah rincian konfirmasi reservasi Anda:
+          </div>
+
+          <table class="info-grid">
+            <tr>
+              <td class="info-label">Nama Tamu / Guest Name</td>
+              <td class="info-val"><strong>${escapeHtml(d.name)}</strong></td>
+            </tr>
+            <tr>
+              <td class="info-label">Nomor WhatsApp / Telepon</td>
+              <td class="info-val">${escapeHtml(d.phone)}</td>
+            </tr>
+            <tr>
+              <td class="info-label">Venue &amp; Nomor Meja</td>
+              <td class="info-val"><strong>Rooftop Bar &amp; Lounge — ${escapeHtml(d.tableLabel)}</strong></td>
+            </tr>
+            <tr>
+              <td class="info-label">Jumlah Tamu (Pax)</td>
+              <td class="info-val">${escapeHtml(String(d.pax))} Orang</td>
+            </tr>
+            <tr>
+              <td class="info-label">Waktu Kedatangan</td>
+              <td class="info-val">${escapeHtml(d.time)}</td>
+            </tr>
+            <tr>
+              <td class="info-label">Catatan Khusus</td>
+              <td class="info-val">${escapeHtml(d.notes)}</td>
+            </tr>
+          </table>
+
+          <table class="items-table">
+            <thead>
+              <tr>
+                <th style="width:36px;">No</th>
+                <th>Paket / Item Menu</th>
+                <th style="width:52px; text-align:center;">Qty</th>
+                <th style="width:120px; text-align:right;">Harga Satuan</th>
+                <th style="width:130px; text-align:right;">Subtotal</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${itemsRows}
+            </tbody>
+          </table>
+
+          <div class="summary-box">
+            <div class="summary-line">
+              <span>Total Estimasi Paket &amp; Konsumsi</span>
+              <strong>Rp ${Number(d.totalKonsumsi).toLocaleString('id-ID')}</strong>
+            </div>
+            <div class="summary-line">
+              <span>Uang Muka / Deposit Diterima (DP)</span>
+              <strong style="color:#047857;">Rp ${Number(d.dp).toLocaleString('id-ID')}</strong>
+            </div>
+            <div class="summary-line">
+              <span>Status Penyelesaian / Balance</span>
+              <span>${escapeHtml(balanceStatusText)}</span>
+            </div>
+          </div>
+
+          <div class="terms-box">
+            <strong>Ketentuan Reservasi:</strong>
+            <ul>
+              <li>Mohon menunjukkan dokumen konfirmasi ini (cetak atau digital) kepada petugas penerima tamu di area Rooftop Bar &amp; Lounge saat registrasi kedatangan.</li>
+              <li>Meja akan dipertahankan sesuai jadwal kedatangan yang tercantum; apabila terdapat perubahan waktu kedatangan, mohon informasikan kepada tim kami sebelumnya.</li>
+              <li>Penyelesaian administrasi/sisa pembayaran (apabila ada) dilakukan sesuai ketentuan yang berlaku di outlet.</li>
+            </ul>
+          </div>
+
+          <div class="sign-area">
+            <div class="sign-col">
+              <div>Disiapkan Oleh / Petugas</div>
+              <div class="sign-space"></div>
+              <div><strong>${escapeHtml(d.staff)}</strong></div>
+              <div style="font-size:10.5px; color:#64748b;">Rooftop Bar &amp; Lounge Team</div>
+            </div>
+            <div class="sign-col">
+              <div>Disetujui Oleh Tamu</div>
+              <div class="sign-space"></div>
+              <div><strong>${escapeHtml(d.name)}</strong></div>
+              <div style="font-size:10.5px; color:#64748b;">Guest Signature</div>
+            </div>
+          </div>
+
+          <div class="footer-note">
+            Platinum Hotel &amp; Convention Hall Balikpapan — Delivering Memorable Moments for New Year's Eve 2027.
           </div>
         </body>
         </html>
@@ -2128,12 +2833,21 @@
       printWindow.document.close();
     }
 
+    function escapeHtml(str) {
+      return String(str ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+
     function openFDCBookingModal() {
       document.getElementById('fdcName').value = '';
       document.getElementById('fdcPhone').value = '';
       document.getElementById('fdcPax').value = '1';
       document.getElementById('fdcAmount').value = (1 * FDC_DEFAULT_PRICE).toLocaleString('id-ID');
-      document.getElementById('fdcCreatedBy').value = '';
+      document.getElementById('fdcCreatedBy').value = localStorage.getItem('last_staff_name') || '';
       document.getElementById('fdcNotes').value = '';
       document.getElementById('fdcModal').classList.add('open');
     }
@@ -2159,11 +2873,13 @@
         return;
       }
 
+      if (staff) localStorage.setItem('last_staff_name', staff);
+
       const payload = {
         id: 'RT-FDC-' + Date.now().toString().slice(-6),
         guest_name: name,
         guest_phone: phone,
-        pax: pax,
+        pax,
         amount: rawAmt ? parseInt(rawAmt, 10) : (pax * FDC_DEFAULT_PRICE),
         created_by: staff,
         notes: document.getElementById('fdcNotes').value
@@ -2182,23 +2898,23 @@
     function openFDCListModal() {
       const container = document.getElementById('fdcListContent');
       if (fdcBookings.length === 0) {
-        container.innerHTML = '<div style="text-align:center; padding: 25px; color:var(--text-muted); font-size:0.85rem;">Belum ada pesanan tiket FDC Standing.</div>';
+        container.innerHTML = '<div style="text-align:center; padding: 25px; color:var(--text-muted-dark); font-size:0.85rem;">Belum ada pesanan tiket FDC Standing.</div>';
       } else {
         let html = '';
         fdcBookings.forEach((item) => {
           html += `
-            <div style="background:#ffffff; border:1px solid var(--border-color); border-radius:8px; padding:10px 12px; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
+            <div style="background:#ffffff; border:1px solid #cbd5e1; border-radius:8px; padding:10px 12px; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
               <div>
-                <strong style="color:#9333ea; font-size:0.86rem;">${item.name}</strong> 
-                <span style="background:rgba(147,51,234,0.12); color:#7e22ce; font-size:0.65rem; padding:2px 6px; border-radius:4px; margin-left:6px; font-weight:700;">${item.pax} Pax</span>
-                <div style="font-size:0.75rem; color:var(--text-muted); margin-top:2px;">
-                  WA: ${item.phone || '-'} | Total: <strong style="color:#059669;">Rp ${(item.amount || 0).toLocaleString('id-ID')}</strong>
+                <strong style="color:#7e22ce; font-size:0.86rem;">${escapeHtml(item.name)}</strong>
+                <span style="background:rgba(126,34,206,0.12); color:#6b21a8; font-size:0.66rem; padding:2px 6px; border-radius:4px; margin-left:6px; font-weight:700;">${item.pax} Pax</span>
+                <div style="font-size:0.75rem; color:var(--text-muted-dark); margin-top:2px;">
+                  WA: ${escapeHtml(item.phone || '-')} · Total: <strong style="color:#059669;">Rp ${(item.amount || 0).toLocaleString('id-ID')}</strong>
                 </div>
-                <div style="font-size:0.7rem; color:#b45309; margin-top:2px;">
-                  <i class="fa-solid fa-user-pen"></i> By: <strong>${item.created_by || '-'}</strong>
+                <div style="font-size:0.7rem; color:#92400e; margin-top:2px;">
+                  <i class="fa-solid fa-user-pen"></i> By: <strong>${escapeHtml(item.created_by || '-')}</strong>
                 </div>
               </div>
-              <button onclick="deleteFDC('${item.id}')" style="background:#fee2e2; border:none; color:#991b1b; width:30px; height:30px; border-radius:6px; cursor:pointer;" title="Hapus Tiket FDC">
+              <button onclick="deleteFDC('${item.id}')" style="background:#fee2e2; border:1px solid #fca5a5; color:#991b1b; width:30px; height:30px; border-radius:6px; cursor:pointer;" title="Hapus Tiket FDC">
                 <i class="fa-solid fa-trash" style="font-size:0.75rem;"></i>
               </button>
             </div>
@@ -2227,14 +2943,8 @@
 
     function openReportModal() {
       const bookedKeys = Object.keys(bookings);
-
-      let loungeBooked = 0;
-      let loungeRev = 0;
-      let loungePax = 0;
-
-      let terraceBooked = 0;
-      let terraceRev = 0;
-      let terracePax = 0;
+      let loungeBooked = 0, loungeRev = 0, loungePax = 0;
+      let terraceBooked = 0, terraceRev = 0, terracePax = 0;
 
       bookedKeys.forEach(k => {
         const item = bookings[k];
@@ -2255,15 +2965,10 @@
 
       const totalLounge = 25;
       const totalTerrace = 13;
-
       const loungeLeft = totalLounge - loungeBooked;
       const terraceLeft = totalTerrace - terraceBooked;
 
-      const loungeOccupancy = Math.round((loungeBooked / totalLounge) * 100);
-      const terraceOccupancy = Math.round((terraceBooked / totalTerrace) * 100);
-
-      let fdcPax = 0;
-      let fdcTotalRev = 0;
+      let fdcPax = 0, fdcTotalRev = 0;
       fdcBookings.forEach(item => {
         fdcPax += (item.pax || 0);
         fdcTotalRev += (item.amount || 0);
@@ -2275,16 +2980,15 @@
       const totalCrowd = seatingPax + fdcPax;
 
       document.getElementById('repTotalGross').innerText = 'Rp ' + grandGross.toLocaleString('id-ID');
-      
       document.getElementById('repLoungeBooked').innerText = loungeBooked;
       document.getElementById('repLoungeLeft').innerText = loungeLeft;
       document.getElementById('repLoungeRev').innerText = 'Rp ' + loungeRev.toLocaleString('id-ID');
-      document.getElementById('repLoungeBar').style.width = loungeOccupancy + '%';
+      document.getElementById('repLoungeBar').style.width = Math.round((loungeBooked / totalLounge) * 100) + '%';
 
       document.getElementById('repTerraceBooked').innerText = terraceBooked;
       document.getElementById('repTerraceLeft').innerText = terraceLeft;
       document.getElementById('repTerraceRev').innerText = 'Rp ' + terraceRev.toLocaleString('id-ID');
-      document.getElementById('repTerraceBar').style.width = terraceOccupancy + '%';
+      document.getElementById('repTerraceBar').style.width = Math.round((terraceBooked / totalTerrace) * 100) + '%';
 
       document.getElementById('repTableGrossRev').innerText = 'Rp ' + tableGrossRev.toLocaleString('id-ID');
       document.getElementById('repTablePaxDetail').innerText = `${seatingPax} Pax dari ${loungeBooked + terraceBooked} meja terisi (${loungeBooked} Lower Deck + ${terraceBooked} Cockpit)`;
@@ -2305,49 +3009,38 @@
     function refreshMapNodes() {
       document.querySelectorAll('.spot').forEach(spot => {
         const id = spot.dataset.id;
-        if (bookings[id]) {
-          spot.classList.add('is-booked');
-        } else {
-          spot.classList.remove('is-booked');
-        }
+        if (bookings[id]) spot.classList.add('is-booked');
+        else spot.classList.remove('is-booked');
       });
     }
 
     function updateMetrics() {
       const bookedKeys = Object.keys(bookings);
-      let loungeCount = 0;
-      let terraceCount = 0;
-      let tableDP = 0;
+      let loungeCount = 0, terraceCount = 0, tableDP = 0;
 
       bookedKeys.forEach(k => {
-        if (TERRACE_IDS.includes(k)) {
-          terraceCount++;
-        } else {
-          loungeCount++;
-        }
+        if (TERRACE_IDS.includes(k)) terraceCount++;
+        else loungeCount++;
         tableDP += (bookings[k].dp || 0);
       });
 
       document.getElementById('statLoungeBooked').innerText = loungeCount;
       document.getElementById('statTerraceBooked').innerText = terraceCount;
 
-      let fdcPaxTotal = 0;
-      let fdcAmountTotal = 0;
+      let fdcPaxTotal = 0, fdcAmountTotal = 0;
       fdcBookings.forEach(item => {
         fdcPaxTotal += (item.pax || 0);
         fdcAmountTotal += (item.amount || 0);
       });
 
       document.getElementById('statFDCPaxTotal').innerText = fdcPaxTotal;
-      const grandTotal = tableDP + fdcAmountTotal;
-      document.getElementById('statDPTotal').innerText = 'Rp ' + grandTotal.toLocaleString('id-ID');
-
+      document.getElementById('statDPTotal').innerText = 'Rp ' + (tableDP + fdcAmountTotal).toLocaleString('id-ID');
       document.getElementById('legendAvailText').innerText = `Sisa Lounge: ${25 - loungeCount} | Sisa Cockpit: ${13 - terraceCount}`;
       document.getElementById('legendBookedText').innerText = `${bookedKeys.length} Booked`;
     }
 
     function formatCurrencyInput(el) {
-      let val = el.value.replace(/[^0-9]/g, '');
+      const val = el.value.replace(/[^0-9]/g, '');
       el.value = val ? parseInt(val, 10).toLocaleString('id-ID') : '';
     }
 
@@ -2364,7 +3057,7 @@
           scale: 2,
           useCORS: true,
           allowTaint: true,
-          backgroundColor: '#090d16'
+          backgroundColor: '#070b14'
         });
 
         const link = document.createElement('a');
