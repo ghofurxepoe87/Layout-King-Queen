@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover">
-  <title>Rooftop Bar & Lounge - NYE 2027 | Platinum Hotel Balikpapan</title>
+  <title>Rooftop Bar & Lounge - NYE 2027 | Platinum Hotel & Convention Hall</title>
 
   <link rel="icon" type="image/png" href="favicon.png">
   <link rel="apple-touch-icon" href="favicon.png">
@@ -35,7 +35,7 @@
       --border-subtle: #d6e0eb;
       --border-blue: #9ec0df;
       --red-booked: #ef4444;
-      --red-glow: rgba(239, 68, 68, 0.42);
+      --red-glow: rgba(239, 68, 68, 0.45);
     }
 
     * {
@@ -121,7 +121,6 @@
     }
 
     .brand-title h1 {
-      font-family: 'Plus Jakarta Sans', sans-serif;
       font-size: 1.02rem;
       font-weight: 800;
       letter-spacing: 0.2px;
@@ -214,7 +213,6 @@
 
     .metric-card-lg .txt-wrap strong {
       font-size: 0.88rem;
-      font-family: 'Plus Jakarta Sans', sans-serif;
       font-weight: 800;
       color: #ffffff;
       white-space: nowrap;
@@ -262,19 +260,10 @@
       box-shadow: 0 3px 10px rgba(0, 0, 0, 0.14);
     }
 
-    .btn-fdc {
-      background: rgba(6, 41, 74, 0.55);
-      color: #ffffff;
-      border-color: rgba(255, 255, 255, 0.26);
-    }
-
-    .btn-menu {
-      background: rgba(6, 41, 74, 0.55);
-      color: #ffffff;
-      border-color: rgba(255, 255, 255, 0.26);
-    }
-
-    .btn-dashboard {
+    .btn-fdc,
+    .btn-menu,
+    .btn-dashboard,
+    .btn-csv {
       background: rgba(6, 41, 74, 0.55);
       color: #ffffff;
       border-color: rgba(255, 255, 255, 0.26);
@@ -286,12 +275,6 @@
       border-color: #ffffff;
     }
 
-    .btn-csv {
-      background: rgba(6, 41, 74, 0.55);
-      color: #ffffff;
-      border-color: rgba(255, 255, 255, 0.26);
-    }
-
     .btn-reset-pos {
       background: rgba(6, 41, 74, 0.45);
       color: #e2effa;
@@ -299,12 +282,15 @@
       grid-column: span 2;
     }
 
-    /* TOOLBAR CARD */
+    /* TOOLBAR & GREETER SEARCH */
     .toolbar-bar {
       max-width: 1840px;
       margin: 12px auto 0;
       padding: 0 16px;
       width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
     }
 
     .toolbar-card {
@@ -386,6 +372,144 @@
       transform: scale(0.96);
     }
 
+    .greeter-search-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-blue);
+      border-radius: 12px;
+      padding: 10px 14px;
+      box-shadow: 0 3px 10px rgba(15, 23, 42, 0.04);
+      position: relative;
+    }
+
+    .greeter-search-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .greeter-badge {
+      background: var(--navy-dark);
+      color: #ffffff;
+      font-size: 0.7rem;
+      font-weight: 800;
+      padding: 6px 10px;
+      border-radius: 7px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
+
+    .greeter-input-wrap {
+      position: relative;
+      flex: 1;
+      min-width: 220px;
+    }
+
+    .greeter-input-wrap i.fa-magnifying-glass {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--navy-primary);
+      font-size: 0.85rem;
+      pointer-events: none;
+    }
+
+    .greeter-search-input {
+      width: 100%;
+      padding: 9px 36px 9px 36px;
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      font-size: 0.85rem;
+      color: var(--text-main);
+      background: var(--bg-soft);
+      outline: none;
+      min-height: 40px;
+      font-family: inherit;
+    }
+
+    .greeter-search-input:focus {
+      background: #ffffff;
+      border-color: var(--navy-primary);
+      box-shadow: 0 0 0 3px rgba(11, 79, 138, 0.14);
+    }
+
+    .btn-clear-search {
+      position: absolute;
+      right: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      width: 26px;
+      height: 26px;
+      border-radius: 6px;
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btn-clear-search.visible {
+      display: inline-flex;
+    }
+
+    .search-results-dropdown {
+      margin-top: 8px;
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 8px;
+      display: none;
+      flex-direction: column;
+      gap: 6px;
+      max-height: 240px;
+      overflow-y: auto;
+    }
+
+    .search-results-dropdown.open {
+      display: flex;
+    }
+
+    .search-result-item {
+      background: var(--bg-soft);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 9px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      cursor: pointer;
+      transition: background 0.14s ease, border-color 0.14s ease;
+    }
+
+    .search-result-item:hover {
+      background: #f0f7ff;
+      border-color: var(--navy-primary);
+    }
+
+    .res-pill-booked {
+      background: #fee2e2;
+      color: #b91c1c;
+      font-size: 0.65rem;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    .res-pill-avail {
+      background: #e0f2fe;
+      color: #075985;
+      font-size: 0.65rem;
+      font-weight: 800;
+      padding: 3px 8px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
     /* VIEWPORT */
     .viewport-area {
       flex: 1;
@@ -457,7 +581,7 @@
       font-weight: 700;
       color: #0f172a;
       touch-action: none;
-      transition: background 0.18s ease, border-color 0.18s ease;
+      transition: background 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
     }
 
     .spot:active {
@@ -476,6 +600,12 @@
       box-shadow: 0 0 12px var(--red-glow), inset 0 0 6px rgba(255, 255, 255, 0.55) !important;
       color: #ffffff !important;
       z-index: 5;
+    }
+
+    .spot.is-highlighted {
+      outline: 3px solid #f5d77f !important;
+      box-shadow: 0 0 0 4px rgba(11, 79, 138, 0.85), 0 0 22px rgba(245, 215, 127, 0.95) !important;
+      z-index: 20 !important;
     }
 
     /* MODAL */
@@ -503,7 +633,7 @@
       border: 1.5px solid var(--border-blue);
       border-radius: 14px;
       width: 100%;
-      max-width: 560px;
+      max-width: 580px;
       max-height: 90vh;
       display: flex;
       flex-direction: column;
@@ -524,7 +654,6 @@
     }
 
     .modal-header h3 {
-      font-family: 'Plus Jakarta Sans', sans-serif;
       font-size: 0.98rem;
       color: #ffffff;
       font-weight: 800;
@@ -652,7 +781,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
       flex-wrap: wrap;
       flex-shrink: 0;
     }
@@ -661,24 +790,24 @@
       background: #e2e8f0;
       color: #334155;
       border: none;
-      padding: 10px 14px;
+      padding: 9px 13px;
       border-radius: 8px;
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       font-weight: 700;
       cursor: pointer;
-      min-height: 40px;
+      min-height: 38px;
     }
 
     .btn-modal-del {
       background: #fee2e2;
       color: #991b1b;
       border: 1px solid #fca5a5;
-      padding: 10px 14px;
+      padding: 9px 13px;
       border-radius: 8px;
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       font-weight: 700;
       cursor: pointer;
-      min-height: 40px;
+      min-height: 38px;
       display: inline-flex;
       align-items: center;
       gap: 6px;
@@ -688,12 +817,42 @@
       background: #ffffff;
       color: var(--navy-dark);
       border: 1px solid var(--border-blue);
-      padding: 10px 14px;
+      padding: 9px 12px;
       border-radius: 8px;
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       font-weight: 700;
       cursor: pointer;
-      min-height: 40px;
+      min-height: 38px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-modal-email {
+      background: #0f766e;
+      color: #ffffff;
+      border: 1px solid #0d5e54;
+      padding: 9px 12px;
+      border-radius: 8px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
+      min-height: 38px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-modal-wa {
+      background: #15803d;
+      color: #ffffff;
+      border: 1px solid #166534;
+      padding: 9px 12px;
+      border-radius: 8px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
+      min-height: 38px;
       display: inline-flex;
       align-items: center;
       gap: 6px;
@@ -703,12 +862,12 @@
       background: var(--navy-primary);
       color: #ffffff;
       border: 1px solid var(--navy-dark);
-      padding: 10px 16px;
+      padding: 9px 15px;
       border-radius: 8px;
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       font-weight: 700;
       cursor: pointer;
-      min-height: 40px;
+      min-height: 38px;
       display: inline-flex;
       align-items: center;
       gap: 7px;
@@ -905,7 +1064,7 @@
       <div class="hdr-top-row">
         <div class="brand-section">
           <div class="brand-logo-frame">
-            <img src="Logo.png" alt="Logo Platinum Hotel & Convention Hall"
+            <img src="Logo.png" alt="Platinum Hotel & Convention Hall Logo"
                  onerror="this.onerror=null; this.src='logo.png'; this.addEventListener('error', () => { this.src='favicon.png'; });">
           </div>
           <div class="brand-title">
@@ -918,7 +1077,7 @@
         </div>
 
         <div class="metrics-group">
-          <div class="metric-card-lg" onclick="openReportModal()" title="Lihat Inventaris Lower Deck">
+          <div class="metric-card-lg" onclick="openReportModal()" title="Lower Deck Inventory">
             <div class="metric-icon-box"><i class="fa-solid fa-couch"></i></div>
             <div class="txt-wrap">
               <span>Lounge (L)</span>
@@ -926,7 +1085,7 @@
             </div>
           </div>
 
-          <div class="metric-card-lg" onclick="openReportModal()" title="Lihat Inventaris Cockpit Deck">
+          <div class="metric-card-lg" onclick="openReportModal()" title="Cockpit Deck Inventory">
             <div class="metric-icon-box"><i class="fa-solid fa-cloud-moon"></i></div>
             <div class="txt-wrap">
               <span>Cockpit (C)</span>
@@ -934,7 +1093,7 @@
             </div>
           </div>
 
-          <div class="metric-card-lg" onclick="openFDCListModal()" title="Lihat Tamu Tiket FDC Standing">
+          <div class="metric-card-lg" onclick="openFDCListModal()" title="Standing FDC Ticket Guests">
             <div class="metric-icon-box"><i class="fa-solid fa-ticket"></i></div>
             <div class="txt-wrap">
               <span>FDC Guests</span>
@@ -942,7 +1101,7 @@
             </div>
           </div>
 
-          <div class="metric-card-lg" onclick="openReportModal()" title="Lihat Rincian Pendapatan">
+          <div class="metric-card-lg" onclick="openReportModal()" title="Revenue / Deposit Summary">
             <div class="metric-icon-box"><i class="fa-solid fa-coins"></i></div>
             <div class="txt-wrap">
               <span>Total Rev / DP</span>
@@ -954,10 +1113,10 @@
 
       <div class="btn-action-group">
         <button class="btn-action btn-reg" onclick="openRegistrationModal()">
-          <i class="fa-solid fa-file-pen"></i> + Registrasi Meja
+          <i class="fa-solid fa-file-pen"></i> + Table Registration
         </button>
         <button class="btn-action btn-fdc" onclick="openFDCBookingModal()">
-          <i class="fa-solid fa-ticket"></i> + Tiket FDC
+          <i class="fa-solid fa-ticket"></i> + FDC Ticket
         </button>
         <button class="btn-action btn-menu" onclick="openMasterMenuModal()">
           <i class="fa-solid fa-utensils"></i> Master Menu
@@ -971,20 +1130,20 @@
         <button class="btn-action btn-csv" onclick="exportReservationsCSV()">
           <i class="fa-solid fa-file-csv"></i> Export CSV
         </button>
-        <button class="btn-action btn-reset-pos" onclick="resetHotspotsPosition()" title="Reset Posisi Kotak Meja">
+        <button class="btn-action btn-reset-pos" onclick="resetHotspotsPosition()" title="Reset Table Marker Positions">
           <i class="fa-solid fa-arrows-rotate"></i> Reset Layout
         </button>
       </div>
     </div>
   </header>
 
-  <!-- TOOLBAR -->
+  <!-- TOOLBAR & GREETER SEARCH -->
   <div class="toolbar-bar">
     <div class="toolbar-card">
       <div class="legend-tag">
         <div style="display:flex; align-items:center; gap:6px;">
           <span class="dot-node avail"></span>
-          <span id="legendAvailText">Sisa Lounge: 25 | Sisa Cockpit: 13</span>
+          <span id="legendAvailText">Available Lounge: 25 | Cockpit: 13</span>
         </div>
         <div style="display:flex; align-items:center; gap:6px;">
           <span class="dot-node booked"></span>
@@ -994,14 +1153,33 @@
       </div>
 
       <div class="zoom-group">
-        <label class="btn-tool-icon" title="Pilih Gambar Denah dari Perangkat">
+        <label class="btn-tool-icon" title="Load Floor Plan Image from Device">
           <i class="fa-solid fa-image"></i>
           <input type="file" id="localImgPicker" accept="image/*" style="display: none;" onchange="loadLocalImage(event)">
         </label>
-        <button class="btn-tool-icon" onclick="zoomMap(0.1)" title="Perbesar Denah"><i class="fa-solid fa-plus"></i></button>
-        <button class="btn-tool-icon" onclick="zoomMap(-0.1)" title="Perkecil Denah"><i class="fa-solid fa-minus"></i></button>
+        <button class="btn-tool-icon" onclick="zoomMap(0.1)" title="Zoom In"><i class="fa-solid fa-plus"></i></button>
+        <button class="btn-tool-icon" onclick="zoomMap(-0.1)" title="Zoom Out"><i class="fa-solid fa-minus"></i></button>
         <button class="btn-tool-icon" onclick="resetZoom()" title="Reset Zoom"><i class="fa-solid fa-expand"></i></button>
       </div>
+    </div>
+
+    <div class="greeter-search-card">
+      <div class="greeter-search-row">
+        <span class="greeter-badge"><i class="fa-solid fa-concierge-bell"></i> GREETER / CASHIER SEARCH</span>
+        <div class="greeter-input-wrap">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text"
+                 id="greeterSearchInput"
+                 class="greeter-search-input"
+                 placeholder="Search by guest name or table number (e.g., L1, C4, Lower Deck, Cockpit)..."
+                 oninput="handleGreeterSearch()"
+                 onfocus="handleGreeterSearch()">
+          <button type="button" id="btnClearGreeterSearch" class="btn-clear-search" onclick="clearGreeterSearch()" title="Clear Search">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+      </div>
+      <div id="greeterSearchResults" class="search-results-dropdown"></div>
     </div>
   </div>
 
@@ -1025,54 +1203,54 @@
     </div>
   </main>
 
-  <!-- MODAL RESERVASI / EDIT MEJA -->
+  <!-- MODAL TABLE RESERVATION / EDIT -->
   <div id="bookingModal" class="modal-backdrop">
     <div class="modal-container">
       <div class="modal-header">
-        <h3><i class="fa-solid fa-chair"></i> Reservasi <span id="modalTitle">#L1</span></h3>
+        <h3><i class="fa-solid fa-chair"></i> Table Reservation <span id="modalTitle">#L1</span></h3>
         <button class="btn-x" onclick="closeBookingModal()"><i class="fa-solid fa-xmark"></i></button>
       </div>
 
       <div class="modal-body">
         <div class="form-row">
-          <label><i class="fa-solid fa-user"></i> Nama Tamu (Guest Name) *</label>
-          <input type="text" id="guestName" class="inp-field" placeholder="Contoh: Bpk. Hendra Wijaya">
+          <label><i class="fa-solid fa-user"></i> Guest Name *</label>
+          <input type="text" id="guestName" class="inp-field" placeholder="e.g., Mr. Hendra Wijaya">
         </div>
 
         <div class="form-grid-2">
           <div class="form-row">
-            <label><i class="fa-brands fa-whatsapp"></i> WhatsApp / HP *</label>
+            <label><i class="fa-brands fa-whatsapp"></i> WhatsApp / Phone *</label>
             <input type="tel" id="guestPhone" class="inp-field" placeholder="0812-xxxx-xxxx">
           </div>
           <div class="form-row">
-            <label><i class="fa-solid fa-envelope"></i> Email Tamu (Auto-Send)</label>
-            <input type="email" id="guestEmail" class="inp-field" placeholder="tamu@email.com">
+            <label><i class="fa-solid fa-envelope"></i> Guest Email (Confirmation Letter)</label>
+            <input type="email" id="guestEmail" class="inp-field" placeholder="guest@example.com">
           </div>
         </div>
 
         <div class="form-row">
-          <label><i class="fa-solid fa-users"></i> Jumlah Pax</label>
+          <label><i class="fa-solid fa-users"></i> Number of Guests (Pax)</label>
           <input type="number" id="guestPax" class="inp-field" value="4" min="1">
         </div>
 
         <div style="background: #f4f9fe; border: 1px solid var(--border-blue); border-radius: 10px; padding: 12px; display: flex; flex-direction: column; gap: 10px;">
           <label style="font-size: 0.78rem; font-weight: 800; color: var(--navy-dark); display: flex; align-items: center; gap: 6px;">
-            <i class="fa-solid fa-utensils"></i> Kasir Menu &amp; Paket Promo Rooftop
+            <i class="fa-solid fa-utensils"></i> Rooftop Menu &amp; Promotional Packages
           </label>
 
           <div style="display: flex; gap: 8px;">
             <select id="selectMasterMenuDropdown" class="inp-field" style="flex: 1;">
-              <option value="">-- Pilih Menu / Paket Rooftop --</option>
+              <option value="">-- Select Rooftop Menu / Package --</option>
             </select>
             <button type="button" class="btn-modal-save" style="padding: 0 14px;" onclick="addCartItemFromDropdown()">
-              <i class="fa-solid fa-plus"></i> Tambah
+              <i class="fa-solid fa-plus"></i> Add
             </button>
           </div>
 
           <div class="form-grid-2">
-            <input type="text" id="customMenuName" class="inp-field" placeholder="Nama Menu Custom">
+            <input type="text" id="customMenuName" class="inp-field" placeholder="Custom Menu Item">
             <div style="display: flex; gap: 6px;">
-              <input type="text" id="customMenuPrice" class="inp-field" placeholder="Harga (150000)" onkeyup="formatCurrencyInput(this)">
+              <input type="text" id="customMenuPrice" class="inp-field" placeholder="Price (150000)" onkeyup="formatCurrencyInput(this)">
               <button type="button" class="btn-modal-pdf" style="padding: 0 12px;" onclick="addCustomCartItem()">
                 <i class="fa-solid fa-plus"></i>
               </button>
@@ -1080,36 +1258,36 @@
           </div>
 
           <div id="bookingCartItemsContainer" style="display: flex; flex-direction: column; gap: 6px; max-height: 170px; overflow-y: auto;">
-            <div style="font-size: 0.75rem; color: var(--text-muted); text-align: center; padding: 6px;">Belum ada menu dipilih.</div>
+            <div style="font-size: 0.75rem; color: var(--text-muted); text-align: center; padding: 6px;">No menu items selected yet.</div>
           </div>
 
           <div style="background: #ffffff; border: 1px solid #10b981; border-radius: 8px; padding: 10px 14px; display: flex; justify-content: space-between; align-items: center;">
-            <span style="font-size: 0.78rem; font-weight: 700; color: #047857;">Total Estimasi Menu:</span>
+            <span style="font-size: 0.78rem; font-weight: 700; color: #047857;">Estimated Menu Total:</span>
             <strong id="bookingCartTotalDisplay" style="font-size: 0.98rem; color: #047857;">Rp 0</strong>
           </div>
         </div>
 
         <div class="form-row">
-          <label><i class="fa-solid fa-money-bill-wave" style="color: #059669;"></i> Nominal DP / Uang Muka *</label>
+          <label><i class="fa-solid fa-money-bill-wave" style="color: #059669;"></i> Deposit / Down Payment (DP) *</label>
           <div class="money-input-box">
             <span>Rp</span>
-            <input type="text" id="guestDP" class="inp-field" placeholder="Contoh: 500.000" onkeyup="formatCurrencyInput(this); updateBalanceDisplay();">
+            <input type="text" id="guestDP" class="inp-field" placeholder="e.g., 500.000" onkeyup="formatCurrencyInput(this); updateBalanceDisplay();">
           </div>
         </div>
 
         <div style="background: #f8fafc; border: 1.5px dashed var(--navy-primary); border-radius: 10px; padding: 12px; display: flex; justify-content: space-between; align-items: center; gap: 8px;">
           <div>
             <div style="font-size: 0.72rem; font-weight: 800; color: var(--navy-dark); text-transform: uppercase;">
-              <i class="fa-solid fa-scale-balanced"></i> Balance (Sisa Tagihan / Kembalian)
+              <i class="fa-solid fa-scale-balanced"></i> Balance (Remaining / Change)
             </div>
-            <div style="font-size: 0.66rem; color: var(--text-muted);">Total Konsumsi dikurangi Uang Muka (DP)</div>
+            <div style="font-size: 0.66rem; color: var(--text-muted);">Menu Total minus Deposit (DP)</div>
           </div>
-          <strong id="bookingBalanceDisplay" style="font-size: 0.95rem; text-align: right;">LUNAS (Rp 0)</strong>
+          <strong id="bookingBalanceDisplay" style="font-size: 0.95rem; text-align: right;">SETTLED (Rp 0)</strong>
         </div>
 
         <div class="form-grid-2">
           <div class="form-row">
-            <label><i class="fa-solid fa-clock"></i> Jam Kedatangan</label>
+            <label><i class="fa-solid fa-clock"></i> Arrival Time</label>
             <select id="guestTime" class="inp-field">
               <option value="19:30 WITA">19:30 WITA</option>
               <option value="20:00 WITA">20:00 WITA</option>
@@ -1119,133 +1297,139 @@
           </div>
           <div class="form-row">
             <label><i class="fa-solid fa-user-tie"></i> Created By (Staff) *</label>
-            <input type="text" id="guestCreatedBy" class="inp-field" placeholder="Ketik nama staff...">
+            <input type="text" id="guestCreatedBy" class="inp-field" placeholder="Enter staff name...">
           </div>
         </div>
 
         <div class="form-row">
-          <label><i class="fa-solid fa-calendar-check"></i> Waktu Input Kasir (Real-Time Otomatis)</label>
+          <label><i class="fa-solid fa-calendar-check"></i> Entry Timestamp (Real-Time)</label>
           <input type="text" id="guestInputTimestamp" class="inp-field" readonly style="font-weight: 700; background: #f1f5f9;">
         </div>
 
         <div class="form-row">
-          <label><i class="fa-solid fa-note-sticky"></i> Catatan Khusus / Special Request</label>
-          <input type="text" id="guestNotes" class="inp-field" placeholder="Cth: Request bucket ice, fruit platter, perayaan ulang tahun...">
+          <label><i class="fa-solid fa-note-sticky"></i> Special Notes / Requests</label>
+          <input type="text" id="guestNotes" class="inp-field" placeholder="e.g., Ice bucket, fruit platter, celebration notes...">
         </div>
 
         <div class="auto-pdf-box">
           <label class="auto-pdf-toggle">
             <input type="checkbox" id="autoPdfBooking" checked>
-            <span>Auto-PDF &amp; Kirim Email Konfirmasi saat Simpan</span>
+            <span>Auto-Generate PDF &amp; Send Confirmation Email on Save</span>
           </label>
-          <span style="font-size: 0.68rem;">fbmbpn@platinumhotelindonesia.com</span>
+          <span style="font-size: 0.68rem;">Sender: fbmbpn@platinumhotelindonesia.com</span>
         </div>
       </div>
 
       <div class="modal-footer">
         <button id="btnRemoveBooking" class="btn-modal-del" onclick="deleteBooking()" style="display: none;">
-          <i class="fa-solid fa-trash"></i> Hapus
+          <i class="fa-solid fa-trash"></i> Delete
         </button>
-        <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-left: auto;">
+        <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-left: auto;">
           <button type="button" class="btn-modal-pdf" onclick="generateGuestBookingPDF('booking')">
-            <i class="fa-solid fa-file-pdf"></i> Cetak PDF
+            <i class="fa-solid fa-file-pdf"></i> PDF Letter
+          </button>
+          <button type="button" class="btn-modal-email" onclick="sendConfirmationEmailAction('booking')">
+            <i class="fa-solid fa-envelope"></i> Send Email
+          </button>
+          <button type="button" class="btn-modal-wa" onclick="sendConfirmationWhatsApp('booking')">
+            <i class="fa-brands fa-whatsapp"></i> WhatsApp
           </button>
           <button class="btn-modal-save" onclick="saveBooking()">
-            <i class="fa-solid fa-paper-plane"></i> Simpan &amp; Kirim
+            <i class="fa-solid fa-check-double"></i> Save &amp; Send
           </button>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- MODAL EDIT ITEM KERANJANG -->
+  <!-- MODAL EDIT CART ITEM -->
   <div id="editCartItemModal" class="modal-backdrop" style="z-index: 150;">
     <div class="modal-container" style="max-width: 410px;">
       <div class="modal-header">
-        <h3><i class="fa-solid fa-pen-to-square"></i> Edit Item Pesanan</h3>
+        <h3><i class="fa-solid fa-pen-to-square"></i> Edit Order Item</h3>
         <button class="btn-x" onclick="closeEditCartItemModal()"><i class="fa-solid fa-xmark"></i></button>
       </div>
       <div class="modal-body">
         <div class="form-row">
-          <label>Nama Item Menu</label>
+          <label>Menu Item Name</label>
           <input type="text" id="editItemName" class="inp-field">
         </div>
         <div class="form-row">
-          <label>Harga Satuan (IDR)</label>
+          <label>Unit Price (IDR)</label>
           <div class="money-input-box">
             <span>Rp</span>
             <input type="text" id="editItemPrice" class="inp-field" onkeyup="formatCurrencyInput(this)">
           </div>
         </div>
         <div class="form-row">
-          <label>Jumlah (Qty)</label>
+          <label>Quantity (Qty)</label>
           <input type="number" id="editItemQty" class="inp-field" min="1">
         </div>
       </div>
       <div class="modal-footer">
-        <button class="btn-modal-secondary" onclick="closeEditCartItemModal()">Batal</button>
+        <button class="btn-modal-secondary" onclick="closeEditCartItemModal()">Cancel</button>
         <button class="btn-modal-save" onclick="saveEditedCartItem()">
-          <i class="fa-solid fa-check"></i> Simpan Perubahan
+          <i class="fa-solid fa-check"></i> Save Changes
         </button>
       </div>
     </div>
   </div>
 
-  <!-- MODAL REGISTRASI MEJA BARU -->
+  <!-- MODAL NEW TABLE REGISTRATION -->
   <div id="registrationModal" class="modal-backdrop">
     <div class="modal-container">
       <div class="modal-header">
-        <h3><i class="fa-solid fa-file-pen"></i> Registrasi Meja Rooftop NYE 2027</h3>
+        <h3><i class="fa-solid fa-file-pen"></i> Table Registration — Rooftop NYE 2027</h3>
         <button class="btn-x" onclick="closeRegistrationModal()"><i class="fa-solid fa-xmark"></i></button>
       </div>
 
       <div class="modal-body">
         <div class="form-row">
-          <label><i class="fa-solid fa-chair"></i> Pilih Nomor Meja *</label>
+          <label><i class="fa-solid fa-chair"></i> Select Available Table *</label>
           <select id="regTableIdSelect" class="inp-field">
-            <option value="">-- Pilih Meja Kosong --</option>
+            <option value="">-- Select Available Table --</option>
           </select>
         </div>
 
         <div class="form-row">
-          <label><i class="fa-solid fa-user"></i> Nama Tamu (Guest Name) *</label>
-          <input type="text" id="regGuestName" class="inp-field" placeholder="Contoh: Ibu Clarissa Putri">
+          <label><i class="fa-solid fa-user"></i> Guest Name *</label>
+          <input type="text" id="regGuestName" class="inp-field" placeholder="e.g., Mrs. Clarissa Putri">
         </div>
 
         <div class="form-grid-2">
           <div class="form-row">
-            <label><i class="fa-brands fa-whatsapp"></i> WhatsApp / HP *</label>
+            <label><i class="fa-brands fa-whatsapp"></i> WhatsApp / Phone *</label>
             <input type="tel" id="regGuestPhone" class="inp-field" placeholder="0812-xxxx-xxxx">
           </div>
           <div class="form-row">
-            <label><i class="fa-solid fa-envelope"></i> Email Tamu (Auto-Send)</label>
-            <input type="email" id="regGuestEmail" class="inp-field" placeholder="tamu@email.com">
+            <label><i class="fa-solid fa-envelope"></i> Guest Email (Confirmation Letter)</label>
+            <input type="email" id="regGuestEmail" class="inp-field" placeholder="guest@example.com">
           </div>
         </div>
 
         <div class="form-row">
-          <label><i class="fa-solid fa-users"></i> Jumlah Pax</label>
+          <label><i class="fa-solid fa-users"></i> Number of Guests (Pax)</label>
           <input type="number" id="regGuestPax" class="inp-field" value="4" min="1">
         </div>
 
         <div style="background: #f4f9fe; border: 1px solid var(--border-blue); border-radius: 10px; padding: 12px; display: flex; flex-direction: column; gap: 10px;">
           <label style="font-size: 0.78rem; font-weight: 800; color: var(--navy-dark); display: flex; align-items: center; gap: 6px;">
-            <i class="fa-solid fa-utensils"></i> Kasir Menu &amp; Paket Promo Rooftop
+            <i class="fa-solid fa-utensils"></i> Rooftop Menu &amp; Promotional Packages
           </label>
 
           <div style="display: flex; gap: 8px;">
             <select id="selectRegMasterMenuDropdown" class="inp-field" style="flex: 1;">
-              <option value="">-- Pilih Menu / Paket Rooftop --</option>
+              <option value="">-- Select Rooftop Menu / Package --</option>
             </select>
             <button type="button" class="btn-modal-save" style="padding: 0 14px;" onclick="addRegCartItemFromDropdown()">
-              <i class="fa-solid fa-plus"></i> Tambah
+              <i class="fa-solid fa-plus"></i> Add
             </button>
           </div>
 
           <div class="form-grid-2">
-            <input type="text" id="regCustomMenuName" class="inp-field" placeholder="Nama Menu Custom">
+            <input type="text" id="regCustomMenuName" class="inp-field" placeholder="Custom Menu Item">
             <div style="display: flex; gap: 6px;">
-              <input type="text" id="regCustomMenuPrice" class="inp-field" placeholder="Harga (150000)" onkeyup="formatCurrencyInput(this)">
+              <input type="text" id="regCustomMenuPrice" class="inp-field" placeholder="Price (150000)" onkeyup="formatCurrencyInput(this)">
               <button type="button" class="btn-modal-pdf" style="padding: 0 12px;" onclick="addRegCustomCartItem()">
                 <i class="fa-solid fa-plus"></i>
               </button>
@@ -1253,36 +1437,36 @@
           </div>
 
           <div id="regBookingCartItemsContainer" style="display: flex; flex-direction: column; gap: 6px; max-height: 150px; overflow-y: auto;">
-            <div style="font-size: 0.75rem; color: var(--text-muted); text-align: center; padding: 6px;">Belum ada menu dipilih.</div>
+            <div style="font-size: 0.75rem; color: var(--text-muted); text-align: center; padding: 6px;">No menu items selected yet.</div>
           </div>
 
           <div style="background: #ffffff; border: 1px solid #10b981; border-radius: 8px; padding: 10px 14px; display: flex; justify-content: space-between; align-items: center;">
-            <span style="font-size: 0.78rem; font-weight: 700; color: #047857;">Total Estimasi Menu:</span>
+            <span style="font-size: 0.78rem; font-weight: 700; color: #047857;">Estimated Menu Total:</span>
             <strong id="regBookingCartTotalDisplay" style="font-size: 0.98rem; color: #047857;">Rp 0</strong>
           </div>
         </div>
 
         <div class="form-row">
-          <label><i class="fa-solid fa-money-bill-wave" style="color: #059669;"></i> Nominal DP / Uang Muka *</label>
+          <label><i class="fa-solid fa-money-bill-wave" style="color: #059669;"></i> Deposit / Down Payment (DP) *</label>
           <div class="money-input-box">
             <span>Rp</span>
-            <input type="text" id="regGuestDP" class="inp-field" placeholder="Contoh: 500.000" onkeyup="formatCurrencyInput(this); updateRegBalanceDisplay();">
+            <input type="text" id="regGuestDP" class="inp-field" placeholder="e.g., 500.000" onkeyup="formatCurrencyInput(this); updateRegBalanceDisplay();">
           </div>
         </div>
 
         <div style="background: #f8fafc; border: 1.5px dashed var(--navy-primary); border-radius: 10px; padding: 12px; display: flex; justify-content: space-between; align-items: center; gap: 8px;">
           <div>
             <div style="font-size: 0.72rem; font-weight: 800; color: var(--navy-dark); text-transform: uppercase;">
-              <i class="fa-solid fa-scale-balanced"></i> Balance (Sisa Tagihan / Kembalian)
+              <i class="fa-solid fa-scale-balanced"></i> Balance (Remaining / Change)
             </div>
-            <div style="font-size: 0.66rem; color: var(--text-muted);">Total Konsumsi dikurangi Uang Muka (DP)</div>
+            <div style="font-size: 0.66rem; color: var(--text-muted);">Menu Total minus Deposit (DP)</div>
           </div>
-          <strong id="regBookingBalanceDisplay" style="font-size: 0.95rem; text-align: right;">LUNAS (Rp 0)</strong>
+          <strong id="regBookingBalanceDisplay" style="font-size: 0.95rem; text-align: right;">SETTLED (Rp 0)</strong>
         </div>
 
         <div class="form-grid-2">
           <div class="form-row">
-            <label><i class="fa-solid fa-clock"></i> Jam Kedatangan</label>
+            <label><i class="fa-solid fa-clock"></i> Arrival Time</label>
             <select id="regGuestTime" class="inp-field">
               <option value="19:30 WITA">19:30 WITA</option>
               <option value="20:00 WITA">20:00 WITA</option>
@@ -1292,32 +1476,38 @@
           </div>
           <div class="form-row">
             <label><i class="fa-solid fa-user-tie"></i> Created By (Staff) *</label>
-            <input type="text" id="regGuestCreatedBy" class="inp-field" placeholder="Ketik nama staff...">
+            <input type="text" id="regGuestCreatedBy" class="inp-field" placeholder="Enter staff name...">
           </div>
         </div>
 
         <div class="form-row">
-          <label><i class="fa-solid fa-note-sticky"></i> Catatan Khusus / Special Request</label>
-          <input type="text" id="regGuestNotes" class="inp-field" placeholder="Cth: Sofa dekat view kota, ucapan tahun baru...">
+          <label><i class="fa-solid fa-note-sticky"></i> Special Notes / Requests</label>
+          <input type="text" id="regGuestNotes" class="inp-field" placeholder="e.g., Sofa overlooking the city, celebration notes...">
         </div>
 
         <div class="auto-pdf-box">
           <label class="auto-pdf-toggle">
             <input type="checkbox" id="autoPdfRegistration" checked>
-            <span>Auto-PDF &amp; Kirim Email setelah Registrasi Selesai</span>
+            <span>Auto-Generate PDF &amp; Send Confirmation Email after Registration</span>
           </label>
-          <span style="font-size: 0.68rem;">fbmbpn@platinumhotelindonesia.com</span>
+          <span style="font-size: 0.68rem;">Sender: fbmbpn@platinumhotelindonesia.com</span>
         </div>
       </div>
 
       <div class="modal-footer">
-        <button class="btn-modal-secondary" onclick="closeRegistrationModal()">Batal</button>
-        <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-left: auto;">
+        <button class="btn-modal-secondary" onclick="closeRegistrationModal()">Cancel</button>
+        <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-left: auto;">
           <button type="button" class="btn-modal-pdf" onclick="generateGuestBookingPDF('reg')">
-            <i class="fa-solid fa-file-pdf"></i> Preview PDF
+            <i class="fa-solid fa-file-pdf"></i> PDF Letter
+          </button>
+          <button type="button" class="btn-modal-email" onclick="sendConfirmationEmailAction('reg')">
+            <i class="fa-solid fa-envelope"></i> Send Email
+          </button>
+          <button type="button" class="btn-modal-wa" onclick="sendConfirmationWhatsApp('reg')">
+            <i class="fa-brands fa-whatsapp"></i> WhatsApp
           </button>
           <button class="btn-modal-save" onclick="saveRegistrationBooking()">
-            <i class="fa-solid fa-paper-plane"></i> Simpan &amp; Kirim
+            <i class="fa-solid fa-paper-plane"></i> Save &amp; Send
           </button>
         </div>
       </div>
@@ -1328,24 +1518,24 @@
   <div id="masterMenuModal" class="modal-backdrop">
     <div class="modal-container">
       <div class="modal-header">
-        <h3><i class="fa-solid fa-utensils"></i> Master Menu &amp; Produk Rooftop</h3>
+        <h3><i class="fa-solid fa-utensils"></i> Master Menu &amp; Rooftop Offerings</h3>
         <button class="btn-x" onclick="closeMasterMenuModal()"><i class="fa-solid fa-xmark"></i></button>
       </div>
 
       <div class="modal-body">
         <div style="background: #f4f9fe; border: 1px solid var(--border-blue); padding: 10px 12px; border-radius: 8px; font-size: 0.78rem; color: var(--navy-dark); font-weight: 600;">
-          <i class="fa-solid fa-cloud"></i> Semua item di bawah ini tersimpan permanen di Cloud Supabase (tabel <strong>rt_master_menu</strong>).
+          <i class="fa-solid fa-cloud"></i> All menu items are saved permanently in Supabase Cloud (table <strong>rt_master_menu</strong>).
         </div>
 
         <input type="hidden" id="editMasterMenuId" value="">
         <div class="form-row">
-          <label><i class="fa-solid fa-tag"></i> Nama Menu / Item *</label>
-          <input type="text" id="menuItemName" class="inp-field" placeholder="Contoh: Royal Sky Countdown Package">
+          <label><i class="fa-solid fa-tag"></i> Menu / Package Name *</label>
+          <input type="text" id="menuItemName" class="inp-field" placeholder="e.g., Royal Sky Countdown Package">
         </div>
 
         <div class="form-grid-2">
           <div class="form-row">
-            <label><i class="fa-solid fa-folder"></i> Kategori</label>
+            <label><i class="fa-solid fa-folder"></i> Category</label>
             <select id="menuItemCategory" class="inp-field">
               <option value="Package Promo">Package Promo</option>
               <option value="Beverage / Cocktail">Beverage / Cocktail</option>
@@ -1354,7 +1544,7 @@
             </select>
           </div>
           <div class="form-row">
-            <label><i class="fa-solid fa-money-bill"></i> Harga (IDR) *</label>
+            <label><i class="fa-solid fa-money-bill"></i> Price (IDR) *</label>
             <div class="money-input-box">
               <span>Rp</span>
               <input type="text" id="menuItemPrice" class="inp-field" placeholder="150.000" onkeyup="formatCurrencyInput(this)">
@@ -1363,53 +1553,53 @@
         </div>
 
         <button id="btnSaveMasterMenu" class="btn-modal-save" style="width:100%; justify-content:center; margin-top:2px;" onclick="saveMasterMenuItem()">
-          <i class="fa-solid fa-plus"></i> Simpan ke Cloud Master Menu
+          <i class="fa-solid fa-plus"></i> Save to Cloud Master Menu
         </button>
 
         <hr style="border: 0; border-top: 1px solid var(--border-subtle); margin: 6px 0;">
 
-        <div style="font-size:0.8rem; font-weight:700; color:var(--navy-dark);">Daftar Master Menu Aktif:</div>
+        <div style="font-size:0.8rem; font-weight:700; color:var(--navy-dark);">Active Master Menu Items:</div>
         <div id="masterMenuListContent" style="max-height: 190px; overflow-y: auto;"></div>
       </div>
 
       <div class="modal-footer">
-        <button class="btn-modal-secondary" onclick="closeMasterMenuModal()">Tutup</button>
+        <button class="btn-modal-secondary" onclick="closeMasterMenuModal()">Close</button>
       </div>
     </div>
   </div>
 
-  <!-- MODAL INPUT FDC -->
+  <!-- MODAL FDC INPUT -->
   <div id="fdcModal" class="modal-backdrop">
     <div class="modal-container">
       <div class="modal-header">
-        <h3><i class="fa-solid fa-ticket"></i> Input Tiket FDC (Standing Party)</h3>
+        <h3><i class="fa-solid fa-ticket"></i> FDC Ticket Entry (Standing Party)</h3>
         <button class="btn-x" onclick="closeFDCModal()"><i class="fa-solid fa-xmark"></i></button>
       </div>
 
       <div class="modal-body">
         <div style="background: var(--emerald-soft); border: 1px solid #a7f3d0; padding: 10px 12px; border-radius: 8px; font-size: 0.78rem; color: #065f46; font-weight: 600;">
-          <i class="fa-solid fa-circle-info"></i> Tiket First Drink Charge (FDC) Standing: <strong>Rp 125.000 / Pax</strong> (termasuk 1x First Drink Voucher).
+          <i class="fa-solid fa-circle-info"></i> Standing First Drink Charge (FDC) Ticket: <strong>Rp 125.000 / Pax</strong> (includes 1x First Drink Voucher).
         </div>
 
         <div class="form-row">
-          <label><i class="fa-solid fa-user"></i> Nama Tamu *</label>
-          <input type="text" id="fdcName" class="inp-field" placeholder="Nama pemesan FDC">
+          <label><i class="fa-solid fa-user"></i> Guest Name *</label>
+          <input type="text" id="fdcName" class="inp-field" placeholder="FDC guest name">
         </div>
 
         <div class="form-grid-2">
           <div class="form-row">
-            <label><i class="fa-brands fa-whatsapp"></i> WhatsApp / HP *</label>
+            <label><i class="fa-brands fa-whatsapp"></i> WhatsApp / Phone *</label>
             <input type="tel" id="fdcPhone" class="inp-field" placeholder="0812-xxxx-xxxx">
           </div>
           <div class="form-row">
-            <label><i class="fa-solid fa-users"></i> Jumlah Tiket (Pax) *</label>
+            <label><i class="fa-solid fa-users"></i> Ticket Quantity (Pax) *</label>
             <input type="number" id="fdcPax" class="inp-field" value="1" min="1" oninput="calculateFDCAmount()">
           </div>
         </div>
 
         <div class="form-grid-2">
           <div class="form-row">
-            <label><i class="fa-solid fa-money-bill-wave" style="color: #059669;"></i> Total FDC (@ Rp 125rb) *</label>
+            <label><i class="fa-solid fa-money-bill-wave" style="color: #059669;"></i> Total FDC (@ Rp 125k) *</label>
             <div class="money-input-box">
               <span>Rp</span>
               <input type="text" id="fdcAmount" class="inp-field" placeholder="125.000" onkeyup="formatCurrencyInput(this)">
@@ -1417,20 +1607,20 @@
           </div>
           <div class="form-row">
             <label><i class="fa-solid fa-user-tie"></i> Created By (Staff) *</label>
-            <input type="text" id="fdcCreatedBy" class="inp-field" placeholder="Ketik nama staff...">
+            <input type="text" id="fdcCreatedBy" class="inp-field" placeholder="Enter staff name...">
           </div>
         </div>
 
         <div class="form-row">
-          <label><i class="fa-solid fa-note-sticky"></i> Keterangan / PIC Penjualan</label>
-          <input type="text" id="fdcNotes" class="inp-field" placeholder="Cth: Sales FO / Bar Cashier">
+          <label><i class="fa-solid fa-note-sticky"></i> Remarks / Sales PIC</label>
+          <input type="text" id="fdcNotes" class="inp-field" placeholder="e.g., Front Office / Bar Cashier">
         </div>
       </div>
 
       <div class="modal-footer">
-        <button class="btn-modal-secondary" onclick="closeFDCModal()">Batal</button>
+        <button class="btn-modal-secondary" onclick="closeFDCModal()">Cancel</button>
         <button class="btn-modal-save" onclick="saveFDCBooking()">
-          <i class="fa-solid fa-check"></i> Simpan Tiket FDC
+          <i class="fa-solid fa-check"></i> Save FDC Ticket
         </button>
       </div>
     </div>
@@ -1447,37 +1637,37 @@
       <div class="modal-body">
         <div class="dash-grid">
           <div class="dash-card hero-card">
-            <div class="card-lbl"><i class="fa-solid fa-coins" style="color: var(--navy-primary);"></i> Total Gross Revenue (Meja + FDC)</div>
+            <div class="card-lbl"><i class="fa-solid fa-coins" style="color: var(--navy-primary);"></i> Total Gross Revenue (Tables + FDC)</div>
             <div class="card-val" id="repTotalGross">Rp 0</div>
-            <div class="card-sub">Akumulasi seluruh transaksi reservasi meja Rooftop, Cockpit &amp; tiket standing</div>
+            <div class="card-sub">Cumulative revenue across Lower Deck, Cockpit Deck &amp; standing FDC tickets</div>
           </div>
 
           <div class="dash-card">
             <div class="card-lbl"><i class="fa-solid fa-couch" style="color: var(--gold-accent);"></i> Lower Deck (L)</div>
-            <div><span id="repLoungeBooked" style="color: var(--navy-dark); font-size: 1.25rem; font-weight: 800;">0</span> <span style="font-size:0.75rem; color:var(--text-muted);">/ 25 Unit</span></div>
+            <div><span id="repLoungeBooked" style="color: var(--navy-dark); font-size: 1.25rem; font-weight: 800;">0</span> <span style="font-size:0.75rem; color:var(--text-muted);">/ 25 Units</span></div>
             <div class="occupancy-bar-wrap">
               <div id="repLoungeBar" class="occupancy-bar" style="background: var(--gold-accent);"></div>
             </div>
             <div class="card-sub">
-              Tersisa: <strong id="repLoungeLeft" style="color:var(--navy-primary);">25</strong> | Rev: <span id="repLoungeRev" style="color:#059669; font-weight:700;">Rp 0</span>
+              Remaining: <strong id="repLoungeLeft" style="color:var(--navy-primary);">25</strong> | Rev: <span id="repLoungeRev" style="color:#059669; font-weight:700;">Rp 0</span>
             </div>
           </div>
 
           <div class="dash-card">
             <div class="card-lbl"><i class="fa-solid fa-cloud-moon" style="color: var(--navy-primary);"></i> Cockpit Deck (C)</div>
-            <div><span id="repTerraceBooked" style="color: var(--navy-dark); font-size: 1.25rem; font-weight: 800;">0</span> <span style="font-size:0.75rem; color:var(--text-muted);">/ 13 Unit</span></div>
+            <div><span id="repTerraceBooked" style="color: var(--navy-dark); font-size: 1.25rem; font-weight: 800;">0</span> <span style="font-size:0.75rem; color:var(--text-muted);">/ 13 Units</span></div>
             <div class="occupancy-bar-wrap">
               <div id="repTerraceBar" class="occupancy-bar" style="background: var(--navy-primary);"></div>
             </div>
             <div class="card-sub">
-              Tersisa: <strong id="repTerraceLeft" style="color:var(--navy-primary);">13</strong> | Rev: <span id="repTerraceRev" style="color:#059669; font-weight:700;">Rp 0</span>
+              Remaining: <strong id="repTerraceLeft" style="color:var(--navy-primary);">13</strong> | Rev: <span id="repTerraceRev" style="color:#059669; font-weight:700;">Rp 0</span>
             </div>
           </div>
 
           <div class="dash-card">
-            <div class="card-lbl"><i class="fa-solid fa-receipt" style="color: #059669;"></i> Total Revenue Meja</div>
+            <div class="card-lbl"><i class="fa-solid fa-receipt" style="color: #059669;"></i> Total Table Revenue</div>
             <div class="card-val" id="repTableGrossRev" style="font-size: 1.05rem; color: #059669;">Rp 0</div>
-            <div class="card-sub" id="repTablePaxDetail">0 Pax dari 0 meja terisi</div>
+            <div class="card-sub" id="repTablePaxDetail">0 Pax across 0 occupied tables</div>
           </div>
 
           <div class="dash-card">
@@ -1488,26 +1678,26 @@
 
           <div class="dash-card wide-card">
             <div class="card-lbl"><i class="fa-solid fa-users" style="color: var(--navy-dark);"></i> Total Estimated Attendees (Crowd)</div>
-            <div class="card-val" id="repTotalPax" style="font-size: 1.1rem;">0 Total Tamu Hadir</div>
+            <div class="card-val" id="repTotalPax" style="font-size: 1.1rem;">0 Total Guests</div>
             <div class="card-sub" id="repCrowdBreakdown">0 Seating (Lower Deck + Cockpit) + 0 Standing FDC</div>
           </div>
         </div>
       </div>
 
       <div class="modal-footer">
-        <button class="btn-modal-secondary" onclick="closeReportModal()">Tutup</button>
+        <button class="btn-modal-secondary" onclick="closeReportModal()">Close</button>
         <button class="btn-modal-save" onclick="exportReservationsCSV()">
-          <i class="fa-solid fa-download"></i> Unduh CSV
+          <i class="fa-solid fa-download"></i> Download CSV
         </button>
       </div>
     </div>
   </div>
 
-  <!-- MODAL DAFTAR TAMU FDC -->
+  <!-- MODAL FDC GUEST LIST -->
   <div id="fdcListModal" class="modal-backdrop">
     <div class="modal-container">
       <div class="modal-header">
-        <h3><i class="fa-solid fa-list-check"></i> Daftar Pesanan FDC (Standing)</h3>
+        <h3><i class="fa-solid fa-list-check"></i> FDC Standing Ticket List</h3>
         <button class="btn-x" onclick="closeFDCListModal()"><i class="fa-solid fa-xmark"></i></button>
       </div>
 
@@ -1516,9 +1706,9 @@
       </div>
 
       <div class="modal-footer">
-        <button class="btn-modal-secondary" onclick="closeFDCListModal()">Tutup</button>
+        <button class="btn-modal-secondary" onclick="closeFDCListModal()">Close</button>
         <button class="btn-modal-save" onclick="closeFDCListModal(); openFDCBookingModal();">
-          + Tambah FDC Baru
+          + Add FDC Ticket
         </button>
       </div>
     </div>
@@ -1527,8 +1717,8 @@
   <!-- LOADER SPINNER -->
   <div id="loaderOverlay" class="loader-overlay">
     <div class="spinner"></div>
-    <div style="color: #ffffff; font-weight: 700; font-size: 0.95rem;">Menyiapkan Dokumen / Denah...</div>
-    <div style="color: #dbeafe; font-size: 0.78rem;">Mohon tunggu sebentar</div>
+    <div style="color: #ffffff; font-weight: 700; font-size: 0.95rem;">Preparing Floor Plan / Document...</div>
+    <div style="color: #dbeafe; font-size: 0.78rem;">Please wait a moment</div>
   </div>
 
   <script>
@@ -1609,6 +1799,7 @@
 
     let editingTargetCartType = 'booking';
     let editingItemId = null;
+    let highlightedTableId = null;
 
     const possibleImages = ['denah.jpg', 'denah.jpeg', 'Denah.jpg', 'denah.JPG'];
     let imgAttempt = 0;
@@ -1647,7 +1838,7 @@
         .order('id', { ascending: true });
 
       if (error) {
-        console.error('Error memuat rt_master_menu:', error.message);
+        console.error('Error loading rt_master_menu:', error.message);
         return;
       }
 
@@ -1684,7 +1875,7 @@
           });
         }
       } catch (err) {
-        console.log('Menggunakan posisi default.');
+        console.log('Using default table coordinates.');
       }
 
       ALL_TABLE_IDS.forEach(id => {
@@ -1706,12 +1897,12 @@
           h: t.h
         }, { onConflict: 'table_id' });
       } catch (err) {
-        console.error('Gagal menyimpan posisi:', err);
+        console.error('Error saving table position:', err);
       }
     }
 
     async function resetHotspotsPosition() {
-      if (confirm('Kembalikan posisi kotak meja ke default presisi 3D dan sinkronkan ke cloud?')) {
+      if (confirm('Reset all table markers to default 3D coordinates and sync to cloud?')) {
         try {
           await _supabase.from('rt_table_positions').delete().neq('table_id', 'XXX');
         } catch (e) {}
@@ -1735,8 +1926,9 @@
         const t = tableConfigs[id] || DEFAULT_TABLE_CONFIGS[id];
         if (!t) return;
         const isBookedClass = bookings[id] ? 'is-booked' : '';
+        const isHighClass = highlightedTableId === id ? 'is-highlighted' : '';
         html += `
-          <div id="spot-${id}" class="spot ${isBookedClass}"
+          <div id="spot-${id}" class="spot ${isBookedClass} ${isHighClass}"
                style="top: ${t.top}%; left: ${t.left}%; width: ${t.w}%; height: ${t.h}%;"
                data-id="${id}"
                onmousedown="initDrag(event, '${id}')"
@@ -1875,8 +2067,11 @@
 
         refreshMapNodes();
         updateMetrics();
+        if (document.getElementById('greeterSearchInput').value.trim()) {
+          handleGreeterSearch();
+        }
       } catch (err) {
-        console.error('Koneksi Supabase gagal:', err);
+        console.error('Supabase connection failed:', err);
       }
     }
 
@@ -1890,18 +2085,307 @@
         .subscribe();
     }
 
-    async function sendConfirmationEmailToGuest(emailPayload) {
-      if (!ROOFTOP_EMAIL_WEBHOOK_URL) return;
+    /* GREETER & CASHIER SEARCH */
+    function getZoneLocationLabel(tableId, cfg) {
+      const zoneName = TERRACE_IDS.includes(tableId) ? 'Cockpit Deck' : 'Lower Deck Lounge';
+      const subType = cfg?.type ? ` · ${cfg.type}` : '';
+      return `${zoneName}${subType}`;
+    }
+
+    function handleGreeterSearch() {
+      const input = document.getElementById('greeterSearchInput');
+      const clearBtn = document.getElementById('btnClearGreeterSearch');
+      const dropdown = document.getElementById('greeterSearchResults');
+      const query = input.value.trim().toLowerCase();
+
+      clearBtn.classList.toggle('visible', query.length > 0);
+
+      if (!query) {
+        dropdown.classList.remove('open');
+        dropdown.innerHTML = '';
+        return;
+      }
+
+      const matches = [];
+      ALL_TABLE_IDS.forEach(tid => {
+        const cfg = tableConfigs[tid] || DEFAULT_TABLE_CONFIGS[tid] || { type: 'Table', pax: 4, cat: 'lounge' };
+        const bk = bookings[tid];
+        const zoneLabel = getZoneLocationLabel(tid, cfg);
+        const guestName = bk?.name || '';
+        const guestPhone = bk?.phone || '';
+
+        const hitTable = tid.toLowerCase().includes(query) || zoneLabel.toLowerCase().includes(query) || cfg.type.toLowerCase().includes(query);
+        const hitGuest = guestName.toLowerCase().includes(query) || guestPhone.toLowerCase().includes(query);
+
+        if (hitTable || hitGuest) {
+          matches.push({
+            tid,
+            cfg,
+            bk,
+            zoneLabel,
+            priority: bk ? 0 : 1
+          });
+        }
+      });
+
+      matches.sort((a, b) => a.priority - b.priority || a.tid.localeCompare(b.tid));
+
+      if (matches.length === 0) {
+        dropdown.innerHTML = `<div style="font-size:0.78rem; color:var(--text-muted); padding:8px; text-align:center;">No matching guest or table found for "<strong>${escapeHtml(input.value.trim())}</strong>".</div>`;
+        dropdown.classList.add('open');
+        return;
+      }
+
+      dropdown.innerHTML = matches.slice(0, 12).map(m => {
+        const statusBadge = m.bk
+          ? `<span class="res-pill-booked"><i class="fa-solid fa-user-check"></i> BOOKED · ${escapeHtml(m.bk.pax || m.cfg.pax)} Pax</span>`
+          : `<span class="res-pill-avail"><i class="fa-solid fa-chair"></i> AVAILABLE · ${escapeHtml(String(m.cfg.pax))} Pax</span>`;
+
+        const detailLine = m.bk
+          ? `<strong>${escapeHtml(m.bk.name)}</strong> · ${escapeHtml(m.zoneLabel)} · Arrival: ${escapeHtml(m.bk.time || '21:00 WITA')}`
+          : `<strong>Table #${escapeHtml(m.tid)}</strong> · ${escapeHtml(m.zoneLabel)} (Vacant)`;
+
+        return `
+          <div class="search-result-item" onclick="locateTableFromSearch('${m.tid}')">
+            <div>
+              <div style="font-size:0.82rem; color:var(--text-main);">
+                <strong style="color:var(--navy-dark);">[${escapeHtml(m.tid)}]</strong> ${detailLine}
+              </div>
+              <div style="font-size:0.7rem; color:var(--text-muted); margin-top:2px;">
+                <i class="fa-solid fa-location-dot" style="color:var(--gold-accent);"></i> Location: ${escapeHtml(m.zoneLabel)} (Table #${escapeHtml(m.tid)}) · Tap to focus &amp; open
+              </div>
+            </div>
+            ${statusBadge}
+          </div>
+        `;
+      }).join('');
+
+      dropdown.classList.add('open');
+    }
+
+    function clearGreeterSearch() {
+      document.getElementById('greeterSearchInput').value = '';
+      document.getElementById('btnClearGreeterSearch').classList.remove('visible');
+      document.getElementById('greeterSearchResults').classList.remove('open');
+      document.getElementById('greeterSearchResults').innerHTML = '';
+      highlightedTableId = null;
+      refreshMapNodes();
+    }
+
+    function locateTableFromSearch(tableId) {
+      highlightedTableId = String(tableId);
+      refreshMapNodes();
+
+      const spotEl = document.getElementById(`spot-${tableId}`);
+      if (spotEl) {
+        spotEl.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
+      }
+
+      const cfg = tableConfigs[tableId] || DEFAULT_TABLE_CONFIGS[tableId] || { type: 'Table', pax: 4, cat: 'lounge' };
+      openBooking(tableId, cfg.type, cfg.pax, cfg.cat);
+    }
+
+    /* EMAIL & WHATSAPP CONFIRMATION */
+    function buildConfirmationEmailHtml(d) {
+      const itemsRows = d.cart && d.cart.length > 0
+        ? d.cart.map((c, idx) => `
+            <tr>
+              <td style="padding:7px 8px;border-bottom:1px solid #e2e8f0;">${idx + 1}</td>
+              <td style="padding:7px 8px;border-bottom:1px solid #e2e8f0;">${escapeHtml(c.name)}</td>
+              <td style="padding:7px 8px;border-bottom:1px solid #e2e8f0;text-align:center;">${c.qty}</td>
+              <td style="padding:7px 8px;border-bottom:1px solid #e2e8f0;text-align:right;">Rp ${Number(c.price).toLocaleString('id-ID')}</td>
+              <td style="padding:7px 8px;border-bottom:1px solid #e2e8f0;text-align:right;"><strong>Rp ${(Number(c.price) * Number(c.qty)).toLocaleString('id-ID')}</strong></td>
+            </tr>
+          `).join('')
+        : `<tr><td colspan="5" style="padding:9px;text-align:center;color:#64748b;font-style:italic;">Package / Consumption as agreed upon table reservation</td></tr>`;
+
+      const balanceLine = d.balance > 0
+        ? `Remaining Balance: Rp ${d.balance.toLocaleString('id-ID')}`
+        : d.balance < 0
+          ? `Overpayment / Change: Rp ${Math.abs(d.balance).toLocaleString('id-ID')}`
+          : 'Settled in Full (Rp 0)';
+
+      return `
+        <div style="font-family:'Plus Jakarta Sans',Arial,sans-serif;max-width:680px;margin:0 auto;color:#0f172a;line-height:1.6;">
+          <div style="background:#073b69;color:#ffffff;padding:18px 22px;border-bottom:3px solid #c59b38;">
+            <div style="font-family:'Cinzel',Georgia,serif;font-size:16px;font-weight:800;letter-spacing:0.6px;">PLATINUM HOTEL &amp; CONVENTION HALL</div>
+            <div style="font-size:11px;font-weight:700;color:#f5d77f;letter-spacing:0.8px;margin-top:3px;">ROOFTOP BAR &amp; LOUNGE &bull; NEW YEAR'S EVE 2027 CELEBRATION</div>
+            <div style="font-size:11px;color:#dbeafe;margin-top:2px;">Jl. Soekarno Hatta, Balikpapan, East Kalimantan, Indonesia</div>
+          </div>
+          <div style="padding:22px;border:1px solid #d6e0eb;border-top:none;background:#ffffff;">
+            <div style="font-size:13px;font-weight:800;color:#073b69;text-align:center;letter-spacing:0.8px;margin-bottom:16px;">OFFICIAL RESERVATION CONFIRMATION</div>
+            <p style="font-size:13px;margin-bottom:12px;">Dear <strong>${escapeHtml(d.name)}</strong>,</p>
+            <p style="font-size:13px;margin-bottom:16px;">Thank you for choosing <strong>Rooftop Bar &amp; Lounge at Platinum Hotel &amp; Convention Hall Balikpapan</strong> to celebrate <strong>New Year's Eve 2027</strong>. We are pleased to confirm your table reservation under the following details:</p>
+
+            <table style="width:100%;border-collapse:collapse;margin-bottom:16px;font-size:12.5px;">
+              <tr><td style="padding:6px 8px;border-bottom:1px solid #e2e8f0;color:#475569;width:36%;"><strong>Reference Number</strong></td><td style="padding:6px 8px;border-bottom:1px solid #e2e8f0;">${escapeHtml(d.docRef)}</td></tr>
+              <tr><td style="padding:6px 8px;border-bottom:1px solid #e2e8f0;color:#475569;"><strong>Guest Name</strong></td><td style="padding:6px 8px;border-bottom:1px solid #e2e8f0;"><strong>${escapeHtml(d.name)}</strong></td></tr>
+              <tr><td style="padding:6px 8px;border-bottom:1px solid #e2e8f0;color:#475569;"><strong>WhatsApp / Telephone</strong></td><td style="padding:6px 8px;border-bottom:1px solid #e2e8f0;">${escapeHtml(d.phone)}</td></tr>
+              <tr><td style="padding:6px 8px;border-bottom:1px solid #e2e8f0;color:#475569;"><strong>Email Address</strong></td><td style="padding:6px 8px;border-bottom:1px solid #e2e8f0;">${escapeHtml(d.email)}</td></tr>
+              <tr><td style="padding:6px 8px;border-bottom:1px solid #e2e8f0;color:#475569;"><strong>Venue &amp; Table</strong></td><td style="padding:6px 8px;border-bottom:1px solid #e2e8f0;"><strong>Rooftop Bar &amp; Lounge — ${escapeHtml(d.tableLabel)}</strong></td></tr>
+              <tr><td style="padding:6px 8px;border-bottom:1px solid #e2e8f0;color:#475569;"><strong>Number of Guests (Pax)</strong></td><td style="padding:6px 8px;border-bottom:1px solid #e2e8f0;">${escapeHtml(String(d.pax))} Guests</td></tr>
+              <tr><td style="padding:6px 8px;border-bottom:1px solid #e2e8f0;color:#475569;"><strong>Arrival Time</strong></td><td style="padding:6px 8px;border-bottom:1px solid #e2e8f0;">${escapeHtml(d.time)}</td></tr>
+              <tr><td style="padding:6px 8px;border-bottom:1px solid #e2e8f0;color:#475569;"><strong>Special Requests</strong></td><td style="padding:6px 8px;border-bottom:1px solid #e2e8f0;">${escapeHtml(d.notes)}</td></tr>
+            </table>
+
+            <table style="width:100%;border-collapse:collapse;margin-bottom:16px;font-size:12px;">
+              <thead>
+                <tr style="background:#073b69;color:#ffffff;">
+                  <th style="padding:7px 8px;text-align:left;width:36px;">No</th>
+                  <th style="padding:7px 8px;text-align:left;">Menu / Package Item</th>
+                  <th style="padding:7px 8px;text-align:center;width:54px;">Qty</th>
+                  <th style="padding:7px 8px;text-align:right;width:120px;">Unit Price</th>
+                  <th style="padding:7px 8px;text-align:right;width:125px;">Subtotal</th>
+                </tr>
+              </thead>
+              <tbody>${itemsRows}</tbody>
+            </table>
+
+            <div style="background:#f8fafc;border:1px solid #cbd5e1;border-left:4px solid #0b4f8a;border-radius:6px;padding:12px 14px;margin-bottom:16px;font-size:12.5px;">
+              <div style="display:flex;justify-content:space-between;margin-bottom:5px;">
+                <span>Estimated Menu &amp; Package Total</span>
+                <strong>Rp ${Number(d.totalKonsumsi).toLocaleString('id-ID')}</strong>
+              </div>
+              <div style="display:flex;justify-content:space-between;margin-bottom:5px;">
+                <span>Deposit Received (DP)</span>
+                <strong style="color:#047857;">Rp ${Number(d.dp).toLocaleString('id-ID')}</strong>
+              </div>
+              <div style="display:flex;justify-content:space-between;padding-top:6px;border-top:1px dashed #cbd5e1;font-weight:700;">
+                <span>Settlement Status / Balance</span>
+                <span>${escapeHtml(balanceLine)}</span>
+              </div>
+            </div>
+
+            <div style="background:#f4f9fe;border:1px solid #c9dff3;border-radius:6px;padding:12px 14px;margin-bottom:18px;font-size:11.5px;color:#334155;">
+              <strong>Reservation Terms &amp; Conditions:</strong>
+              <ul style="margin:6px 0 0 18px;">
+                <li style="margin-bottom:4px;">Please present this confirmation letter (printed or digital) to our greeter upon arrival at Rooftop Bar &amp; Lounge.</li>
+                <li style="margin-bottom:4px;">Tables are held for the scheduled arrival time; kindly notify our team in advance if your arrival schedule changes.</li>
+                <li>Any remaining balance or applicable charges shall be settled in accordance with outlet policies.</li>
+              </ul>
+            </div>
+
+            <p style="font-size:13px;margin-bottom:4px;">Yours sincerely,</p>
+            <p style="font-size:13.5px;font-weight:800;color:#073b69;margin-bottom:2px;">Management</p>
+            <p style="font-size:12px;color:#475569;">Rooftop Bar &amp; Lounge &bull; Platinum Hotel &amp; Convention Hall Balikpapan</p>
+          </div>
+        </div>
+      `;
+    }
+
+    async function sendConfirmationEmailToGuest(d, showFeedback = false) {
+      const email = (d.email || '').trim();
+      if (!email || email === '-') {
+        if (showFeedback) {
+          alert('Please enter a valid guest email address first.');
+        }
+        return false;
+      }
+
+      if (!ROOFTOP_EMAIL_WEBHOOK_URL) {
+        if (showFeedback) {
+          alert('Email webhook URL is not configured.');
+        }
+        return false;
+      }
+
       try {
         await fetch(ROOFTOP_EMAIL_WEBHOOK_URL, {
           method: 'POST',
           mode: 'no-cors',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(emailPayload)
+          body: JSON.stringify({
+            doc_ref: d.docRef,
+            table_label: d.tableLabel,
+            guest_name: d.name,
+            guest_phone: d.phone,
+            guest_email: email,
+            pax: d.pax,
+            arrival_time: d.time,
+            total_konsumsi: d.totalKonsumsi,
+            dp: d.dp,
+            balance: d.balance,
+            created_by: d.staff,
+            notes: d.notes,
+            cart_items: d.cart,
+            subject: `Official Reservation Confirmation - Rooftop Bar & Lounge NYE 2027 (${d.tableLabel})`,
+            html_body: buildConfirmationEmailHtml(d)
+          })
         });
+
+        if (showFeedback) {
+          alert(`Confirmation letter has been dispatched to ${email}.`);
+        }
+        return true;
       } catch (err) {
-        console.error('Gagal mengirim notifikasi email:', err);
+        console.error('Failed to send confirmation email:', err);
+        if (showFeedback) {
+          alert('Unable to send confirmation email right now.');
+        }
+        return false;
       }
+    }
+
+    async function sendConfirmationEmailAction(mode = 'booking') {
+      const d = collectCurrentModalPDFData(mode);
+      await sendConfirmationEmailToGuest(d, true);
+    }
+
+    function normalizeWhatsAppPhone(rawPhone) {
+      let digits = String(rawPhone || '').replace(/[^0-9]/g, '');
+      if (!digits) return '';
+      if (digits.startsWith('0')) {
+        digits = '62' + digits.slice(1);
+      }
+      return digits;
+    }
+
+    function sendConfirmationWhatsApp(mode = 'booking') {
+      const d = collectCurrentModalPDFData(mode);
+      const waPhone = normalizeWhatsAppPhone(d.phone);
+
+      const itemsText = d.cart && d.cart.length > 0
+        ? d.cart.map((c, idx) => `${idx + 1}. ${c.name} (${c.qty}x) - Rp ${(c.price * c.qty).toLocaleString('id-ID')}`).join('\n')
+        : '- Package / Consumption as agreed upon table reservation';
+
+      const balanceText = d.balance > 0
+        ? `Remaining Balance: Rp ${d.balance.toLocaleString('id-ID')}`
+        : d.balance < 0
+          ? `Overpayment / Change: Rp ${Math.abs(d.balance).toLocaleString('id-ID')}`
+          : 'Settled in Full (Rp 0)';
+
+      const message = [
+        '*OFFICIAL RESERVATION CONFIRMATION*',
+        '*Platinum Hotel & Convention Hall Balikpapan*',
+        '_Rooftop Bar & Lounge — New Year\'s Eve 2027_',
+        '',
+        `Dear *${d.name}*,`,
+        'Thank you for choosing Rooftop Bar & Lounge to celebrate New Year\'s Eve 2027. Here are your confirmed reservation details:',
+        '',
+        `*Ref:* ${d.docRef}`,
+        `*Table:* ${d.tableLabel}`,
+        `*Guests:* ${d.pax} Pax`,
+        `*Arrival Time:* ${d.time}`,
+        `*Estimated Menu Total:* Rp ${Number(d.totalKonsumsi).toLocaleString('id-ID')}`,
+        `*Deposit (DP):* Rp ${Number(d.dp).toLocaleString('id-ID')}`,
+        `*${balanceText}*`,
+        `*Special Requests:* ${d.notes}`,
+        '',
+        '*Selected Menu / Packages:*',
+        itemsText,
+        '',
+        'Kindly present this confirmation upon arrival at Rooftop Bar & Lounge.',
+        '',
+        'Yours sincerely,',
+        '*Management*',
+        'Rooftop Bar & Lounge • Platinum Hotel & Convention Hall Balikpapan'
+      ].join('\n');
+
+      const waUrl = waPhone
+        ? `https://wa.me/${waPhone}?text=${encodeURIComponent(message)}`
+        : `https://wa.me/?text=${encodeURIComponent(message)}`;
+
+      window.open(waUrl, '_blank', 'noopener,noreferrer');
     }
 
     function openEditCartItemModal(cartType, id) {
@@ -1928,7 +2412,7 @@
       const newQty = parseInt(document.getElementById('editItemQty').value, 10) || 1;
 
       if (!newName || !rawPrice) {
-        alert('Nama dan harga item tidak boleh kosong.');
+        alert('Item name and price cannot be empty.');
         return;
       }
 
@@ -1947,11 +2431,11 @@
 
     function openRegistrationModal() {
       const select = document.getElementById('regTableIdSelect');
-      let html = '<option value="">-- Pilih Meja Kosong --</option>';
+      let html = '<option value="">-- Select Available Table --</option>';
       ALL_TABLE_IDS.forEach(id => {
         if (!bookings[id]) {
           const cfg = tableConfigs[id] || DEFAULT_TABLE_CONFIGS[id];
-          html += `<option value="${id}">Meja #${id} (${cfg?.type || 'Table'} · ${cfg?.pax || 4} Pax)</option>`;
+          html += `<option value="${id}">Table #${id} (${cfg?.type || 'Table'} · ${cfg?.pax || 4} Pax)</option>`;
         }
       });
       select.innerHTML = html;
@@ -1978,7 +2462,7 @@
     function populateRegBookingMenuDropdown() {
       const dropdown = document.getElementById('selectRegMasterMenuDropdown');
       if (!dropdown) return;
-      let html = '<option value="">-- Pilih Menu / Paket Rooftop --</option>';
+      let html = '<option value="">-- Select Rooftop Menu / Package --</option>';
       masterMenu.forEach(item => {
         html += `<option value="${item.id}">${item.name} - Rp ${item.price.toLocaleString('id-ID')}</option>`;
       });
@@ -2008,7 +2492,7 @@
       const rawPrice = priceInput.value.replace(/[^0-9]/g, '');
 
       if (!name || !rawPrice) {
-        alert('Masukkan nama menu custom dan harga.');
+        alert('Please enter custom menu item name and price.');
         return;
       }
 
@@ -2033,7 +2517,7 @@
       const totalDisplay = document.getElementById('regBookingCartTotalDisplay');
 
       if (regCurrentCart.length === 0) {
-        container.innerHTML = '<div style="font-size: 0.75rem; color: var(--text-muted); text-align: center; padding: 6px;">Belum ada menu dipilih.</div>';
+        container.innerHTML = '<div style="font-size: 0.75rem; color: var(--text-muted); text-align: center; padding: 6px;">No menu items selected yet.</div>';
         totalDisplay.innerText = 'Rp 0';
         updateRegBalanceDisplay();
         return;
@@ -2069,9 +2553,9 @@
     }
 
     function formatBalanceText(balance) {
-      if (balance > 0) return `<span style="color: #dc2626; font-weight:800;">Kurang Rp ${balance.toLocaleString('id-ID')}</span>`;
-      if (balance < 0) return `<span style="color: #059669; font-weight:800;">Kembalian Rp ${Math.abs(balance).toLocaleString('id-ID')}</span>`;
-      return `<span style="color: #059669; font-weight:800;">LUNAS (Rp 0)</span>`;
+      if (balance > 0) return `<span style="color: #dc2626; font-weight:800;">Due Rp ${balance.toLocaleString('id-ID')}</span>`;
+      if (balance < 0) return `<span style="color: #059669; font-weight:800;">Change Rp ${Math.abs(balance).toLocaleString('id-ID')}</span>`;
+      return `<span style="color: #059669; font-weight:800;">SETTLED (Rp 0)</span>`;
     }
 
     function updateBalanceDisplay() {
@@ -2104,19 +2588,19 @@
       const autoPdf = document.getElementById('autoPdfRegistration').checked;
 
       if (!tid) {
-        alert('Silakan pilih nomor meja terlebih dahulu.');
+        alert('Please select a table number.');
         return;
       }
       if (!name) {
-        alert('Silakan masukkan nama tamu.');
+        alert('Please enter the guest name.');
         return;
       }
 
       if (staff) localStorage.setItem('last_staff_name', staff);
       const now = new Date();
-      const timestamp = `${now.toLocaleDateString('id-ID')} - ${now.toLocaleTimeString('id-ID')} WITA`;
+      const timestamp = `${now.toLocaleDateString('en-GB')} · ${now.toLocaleTimeString('en-GB')} WITA`;
       const menuSummary = regCurrentCart.map(c => `${c.name} (${c.qty}x)`).join(', ');
-      const finalNotes = menuSummary ? (menuSummary + (customNotes ? ' | ' + customNotes : '')) : (customNotes || 'Registrasi Meja Rooftop NYE 2027');
+      const finalNotes = menuSummary ? (menuSummary + (customNotes ? ' | ' + customNotes : '')) : (customNotes || 'Rooftop NYE 2027 Table Registration');
 
       const payload = {
         table_id: String(tid),
@@ -2136,7 +2620,7 @@
 
       const { error } = await _supabase.from('rt_table_bookings').upsert(payload, { onConflict: 'table_id' });
       if (error) {
-        alert('Gagal menyimpan ke Supabase: ' + error.message);
+        alert('Failed to save to Supabase: ' + error.message);
         return;
       }
 
@@ -2168,22 +2652,9 @@
       await fetchAllCloudData();
 
       if (autoPdf) {
-        await sendConfirmationEmailToGuest({
-          doc_ref: docRef,
-          table_id: tid,
-          table_label: tableLabel,
-          guest_name: name,
-          guest_phone: phone || '-',
-          guest_email: email,
-          pax,
-          arrival_time: time,
-          total_konsumsi: totalKonsumsi,
-          dp,
-          balance,
-          created_by: staff || '-',
-          notes: customNotes || '-',
-          cart_items: regCurrentCart
-        });
+        if (email) {
+          await sendConfirmationEmailToGuest(pdfData, false);
+        }
         openConfirmationPDFWindow(pdfData);
       }
     }
@@ -2192,7 +2663,7 @@
       document.getElementById('editMasterMenuId').value = '';
       document.getElementById('menuItemName').value = '';
       document.getElementById('menuItemPrice').value = '';
-      document.getElementById('btnSaveMasterMenu').innerHTML = '<i class="fa-solid fa-plus"></i> Simpan ke Cloud Master Menu';
+      document.getElementById('btnSaveMasterMenu').innerHTML = '<i class="fa-solid fa-plus"></i> Save to Cloud Master Menu';
       renderMasterMenuList();
       document.getElementById('masterMenuModal').classList.add('open');
     }
@@ -2209,7 +2680,7 @@
       document.getElementById('menuItemName').value = item.name;
       document.getElementById('menuItemCategory').value = item.category;
       document.getElementById('menuItemPrice').value = item.price.toLocaleString('id-ID');
-      document.getElementById('btnSaveMasterMenu').innerHTML = '<i class="fa-solid fa-check"></i> Update Menu di Cloud';
+      document.getElementById('btnSaveMasterMenu').innerHTML = '<i class="fa-solid fa-check"></i> Update Cloud Menu';
     }
 
     async function saveMasterMenuItem() {
@@ -2219,7 +2690,7 @@
       const rawPrice = document.getElementById('menuItemPrice').value.replace(/[^0-9]/g, '');
 
       if (!name || !rawPrice) {
-        alert('Mohon isi nama menu dan harga.');
+        alert('Please enter menu item name and price.');
         return;
       }
 
@@ -2232,24 +2703,24 @@
       }, { onConflict: 'id' });
 
       if (error) {
-        alert('Gagal menyimpan ke Cloud Supabase: ' + error.message);
+        alert('Failed to save to Supabase Cloud: ' + error.message);
         return;
       }
 
       document.getElementById('editMasterMenuId').value = '';
       document.getElementById('menuItemName').value = '';
       document.getElementById('menuItemPrice').value = '';
-      document.getElementById('btnSaveMasterMenu').innerHTML = '<i class="fa-solid fa-plus"></i> Simpan ke Cloud Master Menu';
+      document.getElementById('btnSaveMasterMenu').innerHTML = '<i class="fa-solid fa-plus"></i> Save to Cloud Master Menu';
 
       await fetchMasterMenuFromCloud();
       renderMasterMenuList();
     }
 
     async function deleteMasterMenuItem(id) {
-      if (!confirm('Hapus menu ini secara permanen dari Cloud?')) return;
+      if (!confirm('Permanently delete this menu item from Cloud?')) return;
       const { error } = await _supabase.from('rt_master_menu').delete().eq('id', Number(id));
       if (error) {
-        alert('Gagal menghapus menu: ' + error.message);
+        alert('Failed to delete menu item: ' + error.message);
         return;
       }
       await fetchMasterMenuFromCloud();
@@ -2259,7 +2730,7 @@
     function renderMasterMenuList() {
       const container = document.getElementById('masterMenuListContent');
       if (masterMenu.length === 0) {
-        container.innerHTML = '<div style="color:var(--text-muted); font-size:0.76rem; text-align:center; padding:12px;">Belum ada item menu di Cloud. Silakan tambahkan di atas.</div>';
+        container.innerHTML = '<div style="color:var(--text-muted); font-size:0.76rem; text-align:center; padding:12px;">No menu items in Cloud yet. Add an item above.</div>';
         return;
       }
       let html = '';
@@ -2274,7 +2745,7 @@
               <button onclick="editMasterMenuItem('${item.id}')" style="background:var(--gold-soft); border:1px solid #e6c46d; color:#8c6313; width:28px; height:28px; border-radius:6px; cursor:pointer;" title="Edit Menu">
                 <i class="fa-solid fa-pen" style="font-size:0.7rem;"></i>
               </button>
-              <button onclick="deleteMasterMenuItem('${item.id}')" style="background:#fee2e2; border:1px solid #fca5a5; color:#991b1b; width:28px; height:28px; border-radius:6px; cursor:pointer;" title="Hapus Menu">
+              <button onclick="deleteMasterMenuItem('${item.id}')" style="background:#fee2e2; border:1px solid #fca5a5; color:#991b1b; width:28px; height:28px; border-radius:6px; cursor:pointer;" title="Delete Menu">
                 <i class="fa-solid fa-trash" style="font-size:0.7rem;"></i>
               </button>
             </div>
@@ -2287,7 +2758,7 @@
     function populateBookingMenuDropdown() {
       const dropdown = document.getElementById('selectMasterMenuDropdown');
       if (!dropdown) return;
-      let html = '<option value="">-- Pilih Menu / Paket Rooftop --</option>';
+      let html = '<option value="">-- Select Rooftop Menu / Package --</option>';
       masterMenu.forEach(item => {
         html += `<option value="${item.id}">${item.name} - Rp ${item.price.toLocaleString('id-ID')}</option>`;
       });
@@ -2317,7 +2788,7 @@
       const rawPrice = priceInput.value.replace(/[^0-9]/g, '');
 
       if (!name || !rawPrice) {
-        alert('Masukkan nama menu custom dan harga.');
+        alert('Please enter custom menu item name and price.');
         return;
       }
 
@@ -2342,7 +2813,7 @@
       const totalDisplay = document.getElementById('bookingCartTotalDisplay');
 
       if (currentCart.length === 0) {
-        container.innerHTML = '<div style="font-size: 0.75rem; color: var(--text-muted); text-align: center; padding: 6px;">Belum ada menu dipilih.</div>';
+        container.innerHTML = '<div style="font-size: 0.75rem; color: var(--text-muted); text-align: center; padding: 6px;">No menu items selected yet.</div>';
         totalDisplay.innerText = 'Rp 0';
         updateBalanceDisplay();
         return;
@@ -2385,9 +2856,9 @@
       const btnDel = document.getElementById('btnRemoveBooking');
 
       const now = new Date();
-      const dateStr = now.toLocaleDateString('id-ID', { year: 'numeric', month: '2-digit', day: '2-digit' });
-      const timeStr = now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-      document.getElementById('guestInputTimestamp').value = `${dateStr} - ${timeStr} WITA`;
+      const dateStr = now.toLocaleDateString('en-GB', { year: 'numeric', month: '2-digit', day: '2-digit' });
+      const timeStr = now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+      document.getElementById('guestInputTimestamp').value = `${dateStr} · ${timeStr} WITA`;
 
       if (data) {
         document.getElementById('guestName').value = data.name || '';
@@ -2443,7 +2914,7 @@
       const autoPdf = document.getElementById('autoPdfBooking').checked;
 
       if (!name) {
-        alert('Silakan masukkan nama tamu pemesan.');
+        alert('Please enter the guest name.');
         return;
       }
 
@@ -2469,7 +2940,7 @@
 
       const { error } = await _supabase.from('rt_table_bookings').upsert(payload, { onConflict: 'table_id' });
       if (error) {
-        alert('Gagal menyimpan ke database Supabase: ' + error.message);
+        alert('Failed to save to Supabase: ' + error.message);
         return;
       }
 
@@ -2500,28 +2971,15 @@
       await fetchAllCloudData();
 
       if (autoPdf) {
-        await sendConfirmationEmailToGuest({
-          doc_ref: docRef,
-          table_id: currentTable,
-          table_label: tableLabel,
-          guest_name: name,
-          guest_phone: phone || '-',
-          guest_email: email,
-          pax,
-          arrival_time: time,
-          total_konsumsi: totalKonsumsi,
-          dp,
-          balance,
-          created_by: staff || '-',
-          notes: customNotes || '-',
-          cart_items: currentCart
-        });
+        if (email) {
+          await sendConfirmationEmailToGuest(pdfData, false);
+        }
         openConfirmationPDFWindow(pdfData);
       }
     }
 
     async function deleteBooking() {
-      if (confirm('Batalkan reservasi #' + currentTable + '? Meja akan kembali tersedia.')) {
+      if (confirm('Cancel reservation #' + currentTable + '? The table will return to available status.')) {
         const { error } = await _supabase.from('rt_table_bookings').delete().eq('table_id', String(currentTable));
         if (!error) {
           delete bookings[currentTable];
@@ -2530,7 +2988,7 @@
           closeBookingModal();
           await fetchAllCloudData();
         } else {
-          alert('Gagal menghapus data: ' + error.message);
+          alert('Failed to delete reservation: ' + error.message);
         }
       }
     }
@@ -2544,7 +3002,7 @@
         const dp = rawDP ? parseInt(rawDP, 10) : 0;
         const now = new Date();
         return {
-          tableLabel: tid === 'PENDING' ? 'Belum Dipilih' : `#${tid} (${cfg?.type || 'Rooftop Table'})`,
+          tableLabel: tid === 'PENDING' ? 'Not Assigned Yet' : `#${tid} (${cfg?.type || 'Rooftop Table'})`,
           name: document.getElementById('regGuestName').value.trim() || '-',
           phone: document.getElementById('regGuestPhone').value.trim() || '-',
           email: document.getElementById('regGuestEmail').value.trim() || '-',
@@ -2554,7 +3012,7 @@
           dp,
           balance: totalKonsumsi - dp,
           staff: document.getElementById('regGuestCreatedBy').value.trim() || '-',
-          timestamp: `${now.toLocaleDateString('id-ID')} - ${now.toLocaleTimeString('id-ID')} WITA`,
+          timestamp: `${now.toLocaleDateString('en-GB')} · ${now.toLocaleTimeString('en-GB')} WITA`,
           notes: document.getElementById('regGuestNotes').value.trim() || '-',
           cart: [...regCurrentCart],
           docRef: `PHB-RT-NYE27-${tid}-${now.getTime().toString().slice(-4)}`
@@ -2597,23 +3055,23 @@
               <td style="text-align:right;"><strong>Rp ${(Number(c.price) * Number(c.qty)).toLocaleString('id-ID')}</strong></td>
             </tr>
           `).join('')
-        : `<tr><td colspan="5" style="text-align:center; color:#64748b; font-style:italic;">Paket / Konsumsi sesuai kesepakatan reservasi meja</td></tr>`;
+        : `<tr><td colspan="5" style="text-align:center; color:#64748b; font-style:italic;">Package / Consumption as agreed upon table reservation</td></tr>`;
 
       const balanceStatusText = d.balance > 0
-        ? `Sisa Pembayaran: Rp ${d.balance.toLocaleString('id-ID')}`
+        ? `Remaining Balance: Rp ${d.balance.toLocaleString('id-ID')}`
         : d.balance < 0
-          ? `Kelebihan / Kembalian: Rp ${Math.abs(d.balance).toLocaleString('id-ID')}`
-          : 'Lunas / Terpenuhi (Rp 0)';
+          ? `Overpayment / Change: Rp ${Math.abs(d.balance).toLocaleString('id-ID')}`
+          : 'Settled in Full (Rp 0)';
 
       const printWindow = window.open('', '_blank');
       if (!printWindow) {
-        alert('Izinkan pop-up browser agar dokumen PDF konfirmasi dapat terbuka otomatis.');
+        alert('Please allow pop-ups in your browser so the confirmation letter PDF can open automatically.');
         return;
       }
 
       printWindow.document.write(`
         <!DOCTYPE html>
-        <html lang="id">
+        <html lang="en">
         <head>
           <meta charset="UTF-8">
           <title>Official Reservation Confirmation - ${escapeHtml(d.name)}</title>
@@ -2627,7 +3085,7 @@
               padding: 28px 34px;
               max-width: 760px;
               margin: 0 auto;
-              line-height: 1.55;
+              line-height: 1.58;
             }
             .letterhead {
               display: flex;
@@ -2684,7 +3142,7 @@
             }
             .greeting {
               font-size: 12.5px;
-              margin-bottom: 12px;
+              margin-bottom: 14px;
             }
             .info-grid {
               width: 100%;
@@ -2758,21 +3216,13 @@
             .terms-box li {
               margin-bottom: 3px;
             }
-            .sign-area {
-              display: flex;
-              justify-content: space-between;
-              gap: 24px;
-              margin-top: 22px;
-              font-size: 11.5px;
-            }
-            .sign-col {
-              flex: 1;
-              text-align: center;
+            .sign-block {
+              margin-top: 18px;
+              font-size: 12px;
+              color: #0f172a;
             }
             .sign-space {
-              height: 58px;
-              border-bottom: 1px solid #94a3b8;
-              margin: 8px 16px;
+              height: 46px;
             }
             .footer-note {
               margin-top: 22px;
@@ -2798,49 +3248,49 @@
             <div>
               <div class="hotel-name">PLATINUM HOTEL &amp; CONVENTION HALL</div>
               <div class="hotel-sub">ROOFTOP BAR &amp; LOUNGE · NEW YEAR'S EVE 2027 CELEBRATION</div>
-              <div class="hotel-addr">Jl. Soekarno Hatta, Balikpapan, Kalimantan Timur</div>
+              <div class="hotel-addr">Jl. Soekarno Hatta, Balikpapan, East Kalimantan, Indonesia</div>
             </div>
             <div class="doc-meta">
               <div class="doc-badge">OFFICIAL RESERVATION CONFIRMATION</div>
               <div><strong>Ref:</strong> ${escapeHtml(d.docRef)}</div>
-              <div><strong>Tanggal Cetak:</strong> ${escapeHtml(d.timestamp)}</div>
+              <div><strong>Issued:</strong> ${escapeHtml(d.timestamp)}</div>
             </div>
           </div>
 
-          <div class="doc-title">SURAT KONFIRMASI RESERVASI MEJA</div>
+          <div class="doc-title">OFFICIAL RESERVATION CONFIRMATION</div>
 
           <div class="greeting">
-            Dengan hormat <strong>${escapeHtml(d.name)}</strong>,<br>
-            Terima kasih atas kepercayaan Anda memilih <strong>Rooftop Bar &amp; Lounge, Platinum Hotel &amp; Convention Hall Balikpapan</strong> untuk merayakan malam pergantian tahun <strong>New Year's Eve 2027</strong>. Berikut adalah rincian konfirmasi reservasi Anda:
+            Dear <strong>${escapeHtml(d.name)}</strong>,<br>
+            Thank you for selecting <strong>Rooftop Bar &amp; Lounge at Platinum Hotel &amp; Convention Hall Balikpapan</strong> to celebrate <strong>New Year's Eve 2027</strong>. We are delighted to confirm your table reservation with the following details:
           </div>
 
           <table class="info-grid">
             <tr>
-              <td class="info-label">Nama Tamu / Guest Name</td>
+              <td class="info-label">Guest Name</td>
               <td class="info-val"><strong>${escapeHtml(d.name)}</strong></td>
             </tr>
             <tr>
-              <td class="info-label">Nomor WhatsApp / Telepon</td>
+              <td class="info-label">WhatsApp / Telephone</td>
               <td class="info-val">${escapeHtml(d.phone)}</td>
             </tr>
             <tr>
-              <td class="info-label">Email Konfirmasi</td>
+              <td class="info-label">Email Address</td>
               <td class="info-val">${escapeHtml(d.email)}</td>
             </tr>
             <tr>
-              <td class="info-label">Venue &amp; Nomor Meja</td>
+              <td class="info-label">Venue &amp; Table</td>
               <td class="info-val"><strong>Rooftop Bar &amp; Lounge — ${escapeHtml(d.tableLabel)}</strong></td>
             </tr>
             <tr>
-              <td class="info-label">Jumlah Tamu (Pax)</td>
-              <td class="info-val">${escapeHtml(String(d.pax))} Orang</td>
+              <td class="info-label">Number of Guests (Pax)</td>
+              <td class="info-val">${escapeHtml(String(d.pax))} Guests</td>
             </tr>
             <tr>
-              <td class="info-label">Waktu Kedatangan</td>
+              <td class="info-label">Arrival Time</td>
               <td class="info-val">${escapeHtml(d.time)}</td>
             </tr>
             <tr>
-              <td class="info-label">Catatan Khusus</td>
+              <td class="info-label">Special Notes</td>
               <td class="info-val">${escapeHtml(d.notes)}</td>
             </tr>
           </table>
@@ -2849,9 +3299,9 @@
             <thead>
               <tr>
                 <th style="width:36px;">No</th>
-                <th>Paket / Item Menu</th>
+                <th>Menu / Package Item</th>
                 <th style="width:52px; text-align:center;">Qty</th>
-                <th style="width:120px; text-align:right;">Harga Satuan</th>
+                <th style="width:120px; text-align:right;">Unit Price</th>
                 <th style="width:130px; text-align:right;">Subtotal</th>
               </tr>
             </thead>
@@ -2862,41 +3312,33 @@
 
           <div class="summary-box">
             <div class="summary-line">
-              <span>Total Estimasi Paket &amp; Konsumsi</span>
+              <span>Estimated Menu &amp; Package Total</span>
               <strong>Rp ${Number(d.totalKonsumsi).toLocaleString('id-ID')}</strong>
             </div>
             <div class="summary-line">
-              <span>Uang Muka / Deposit Diterima (DP)</span>
+              <span>Deposit Received (DP)</span>
               <strong style="color:#047857;">Rp ${Number(d.dp).toLocaleString('id-ID')}</strong>
             </div>
             <div class="summary-line">
-              <span>Status Penyelesaian / Balance</span>
+              <span>Settlement Status / Balance</span>
               <span>${escapeHtml(balanceStatusText)}</span>
             </div>
           </div>
 
           <div class="terms-box">
-            <strong>Ketentuan Reservasi:</strong>
+            <strong>Reservation Terms &amp; Conditions:</strong>
             <ul>
-              <li>Mohon menunjukkan dokumen konfirmasi ini (cetak atau digital) kepada petugas penerima tamu di area Rooftop Bar &amp; Lounge saat registrasi kedatangan.</li>
-              <li>Meja akan dipertahankan sesuai jadwal kedatangan yang tercantum; apabila terdapat perubahan waktu kedatangan, mohon informasikan kepada tim kami sebelumnya.</li>
-              <li>Penyelesaian administrasi/sisa pembayaran (apabila ada) dilakukan sesuai ketentuan yang berlaku di outlet.</li>
+              <li>Please present this confirmation letter (printed or digital) to our greeter upon arrival at Rooftop Bar &amp; Lounge.</li>
+              <li>Tables will be held for the scheduled arrival time; please inform our team in advance should your arrival time change.</li>
+              <li>Any remaining balance or applicable charges shall be settled in accordance with outlet policies.</li>
             </ul>
           </div>
 
-          <div class="sign-area">
-            <div class="sign-col">
-              <div>Disiapkan Oleh / Petugas</div>
-              <div class="sign-space"></div>
-              <div><strong>${escapeHtml(d.staff)}</strong></div>
-              <div style="font-size:10.5px; color:#64748b;">Rooftop Bar &amp; Lounge Team</div>
-            </div>
-            <div class="sign-col">
-              <div>Disetujui Oleh Tamu</div>
-              <div class="sign-space"></div>
-              <div><strong>${escapeHtml(d.name)}</strong></div>
-              <div style="font-size:10.5px; color:#64748b;">Guest Signature</div>
-            </div>
+          <div class="sign-block">
+            <div>Yours sincerely,</div>
+            <div class="sign-space"></div>
+            <div><strong style="font-size:13px; color:#073b69;">Management</strong></div>
+            <div style="font-size:11.5px; color:#475569;">Rooftop Bar &amp; Lounge · Platinum Hotel &amp; Convention Hall Balikpapan</div>
           </div>
 
           <div class="footer-note">
@@ -2944,7 +3386,7 @@
       const staff = document.getElementById('fdcCreatedBy').value.trim();
 
       if (!name) {
-        alert('Silakan masukkan nama pemesan tiket FDC.');
+        alert('Please enter the FDC guest name.');
         return;
       }
 
@@ -2962,7 +3404,7 @@
 
       const { error } = await _supabase.from('rt_fdc_bookings').insert([payload]);
       if (error) {
-        alert('Gagal menyimpan tiket FDC ke Supabase: ' + error.message);
+        alert('Failed to save FDC ticket to Supabase: ' + error.message);
         return;
       }
 
@@ -2973,7 +3415,7 @@
     function openFDCListModal() {
       const container = document.getElementById('fdcListContent');
       if (fdcBookings.length === 0) {
-        container.innerHTML = '<div style="text-align:center; padding: 25px; color:var(--text-muted); font-size:0.85rem;">Belum ada pesanan tiket FDC Standing.</div>';
+        container.innerHTML = '<div style="text-align:center; padding: 25px; color:var(--text-muted); font-size:0.85rem;">No standing FDC ticket bookings yet.</div>';
       } else {
         let html = '';
         fdcBookings.forEach((item) => {
@@ -2989,7 +3431,7 @@
                   <i class="fa-solid fa-user-pen"></i> By: <strong>${escapeHtml(item.created_by || '-')}</strong>
                 </div>
               </div>
-              <button onclick="deleteFDC('${item.id}')" style="background:#fee2e2; border:1px solid #fca5a5; color:#991b1b; width:30px; height:30px; border-radius:6px; cursor:pointer;" title="Hapus Tiket FDC">
+              <button onclick="deleteFDC('${item.id}')" style="background:#fee2e2; border:1px solid #fca5a5; color:#991b1b; width:30px; height:30px; border-radius:6px; cursor:pointer;" title="Delete FDC Ticket">
                 <i class="fa-solid fa-trash" style="font-size:0.75rem;"></i>
               </button>
             </div>
@@ -3005,13 +3447,13 @@
     }
 
     async function deleteFDC(id) {
-      if (confirm('Hapus pesanan tiket FDC ini dari database?')) {
+      if (confirm('Delete this standing FDC ticket record from database?')) {
         const { error } = await _supabase.from('rt_fdc_bookings').delete().eq('id', id);
         if (!error) {
           await fetchAllCloudData();
           openFDCListModal();
         } else {
-          alert('Gagal menghapus: ' + error.message);
+          alert('Failed to delete FDC ticket: ' + error.message);
         }
       }
     }
@@ -3066,12 +3508,12 @@
       document.getElementById('repTerraceBar').style.width = Math.round((terraceBooked / totalTerrace) * 100) + '%';
 
       document.getElementById('repTableGrossRev').innerText = 'Rp ' + tableGrossRev.toLocaleString('id-ID');
-      document.getElementById('repTablePaxDetail').innerText = `${seatingPax} Pax dari ${loungeBooked + terraceBooked} meja terisi (${loungeBooked} Lower Deck + ${terraceBooked} Cockpit)`;
+      document.getElementById('repTablePaxDetail').innerText = `${seatingPax} Pax across ${loungeBooked + terraceBooked} occupied tables (${loungeBooked} Lower Deck + ${terraceBooked} Cockpit)`;
 
       document.getElementById('repFDCPax').innerText = `${fdcPax} Pax`;
       document.getElementById('repFDCTotalRev').innerText = `Rp ${fdcTotalRev.toLocaleString('id-ID')} Total FDC Revenue`;
 
-      document.getElementById('repTotalPax').innerText = `${totalCrowd} Total Tamu Hadir`;
+      document.getElementById('repTotalPax').innerText = `${totalCrowd} Total Guests`;
       document.getElementById('repCrowdBreakdown').innerText = `${seatingPax} Seating (${loungePax} Lower Deck + ${terracePax} Cockpit) + ${fdcPax} Standing FDC`;
 
       document.getElementById('reportModal').classList.add('open');
@@ -3084,8 +3526,8 @@
     function refreshMapNodes() {
       document.querySelectorAll('.spot').forEach(spot => {
         const id = spot.dataset.id;
-        if (bookings[id]) spot.classList.add('is-booked');
-        else spot.classList.remove('is-booked');
+        spot.classList.toggle('is-booked', Boolean(bookings[id]));
+        spot.classList.toggle('is-highlighted', highlightedTableId === id);
       });
     }
 
@@ -3110,7 +3552,7 @@
 
       document.getElementById('statFDCPaxTotal').innerText = fdcPaxTotal;
       document.getElementById('statDPTotal').innerText = 'Rp ' + (tableDP + fdcAmountTotal).toLocaleString('id-ID');
-      document.getElementById('legendAvailText').innerText = `Sisa Lounge: ${25 - loungeCount} | Sisa Cockpit: ${13 - terraceCount}`;
+      document.getElementById('legendAvailText').innerText = `Available Lounge: ${25 - loungeCount} | Cockpit: ${13 - terraceCount}`;
       document.getElementById('legendBookedText').innerText = `${bookedKeys.length} Booked`;
     }
 
@@ -3141,8 +3583,8 @@
         link.href = canvas.toDataURL('image/jpeg', 0.92);
         link.click();
       } catch (err) {
-        console.error('Gagal membuat JPG:', err);
-        alert('Gagal mengekspor gambar.');
+        console.error('Failed to export JPG:', err);
+        alert('Failed to export floor plan image.');
       } finally {
         mapEl.style.transform = savedTransform;
         loader.style.display = 'none';
@@ -3152,11 +3594,11 @@
     function exportReservationsCSV() {
       const tableKeys = Object.keys(bookings);
       if (tableKeys.length === 0 && fdcBookings.length === 0) {
-        alert('Belum ada data reservasi.');
+        alert('No reservation data available to export.');
         return;
       }
 
-      let csv = 'Area Kategori,Nomor Meja/ID,Nama Tamu,WhatsApp,Email,Pax,DP (IDR),Total Konsumsi (IDR),Balance Sisa / Kurang Lebih (IDR),Jam Tiba,Created By (Staff),Waktu Input,Detail Menu & Catatan\n';
+      let csv = 'Area Category,Table/ID,Guest Name,WhatsApp,Email,Pax,DP (IDR),Menu Total (IDR),Balance (IDR),Arrival Time,Created By,Entry Timestamp,Menu & Notes\n';
       tableKeys.forEach(k => {
         const b = bookings[k];
         const catLabel = TERRACE_IDS.includes(k) ? 'COCKPIT DECK (C)' : 'LOWER DECK LOUNGE (L)';
